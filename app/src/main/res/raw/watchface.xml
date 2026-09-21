@@ -384,9 +384,9 @@
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
-        <PartText x="0" y="44" width="118" height="24">
+        <PartText x="0" y="41" width="118" height="30">
           <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
             <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
           </Font>
           </Text>
@@ -396,9 +396,9 @@
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
-        <PartText x="0" y="44" width="118" height="24">
+        <PartText x="0" y="41" width="118" height="30">
           <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
             <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
           </Font>
           </Text>
@@ -426,9 +426,9 @@
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
-        <PartText x="0" y="44" width="118" height="24">
+        <PartText x="0" y="41" width="118" height="30">
           <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
             <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
           </Font>
           </Text>
@@ -438,9 +438,9 @@
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
-        <PartText x="0" y="44" width="118" height="24">
+        <PartText x="0" y="41" width="118" height="30">
           <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
             <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
           </Font>
           </Text>
