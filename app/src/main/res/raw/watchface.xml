@@ -6,20 +6,20 @@
 
   <UserConfigurations>
     <ColorConfiguration id="theme" displayName="cfg_theme" defaultValue="0">
-      <ColorOption id="0" displayName="theme_sommet" colors="#5BE37A #2FD0C6 #06090D" />
-      <ColorOption id="1" displayName="theme_braise" colors="#FFB020 #FF3D00 #0A0705" />
-      <ColorOption id="2" displayName="theme_arctique" colors="#52D9FF #2F6BFF #050A14" />
-      <ColorOption id="3" displayName="theme_crepuscule" colors="#FF6FA5 #FFA83D #0C070A" />
-      <ColorOption id="4" displayName="theme_iris" colors="#B594FF #5A4BFF #08060F" />
-      <ColorOption id="5" displayName="theme_corail" colors="#FF8A6B #FF3D6E #0B0608" />
-      <ColorOption id="6" displayName="theme_acide" colors="#D8FF3D #4FE08A #070A06" />
-      <ColorOption id="7" displayName="theme_platine" colors="#EEF3F8 #8DA2B4 #080A0C" />
+      <ColorOption id="0" displayName="theme_sommet" colors="#5BE37A #2FD0C6" />
+      <ColorOption id="1" displayName="theme_braise" colors="#FFB020 #FF3D00" />
+      <ColorOption id="2" displayName="theme_arctique" colors="#52D9FF #2F6BFF" />
+      <ColorOption id="3" displayName="theme_crepuscule" colors="#FF6FA5 #FFA83D" />
+      <ColorOption id="4" displayName="theme_iris" colors="#B594FF #5A4BFF" />
+      <ColorOption id="5" displayName="theme_corail" colors="#FF8A6B #FF3D6E" />
+      <ColorOption id="6" displayName="theme_acide" colors="#D8FF3D #4FE08A" />
+      <ColorOption id="7" displayName="theme_platine" colors="#EEF3F8 #8DA2B4" />
     </ColorConfiguration>
     <ListConfiguration id="police" displayName="cfg_font" defaultValue="0">
-      <ListOption id="0" displayName="font_technique" />
-      <ListOption id="1" displayName="font_etroite" />
-      <ListOption id="2" displayName="font_condensee" />
-      <ListOption id="3" displayName="font_digitale" />
+      <ListOption id="0" displayName="font_technique" icon="font_technique" />
+      <ListOption id="1" displayName="font_etroite" icon="font_etroite" />
+      <ListOption id="2" displayName="font_condensee" icon="font_condensee" />
+      <ListOption id="3" displayName="font_digitale" icon="font_digitale" />
     </ListConfiguration>
     <BooleanConfiguration id="tiles" displayName="cfg_tiles" defaultValue="TRUE" />
     <BooleanConfiguration id="arc"   displayName="cfg_arc"   defaultValue="TRUE" />
@@ -31,7 +31,7 @@
     <!-- Fond -->
     <PartDraw x="0" y="0" width="438" height="438">
       <Ellipse x="0" y="0" width="438" height="438">
-        <Fill color="[CONFIGURATION.theme.2]" />
+        <Fill color="#08090C" />
       </Ellipse>
     </PartDraw>
 
@@ -110,7 +110,10 @@
           </Arc>
           <Arc centerX="219" centerY="219" width="404" height="404"
                startAngle="-44" endAngle="44" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" thickness="16" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.1]" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
           </Arc>
           <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -478,7 +481,10 @@
             <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle"
                        value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
                               / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
@@ -513,7 +519,10 @@
             <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle"
                        value="clamp(360 * [COMPLICATION.GOAL_PROGRESS_VALUE] / [COMPLICATION.GOAL_PROGRESS_TARGET_VALUE], 0, 360)" />
           </Arc>
@@ -571,7 +580,10 @@
             <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle"
                        value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
                               / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
@@ -606,7 +618,10 @@
             <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle"
                        value="clamp(360 * [COMPLICATION.GOAL_PROGRESS_VALUE] / [COMPLICATION.GOAL_PROGRESS_TARGET_VALUE], 0, 360)" />
           </Arc>
@@ -817,7 +832,10 @@
             <Stroke color="#1B232B" thickness="4.4" />
           </Arc>
           <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" thickness="4.4" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.1]" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="[CONFIGURATION.theme]" positions="0 1" />
+                </Stroke>
             <Transform target="endAngle" value="6 * [SECOND]" />
           </Arc>
           <Variant mode="AMBIENT" target="alpha" value="0" />
