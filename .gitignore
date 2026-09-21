@@ -3,3 +3,7 @@ build/
 local.properties
 *.iml
 .idea/
+
+# SDK propriétaire Samsung (licence non redistribuable) — chacun le télécharge soi-même,
+# voir energyscore-phone/libs/README.md
+energyscore-phone/libs/*.aar

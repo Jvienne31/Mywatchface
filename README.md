@@ -8,8 +8,9 @@ Le paquet ne contient **aucun code** : uniquement des ressources (`android:hasCo
 ## Ce que fait le cadran
 
 - Toile **438 × 438**, sans graduation peinte : la lunette du Watch8 Classic est physique.
-- **7 emplacements de complication.** La liste des sources vient de la montre, pas du cadran :
-  Samsung Health, météo, agenda, et toute application installée qui publie une complication.
+- **8 emplacements de complication** (le maximum autorisé par le format). La liste des sources
+  vient de la montre, pas du cadran : Samsung Health, météo, agenda, et toute application
+  installée qui publie une complication — y compris `energyscore-watch`, voir plus bas.
 - **8 thèmes de couleur** (`ColorConfiguration`), accords analogues pour que le dégradé des jauges reste franc.
 - **4 polices pour l'heure** (`ListConfiguration`), embarquées dans le paquet.
 - **3 interrupteurs** (`BooleanConfiguration`) : cadres des données, arc de batterie, jours de la semaine.
@@ -46,6 +47,42 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 5. Appui long sur le cadran actuel : *Summit* est dans la liste. Les réglages sont aussi dans
    Galaxy Wearable → Cadrans → Personnaliser.
+
+## Score d'énergie Samsung Health
+
+Le score d'énergie de Samsung Health n'est **pas** accessible via l'API publique des
+complications Wear OS — c'est une API privée réservée aux partenaires licenciés Samsung. Ce
+n'est en revanche pas totalement fermé : Samsung publie un **Samsung Health Data SDK** distinct
+qui expose un type `EnergyScoreType` en lecture seule, utilisable **sans accord partenaire** en
+activant le « mode développeur » de l'appli Samsung Health, pour un usage personnel (lecture de
+ses propres données, non redistribué publiquement).
+
+Cette API tourne côté téléphone, pas sur la montre, et ne peut pas s'exécuter dans un paquet
+`hasCode="false"` comme le cadran lui-même. La solution ajoutée ici est donc deux applis
+annexes, indépendantes du cadran :
+
+- **`energyscore-phone/`** — appli téléphone : lit le score via le Samsung Health Data SDK et le
+  transmet à la montre via le Data Layer Wear OS.
+- **`energyscore-watch/`** — appli montre : reçoit la valeur et l'expose comme un vrai
+  **fournisseur de complication** (`ComplicationDataSourceService`, types `SHORT_TEXT` et
+  `RANGED_VALUE`). Une fois installée, « Score d'énergie » apparaît dans le sélecteur de
+  complications de **n'importe quel** emplacement du cadran, à côté des fournisseurs Samsung.
+
+### Mise en route
+
+1. Suivre `energyscore-phone/libs/README.md` pour récupérer le `.aar` du SDK (compte développeur
+   Samsung requis — ce fichier n'est pas redistribuable, donc pas dans ce dépôt) et activer le
+   mode développeur dans l'appli Samsung Health du téléphone.
+2. `./gradlew :energyscore-watch:assembleDebug` → installer sur la montre (même procédure ADB
+   que pour `:app` ci-dessus).
+3. `./gradlew :energyscore-phone:assembleDebug` → installer sur le téléphone, ouvrir l'appli,
+   accorder la permission Samsung Health quand elle est demandée.
+4. Dans Galaxy Wearable, ouvrir n'importe quel emplacement du cadran → choisir « Score
+   d'énergie » dans la liste des complications.
+
+`MainActivity.kt` du module téléphone a toute la mécanique (permission, synchronisation,
+affichage) déjà en place ; seul l'appel exact de lecture `EnergyScoreType` reste à brancher sur
+le vrai SDK une fois téléchargé (le code source explique où et pourquoi).
 
 ## Structure
 

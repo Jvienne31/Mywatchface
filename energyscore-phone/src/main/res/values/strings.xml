@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Energy Score Sync</string>
+    <string name="status_idle">En attente de synchronisation…</string>
+    <string name="status_permission_needed">Autorisation Samsung Health requise pour le score d\'énergie.</string>
+    <string name="status_synced">Score d\'énergie synchronisé : %1$d</string>
+    <string name="status_error">Erreur de synchronisation : %1$s</string>
+    <string name="action_sync_now">Synchroniser maintenant</string>
+</resources>
