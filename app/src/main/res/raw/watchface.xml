@@ -103,18 +103,153 @@
     <!-- Arc de batterie, de -44° à +44° -->
     <BooleanConfiguration id="arc">
       <BooleanOption id="TRUE">
-        <PartDraw x="0" y="0" width="438" height="438">
-          <Arc centerX="219" centerY="219" width="404" height="404"
-               startAngle="-44" endAngle="44" direction="CLOCKWISE">
-            <Stroke color="#1B232B" thickness="16" cap="ROUND" />
-          </Arc>
-          <Arc centerX="219" centerY="219" width="404" height="404"
-               startAngle="-44" endAngle="44" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" thickness="16" cap="ROUND" />
-            <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
-          </Arc>
-          <Variant mode="AMBIENT" target="alpha" value="0" />
-        </PartDraw>
+        <Condition>
+          <Expressions>
+            <Expression name="bat_1"><![CDATA[[CONFIGURATION.theme] == "1"]]></Expression>
+            <Expression name="bat_2"><![CDATA[[CONFIGURATION.theme] == "2"]]></Expression>
+            <Expression name="bat_3"><![CDATA[[CONFIGURATION.theme] == "3"]]></Expression>
+            <Expression name="bat_4"><![CDATA[[CONFIGURATION.theme] == "4"]]></Expression>
+            <Expression name="bat_5"><![CDATA[[CONFIGURATION.theme] == "5"]]></Expression>
+            <Expression name="bat_6"><![CDATA[[CONFIGURATION.theme] == "6"]]></Expression>
+            <Expression name="bat_7"><![CDATA[[CONFIGURATION.theme] == "7"]]></Expression>
+          </Expressions>
+          <Compare expression="bat_1">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#FFB020" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#FF3D00 #FFB020" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_2">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#52D9FF" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#2F6BFF #52D9FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_3">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#FF6FA5" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#FFA83D #FF6FA5" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_4">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#B594FF" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#5A4BFF #B594FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_5">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#FF8A6B" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#FF3D6E #FF8A6B" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_6">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#D8FF3D" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#4FE08A #D8FF3D" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="bat_7">
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#EEF3F8" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#8DA2B4 #EEF3F8" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Default>
+          <PartDraw x="0" y="0" width="438" height="438">
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#1B232B" thickness="16" cap="ROUND" />
+              </Arc>
+              <Arc centerX="219" centerY="219" width="404" height="404"
+                   startAngle="-44" endAngle="44" direction="CLOCKWISE">
+                <Stroke color="#5BE37A" thickness="16" cap="ROUND">
+                  <LinearGradient startX="17" startY="219" endX="421" endY="219"
+                                  colors="#2FD0C6 #5BE37A" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Default>
+        </Condition>
       </BooleanOption>
       <BooleanOption id="FALSE">
         <Group name="arc_off" x="0" y="0" width="438" height="438" />
@@ -370,17 +505,145 @@
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
       <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
-        <PartDraw x="0" y="0" width="118" height="96">
-          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" thickness="6" />
-          </Arc>
-          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
-            <Transform target="endAngle"
-                       value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
-                              / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
-          </Arc>
-        </PartDraw>
+        <Condition>
+          <Expressions>
+            <Expression name="gau_1"><![CDATA[[CONFIGURATION.theme] == "1"]]></Expression>
+            <Expression name="gau_2"><![CDATA[[CONFIGURATION.theme] == "2"]]></Expression>
+            <Expression name="gau_3"><![CDATA[[CONFIGURATION.theme] == "3"]]></Expression>
+            <Expression name="gau_4"><![CDATA[[CONFIGURATION.theme] == "4"]]></Expression>
+            <Expression name="gau_5"><![CDATA[[CONFIGURATION.theme] == "5"]]></Expression>
+            <Expression name="gau_6"><![CDATA[[CONFIGURATION.theme] == "6"]]></Expression>
+            <Expression name="gau_7"><![CDATA[[CONFIGURATION.theme] == "7"]]></Expression>
+          </Expressions>
+          <Compare expression="gau_1">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FFB020" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FF3D00 #FFB020" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_2">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#52D9FF" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#2F6BFF #52D9FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_3">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF6FA5" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FFA83D #FF6FA5" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_4">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#B594FF" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#5A4BFF #B594FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_5">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF8A6B" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FF3D6E #FF8A6B" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_6">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#D8FF3D" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#4FE08A #D8FF3D" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_7">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#EEF3F8" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#8DA2B4 #EEF3F8" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Default>
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#5BE37A" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#2FD0C6 #5BE37A" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Default>
+        </Condition>
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -412,17 +675,145 @@
       <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
       <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
-        <PartDraw x="0" y="0" width="118" height="96">
-          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" thickness="6" />
-          </Arc>
-          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
-            <Transform target="endAngle"
-                       value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
-                              / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
-          </Arc>
-        </PartDraw>
+        <Condition>
+          <Expressions>
+            <Expression name="gau_1"><![CDATA[[CONFIGURATION.theme] == "1"]]></Expression>
+            <Expression name="gau_2"><![CDATA[[CONFIGURATION.theme] == "2"]]></Expression>
+            <Expression name="gau_3"><![CDATA[[CONFIGURATION.theme] == "3"]]></Expression>
+            <Expression name="gau_4"><![CDATA[[CONFIGURATION.theme] == "4"]]></Expression>
+            <Expression name="gau_5"><![CDATA[[CONFIGURATION.theme] == "5"]]></Expression>
+            <Expression name="gau_6"><![CDATA[[CONFIGURATION.theme] == "6"]]></Expression>
+            <Expression name="gau_7"><![CDATA[[CONFIGURATION.theme] == "7"]]></Expression>
+          </Expressions>
+          <Compare expression="gau_1">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FFB020" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FF3D00 #FFB020" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_2">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#52D9FF" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#2F6BFF #52D9FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_3">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF6FA5" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FFA83D #FF6FA5" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_4">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#B594FF" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#5A4BFF #B594FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_5">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF8A6B" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#FF3D6E #FF8A6B" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_6">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#D8FF3D" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#4FE08A #D8FF3D" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Compare expression="gau_7">
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#EEF3F8" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#8DA2B4 #EEF3F8" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Compare>
+          <Default>
+          <PartDraw x="0" y="0" width="118" height="96">
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="6" />
+              </Arc>
+              <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#5BE37A" thickness="6" cap="ROUND">
+                  <LinearGradient startX="23" startY="48" endX="95" endY="48"
+                                  colors="#2FD0C6 #5BE37A" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle"
+                           value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                                  / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+              </Arc>
+            </PartDraw>
+          </Default>
+        </Condition>
         <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -491,16 +882,137 @@
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_sec">
       <BoundingRoundBox x="0" y="0" width="62" height="62" cornerRadius="18" />
       <Complication type="EMPTY">
-        <PartDraw x="0" y="0" width="62" height="62">
-          <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" thickness="4.4" />
-          </Arc>
-          <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" thickness="4.4" cap="ROUND" />
-            <Transform target="endAngle" value="6 * [SECOND]" />
-          </Arc>
-          <Variant mode="AMBIENT" target="alpha" value="0" />
-        </PartDraw>
+        <Condition>
+          <Expressions>
+            <Expression name="sec_1"><![CDATA[[CONFIGURATION.theme] == "1"]]></Expression>
+            <Expression name="sec_2"><![CDATA[[CONFIGURATION.theme] == "2"]]></Expression>
+            <Expression name="sec_3"><![CDATA[[CONFIGURATION.theme] == "3"]]></Expression>
+            <Expression name="sec_4"><![CDATA[[CONFIGURATION.theme] == "4"]]></Expression>
+            <Expression name="sec_5"><![CDATA[[CONFIGURATION.theme] == "5"]]></Expression>
+            <Expression name="sec_6"><![CDATA[[CONFIGURATION.theme] == "6"]]></Expression>
+            <Expression name="sec_7"><![CDATA[[CONFIGURATION.theme] == "7"]]></Expression>
+          </Expressions>
+          <Compare expression="sec_1">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FFB020" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#FF3D00 #FFB020" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_2">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#52D9FF" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#2F6BFF #52D9FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_3">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF6FA5" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#FFA83D #FF6FA5" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_4">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#B594FF" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#5A4BFF #B594FF" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_5">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#FF8A6B" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#FF3D6E #FF8A6B" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_6">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#D8FF3D" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#4FE08A #D8FF3D" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Compare expression="sec_7">
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#EEF3F8" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#8DA2B4 #EEF3F8" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Compare>
+          <Default>
+          <PartDraw x="0" y="0" width="62" height="62">
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+                <Stroke color="#1B232B" thickness="4.4" />
+              </Arc>
+              <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                <Stroke color="#5BE37A" thickness="4.4" cap="ROUND">
+                  <LinearGradient startX="6" startY="31" endX="56" endY="31"
+                                  colors="#2FD0C6 #5BE37A" positions="0 1" />
+                </Stroke>
+                <Transform target="endAngle" value="6 * [SECOND]" />
+              </Arc>
+              <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartDraw>
+          </Default>
+        </Condition>
         <PartText x="0" y="13" width="62" height="12">
           <Text align="CENTER">
             <Font family="chakrapetch_semibold" size="8" color="#8D9BA9" letterSpacing="1.6">SEC</Font>
