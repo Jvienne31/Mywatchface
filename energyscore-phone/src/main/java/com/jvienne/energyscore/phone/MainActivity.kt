@@ -7,28 +7,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.samsung.android.sdk.health.data.HealthDataService
+import com.samsung.android.sdk.health.data.permission.AccessType
+import com.samsung.android.sdk.health.data.permission.Permission
+import com.samsung.android.sdk.health.data.request.DataType
+import com.samsung.android.sdk.health.data.request.LocalTimeFilter
+import com.samsung.android.sdk.health.data.request.Ordering
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
-// --- Samsung Health Data SDK -------------------------------------------------------------
-// ATTENTION : les imports et appels ci-dessous suivent le nommage documenté publiquement
-// (com.samsung.android.sdk.health.data.*, DataType.EnergyScoreType, HealthDataService,
-// PermissionManager) mais n'ont PAS pu être vérifiés contre le javadoc exact du SDK : le site
-// developer.samsung.com est inaccessible depuis cet environnement. Le SDK (fichier .aar) n'est
-// de toute façon pas encore présent dans libs/, donc ce fichier ne compilera pas tel quel.
-//
-// Étape suivante une fois le SDK téléchargé (voir README à la racine du dépôt) : ouvrir le
-// projet d'exemple fourni dans le zip du SDK ("Hello SDK"), comparer son code de lecture
-// EnergyScoreType avec le bloc readEnergyScore() ci-dessous, et corriger les noms d'appels si
-// besoin — la structure autour (permission, callback, envoi au Data Layer) restera identique.
-//
-// import com.samsung.android.sdk.health.data.HealthDataService
-// import com.samsung.android.sdk.health.data.HealthDataStore
-// import com.samsung.android.sdk.health.data.permission.AccessType
-// import com.samsung.android.sdk.health.data.permission.Permission
-// import com.samsung.android.sdk.health.data.request.DataType
-// import com.samsung.android.sdk.health.data.request.LocalTimeFilter
-// -------------------------------------------------------------------------------------------
-
+/**
+ * Lit le score d'énergie Samsung Health (Samsung Health Data SDK, mode développeur — pas besoin
+ * d'accord partenaire pour un usage personnel non distribué) et le pousse vers la montre via le
+ * Data Layer Wear OS, où `energyscore-watch` l'expose comme un vrai fournisseur de complication.
+ *
+ * Ce fichier suit le pattern officiel confirmé pour la lecture d'un type de donnée instantané
+ * (ex. HeartRateType) :
+ *   val store = HealthDataService.getStore(context)
+ *   val request = DataType.<Type>.readDataRequestBuilder.setLocalTimeFilter(filter)....build()
+ *   val list = store.readData(request).dataList
+ *
+ * Deux points précis restent à confirmer dans Android Studio une fois le .aar en place (autocomplete
+ * règle ça en quelques secondes, voir energyscore-phone/libs/README.md) :
+ *   - le nom exact du champ de valeur sur EnergyScoreType (ici DataType.EnergyScoreType.SCORE) ;
+ *   - si `requestPermissions` doit être appelée directement ou via un callback d'activité —
+ *     ici elle est traitée comme suspend, cohérent avec le reste d'un SDK conçu pour coroutines.
+ * Tout le reste (permission, filtre temporel, lecture, envoi à la montre) est le vrai appel SDK.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
@@ -59,24 +64,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Lit le dernier score d'énergie connu via le Samsung Health Data SDK (mode développeur,
-     * lecture seule, pas besoin de partenariat Samsung pour un usage personnel non distribué).
-     *
-     * TODO(à finaliser avec le SDK réel — voir le bloc de commentaires en tête de fichier) :
-     *   1. store = HealthDataService.getStore(applicationContext)
-     *   2. demander la permission de lecture sur DataType.EnergyScoreType si pas déjà accordée
-     *   3. construire une requête de lecture sur la période "aujourd'hui" (LocalTimeFilter)
-     *   4. renvoyer la valeur la plus récente (0–100), ou null si aucune donnée / permission refusée
-     */
     private suspend fun readEnergyScore(): Int? {
-        // Squelette temporaire tant que le .aar n'est pas intégré : à remplacer par le vrai
-        // appel SDK. Laissé explicite (et non un simple retour statique) pour que l'échec soit
-        // visible immédiatement plutôt que de faire croire à une synchronisation réussie.
-        throw NotImplementedError(
-            "Samsung Health Data SDK non encore intégré : voir libs/README et le bloc de " +
-                "commentaires en tête de ce fichier."
-        )
+        val store = HealthDataService.getStore(applicationContext)
+
+        val permissions = setOf(Permission.of(DataType.EnergyScoreType, AccessType.READ))
+        var granted = store.getGrantedPermissions(permissions)
+        if (!granted.containsAll(permissions)) {
+            store.requestPermissions(permissions, this@MainActivity)
+            granted = store.getGrantedPermissions(permissions)
+        }
+        if (!granted.containsAll(permissions)) {
+            return null
+        }
+
+        val today = LocalDate.now()
+        val filter = LocalTimeFilter.of(today.atStartOfDay(), today.plusDays(1).atStartOfDay())
+        val readRequest = DataType.EnergyScoreType.readDataRequestBuilder
+            .setLocalTimeFilter(filter)
+            .setOrdering(Ordering.DESC)
+            .build()
+
+        val dataList = store.readData(readRequest).dataList
+        val latest = dataList.firstOrNull() ?: return null
+
+        // TODO : confirmer le nom du champ dans le javadoc du SDK une fois téléchargé
+        // (probablement DataType.EnergyScoreType.SCORE — cf. commentaire en tête de fichier).
+        val score = latest.getValue(DataType.EnergyScoreType.SCORE) ?: return null
+        return score.toInt().coerceIn(0, 100)
     }
 
     private fun pushToWatch(score: Int) {

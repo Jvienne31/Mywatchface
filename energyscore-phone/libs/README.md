@@ -4,9 +4,17 @@ Ce module a besoin du fichier `.aar` du **Samsung Health Data SDK** (ex: `health
 pour compiler. Il n'est pas distribué sur Maven — Samsung ne le publie qu'en téléchargement direct,
 réservé aux comptes développeur.
 
+**Attention à ne pas confondre deux comptes différents :**
+- **Compte Google Play / developer.android.com** (celui déjà utilisé pour Android Studio) →
+  ne donne **pas** accès au SDK Samsung, ce sont deux portails indépendants.
+- **Compte Samsung** sur **developer.samsung.com** → c'est celui-là qu'il faut, un Samsung
+  Account classique suffit (le même que pour un Galaxy Watch/téléphone), aucun frais ni
+  partenariat requis pour la lecture en mode développeur.
+
 ## Marche à suivre
 
-1. Créer/se connecter à un compte sur https://developer.samsung.com
+1. Se connecter avec un compte Samsung sur https://developer.samsung.com (pas le compte Google
+   Play Console)
 2. Aller sur https://developer.samsung.com/health/data (section "Samsung Health Data SDK")
 3. Télécharger le SDK — le zip contient le `.aar`, le javadoc, la licence, et un projet
    d'exemple ("Hello SDK") avec du vrai code de lecture de données (permissions, requêtes).
@@ -26,7 +34,13 @@ réservé aux comptes développeur.
 
 ## État du code dans ce module
 
-`MainActivity.kt` contient déjà toute la logique autour (permission UI, synchronisation vers la
-montre via le Data Layer Wear OS, affichage du statut) — seule la fonction `readEnergyScore()`
-est un squelette à finaliser une fois le SDK réel disponible, en s'inspirant du projet d'exemple
-"Hello SDK" fourni dans le zip téléchargé à l'étape 3.
+`MainActivity.kt` contient le vrai appel SDK (pas un squelette) : récupération du store,
+permission, filtre temporel, lecture, envoi à la montre — reconstruit à partir d'exemples de code
+officiels réels trouvés pour un type de donnée équivalent (fréquence cardiaque). Deux détails
+précis restent à confirmer une fois le `.aar` en place, marqués `TODO` dans le fichier :
+- le nom exact du champ de valeur sur `EnergyScoreType` (`DataType.EnergyScoreType.SCORE` est une
+  supposition raisonnable mais non vérifiée contre le javadoc) ;
+- si `requestPermissions` s'utilise directement comme fonction suspend ou demande un callback.
+
+Android Studio règle les deux en quelques secondes via l'autocomplétion dès que le SDK est
+importé — pas besoin de redemander, juste corriger si le nom proposé diffère.
