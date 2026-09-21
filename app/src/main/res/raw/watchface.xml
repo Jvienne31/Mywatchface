@@ -38,6 +38,7 @@
     <!-- Cadres des données : tuiles à bord courbe (R 210), PNG car WFF n'a pas de primitive Path -->
     <BooleanConfiguration id="tiles">
       <BooleanOption id="TRUE">
+        <Group name="tiles_on" x="0" y="0" width="438" height="438">
         <PartImage x="10" y="90" width="134" height="68">
           <Image resource="tile_tl_normal" />
           <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -89,11 +90,14 @@
         <PartDraw x="0" y="0" width="438" height="438">
           <Ellipse x="188" y="321" width="62" height="62">
             <Fill color="#141A20" />
-            <Variant mode="AMBIENT" target="alpha" value="0" />
           </Ellipse>
+          <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartDraw>
+        </Group>
       </BooleanOption>
-      <BooleanOption id="FALSE" />
+      <BooleanOption id="FALSE">
+        <Group name="tiles_off" x="0" y="0" width="438" height="438" />
+      </BooleanOption>
     </BooleanConfiguration>
 
     <!-- Arc de batterie, de -44° à +44° -->
@@ -102,17 +106,19 @@
         <PartDraw x="0" y="0" width="438" height="438">
           <Arc centerX="219" centerY="219" width="404" height="404"
                startAngle="-44" endAngle="44" direction="CLOCKWISE">
-            <Stroke color="#1B232B" width="16" cap="ROUND" />
+            <Stroke color="#1B232B" thickness="16" cap="ROUND" />
           </Arc>
           <Arc centerX="219" centerY="219" width="404" height="404"
                startAngle="-44" endAngle="44" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" width="16" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.1]" thickness="16" cap="ROUND" />
             <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
           </Arc>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartDraw>
       </BooleanOption>
-      <BooleanOption id="FALSE" />
+      <BooleanOption id="FALSE">
+        <Group name="arc_off" x="0" y="0" width="438" height="438" />
+      </BooleanOption>
     </BooleanConfiguration>
 
     <!-- Niveau de batterie + libellé -->
@@ -132,6 +138,7 @@
     <!-- Heures et minutes : une variante par police -->
     <ListConfiguration id="police">
       <ListOption id="0">
+        <Group name="police_0" x="0" y="0" width="438" height="438">
         <PartText x="0" y="84" width="438" height="102">
           <Text align="CENTER">
             <Font family="chakrapetch_semibold" size="112" color="#E3EAF1" letterSpacing="-2">
@@ -146,8 +153,10 @@
           </Font>
           </Text>
         </PartText>
+        </Group>
       </ListOption>
       <ListOption id="1">
+        <Group name="police_1" x="0" y="0" width="438" height="438">
         <PartText x="0" y="84" width="438" height="102">
           <Text align="CENTER">
             <Font family="rajdhani_semibold" size="124" color="#E3EAF1" letterSpacing="-1">
@@ -162,8 +171,10 @@
           </Font>
           </Text>
         </PartText>
+        </Group>
       </ListOption>
       <ListOption id="2">
+        <Group name="police_2" x="0" y="0" width="438" height="438">
         <PartText x="0" y="84" width="438" height="102">
           <Text align="CENTER">
             <Font family="oswald_semibold" size="116" color="#E3EAF1" letterSpacing="0">
@@ -178,8 +189,10 @@
           </Font>
           </Text>
         </PartText>
+        </Group>
       </ListOption>
       <ListOption id="3">
+        <Group name="police_3" x="0" y="0" width="438" height="438">
         <PartText x="0" y="84" width="438" height="102">
           <Text align="CENTER">
             <Font family="orbitron_semibold" size="86" color="#E3EAF1" letterSpacing="-1">
@@ -194,6 +207,7 @@
           </Font>
           </Text>
         </PartText>
+        </Group>
       </ListOption>
     </ListConfiguration>
 
@@ -216,6 +230,7 @@
     <!-- Jours de la semaine -->
     <BooleanConfiguration id="week">
       <BooleanOption id="TRUE">
+        <Group name="week_on" x="0" y="0" width="438" height="438">
         <PartText x="120" y="388" width="18" height="16">
           <Text align="CENTER">
             <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">D</Font>
@@ -336,18 +351,21 @@
             </PartText>
           </Compare>
         </Condition>
+        </Group>
       </BooleanOption>
-      <BooleanOption id="FALSE" />
+      <BooleanOption id="FALSE">
+        <Group name="week_off" x="0" y="0" width="438" height="438" />
+      </BooleanOption>
     </BooleanConfiguration>
 
     <!-- Complication 1 — Haut gauche -->
     <ComplicationSlot slotId="1" x="10" y="90" width="134" height="68"
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tl">
       <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
-      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
-        <PartImage x="59" y="8" width="16" height="16">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="28" width="134" height="30">
           <Text align="CENTER">
@@ -363,10 +381,10 @@
     <ComplicationSlot slotId="2" x="294" y="90" width="134" height="68"
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tr">
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
-      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
-        <PartImage x="59" y="8" width="16" height="16">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="28" width="134" height="30">
           <Text align="CENTER">
@@ -381,22 +399,22 @@
     <!-- Complication 3 — Jauge gauche -->
     <ComplicationSlot slotId="3" x="4" y="166" width="118" height="96"
                       supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_ml">
-      <DefaultProviderPolicy defaultSystemProvider="DAY_OF_WEEK" defaultSystemProviderType="RANGED_VALUE" />
-      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadiusX="18" cornerRadiusY="18" />
+      <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
+      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
         <PartDraw x="0" y="0" width="118" height="96">
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" width="6" />
+            <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" width="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
             <Transform target="endAngle"
                        value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
                               / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
           </Arc>
         </PartDraw>
-        <PartImage x="51.5" y="26" width="15" height="15">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="44" width="118" height="24">
           <Text align="CENTER">
@@ -407,8 +425,8 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
-        <PartImage x="51.5" y="26" width="15" height="15">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="44" width="118" height="24">
           <Text align="CENTER">
@@ -424,21 +442,21 @@
     <ComplicationSlot slotId="4" x="316" y="166" width="118" height="96"
                       supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_mr">
       <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
-      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
         <PartDraw x="0" y="0" width="118" height="96">
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" width="6" />
+            <Stroke color="#1B232B" thickness="6" />
           </Arc>
           <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.0]" width="6" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
             <Transform target="endAngle"
                        value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
                               / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
           </Arc>
         </PartDraw>
-        <PartImage x="51.5" y="26" width="15" height="15">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="44" width="118" height="24">
           <Text align="CENTER">
@@ -449,8 +467,8 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
-        <PartImage x="51.5" y="26" width="15" height="15">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="44" width="118" height="24">
           <Text align="CENTER">
@@ -466,10 +484,10 @@
     <ComplicationSlot slotId="5" x="10" y="272" width="134" height="64"
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_bl">
       <DefaultProviderPolicy defaultSystemProvider="DATE" defaultSystemProviderType="SHORT_TEXT" />
-      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
-        <PartImage x="59" y="8" width="16" height="16">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="28" width="134" height="30">
           <Text align="CENTER">
@@ -485,10 +503,10 @@
     <ComplicationSlot slotId="6" x="294" y="272" width="134" height="64"
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_br">
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
-      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
-        <PartImage x="59" y="8" width="16" height="16">
-          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
         <PartText x="0" y="28" width="134" height="30">
           <Text align="CENTER">
@@ -503,14 +521,14 @@
     <!-- Complication 7 — Anneau bas -->
     <ComplicationSlot slotId="7" x="188" y="321" width="62" height="62"
                       supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_sec">
-      <BoundingRoundBox x="0" y="0" width="62" height="62" cornerRadiusX="18" cornerRadiusY="18" />
+      <BoundingRoundBox x="0" y="0" width="62" height="62" cornerRadius="18" />
       <Complication type="EMPTY">
         <PartDraw x="0" y="0" width="62" height="62">
           <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
-            <Stroke color="#1B232B" width="4.4" />
+            <Stroke color="#1B232B" thickness="4.4" />
           </Arc>
           <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.theme.1]" width="4.4" cap="ROUND" />
+            <Stroke color="[CONFIGURATION.theme.1]" thickness="4.4" cap="ROUND" />
             <Transform target="endAngle" value="6 * [SECOND]" />
           </Arc>
           <Variant mode="AMBIENT" target="alpha" value="0" />
