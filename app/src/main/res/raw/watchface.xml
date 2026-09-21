@@ -138,76 +138,44 @@
     <!-- Heures et minutes : une variante par police -->
     <ListConfiguration id="police">
       <ListOption id="0">
-        <Group name="police_0" x="0" y="0" width="438" height="438">
-        <PartText x="0" y="84" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="112" color="#E3EAF1" letterSpacing="-2">
-            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        <PartText x="0" y="186" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="112" color="[CONFIGURATION.theme.0]" letterSpacing="-2">
-            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        </Group>
+        <DigitalClock x="0" y="0" width="438" height="438">
+          <TimeText format="hh" hourFormat="24" align="CENTER" x="0" y="84" width="438" height="102">
+            <Font family="chakrapetch_semibold" size="112" color="#E3EAF1" />
+          </TimeText>
+          <TimeText format="mm" align="CENTER" x="0" y="186" width="438" height="102">
+            <Font family="chakrapetch_semibold" size="112" color="[CONFIGURATION.theme.0]" />
+          </TimeText>
+        </DigitalClock>
       </ListOption>
       <ListOption id="1">
-        <Group name="police_1" x="0" y="0" width="438" height="438">
-        <PartText x="0" y="84" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="rajdhani_semibold" size="124" color="#E3EAF1" letterSpacing="-1">
-            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        <PartText x="0" y="186" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="rajdhani_semibold" size="124" color="[CONFIGURATION.theme.0]" letterSpacing="-1">
-            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        </Group>
+        <DigitalClock x="0" y="0" width="438" height="438">
+          <TimeText format="hh" hourFormat="24" align="CENTER" x="0" y="84" width="438" height="102">
+            <Font family="rajdhani_semibold" size="124" color="#E3EAF1" />
+          </TimeText>
+          <TimeText format="mm" align="CENTER" x="0" y="186" width="438" height="102">
+            <Font family="rajdhani_semibold" size="124" color="[CONFIGURATION.theme.0]" />
+          </TimeText>
+        </DigitalClock>
       </ListOption>
       <ListOption id="2">
-        <Group name="police_2" x="0" y="0" width="438" height="438">
-        <PartText x="0" y="84" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="oswald_semibold" size="116" color="#E3EAF1" letterSpacing="0">
-            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        <PartText x="0" y="186" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="oswald_semibold" size="116" color="[CONFIGURATION.theme.0]" letterSpacing="0">
-            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        </Group>
+        <DigitalClock x="0" y="0" width="438" height="438">
+          <TimeText format="hh" hourFormat="24" align="CENTER" x="0" y="84" width="438" height="102">
+            <Font family="oswald_semibold" size="116" color="#E3EAF1" />
+          </TimeText>
+          <TimeText format="mm" align="CENTER" x="0" y="186" width="438" height="102">
+            <Font family="oswald_semibold" size="116" color="[CONFIGURATION.theme.0]" />
+          </TimeText>
+        </DigitalClock>
       </ListOption>
       <ListOption id="3">
-        <Group name="police_3" x="0" y="0" width="438" height="438">
-        <PartText x="0" y="84" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="orbitron_semibold" size="86" color="#E3EAF1" letterSpacing="-1">
-            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        <PartText x="0" y="186" width="438" height="102">
-          <Text align="CENTER">
-            <Font family="orbitron_semibold" size="86" color="[CONFIGURATION.theme.0]" letterSpacing="-1">
-            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
-        </Group>
+        <DigitalClock x="0" y="0" width="438" height="438">
+          <TimeText format="hh" hourFormat="24" align="CENTER" x="0" y="84" width="438" height="102">
+            <Font family="orbitron_semibold" size="86" color="#E3EAF1" />
+          </TimeText>
+          <TimeText format="mm" align="CENTER" x="0" y="186" width="438" height="102">
+            <Font family="orbitron_semibold" size="86" color="[CONFIGURATION.theme.0]" />
+          </TimeText>
+        </DigitalClock>
       </ListOption>
     </ListConfiguration>
 
@@ -538,13 +506,13 @@
             <Font family="chakrapetch_semibold" size="8" color="#8D9BA9" letterSpacing="1.6">SEC</Font>
           </Text>
         </PartText>
-        <PartText x="0" y="24" width="62" height="24">
-          <Text align="CENTER">
-            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
-            <Template><![CDATA[%02d]]><Parameter expression="[SECOND]" /></Template>
-          </Font>
-          </Text>
-        </PartText>
+        <Group name="seconds_digits" x="0" y="0" width="62" height="62">
+          <DigitalClock x="0" y="0" width="62" height="62">
+            <TimeText format="ss" align="CENTER" x="0" y="24" width="62" height="24">
+              <Font family="chakrapetch_semibold" size="19" color="#E3EAF1" />
+            </TimeText>
+          </DigitalClock>
+        </Group>
       </Complication>
       <Complication type="SHORT_TEXT">
         <PartText x="0" y="20" width="62" height="26">
