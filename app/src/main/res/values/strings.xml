@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Summit</string>
+    <string name="cfg_theme">Thème</string>
+    <string name="cfg_font">Police de l’heure</string>
+    <string name="cfg_tiles">Cadres des données</string>
+    <string name="cfg_arc">Arc de batterie</string>
+    <string name="cfg_week">Jours de la semaine</string>
+    <string name="theme_sommet">Sommet</string>
+    <string name="theme_braise">Braise</string>
+    <string name="theme_arctique">Arctique</string>
+    <string name="theme_crepuscule">Crépuscule</string>
+    <string name="theme_iris">Iris</string>
+    <string name="theme_corail">Corail</string>
+    <string name="theme_acide">Acide</string>
+    <string name="theme_platine">Platine</string>
+    <string name="font_technique">Technique</string>
+    <string name="font_etroite">Étroite</string>
+    <string name="font_condensee">Condensée</string>
+    <string name="font_digitale">Digitale</string>
+    <string name="slot_tl">Haut gauche</string>
+    <string name="slot_tr">Haut droite</string>
+    <string name="slot_ml">Jauge gauche</string>
+    <string name="slot_mr">Jauge droite</string>
+    <string name="slot_bl">Bas gauche</string>
+    <string name="slot_br">Bas droite</string>
+    <string name="slot_sec">Anneau bas</string>
+</resources>

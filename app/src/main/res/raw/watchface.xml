@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Summit — cadran Watch Face Format, 438 x 438, Galaxy Watch8 Classic 46 mm. -->
+<WatchFace width="438" height="438" clipShape="CIRCLE">
+  <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+  <Metadata key="PREVIEW_TIME" value="14:08:21" />
+
+  <UserConfigurations>
+    <ColorConfiguration id="theme" displayName="cfg_theme" defaultValue="0">
+      <ColorOption id="0" displayName="theme_sommet" colors="#5BE37A #2FD0C6 #06090D" />
+      <ColorOption id="1" displayName="theme_braise" colors="#FFB020 #FF3D00 #0A0705" />
+      <ColorOption id="2" displayName="theme_arctique" colors="#52D9FF #2F6BFF #050A14" />
+      <ColorOption id="3" displayName="theme_crepuscule" colors="#FF6FA5 #FFA83D #0C070A" />
+      <ColorOption id="4" displayName="theme_iris" colors="#B594FF #5A4BFF #08060F" />
+      <ColorOption id="5" displayName="theme_corail" colors="#FF8A6B #FF3D6E #0B0608" />
+      <ColorOption id="6" displayName="theme_acide" colors="#D8FF3D #4FE08A #070A06" />
+      <ColorOption id="7" displayName="theme_platine" colors="#EEF3F8 #8DA2B4 #080A0C" />
+    </ColorConfiguration>
+    <ListConfiguration id="police" displayName="cfg_font" defaultValue="0">
+      <ListOption id="0" displayName="font_technique" />
+      <ListOption id="1" displayName="font_etroite" />
+      <ListOption id="2" displayName="font_condensee" />
+      <ListOption id="3" displayName="font_digitale" />
+    </ListConfiguration>
+    <BooleanConfiguration id="tiles" displayName="cfg_tiles" defaultValue="TRUE" />
+    <BooleanConfiguration id="arc"   displayName="cfg_arc"   defaultValue="TRUE" />
+    <BooleanConfiguration id="week"  displayName="cfg_week"  defaultValue="TRUE" />
+  </UserConfigurations>
+
+  <Scene>
+
+    <!-- Fond -->
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Ellipse x="0" y="0" width="438" height="438">
+        <Fill color="[CONFIGURATION.theme.2]" />
+      </Ellipse>
+    </PartDraw>
+
+    <!-- Cadres des données : tuiles à bord courbe (R 210), PNG car WFF n'a pas de primitive Path -->
+    <BooleanConfiguration id="tiles">
+      <BooleanOption id="TRUE">
+        <PartImage x="10" y="90" width="134" height="68">
+          <Image resource="tile_tl_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="10" y="90" width="134" height="68" alpha="0">
+          <Image resource="tile_tl_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartImage x="294" y="90" width="134" height="68">
+          <Image resource="tile_tr_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="294" y="90" width="134" height="68" alpha="0">
+          <Image resource="tile_tr_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartImage x="4" y="166" width="118" height="96">
+          <Image resource="tile_ml_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="4" y="166" width="118" height="96" alpha="0">
+          <Image resource="tile_ml_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartImage x="316" y="166" width="118" height="96">
+          <Image resource="tile_mr_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="316" y="166" width="118" height="96" alpha="0">
+          <Image resource="tile_mr_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartImage x="10" y="272" width="134" height="64">
+          <Image resource="tile_bl_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="10" y="272" width="134" height="64" alpha="0">
+          <Image resource="tile_bl_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartImage x="294" y="272" width="134" height="64">
+          <Image resource="tile_br_normal" />
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+        <PartImage x="294" y="272" width="134" height="64" alpha="0">
+          <Image resource="tile_br_ambient" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
+        </PartImage>
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Ellipse x="188" y="321" width="62" height="62">
+            <Fill color="#141A20" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+          </Ellipse>
+        </PartDraw>
+      </BooleanOption>
+      <BooleanOption id="FALSE" />
+    </BooleanConfiguration>
+
+    <!-- Arc de batterie, de -44° à +44° -->
+    <BooleanConfiguration id="arc">
+      <BooleanOption id="TRUE">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="219" width="404" height="404"
+               startAngle="-44" endAngle="44" direction="CLOCKWISE">
+            <Stroke color="#1B232B" width="16" cap="ROUND" />
+          </Arc>
+          <Arc centerX="219" centerY="219" width="404" height="404"
+               startAngle="-44" endAngle="44" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.1]" width="16" cap="ROUND" />
+            <Transform target="endAngle" value="-44 + 88 * [BATTERY_PERCENT] / 100" />
+          </Arc>
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartDraw>
+      </BooleanOption>
+      <BooleanOption id="FALSE" />
+    </BooleanConfiguration>
+
+    <!-- Niveau de batterie + libellé -->
+    <PartText x="0" y="42" width="438" height="22">
+      <Text align="CENTER">
+        <Font family="chakrapetch_semibold" size="14" color="#E3EAF1">
+        <Template><![CDATA[%d%%]]><Parameter expression="[BATTERY_PERCENT]" /></Template>
+      </Font>
+      </Text>
+    </PartText>
+    <PartText x="0" y="66" width="438" height="20">
+      <Text align="CENTER">
+        <Font family="chakrapetch_semibold" size="13" color="#8D9BA9" letterSpacing="5">ENJOY</Font>
+      </Text>
+    </PartText>
+
+    <!-- Heures et minutes : une variante par police -->
+    <ListConfiguration id="police">
+      <ListOption id="0">
+        <PartText x="0" y="84" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="112" color="#E3EAF1" letterSpacing="-2">
+            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+        <PartText x="0" y="186" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="112" color="[CONFIGURATION.theme.0]" letterSpacing="-2">
+            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </ListOption>
+      <ListOption id="1">
+        <PartText x="0" y="84" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="rajdhani_semibold" size="124" color="#E3EAF1" letterSpacing="-1">
+            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+        <PartText x="0" y="186" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="rajdhani_semibold" size="124" color="[CONFIGURATION.theme.0]" letterSpacing="-1">
+            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </ListOption>
+      <ListOption id="2">
+        <PartText x="0" y="84" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="oswald_semibold" size="116" color="#E3EAF1" letterSpacing="0">
+            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+        <PartText x="0" y="186" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="oswald_semibold" size="116" color="[CONFIGURATION.theme.0]" letterSpacing="0">
+            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </ListOption>
+      <ListOption id="3">
+        <PartText x="0" y="84" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="orbitron_semibold" size="86" color="#E3EAF1" letterSpacing="-1">
+            <Template><![CDATA[%02d]]><Parameter expression="[HOUR_0_23]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+        <PartText x="0" y="186" width="438" height="102">
+          <Text align="CENTER">
+            <Font family="orbitron_semibold" size="86" color="[CONFIGURATION.theme.0]" letterSpacing="-1">
+            <Template><![CDATA[%02d]]><Parameter expression="[MINUTE]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </ListOption>
+    </ListConfiguration>
+
+    <!-- Date -->
+    <PartText x="96" y="342" width="80" height="22">
+      <Text align="END">
+        <Font family="chakrapetch_semibold" size="15" color="#8D9BA9" letterSpacing="1">
+        <Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template>
+      </Font>
+      </Text>
+    </PartText>
+    <PartText x="262" y="342" width="80" height="22">
+      <Text align="START">
+        <Font family="chakrapetch_semibold" size="15" color="#8D9BA9" letterSpacing="1">
+        <Template><![CDATA[%s]]><Parameter expression="[DAY]" /></Template>
+      </Font>
+      </Text>
+    </PartText>
+
+    <!-- Jours de la semaine -->
+    <BooleanConfiguration id="week">
+      <BooleanOption id="TRUE">
+        <PartText x="120" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">D</Font>
+          </Text>
+        </PartText>
+        <PartText x="150" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">L</Font>
+          </Text>
+        </PartText>
+        <PartText x="180" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">M</Font>
+          </Text>
+        </PartText>
+        <PartText x="210" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">M</Font>
+          </Text>
+        </PartText>
+        <PartText x="240" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">J</Font>
+          </Text>
+        </PartText>
+        <PartText x="270" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">V</Font>
+          </Text>
+        </PartText>
+        <PartText x="300" y="388" width="18" height="16">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="11" color="#48525E" letterSpacing="1">S</Font>
+          </Text>
+        </PartText>
+        <!-- Jour courant en couleur d'accent. [DAY_OF_WEEK] : 1 = dimanche. -->
+        <Condition>
+          <Expressions>
+            <Expression name="jour_0"><![CDATA[[DAY_OF_WEEK] == 1]]></Expression>
+          </Expressions>
+          <Compare expression="jour_0">
+            <PartText x="120" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">D</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_1"><![CDATA[[DAY_OF_WEEK] == 2]]></Expression>
+          </Expressions>
+          <Compare expression="jour_1">
+            <PartText x="150" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">L</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_2"><![CDATA[[DAY_OF_WEEK] == 3]]></Expression>
+          </Expressions>
+          <Compare expression="jour_2">
+            <PartText x="180" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">M</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_3"><![CDATA[[DAY_OF_WEEK] == 4]]></Expression>
+          </Expressions>
+          <Compare expression="jour_3">
+            <PartText x="210" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">M</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_4"><![CDATA[[DAY_OF_WEEK] == 5]]></Expression>
+          </Expressions>
+          <Compare expression="jour_4">
+            <PartText x="240" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">J</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_5"><![CDATA[[DAY_OF_WEEK] == 6]]></Expression>
+          </Expressions>
+          <Compare expression="jour_5">
+            <PartText x="270" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">V</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+        <Condition>
+          <Expressions>
+            <Expression name="jour_6"><![CDATA[[DAY_OF_WEEK] == 7]]></Expression>
+          </Expressions>
+          <Compare expression="jour_6">
+            <PartText x="300" y="388" width="18" height="16">
+              <Text align="CENTER">
+                <Font family="chakrapetch_semibold" size="11" color="[CONFIGURATION.theme.0]" letterSpacing="1">S</Font>
+              </Text>
+            </PartText>
+          </Compare>
+        </Condition>
+      </BooleanOption>
+      <BooleanOption id="FALSE" />
+    </BooleanConfiguration>
+
+    <!-- Complication 1 — Haut gauche -->
+    <ComplicationSlot slotId="1" x="10" y="90" width="134" height="68"
+                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tl">
+      <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="SHORT_TEXT">
+        <PartImage x="59" y="8" width="16" height="16">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 2 — Haut droite -->
+    <ComplicationSlot slotId="2" x="294" y="90" width="134" height="68"
+                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tr">
+      <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
+      <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="SHORT_TEXT">
+        <PartImage x="59" y="8" width="16" height="16">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 3 — Jauge gauche -->
+    <ComplicationSlot slotId="3" x="4" y="166" width="118" height="96"
+                      supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_ml">
+      <DefaultProviderPolicy defaultSystemProvider="DAY_OF_WEEK" defaultSystemProviderType="RANGED_VALUE" />
+      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="RANGED_VALUE">
+        <PartDraw x="0" y="0" width="118" height="96">
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+            <Stroke color="#1B232B" width="6" />
+          </Arc>
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.0]" width="6" cap="ROUND" />
+            <Transform target="endAngle"
+                       value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                              / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+          </Arc>
+        </PartDraw>
+        <PartImage x="51.5" y="26" width="15" height="15">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="44" width="118" height="24">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="SHORT_TEXT">
+        <PartImage x="51.5" y="26" width="15" height="15">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="44" width="118" height="24">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 4 — Jauge droite -->
+    <ComplicationSlot slotId="4" x="316" y="166" width="118" height="96"
+                      supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_mr">
+      <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
+      <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="RANGED_VALUE">
+        <PartDraw x="0" y="0" width="118" height="96">
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+            <Stroke color="#1B232B" width="6" />
+          </Arc>
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.0]" width="6" cap="ROUND" />
+            <Transform target="endAngle"
+                       value="360 * ([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN])
+                              / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])" />
+          </Arc>
+        </PartDraw>
+        <PartImage x="51.5" y="26" width="15" height="15">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="44" width="118" height="24">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="SHORT_TEXT">
+        <PartImage x="51.5" y="26" width="15" height="15">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="44" width="118" height="24">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="17" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 5 — Bas gauche -->
+    <ComplicationSlot slotId="5" x="10" y="272" width="134" height="64"
+                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_bl">
+      <DefaultProviderPolicy defaultSystemProvider="DATE" defaultSystemProviderType="SHORT_TEXT" />
+      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="SHORT_TEXT">
+        <PartImage x="59" y="8" width="16" height="16">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 6 — Bas droite -->
+    <ComplicationSlot slotId="6" x="294" y="272" width="134" height="64"
+                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_br">
+      <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
+      <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="SHORT_TEXT">
+        <PartImage x="59" y="8" width="16" height="16">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" tintColor="#8D9BA9" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+    <!-- Complication 7 — Anneau bas -->
+    <ComplicationSlot slotId="7" x="188" y="321" width="62" height="62"
+                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_sec">
+      <BoundingRoundBox x="0" y="0" width="62" height="62" cornerRadiusX="18" cornerRadiusY="18" />
+      <Complication type="EMPTY">
+        <PartDraw x="0" y="0" width="62" height="62">
+          <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360">
+            <Stroke color="#1B232B" width="4.4" />
+          </Arc>
+          <Arc centerX="31" centerY="31" width="50" height="50" startAngle="0" endAngle="360" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.1]" width="4.4" cap="ROUND" />
+            <Transform target="endAngle" value="6 * [SECOND]" />
+          </Arc>
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartDraw>
+        <PartText x="0" y="13" width="62" height="12">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="8" color="#8D9BA9" letterSpacing="1.6">SEC</Font>
+          </Text>
+        </PartText>
+        <PartText x="0" y="24" width="62" height="24">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%02d]]><Parameter expression="[SECOND]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="20" width="62" height="26">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+    </ComplicationSlot>
+
+  </Scene>
+</WatchFace>

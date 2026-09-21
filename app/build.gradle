@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.jvienne.summit'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.jvienne.summit"
+        minSdk 33   // Wear OS 4
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    // Le paquet ne contient aucun code : uniquement des ressources.
+    androidResources {
+        noCompress 'ttf'
+    }
+}
