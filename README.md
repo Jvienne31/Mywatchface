@@ -17,13 +17,17 @@ Le paquet ne contient **aucun code** : uniquement des ressources (`android:hasCo
 
 ## Construire
 
+Depuis Android Studio : ouvrir le dossier, laisser Gradle se synchroniser, puis
+*Build → Build APK(s)*. C'est la voie la plus simple, le SDK et le JDK viennent avec l'IDE.
+
+En ligne de commande, avec le SDK Android installé (compileSdk 35) et un JDK 17 :
+
 ```bash
-./gradlew :app:assembleDebug
-# → app/build/outputs/apk/debug/app-debug.apk
+./gradlew :app:assembleDebug      # macOS, Linux
+gradlew.bat :app:assembleDebug    # Windows
 ```
 
-Il faut le SDK Android (compileSdk 35) et un JDK 17. Depuis Android Studio : ouvrir le dossier, laisser
-Gradle se synchroniser, puis *Build → Build APK(s)*.
+L'APK sort dans `app/build/outputs/apk/debug/app-debug.apk`.
 
 ## Installer sur la montre
 
