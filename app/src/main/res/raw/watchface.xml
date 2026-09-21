@@ -463,7 +463,7 @@
 
     <!-- Complication 1 — Haut gauche -->
     <ComplicationSlot slotId="1" x="10" y="90" width="134" height="68"
-                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tl">
+                      supportedTypes="SHORT_TEXT LONG_TEXT RANGED_VALUE GOAL_PROGRESS WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY" displayName="slot_tl">
       <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
       <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
@@ -478,11 +478,69 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
+      <Complication type="SMALL_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32">
+          <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 2 — Haut droite -->
     <ComplicationSlot slotId="2" x="294" y="90" width="134" height="68"
-                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_tr">
+                      supportedTypes="SHORT_TEXT LONG_TEXT RANGED_VALUE GOAL_PROGRESS WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY" displayName="slot_tr">
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
       <BoundingRoundBox x="0" y="0" width="134" height="68" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
@@ -497,11 +555,69 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
+      <Complication type="SMALL_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32">
+          <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 3 — Jauge gauche -->
     <ComplicationSlot slotId="3" x="4" y="166" width="118" height="96"
-                      supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_ml">
+                      supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT LONG_TEXT WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE EMPTY" displayName="slot_ml">
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
       <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
@@ -667,11 +783,62 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartDraw x="0" y="0" width="118" height="96">
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+            <Stroke color="#1B232B" thickness="6" />
+          </Arc>
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Transform target="endAngle"
+                       value="clamp(360 * [COMPLICATION.GOAL_PROGRESS_VALUE] / [COMPLICATION.GOAL_PROGRESS_TARGET_VALUE], 0, 360)" />
+          </Arc>
+        </PartDraw>
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="43" y="31" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 4 — Jauge droite -->
     <ComplicationSlot slotId="4" x="316" y="166" width="118" height="96"
-                      supportedTypes="RANGED_VALUE SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_mr">
+                      supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT LONG_TEXT WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE EMPTY" displayName="slot_mr">
       <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
       <BoundingRoundBox x="0" y="0" width="118" height="96" cornerRadius="18" />
       <Complication type="RANGED_VALUE">
@@ -837,11 +1004,62 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartDraw x="0" y="0" width="118" height="96">
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360">
+            <Stroke color="#1B232B" thickness="6" />
+          </Arc>
+          <Arc centerX="59" centerY="48" width="72" height="72" startAngle="0" endAngle="360" direction="CLOCKWISE">
+            <Stroke color="[CONFIGURATION.theme.0]" thickness="6" cap="ROUND" />
+            <Transform target="endAngle"
+                       value="clamp(360 * [COMPLICATION.GOAL_PROGRESS_VALUE] / [COMPLICATION.GOAL_PROGRESS_TARGET_VALUE], 0, 360)" />
+          </Arc>
+        </PartDraw>
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="52" y="26" width="15" height="15" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="41" width="118" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="22" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="43" y="31" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 5 — Bas gauche -->
     <ComplicationSlot slotId="5" x="10" y="272" width="134" height="64"
-                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_bl">
+                      supportedTypes="SHORT_TEXT LONG_TEXT RANGED_VALUE GOAL_PROGRESS WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY" displayName="slot_bl">
       <DefaultProviderPolicy defaultSystemProvider="DATE" defaultSystemProviderType="SHORT_TEXT" />
       <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
@@ -856,11 +1074,69 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
+      <Complication type="SMALL_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32">
+          <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 6 — Bas droite -->
     <ComplicationSlot slotId="6" x="294" y="272" width="134" height="64"
-                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_br">
+                      supportedTypes="SHORT_TEXT LONG_TEXT RANGED_VALUE GOAL_PROGRESS WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY" displayName="slot_br">
       <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
       <BoundingRoundBox x="0" y="0" width="134" height="64" cornerRadius="18" />
       <Complication type="SHORT_TEXT">
@@ -875,11 +1151,69 @@
           </Text>
         </PartText>
       </Complication>
+      <Complication type="LONG_TEXT">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartImage x="59" y="8" width="16" height="16" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+        <PartText x="0" y="28" width="134" height="30">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="23" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
+      </Complication>
+      <Complication type="SMALL_IMAGE">
+        <PartImage x="51" y="17" width="32" height="32">
+          <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+        </PartImage>
+      </Complication>
     </ComplicationSlot>
 
     <!-- Complication 7 — Anneau bas -->
     <ComplicationSlot slotId="7" x="188" y="321" width="62" height="62"
-                      supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE EMPTY" displayName="slot_sec">
+                      supportedTypes="SHORT_TEXT LONG_TEXT RANGED_VALUE GOAL_PROGRESS WEIGHTED_ELEMENTS MONOCHROMATIC_IMAGE EMPTY" displayName="slot_sec">
       <BoundingRoundBox x="0" y="0" width="62" height="62" cornerRadius="18" />
       <Complication type="EMPTY">
         <Condition>
@@ -1034,6 +1368,47 @@
           </Font>
           </Text>
         </PartText>
+      </Complication>
+      <Complication type="LONG_TEXT">
+        <PartText x="0" y="20" width="62" height="26">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartText x="0" y="20" width="62" height="26">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="GOAL_PROGRESS">
+        <PartText x="0" y="20" width="62" height="26">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="WEIGHTED_ELEMENTS">
+        <PartText x="0" y="20" width="62" height="26">
+          <Text align="CENTER">
+            <Font family="chakrapetch_semibold" size="19" color="#E3EAF1">
+            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+          </Font>
+          </Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="19" y="19" width="24" height="24" tintColor="#8D9BA9">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
       </Complication>
     </ComplicationSlot>
 
