@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Profil matériel Android Studio : Galaxy Watch8 Classic 46 mm.
+     Device Manager → Add Device → « Import hardware profile… » → ce fichier.
+     Écran : 1,34", 438 x 438 (fiche Samsung), rond. -->
+<d:devices xmlns:d="http://schemas.android.com/sdk/devices/7"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <d:device>
+        <d:name>Galaxy Watch8 Classic 46mm</d:name>
+        <d:id>galaxy_watch8_classic_46mm</d:id>
+        <d:manufacturer>User</d:manufacturer>
+        <d:meta/>
+        <d:hardware>
+            <d:screen>
+                <d:screen-size>small</d:screen-size>
+                <d:diagonal-length>1.34</d:diagonal-length>
+                <d:pixel-density>xhdpi</d:pixel-density>
+                <d:screen-ratio>notlong</d:screen-ratio>
+                <d:dimensions>
+                    <d:x-dimension>438</d:x-dimension>
+                    <d:y-dimension>438</d:y-dimension>
+                </d:dimensions>
+                <d:xdpi>462</d:xdpi>
+                <d:ydpi>462</d:ydpi>
+                <d:touch>
+                    <d:multitouch>jazz-hands</d:multitouch>
+                    <d:mechanism>finger</d:mechanism>
+                    <d:screen-type>capacitive</d:screen-type>
+                </d:touch>
+            </d:screen>
+            <d:networking>
+                Bluetooth
+                Wifi
+                NFC
+            </d:networking>
+            <d:sensors>
+                Accelerometer
+                Barometer
+                Compass
+                GPS
+                Gyroscope
+                LightSensor
+            </d:sensors>
+            <d:mic>true</d:mic>
+            <d:keyboard>nokeys</d:keyboard>
+            <d:nav>nonav</d:nav>
+            <d:ram unit="GiB">2</d:ram>
+            <d:buttons>hard</d:buttons>
+            <d:internal-storage unit="GiB">32</d:internal-storage>
+            <d:removable-storage unit="TiB"/>
+            <d:cpu>Generic CPU</d:cpu>
+            <d:gpu>Generic GPU</d:gpu>
+            <d:abi>
+                x86_64
+                arm64-v8a
+            </d:abi>
+            <d:dock/>
+            <d:power-type>battery</d:power-type>
+        </d:hardware>
+        <d:software>
+            <d:api-level>-</d:api-level>
+            <d:live-wallpaper-support>true</d:live-wallpaper-support>
+            <d:bluetooth-profiles/>
+            <d:gl-version>2.0</d:gl-version>
+            <d:gl-extensions/>
+            <d:status-bar>false</d:status-bar>
+        </d:software>
+        <d:state name="Portrait" default="true">
+            <d:description>The device in portrait orientation</d:description>
+            <d:screen-orientation>port</d:screen-orientation>
+            <d:keyboard-state>keyshidden</d:keyboard-state>
+            <d:nav-state>navhidden</d:nav-state>
+        </d:state>
+        <d:tag-id>android-wear</d:tag-id>
+        <d:boot-props>
+            <d:boot-prop>
+                <d:prop-name>ro.emulator.circular</d:prop-name>
+                <d:prop-value>true</d:prop-value>
+            </d:boot-prop>
+        </d:boot-props>
+    </d:device>
+</d:devices>

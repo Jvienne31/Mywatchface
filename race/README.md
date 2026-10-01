@@ -72,6 +72,9 @@ API 36, la base de One UI 8 Watch) — le démarrer, puis
 `adb install -r race-debug.apk` (ou glisser l'APK sur la fenêtre de l'émulateur). Appui long
 sur le cadran actuel → faire défiler → *Race*.
 
+Profil matériel et skin « Galaxy Watch8 Classic » pour l'émulateur : voir
+[emulator/README.md](emulator/README.md).
+
 Installation sur la montre : même procédure que Summit (README principal). Les deux cadrans
 ont des identifiants différents (`com.jvienne.summit`, `com.jvienne.race`) et coexistent.
 
