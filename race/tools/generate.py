@@ -585,8 +585,15 @@ def layer_hours():
     for k in range(1, 13):
         group_open(f"hour_{k}", angle=30 * k if k != 12 else None, pivot=HOURS_C)
         text(C - w / 2, y, w, h, str(k), k, OSWALD, HOUR_SIZE, "#000000", show="normal", alpha=135)
-        text(C - w / 2, y, w, h, str(k), k, OSWALD, HOUR_SIZE, "#000000", show="ambient",
-             outline=(2, M0))
+        # AOD : seulement le chiffre de l'heure en cours, plein (Outline ne s'affiche pas
+        # sur la montre — constaté sur émulateur)
+        O.mode_stack.append(("both", None) if k == SAMPLE["hour"] % 12 or
+                            (k == 12 and SAMPLE["hour"] % 12 == 0) else ("none", None))
+        group_open(f"hour_{k}_aod")
+        O.x(f'<Transform target="alpha" value="[HOUR_1_12] == {k} ? 255 : 0" />')
+        text(C - w / 2, y, w, h, str(k), k, OSWALD, HOUR_SIZE, M0, show="ambient", alpha=200)
+        group_close()
+        O.mode_stack.pop()
         group_close()
     group_close()
 
@@ -1020,9 +1027,10 @@ def write_shading():
     h = W - SHADE_Y
 
     def dial_shade(x, y):  # vignette : clair en haut au centre, sombre vers le bord
-        r = math.hypot(x - C, y - 150)
-        t = max(0.0, min(1.0, (r - 110) / 230))
-        return int(200 * t ** 1.6)
+        # calé sur l'original : ~60 % de luminosité à 130 px du centre, ~30 % au bord
+        r = math.hypot(x - C, y - 135)
+        t = max(0.0, min(1.0, (r - 55) / 165))
+        return int(185 * t ** 0.85)
     png(os.path.join(out, "dial_shade.png"), W, W, dial_shade)
 
     def shadow(alpha, spread):

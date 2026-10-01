@@ -103,12 +103,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">1<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_1_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 1 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">1</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_2" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="60">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -117,12 +120,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">2<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_2_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 2 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">2</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_3" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="90">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -131,12 +137,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">3<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_3_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 3 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">3</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_4" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="120">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -145,12 +154,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">4<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_4_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 4 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">4</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_5" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="150">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -159,12 +171,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">5<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_5_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 5 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">5</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_6" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="180">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -173,12 +188,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">6<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_6_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 6 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">6</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_7" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="210">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -187,12 +205,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">7<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_7_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 7 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">7</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_8" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="240">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -201,12 +222,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">8<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_8_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 8 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">8</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_9" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="270">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -215,12 +239,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">9<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_9_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 9 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">9</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_10" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="300">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -229,12 +256,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">10<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_10_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 10 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">10</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_11" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="330">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -243,12 +273,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">11<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_11_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 11 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">11</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
       <Group name="hour_12" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648">
         <PartText x="129" y="15" width="180" height="150" alpha="135">
@@ -257,12 +290,15 @@
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="129" y="15" width="180" height="150" alpha="0">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="146" color="#000000">12<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
-          </Text>
-          <Variant mode="AMBIENT" target="alpha" value="255" />
-        </PartText>
+        <Group name="hour_12_aod" x="0" y="0" width="438" height="438">
+          <Transform target="alpha" value="[HOUR_1_12] == 12 ? 255 : 0" />
+          <PartText x="129" y="15" width="180" height="150" alpha="0">
+            <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+              <Font family="oswald_semibold" size="146" color="[CONFIGURATION.main.0]">12</Font>
+            </Text>
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+          </PartText>
+        </Group>
       </Group>
     </Group>
 

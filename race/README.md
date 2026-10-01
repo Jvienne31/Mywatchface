@@ -49,7 +49,8 @@ Le nom du mois vient de la langue de la montre (`[MONTH_S]`).
 
 ## AOD
 
-Fond et cockpit noir pur, chiffres d'heure en **contour seul**, compteurs réduits à leurs
+Fond et cockpit noir pur, **seul le chiffre de l'heure en cours**, plein (le contour `Outline` ne
+s'affiche pas sur la montre), compteurs réduits à leurs
 filets, secondes et motif coupés. ≈ 8 % de pixels allumés sur l'aperçu (limite 15 %).
 
 ## Construire et installer
