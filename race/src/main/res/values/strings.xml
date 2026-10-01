@@ -3,7 +3,8 @@
     <string name="app_name">Race</string>
 
     <string name="cfg_main">Couleur principale</string>
-    <string name="cfg_second">Couleur des compteurs</string>
+    <string name="cfg_compteurs">Compteurs : couleur à part</string>
+    <string name="cfg_second">Couleur à part des compteurs</string>
     <string name="cfg_cockpit">Cockpit</string>
     <string name="cfg_motif">Motif</string>
     <string name="cfg_ombre">Ombre</string>

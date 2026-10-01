@@ -39,7 +39,8 @@ date, pas. Appui long → Personnaliser → Complications → choisir une appli.
 | Réglage | Options |
 |---|---|
 | Couleur principale | 10 couleurs (cadran, dégradé radial) |
-| Couleur des compteurs | 13 couleurs (jauges, aiguille, batterie) |
+| Compteurs : couleur à part | Non (défaut : les compteurs prennent la couleur principale), Oui |
+| Couleur à part des compteurs | 13 couleurs (jauges, aiguille, batterie), utilisée si l'option précédente est à Oui |
 | Cockpit | Par défaut, Assombri |
 | Motif | Aucun, Points, Rayures |
 | Ombre | Par défaut, Moins d'ombre |
@@ -112,6 +113,9 @@ lisibles (l'original les laisse tête en bas).
   pas** : seul l'aplat apparaît. Le fond, l'ombre et le cockpit sont donc des aplats assombris
   par des PNG noirs translucides générés par le script (`dial_shade`, `cockpit_shade`,
   `cockpit_shadow*`). Le XML ne contient plus aucun dégradé.
+- **Les arcs en pointillés (`dashIntervals`) dérivent** : l'espacement réel diffère du calcul
+  (~10° d'écart après un demi-tour), les séparateurs des jours étaient décalés. Toutes les
+  graduations sont désormais des `Line` individuelles.
 
 ## Encore à valider
 

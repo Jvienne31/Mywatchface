@@ -67,7 +67,10 @@ DAYS = [
 
 # main : [vive, vive, sombre] — triplet utilisé tel quel par le dégradé radial du fond
 M0, M2 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.2]"
-S0, S1 = "[CONFIGURATION.second.0]", "[CONFIGURATION.second.1]"
+# Couleur des compteurs (jauges, aiguille, batterie). Par défaut celle du cadran
+# (main.0 vive, main.3 mi-luminosité) ; le réglage « compteurs » bascule sur « second ».
+# Les couches des compteurs lisent S0/S1 à l'appel : counters() les redéfinit.
+S0, S1 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]"
 
 OSWALD = "oswald_semibold"
 CHAKRA = "chakrapetch_semibold"
@@ -82,7 +85,10 @@ SAMPLE = {
     "dow_idx": 0,  # lundi
     "day": 21, "month": "JUIN", "slot1": "18:49",
 }
-DEFAULT_COLORS = {M0: MAIN[0][1], "[CONFIGURATION.main.1]": MAIN[0][1], M2: MAIN[0][2], S0: SECOND[0][1], S1: SECOND[0][2]}
+_PM = MAIN[int(os.environ.get("RACE_PREVIEW_MAIN", "0"))]   # couleur de l'aperçu seulement
+DEFAULT_COLORS = {M0: _PM[1], "[CONFIGURATION.main.1]": _PM[1], M2: _PM[2],
+                  "[CONFIGURATION.main.3]": dim(_PM[1]),
+                  "[CONFIGURATION.second.0]": SECOND[0][1], "[CONFIGURATION.second.1]": SECOND[0][2]}
 
 # ---------------------------------------------------------------------------
 # Géométrie
@@ -357,13 +363,16 @@ def _arc_path(cx, cy, r, a0, a1):
 
 
 def ticks(cx, cy, r, count, a0, sweep, length, th, color, closed=True):
-    """Graduations régulières : un arc en pointillés (une seule primitive au lieu de N lignes)."""
-    circ = 2 * math.pi * r
-    step = circ * (sweep / 360) / (count if closed else count - 1)
-    half = th / 2 / circ * 360  # recentre le premier trait sur a0
-    end = a0 + sweep + (0 if closed else half * 2)
-    arc(cx, cy, r, a0 - half, end - half, color, length,
-        dash=f"{f(th)} {f(step - th)}")
+    """Graduations régulières, une Line par trait.
+
+    Pas d'arc en pointillés (dashIntervals) : sur la montre, l'espacement des pointillés
+    dérive le long de l'arc (constaté sur émulateur, ~10° d'écart après un demi-tour)."""
+    n = count if closed else count - 1
+    for i in range(count):
+        a = a0 + sweep * i / n
+        x1, y1 = polar(cx, cy, r - length / 2, a)
+        x2, y2 = polar(cx, cy, r + length / 2, a)
+        line(x1, y1, x2, y2, color, th, cap="BUTT")
 
 
 def line(x1, y1, x2, y2, color, th, cap="ROUND"):
@@ -375,7 +384,7 @@ def line(x1, y1, x2, y2, color, th, cap="ROUND"):
     O.s(f'<line x1="{f(x1)}" y1="{f(y1)}" x2="{f(x2)}" y2="{f(y2)}" {svg_stroke(color, th, cap)} />')
 
 
-def rect(x, y, w, h, fill, gradient=None):
+def rect(x, y, w, h, fill, gradient=None, width_expr=None, svg_w=None):
     a, b = _rel(x, y)
     O.open(f'<Rectangle x="{f(a)}" y="{f(b)}" width="{f(w)}" height="{f(h)}">')
     svg_fill = col(fill)
@@ -394,8 +403,11 @@ def rect(x, y, w, h, fill, gradient=None):
         svg_fill = f"url(#{gid})"
     else:
         O.x(f'<Fill color="{fill}" />')
+    if width_expr:
+        O.x(f'<Transform target="width" value="{escape(width_expr)}" />')
     O.close("</Rectangle>")
-    O.s(f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}" fill="{svg_fill}" />')
+    sw = w if svg_w is None else svg_w
+    O.s(f'<rect x="{f(x)}" y="{f(y)}" width="{f(sw)}" height="{f(h)}" fill="{svg_fill}" />')
 
 
 def rrect(x, y, w, h, r, fill, stroke=None, th=1):
@@ -715,15 +727,19 @@ def layer_battery():
     bx, by = BATT_C
     O.comment("Batterie, dans la bosse — un appui ouvre l'état de la batterie")
     group_open("battery", bx - 32, 160, 64, 86, launch="BATTERY_STATUS")
+    O.comment("Icône de pile, remplie selon le niveau")
+    pct = SAMPLE["battery"]
+    bw, bh = 24, 12
+    x0, y0 = bx - bw / 2 - 1, 171
     draw_open()
-    line(222, 166, 215, 177, "#8E99A5", 2)   # éclair
-    line(215, 177, 223, 177, "#8E99A5", 2)
-    line(223, 177, 216, 188, "#8E99A5", 2)
+    rrect(x0, y0, bw, bh, 3, "#00000000", stroke="#8E99A5", th=1.6)
+    rect(x0 + bw + 0.5, y0 + 3.5, 2.5, 5, "#8E99A5")
+    rect(x0 + 2.5, y0 + 2.5, bw - 5, bh - 5, S0,
+         width_expr=f"{bw - 5} * [BATTERY_PERCENT] / 100", svg_w=(bw - 5) * pct / 100)
     draw_close()
     draw_open("normal")
     arc(bx, by, BATT_R, -90, 90, "#2B3036", 6)
     draw_close("normal")
-    pct = SAMPLE["battery"]
     draw_open()
     arc(bx, by, BATT_R, -90, 90, S0, 6,
         end_expr="-90 + 180 * [BATTERY_PERCENT] / 100", svg_a1=-90 + 180 * pct / 100)
@@ -759,7 +775,7 @@ def layer_heart():
     draw_open("normal")
     arc(cx, cy, BAND_R, HR_BAND_START, HR_BAND_END, S1, BAND_TH)
     hr = SAMPLE["hr"]
-    arc(cx, cy, BAND_R, HR_BAND_START, HR_START + HR_SWEEP, S0, BAND_TH,
+    arc(cx, cy, BAND_R, HR_START, HR_START + HR_SWEEP, S0, BAND_TH,
         end_expr=(f"{HR_START} + {HR_SWEEP} * clamp(([HEART_RATE] - {HR_MIN}) / "
                   f"{HR_MAX - HR_MIN}, 0, 1)"),
         svg_a1=hr_angle(hr))
@@ -927,6 +943,34 @@ def layer_complications():
 # Assemblage
 # ---------------------------------------------------------------------------
 
+def counters():
+    """Batterie + 3 compteurs, en deux variantes de couleur (réglage « compteurs »)."""
+    global S0, S1
+
+    def variant_with(c0, c1):
+        def fn():
+            global S0, S1
+            S0, S1 = c0, c1
+            layer_battery()
+            layer_heart()
+            layer_date()
+            layer_steps()
+        return fn
+    O.comment("Compteurs : couleur du cadran (FALSE, défaut) ou couleur à part (TRUE)")
+    O.open('<BooleanConfiguration id="compteurs">')
+    for opt, c0, c1, shown in (("FALSE", "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]", True),
+                               ("TRUE", "[CONFIGURATION.second.0]", "[CONFIGURATION.second.1]", False)):
+        O.open(f'<BooleanOption id="{opt}">')
+        O.mode_stack.append(("both", None) if shown else ("none", None))
+        group_open(f"compteurs_{opt.lower()}")
+        variant_with(c0, c1)()
+        group_close()
+        O.mode_stack.pop()
+        O.close("</BooleanOption>")
+    O.close("</BooleanConfiguration>")
+    S0, S1 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]"
+
+
 def build():
     layer_dial()
     layer_hours()
@@ -934,10 +978,7 @@ def build():
     layer_index()
     layer_pill()
     layer_cockpit()
-    layer_battery()
-    layer_heart()
-    layer_date()
-    layer_steps()
+    counters()
     layer_complications()
 
 
@@ -945,12 +986,14 @@ def config_xml():
     lines = ['  <UserConfigurations>',
              '    <ColorConfiguration id="main" displayName="cfg_main" defaultValue="0">']
     for i, (name, a, b) in enumerate(MAIN):
-        lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {a} {b}" />')
+        lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {a} {b} {dim(a)}" />')
     lines += ['    </ColorConfiguration>',
               '    <ColorConfiguration id="second" displayName="cfg_second" defaultValue="0">']
     for i, (name, a, b) in enumerate(SECOND):
         lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {b}" />')
     lines.append('    </ColorConfiguration>')
+    lines.append('    <BooleanConfiguration id="compteurs" displayName="cfg_compteurs" '
+                 'defaultValue="FALSE" />')
     for cid, opts in [("cockpit", ["opt_default", "opt_darker"]),
                       ("motif", ["opt_none", "opt_dots", "opt_stripes"]),
                       ("ombre", ["opt_default", "opt_less_shadow"]),
