@@ -22,7 +22,7 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - uses: android-actions/setup-android@v3
+      # Pas d'action setup-android : le SDK est déjà sur ubuntu-latest ($ANDROID_HOME).
 
       - name: Construire l'APK
         run: |
