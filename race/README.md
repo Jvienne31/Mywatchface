@@ -7,7 +7,7 @@ Le dessin est refait de zéro en Watch Face Format, sans aucune ressource de l'o
 personnel. Ne pas le publier sur le Play Store sous ce nom ni avec ce design sans l'accord de
 l'auteur original.
 
-Même cible que Summit : **Galaxy Watch8 Classic 46 mm**, toile 438 × 438, WFF v4, paquet
+Même cible que Summit : **Galaxy Watch8 Classic 46 mm**, toile 438 × 438, **WFF v2** (Wear OS 5 et plus), paquet
 sans code (`android:hasCode="false"`).
 
 ![Aperçu](src/main/res/drawable-nodpi/preview.png) ![AOD](tools/preview_ambient.png)
@@ -54,10 +54,21 @@ filets, secondes et motif coupés. ≈ 8 % de pixels allumés sur l'aperçu (lim
 
 ## Construire et installer
 
+Sans rien installer : l'APK est construit par GitHub Actions (workflow « APK Race ») à chaque
+push qui touche `race/`. Onglet **Actions** du dépôt → dernière exécution → artefact
+`race-debug-apk` (un zip contenant `race-debug.apk`).
+
+En local :
+
 ```bash
 ./gradlew :race:assembleDebug
 adb install -r race/build/outputs/apk/debug/race-debug.apk
 ```
+
+Sur un **émulateur** : Android Studio → Device Manager → créer un appareil *Wear OS Large
+Round* avec une image **Wear OS 5 (API 34) ou plus récente**, le démarrer, puis
+`adb install -r race-debug.apk` (ou glisser l'APK sur la fenêtre de l'émulateur). Appui long
+sur le cadran actuel → faire défiler → *Race*.
 
 Installation sur la montre : même procédure que Summit (README principal). Les deux cadrans
 ont des identifiants différents (`com.jvienne.summit`, `com.jvienne.race`) et coexistent.
@@ -82,8 +93,8 @@ lisibles (l'original les laisse tête en bas).
 
 ## Vérifications faites
 
-- Le XML passe le validateur officiel Watch Face Format **v4** (`google/watchface`,
-  `third_party/wff`).
+- Le XML passe le validateur officiel Watch Face Format en **v2, v3 et v4** (`google/watchface`,
+  `third_party/wff`) ; le paquet déclare la plus basse, v2, pour tourner dès Wear OS 5.
 - Toutes les ressources référencées existent (polices, images, chaînes).
 - Les sources de données utilisées sont toutes de la version 1 du format : `HOUR_0_11`,
   `MINUTE`, `MINUTE_Z`, `SECOND`, `AMPM_STRING`, `DAY`, `DAY_OF_WEEK`, `MONTH_S`,

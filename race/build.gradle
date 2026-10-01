@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.jvienne.race"
-        minSdk 33   // Wear OS 4
+        minSdk 34   // Wear OS 5 : Watch Face Format v2
         targetSdk 35
         versionCode 1
         versionName "1.0"

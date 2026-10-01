@@ -1,0 +1,36 @@
+# Construit l'APK de debug du cadran Race et le publie comme artefact téléchargeable.
+# Déclenché à chaque push qui touche race/, ou à la main depuis l'onglet Actions.
+name: APK Race
+
+on:
+  push:
+    paths:
+      - "race/**"
+      - "build.gradle"
+      - "settings.gradle"
+      - ".github/workflows/build-race.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Construire l'APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :race:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: race-debug-apk
+          path: race/build/outputs/apk/debug/race-debug.apk
+          if-no-files-found: error
