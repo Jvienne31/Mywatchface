@@ -14,20 +14,22 @@ sans code (`android:hasCode="false"`).
 
 ## Lecture de l'heure
 
-- **Heure** : le disque des grands chiffres (1 à 12) tourne en continu ; l'heure se lit sous
-  l'**index vertical**. À la demie, l'index tombe entre deux chiffres.
-- **Minutes** : la pastille à droite de l'index, avec AM/PM.
-- **Secondes** : l'anneau gradué tourne sous l'index (mode normal seulement).
+- **Heure** : un grand disque de chiffres 1 à 12, centré **sous** l'écran (y 335), avance d'un
+  cran de 30° par heure ; l'heure se lit sous l'**index vertical**. Comme sur l'original, on ne
+  voit que trois chiffres.
+- **Minutes** : la pastille inclinée à droite de l'index, avec AM/PM.
+- **Secondes** : un grand anneau gradué, centré lui aussi sous l'écran (y 396), tourne de 6°
+  par seconde sous l'index (mode normal seulement).
 
 ## Cockpit
 
 | Zone | Contenu | Appui |
 |---|---|---|
-| Bosse centrale | Batterie : jauge + pourcentage | ouvre l'état de la batterie |
-| Compteur gauche | Fréquence cardiaque sur une jauge 40–220, valeur au centre (« -- » si aucune mesure) | ouvre la mesure cardio |
-| Compteur gauche, haut | **Conteneur de données** (complication 1, par défaut lever/coucher du soleil) | celui de la complication |
+| Bosse en pointe | Batterie : demi-jauge + pourcentage | ouvre l'état de la batterie |
+| Compteur gauche | Fréquence cardiaque sur 3/4 de tour, 40 en bas → 220 en haut à droite, zone 200+ en couleur ; valeur au centre (« -- » si aucune mesure) | ouvre la mesure cardio |
+| Compteur gauche, haut | **Conteneur de données** (complication 1, par défaut lever/coucher du soleil), texte + icône du fournisseur | celui de la complication |
 | Compteur droit | Couronne des jours de la semaine, jour courant en couleur ; mois et jour au centre | raccourci 5 |
-| Petit compteur bas | Progression vers l'objectif de pas (aiguille + arc), nombre de pas | raccourci 6 |
+| Petit compteur bas, posé sur les deux autres | Progression vers l'objectif de pas (aiguille + arc), nombre de pas | raccourci 6 |
 
 **5 raccourcis invisibles** (complications 2 à 6) : haut gauche, droite, haut (sur l'index),
 date, pas. Appui long → Personnaliser → Complications → choisir une appli.
@@ -47,8 +49,8 @@ Le nom du mois vient de la langue de la montre (`[MONTH_S]`).
 
 ## AOD
 
-Fond et cockpit noir pur, chiffres d'heure en couleur principale atténuée, compteurs réduits à
-leurs filets, secondes et motif coupés. ≈ 11,5 % de pixels allumés sur l'aperçu (limite 15 %).
+Fond et cockpit noir pur, chiffres d'heure en **contour seul**, compteurs réduits à leurs
+filets, secondes et motif coupés. ≈ 8 % de pixels allumés sur l'aperçu (limite 15 %).
 
 ## Construire et installer
 
@@ -71,7 +73,12 @@ python3 race/tools/generate.py        # watchface.xml, motifs PNG, aperçus SVG
 node race/tools/render-preview.mjs    # aperçus PNG (Playwright + Chromium)
 ```
 
-Les réglages de géométrie sont en tête du script (`R_HOURS`, `COCKPIT_C`, `LEFT_C`…).
+Les réglages de géométrie sont en tête du script (`HOURS_C`, `SEC_C`, `COCKPIT_C`, `LEFT_C`…).
+Ils ont été relevés sur une capture de l'original ramenée à 438 × 438 ; l'aperçu est rendu à
+11:18:38, comme cette capture, pour pouvoir les comparer côte à côte.
+
+Différence volontaire : les noms de jours du bas de la couronne sont retournés pour rester
+lisibles (l'original les laisse tête en bas).
 
 ## Vérifications faites
 

@@ -3,35 +3,35 @@
      FICHIER GÉNÉRÉ par race/tools/generate.py : ne pas éditer à la main. -->
 <WatchFace width="438" height="438" clipShape="CIRCLE">
   <Metadata key="CLOCK_TYPE" value="DIGITAL" />
-  <Metadata key="PREVIEW_TIME" value="10:08:37" />
+  <Metadata key="PREVIEW_TIME" value="11:18:38" />
 
   <UserConfigurations>
     <ColorConfiguration id="main" displayName="cfg_main" defaultValue="0">
-      <ColorOption id="0" displayName="col_cyan" colors="#22D8EE #06535E" />
-      <ColorOption id="1" displayName="col_vert" colors="#4DF07A #0D5C26" />
-      <ColorOption id="2" displayName="col_orange" colors="#FF9C1A #6E3200" />
-      <ColorOption id="3" displayName="col_jaune" colors="#F2E01E #5E5200" />
-      <ColorOption id="4" displayName="col_rouge" colors="#FF4040 #6A0808" />
-      <ColorOption id="5" displayName="col_bleu" colors="#3F8CFF #0B2A66" />
-      <ColorOption id="6" displayName="col_violet" colors="#B270FF #3C1470" />
-      <ColorOption id="7" displayName="col_rose" colors="#FF5FB4 #6A1046" />
-      <ColorOption id="8" displayName="col_lime" colors="#C8FF3A #456600" />
-      <ColorOption id="9" displayName="col_blanc" colors="#E6ECF2 #4A535C" />
+      <ColorOption id="0" displayName="col_cyan" colors="#22D8EE #22D8EE #06535E" />
+      <ColorOption id="1" displayName="col_vert" colors="#4DF07A #4DF07A #0D5C26" />
+      <ColorOption id="2" displayName="col_orange" colors="#FF9C1A #FF9C1A #6E3200" />
+      <ColorOption id="3" displayName="col_jaune" colors="#F2E01E #F2E01E #5E5200" />
+      <ColorOption id="4" displayName="col_rouge" colors="#FF4040 #FF4040 #6A0808" />
+      <ColorOption id="5" displayName="col_bleu" colors="#3F8CFF #3F8CFF #0B2A66" />
+      <ColorOption id="6" displayName="col_violet" colors="#B270FF #B270FF #3C1470" />
+      <ColorOption id="7" displayName="col_rose" colors="#FF5FB4 #FF5FB4 #6A1046" />
+      <ColorOption id="8" displayName="col_lime" colors="#C8FF3A #C8FF3A #456600" />
+      <ColorOption id="9" displayName="col_blanc" colors="#E6ECF2 #E6ECF2 #4A535C" />
     </ColorConfiguration>
     <ColorConfiguration id="second" displayName="cfg_second" defaultValue="0">
-      <ColorOption id="0" displayName="col_cyan" colors="#22D8EE #06535E" />
-      <ColorOption id="1" displayName="col_vert" colors="#4DF07A #0D5C26" />
-      <ColorOption id="2" displayName="col_orange" colors="#FF9C1A #6E3200" />
-      <ColorOption id="3" displayName="col_jaune" colors="#F2E01E #5E5200" />
-      <ColorOption id="4" displayName="col_rouge" colors="#FF4040 #6A0808" />
-      <ColorOption id="5" displayName="col_bleu" colors="#3F8CFF #0B2A66" />
-      <ColorOption id="6" displayName="col_violet" colors="#B270FF #3C1470" />
-      <ColorOption id="7" displayName="col_rose" colors="#FF5FB4 #6A1046" />
-      <ColorOption id="8" displayName="col_lime" colors="#C8FF3A #456600" />
-      <ColorOption id="9" displayName="col_blanc" colors="#E6ECF2 #4A535C" />
-      <ColorOption id="10" displayName="col_turquoise" colors="#2CE6B4 #0B5A45" />
-      <ColorOption id="11" displayName="col_or" colors="#E8C063 #5C4415" />
-      <ColorOption id="12" displayName="col_gris" colors="#A3AEBA #353C44" />
+      <ColorOption id="0" displayName="col_cyan" colors="#22D8EE #168F9D" />
+      <ColorOption id="1" displayName="col_vert" colors="#4DF07A #339E51" />
+      <ColorOption id="2" displayName="col_orange" colors="#FF9C1A #A86711" />
+      <ColorOption id="3" displayName="col_jaune" colors="#F2E01E #A09414" />
+      <ColorOption id="4" displayName="col_rouge" colors="#FF4040 #A82A2A" />
+      <ColorOption id="5" displayName="col_bleu" colors="#3F8CFF #2A5CA8" />
+      <ColorOption id="6" displayName="col_violet" colors="#B270FF #754AA8" />
+      <ColorOption id="7" displayName="col_rose" colors="#FF5FB4 #A83F77" />
+      <ColorOption id="8" displayName="col_lime" colors="#C8FF3A #84A826" />
+      <ColorOption id="9" displayName="col_blanc" colors="#E6ECF2 #989CA0" />
+      <ColorOption id="10" displayName="col_turquoise" colors="#2CE6B4 #1D9877" />
+      <ColorOption id="11" displayName="col_or" colors="#E8C063 #997F41" />
+      <ColorOption id="12" displayName="col_gris" colors="#A3AEBA #6C737B" />
     </ColorConfiguration>
     <ListConfiguration id="cockpit" displayName="cfg_cockpit" defaultValue="0">
       <ListOption id="0" displayName="opt_default" />
@@ -61,12 +61,12 @@
     <PartDraw x="0" y="0" width="438" height="438">
       <Ellipse x="0" y="0" width="438" height="438">
         <Fill color="[CONFIGURATION.main.0]">
-          <RadialGradient centerX="219" centerY="140" radius="300" colors="[CONFIGURATION.main]" positions="0 1" />
+          <RadialGradient centerX="219" centerY="150" radius="320" colors="[CONFIGURATION.main]" positions="0 0.42 1" />
         </Fill>
       </Ellipse>
       <Ellipse x="0" y="0" width="438" height="438">
         <Fill color="#00000000">
-          <RadialGradient centerX="219" centerY="219" radius="219" colors="#00000000 #00000000 #B0000000" positions="0 0.72 1" />
+          <RadialGradient centerX="219" centerY="219" radius="219" colors="#00000000 #00000000 #90000000" positions="0 0.82 1" />
         </Fill>
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -96,306 +96,563 @@
       </ListOption>
     </ListConfiguration>
 
-    <!-- Disque des heures : tourne pour amener l'heure courante sous l'index -->
-    <Group name="hour_disk" x="0" y="0" width="438" height="438">
-      <Transform target="angle" value="-30 * ([HOUR_0_11] + [MINUTE] / 60)" />
-      <Group name="hour_1" x="0" y="0" width="438" height="438" angle="30">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+    <!-- Disque des heures : centré bas (y 335), tourne d'un cran de 30° par heure ; l'heure courante se lit sous l'index -->
+    <Group name="hour_disk" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648">
+      <Transform target="angle" value="-30 * [HOUR_0_11]" />
+      <Group name="hour_1" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="30">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">1</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">1</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">1</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">1<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_2" x="0" y="0" width="438" height="438" angle="60">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_2" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="60">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">2</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">2</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">2</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">2<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_3" x="0" y="0" width="438" height="438" angle="90">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_3" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="90">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">3</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">3</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">3</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">3<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_4" x="0" y="0" width="438" height="438" angle="120">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_4" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="120">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">4</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">4</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">4</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">4<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_5" x="0" y="0" width="438" height="438" angle="150">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_5" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="150">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">5</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">5</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">5</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">5<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_6" x="0" y="0" width="438" height="438" angle="180">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_6" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="180">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">6</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">6</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">6</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">6<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_7" x="0" y="0" width="438" height="438" angle="210">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_7" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="210">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">7</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">7</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">7</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">7<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_8" x="0" y="0" width="438" height="438" angle="240">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_8" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="240">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">8</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">8</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">8</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">8<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_9" x="0" y="0" width="438" height="438" angle="270">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_9" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="270">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">9</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">9</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">9</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">9<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_10" x="0" y="0" width="438" height="438" angle="300">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_10" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="300">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">10</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">10</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">10</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">10<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_11" x="0" y="0" width="438" height="438" angle="330">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_11" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648" angle="330">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">11</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">11</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">11</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">11<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
-      <Group name="hour_12" x="0" y="0" width="438" height="438">
-        <PartText x="154" y="1" width="130" height="104" alpha="92">
+      <Group name="hour_12" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.7648">
+        <PartText x="129" y="15" width="180" height="150" alpha="135">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="#000000">12</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">12</Font>
           </Text>
           <Variant mode="AMBIENT" target="alpha" value="0" />
         </PartText>
-        <PartText x="154" y="1" width="130" height="104" alpha="0">
+        <PartText x="129" y="15" width="180" height="150" alpha="0">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="oswald_semibold" size="104" color="[CONFIGURATION.main.0]">12</Font>
+            <Font family="oswald_semibold" size="146" color="#000000">12<Outline width="2" color="[CONFIGURATION.main.0]" /></Font>
           </Text>
-          <Variant mode="AMBIENT" target="alpha" value="110" />
+          <Variant mode="AMBIENT" target="alpha" value="255" />
         </PartText>
       </Group>
     </Group>
 
-    <!-- Anneau des secondes (mode normal) -->
-    <Group name="seconds_ring" x="0" y="0" width="438" height="438">
+    <!-- Anneau des secondes : grand cercle centré bas (y 396), 6° par seconde -->
+    <Group name="seconds_ring" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041">
       <Transform target="angle" value="-6 * [SECOND]" />
-      <PartDraw x="0" y="0" width="438" height="438">
-        <Arc centerX="219" centerY="219" width="232" height="232" startAngle="0" endAngle="360" direction="CLOCKWISE">
-          <Stroke color="#73000000" thickness="1.5" />
-        </Arc>
-        <Arc centerX="219" centerY="219" width="224" height="224" startAngle="-0.36" endAngle="359.64" direction="CLOCKWISE">
-          <Stroke color="#8C000000" thickness="7" dashIntervals="1.4 10.33" />
-        </Arc>
-        <Arc centerX="219" centerY="219" width="222" height="222" startAngle="-0.67" endAngle="359.33" direction="CLOCKWISE">
-          <Stroke color="#B4000000" thickness="10" dashIntervals="2.6 55.52" />
-        </Arc>
-      </PartDraw>
-      <Group name="sec_0" x="0" y="0" width="438" height="438">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_0" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">00</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">00</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_5" x="0" y="0" width="438" height="438" angle="30">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_5" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="30">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">05</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">05</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_10" x="0" y="0" width="438" height="438" angle="60">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_10" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="60">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">10</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">10</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_15" x="0" y="0" width="438" height="438" angle="90">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_15" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="90">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">15</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">15</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_20" x="0" y="0" width="438" height="438" angle="120">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_20" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="120">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">20</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">20</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_25" x="0" y="0" width="438" height="438" angle="150">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_25" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="150">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">25</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">25</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_30" x="0" y="0" width="438" height="438" angle="180">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_30" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="180">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">30</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">30</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_35" x="0" y="0" width="438" height="438" angle="210">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_35" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="210">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">35</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">35</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_40" x="0" y="0" width="438" height="438" angle="240">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_40" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="240">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">40</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">40</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_45" x="0" y="0" width="438" height="438" angle="270">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_45" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="270">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">45</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">45</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_50" x="0" y="0" width="438" height="438" angle="300">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_50" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="300">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">50</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">50</Font>
           </Text>
         </PartText>
       </Group>
-      <Group name="sec_55" x="0" y="0" width="438" height="438" angle="330">
-        <PartText x="204" y="116" width="30" height="16" alpha="170">
+      <Group name="sec_55" x="0" y="0" width="438" height="438" pivotX="0.5000" pivotY="0.9041" angle="330">
+        <PartDraw x="0" y="0" width="438" height="438">
+          <Arc centerX="219" centerY="396" width="602" height="602" startAngle="-15" endAngle="15" direction="CLOCKWISE">
+            <Stroke color="#8C000000" thickness="1.5" />
+          </Arc>
+          <Line startX="219" startY="104" endX="219" endY="86">
+            <Stroke color="#B4000000" thickness="3" />
+          </Line>
+          <Line startX="250.04" startY="100.63" endX="250.88" endY="92.67">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="280.75" startY="105.49" endX="282.41" endY="97.66">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="310.78" startY="113.54" endX="313.25" endY="105.93">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+          <Line startX="339.8" startY="124.68" endX="343.05" endY="117.37">
+            <Stroke color="#B4000000" thickness="1.5" />
+          </Line>
+        </PartDraw>
+        <PartText x="197" y="114" width="44" height="28" alpha="190">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="13" color="#000000">55</Font>
+            <Font family="oswald_semibold" size="23" color="#000000">55</Font>
           </Text>
         </PartText>
       </Group>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
 
-    <!-- Index vertical -->
+    <!-- Index vertical, jusqu'à la pointe du cockpit -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Line startX="219" startY="6" endX="219" endY="174">
-        <Stroke color="#B4000000" thickness="2.5" />
+      <Line startX="219" startY="0" endX="219" endY="148">
+        <Stroke color="#8C000000" thickness="1.5" />
       </Line>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438" alpha="0">
-      <Line startX="219" startY="6" endX="219" endY="174">
-        <Stroke color="[CONFIGURATION.main.0]" thickness="2" />
+      <Line startX="219" startY="0" endX="219" endY="148">
+        <Stroke color="[CONFIGURATION.main.0]" thickness="1.5" />
       </Line>
       <Variant mode="AMBIENT" target="alpha" value="255" />
     </PartDraw>
+
+    <!-- Minutes : pastille inclinée à droite de l'index (son pied passe sous le cockpit) -->
+    <Group name="minute_pill" x="283" y="89" width="60" height="118" angle="15">
+      <PartDraw x="0" y="0" width="60" height="118">
+        <RoundRectangle x="0" y="0" width="60" height="118" cornerRadiusX="30" cornerRadiusY="30">
+          <Fill color="#121417" />
+        </RoundRectangle>
+        <Variant mode="AMBIENT" target="alpha" value="0" />
+      </PartDraw>
+      <PartDraw x="0" y="0" width="60" height="118" alpha="0">
+        <RoundRectangle x="1" y="1" width="58" height="116" cornerRadiusX="29" cornerRadiusY="29">
+          <Fill color="#000000" />
+          <Stroke color="[CONFIGURATION.main.0]" thickness="1.5" />
+        </RoundRectangle>
+        <Variant mode="AMBIENT" target="alpha" value="255" />
+      </PartDraw>
+      <PartText x="0" y="10" width="60" height="52">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="oswald_semibold" size="46" color="#F2F5F8"><Template><![CDATA[%s]]><Parameter expression="[MINUTE_Z]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="0" y="60" width="60" height="18">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="oswald_semibold" size="15" color="#8E99A5"><Template><![CDATA[%s]]><Parameter expression="[AMPM_STRING]" /></Template></Font>
+        </Text>
+      </PartText>
+    </Group>
 
     <!-- Ombre portée du cockpit -->
     <ListConfiguration id="ombre">
       <ListOption id="0">
         <Group name="ombre_0" x="0" y="0" width="438" height="438">
           <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-133" y="170" width="704" height="704">
+            <Ellipse x="-46" y="156" width="530" height="530">
               <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="522" radius="352" colors="#A6000000 #A6000000 #00000000" positions="0 0.9261 1" />
+                <RadialGradient centerX="219" centerY="421" radius="265" colors="#78000000 #78000000 #00000000" positions="0 0.9547 1" />
               </Fill>
             </Ellipse>
-            <Ellipse x="155" y="148" width="128" height="128">
+            <Ellipse x="163" y="136" width="112" height="112">
               <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="212" radius="64" colors="#A6000000 #A6000000 #00000000" positions="0 0.5938 1" />
+                <RadialGradient centerX="219" centerY="192" radius="56" colors="#78000000 #78000000 #00000000" positions="0 0.7857 1" />
               </Fill>
             </Ellipse>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -405,14 +662,14 @@
       <ListOption id="1">
         <Group name="ombre_1" x="0" y="0" width="438" height="438">
           <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-121" y="182" width="680" height="680">
+            <Ellipse x="-41" y="161" width="520" height="520">
               <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="522" radius="340" colors="#60000000 #60000000 #00000000" positions="0 0.9588 1" />
+                <RadialGradient centerX="219" centerY="421" radius="260" colors="#3C000000 #3C000000 #00000000" positions="0 0.9731 1" />
               </Fill>
             </Ellipse>
-            <Ellipse x="167" y="160" width="104" height="104">
+            <Ellipse x="168" y="141" width="102" height="102">
               <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="212" radius="52" colors="#60000000 #60000000 #00000000" positions="0 0.7308 1" />
+                <RadialGradient centerX="219" centerY="192" radius="51" colors="#3C000000 #3C000000 #00000000" positions="0 0.8627 1" />
               </Fill>
             </Ellipse>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -421,316 +678,330 @@
       </ListOption>
     </ListConfiguration>
 
-    <!-- Cockpit : grand disque sombre + bosse de la batterie -->
+    <!-- Cockpit : grand disque sombre + bosse en pointe sous l'index -->
     <ListConfiguration id="cockpit">
       <ListOption id="0">
         <Group name="cockpit_0" x="0" y="0" width="438" height="438">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-107" y="196" width="652" height="652">
-              <Fill color="#2C3137">
-                <LinearGradient startX="0" startY="196" endX="0" endY="438" colors="#2C3137 #0D0F12" positions="0 1" />
-              </Fill>
-            </Ellipse>
-            <Ellipse x="181" y="174" width="76" height="76">
-              <Fill color="#2C3137">
-                <LinearGradient startX="0" startY="196" endX="0" endY="438" colors="#2C3137 #0D0F12" positions="0 1" />
-              </Fill>
-            </Ellipse>
+          <Group name="cockpit_fill" x="0" y="0" width="438" height="438">
+            <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
+              <Rectangle x="0" y="0" width="90" height="60">
+                <Fill color="#1F2327" />
+              </Rectangle>
+            </PartDraw>
+            <PartDraw x="219" y="148" width="90" height="60" pivotX="0.0000" pivotY="0.0000" angle="33">
+              <Rectangle x="0" y="0" width="90" height="60">
+                <Fill color="#1F2327" />
+              </Rectangle>
+            </PartDraw>
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Ellipse x="-34" y="168" width="506" height="506">
+                <Fill color="#1F2327">
+                  <LinearGradient startX="0" startY="148" endX="0" endY="438" colors="#1F2327 #08090A" positions="0 1" />
+                </Fill>
+              </Ellipse>
+            </PartDraw>
             <Variant mode="AMBIENT" target="alpha" value="0" />
-          </PartDraw>
+          </Group>
         </Group>
       </ListOption>
       <ListOption id="1">
         <Group name="cockpit_1" x="0" y="0" width="438" height="438">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-107" y="196" width="652" height="652">
-              <Fill color="#17191C">
-                <LinearGradient startX="0" startY="196" endX="0" endY="438" colors="#17191C #050607" positions="0 1" />
-              </Fill>
-            </Ellipse>
-            <Ellipse x="181" y="174" width="76" height="76">
-              <Fill color="#17191C">
-                <LinearGradient startX="0" startY="196" endX="0" endY="438" colors="#17191C #050607" positions="0 1" />
-              </Fill>
-            </Ellipse>
+          <Group name="cockpit_fill" x="0" y="0" width="438" height="438">
+            <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
+              <Rectangle x="0" y="0" width="90" height="60">
+                <Fill color="#111315" />
+              </Rectangle>
+            </PartDraw>
+            <PartDraw x="219" y="148" width="90" height="60" pivotX="0.0000" pivotY="0.0000" angle="33">
+              <Rectangle x="0" y="0" width="90" height="60">
+                <Fill color="#111315" />
+              </Rectangle>
+            </PartDraw>
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Ellipse x="-34" y="168" width="506" height="506">
+                <Fill color="#111315">
+                  <LinearGradient startX="0" startY="148" endX="0" endY="438" colors="#111315 #030303" positions="0 1" />
+                </Fill>
+              </Ellipse>
+            </PartDraw>
             <Variant mode="AMBIENT" target="alpha" value="0" />
-          </PartDraw>
+          </Group>
         </Group>
       </ListOption>
     </ListConfiguration>
-    <PartDraw x="0" y="0" width="438" height="438" alpha="0">
-      <Ellipse x="-107" y="196" width="652" height="652">
-        <Fill color="#000000" />
-      </Ellipse>
-      <Ellipse x="181" y="174" width="76" height="76">
-        <Fill color="#000000" />
-      </Ellipse>
+    <Group name="cockpit_ambient" x="0" y="0" width="438" height="438" alpha="0">
+      <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
+        <Rectangle x="0" y="0" width="90" height="60">
+          <Fill color="#000000" />
+        </Rectangle>
+      </PartDraw>
+      <PartDraw x="219" y="148" width="90" height="60" pivotX="0.0000" pivotY="0.0000" angle="33">
+        <Rectangle x="0" y="0" width="90" height="60">
+          <Fill color="#000000" />
+        </Rectangle>
+      </PartDraw>
+      <PartDraw x="0" y="0" width="438" height="438">
+        <Ellipse x="-34" y="168" width="506" height="506">
+          <Fill color="#000000" />
+        </Ellipse>
+      </PartDraw>
       <Variant mode="AMBIENT" target="alpha" value="255" />
-    </PartDraw>
+    </Group>
 
-    <!-- Arête du cockpit (aussi en AOD, où elle remplace l'aplat) -->
+    <!-- Arêtes du cockpit (aussi en AOD) -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Arc centerX="219" centerY="522" width="652" height="652" startAngle="-60" endAngle="-6.22" direction="CLOCKWISE">
-        <Stroke color="#4A525B" thickness="2" />
+      <Arc centerX="219" centerY="421" width="506" height="506" startAngle="-80" endAngle="-7.82" direction="CLOCKWISE">
+        <Stroke color="#454C54" thickness="1.5" />
       </Arc>
-      <Arc centerX="219" centerY="522" width="652" height="652" startAngle="6.22" endAngle="60" direction="CLOCKWISE">
-        <Stroke color="#4A525B" thickness="2" />
+      <Arc centerX="219" centerY="421" width="506" height="506" startAngle="7.82" endAngle="80" direction="CLOCKWISE">
+        <Stroke color="#454C54" thickness="1.5" />
       </Arc>
-      <Arc centerX="219" centerY="212" width="76" height="76" startAngle="-68.25" endAngle="68.25" direction="CLOCKWISE">
-        <Stroke color="#4A525B" thickness="2" />
-      </Arc>
+      <Line startX="184.58" startY="170.35" endX="219" endY="148">
+        <Stroke color="#454C54" thickness="1.5" cap="ROUND" />
+      </Line>
+      <Line startX="219" startY="148" endX="253.42" endY="170.35">
+        <Stroke color="#454C54" thickness="1.5" cap="ROUND" />
+      </Line>
     </PartDraw>
 
     <!-- Vis -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="186" y="257" width="10" height="10">
-        <Fill color="#15181B" />
-        <Stroke color="#3E454D" thickness="1.2" />
+      <Ellipse x="214.5" y="283.5" width="9" height="9">
+        <Fill color="#0B0C0E" />
+        <Stroke color="#30363C" thickness="1.2" />
       </Ellipse>
-      <Line startX="188" startY="264" endX="194" endY="260">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
-      </Line>
-      <Ellipse x="242" y="257" width="10" height="10">
-        <Fill color="#15181B" />
-        <Stroke color="#3E454D" thickness="1.2" />
+      <Ellipse x="138.5" y="387.5" width="9" height="9">
+        <Fill color="#0B0C0E" />
+        <Stroke color="#30363C" thickness="1.2" />
       </Ellipse>
-      <Line startX="244" startY="264" endX="250" endY="260">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
-      </Line>
-      <Ellipse x="169" y="407" width="10" height="10">
-        <Fill color="#15181B" />
-        <Stroke color="#3E454D" thickness="1.2" />
+      <Ellipse x="290.5" y="387.5" width="9" height="9">
+        <Fill color="#0B0C0E" />
+        <Stroke color="#30363C" thickness="1.2" />
       </Ellipse>
-      <Line startX="171" startY="414" endX="177" endY="410">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
-      </Line>
-      <Ellipse x="259" y="407" width="10" height="10">
-        <Fill color="#15181B" />
-        <Stroke color="#3E454D" thickness="1.2" />
-      </Ellipse>
-      <Line startX="261" startY="414" endX="267" endY="410">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
-      </Line>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
 
-    <!-- Minutes : pastille à droite de l'index -->
-    <PartDraw x="0" y="0" width="438" height="438">
-      <RoundRectangle x="248" y="70" width="58" height="86" cornerRadiusX="29" cornerRadiusY="29">
-        <Fill color="#E6101317" />
-        <Stroke color="#3A4149" thickness="1.5" />
-      </RoundRectangle>
-      <Variant mode="AMBIENT" target="alpha" value="0" />
-    </PartDraw>
-    <PartDraw x="0" y="0" width="438" height="438" alpha="0">
-      <RoundRectangle x="248" y="70" width="58" height="86" cornerRadiusX="29" cornerRadiusY="29">
-        <Fill color="#000000" />
-        <Stroke color="[CONFIGURATION.main.0]" thickness="1.5" />
-      </RoundRectangle>
-      <Variant mode="AMBIENT" target="alpha" value="255" />
-    </PartDraw>
-    <PartText x="248" y="78" width="58" height="48">
-      <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-        <Font family="oswald_semibold" size="42" color="#F2F5F8"><Template><![CDATA[%s]]><Parameter expression="[MINUTE_Z]" /></Template></Font>
-      </Text>
-    </PartText>
-    <PartText x="248" y="126" width="58" height="18">
-      <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-        <Font family="chakrapetch_semibold" size="12" color="#8E99A5" letterSpacing="1"><Template><![CDATA[%s]]><Parameter expression="[AMPM_STRING]" /></Template></Font>
-      </Text>
-    </PartText>
-
-    <!-- Batterie, dans la bosse du cockpit — un appui ouvre l'état de la batterie -->
-    <Group name="battery" x="181" y="174" width="76" height="76">
+    <!-- Batterie, dans la bosse — un appui ouvre l'état de la batterie -->
+    <Group name="battery" x="187" y="160" width="64" height="86">
       <Launch target="BATTERY_STATUS" />
-      <PartDraw x="-181" y="-174" width="438" height="438">
-        <Line startX="222" startY="181" endX="215" endY="191">
-          <Stroke color="#9AA4AF" thickness="2" cap="ROUND" />
+      <PartDraw x="-187" y="-160" width="438" height="438">
+        <Line startX="222" startY="166" endX="215" endY="177">
+          <Stroke color="#8E99A5" thickness="2" cap="ROUND" />
         </Line>
-        <Line startX="215" startY="191" endX="223" endY="191">
-          <Stroke color="#9AA4AF" thickness="2" cap="ROUND" />
+        <Line startX="215" startY="177" endX="223" endY="177">
+          <Stroke color="#8E99A5" thickness="2" cap="ROUND" />
         </Line>
-        <Line startX="223" startY="191" endX="216" endY="201">
-          <Stroke color="#9AA4AF" thickness="2" cap="ROUND" />
+        <Line startX="223" startY="177" endX="216" endY="188">
+          <Stroke color="#8E99A5" thickness="2" cap="ROUND" />
         </Line>
-        <Arc centerX="219" centerY="220" width="48" height="48" startAngle="-125" endAngle="125" direction="CLOCKWISE">
-          <Stroke color="#2B3036" thickness="5" cap="ROUND" />
+      </PartDraw>
+      <PartDraw x="-187" y="-160" width="438" height="438">
+        <Arc centerX="219" centerY="228" width="54" height="54" startAngle="-90" endAngle="90" direction="CLOCKWISE">
+          <Stroke color="#2B3036" thickness="6" />
         </Arc>
-        <Arc centerX="219" centerY="220" width="48" height="48" startAngle="-125" endAngle="125" direction="CLOCKWISE">
-          <Stroke color="[CONFIGURATION.second.0]" thickness="5" cap="ROUND" />
-          <Transform target="endAngle" value="-125 + 250 * [BATTERY_PERCENT] / 100" />
+        <Variant mode="AMBIENT" target="alpha" value="0" />
+      </PartDraw>
+      <PartDraw x="-187" y="-160" width="438" height="438">
+        <Arc centerX="219" centerY="228" width="54" height="54" startAngle="-90" endAngle="90" direction="CLOCKWISE">
+          <Stroke color="[CONFIGURATION.second.0]" thickness="6" />
+          <Transform target="endAngle" value="-90 + 180 * [BATTERY_PERCENT] / 100" />
         </Arc>
       </PartDraw>
-      <PartText x="18" y="40" width="40" height="22">
+      <PartText x="8" y="57" width="48" height="26">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="15" color="#E8EDF2"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+          <Font family="oswald_semibold" size="22" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
         </Text>
       </PartText>
     </Group>
 
-    <!-- Compteur gauche : fréquence cardiaque (40-220) + conteneur de données -->
+    <!-- Compteur gauche : fréquence cardiaque, échelle 40 (en bas) à 220 (en haut à droite) -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="54" y="242" width="140" height="140">
-        <Fill color="#0D0F12" />
+      <Ellipse x="30" y="210" width="172" height="172">
+        <Fill color="#101214" />
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="54" y="242" width="140" height="140">
-        <Stroke color="#3E454D" thickness="2" />
+      <Ellipse x="31.5" y="211.5" width="169" height="169">
+        <Stroke color="#30363C" thickness="3" />
       </Ellipse>
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Arc centerX="124" centerY="312" width="116" height="116" startAngle="200" endAngle="450" direction="CLOCKWISE">
-        <Stroke color="[CONFIGURATION.second.1]" thickness="16" />
+      <Arc centerX="116" centerY="296" width="140" height="140" startAngle="164" endAngle="440" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.1]" thickness="22" />
       </Arc>
-      <Arc centerX="124" centerY="312" width="116" height="116" startAngle="200" endAngle="450" direction="CLOCKWISE">
-        <Stroke color="[CONFIGURATION.second.0]" thickness="16" />
-        <Transform target="endAngle" value="200 + 250 * clamp(([HEART_RATE] - 40) / 180, 0, 1)" />
+      <Arc centerX="116" centerY="296" width="140" height="140" startAngle="164" endAngle="416" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.0]" thickness="22" />
+        <Transform target="endAngle" value="176 + 240 * clamp(([HEART_RATE] - 40) / 180, 0, 1)" />
       </Arc>
-      <Arc centerX="124" centerY="312" width="116" height="116" startAngle="199.41" endAngle="450.59" direction="CLOCKWISE">
-        <Stroke color="#C8000000" thickness="16" dashIntervals="1.2 26.92" />
+      <Arc centerX="116" centerY="296" width="140" height="140" startAngle="389.33" endAngle="440" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.0]" thickness="22" />
+      </Arc>
+      <Arc centerX="116" centerY="296" width="140" height="140" startAngle="175.43" endAngle="416.57" direction="CLOCKWISE">
+        <Stroke color="#C8000000" thickness="22" dashIntervals="1.4 31.18" />
+      </Arc>
+      <Arc centerX="116" centerY="296" width="156" height="156" startAngle="175.63" endAngle="416.37" direction="CLOCKWISE">
+        <Stroke color="#A0000000" thickness="6" dashIntervals="1 17.15" />
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438" alpha="0">
-      <Arc centerX="124" centerY="312" width="116" height="116" startAngle="200" endAngle="450" direction="CLOCKWISE">
+      <Arc centerX="116" centerY="296" width="162" height="162" startAngle="164" endAngle="440" direction="CLOCKWISE">
         <Stroke color="[CONFIGURATION.second.0]" thickness="1.5" />
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="255" />
     </PartDraw>
-    <Group name="lbl_l11" x="52" y="240" width="144" height="144" angle="47.78">
-      <PartText x="57" y="130" width="30" height="14" alpha="200">
+    <Group name="lbl_l9" x="26" y="206" width="180" height="180" angle="-4">
+      <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">60</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">40</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l12" x="52" y="240" width="144" height="144" angle="75.56">
-      <PartText x="57" y="130" width="30" height="14" alpha="200">
+    <Group name="lbl_l10" x="26" y="206" width="180" height="180" angle="22.67">
+      <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">80</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">60</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l13" x="52" y="240" width="144" height="144" angle="283.33">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l11" x="26" y="206" width="180" height="180" angle="49.33">
+      <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">100</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">80</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l14" x="52" y="240" width="144" height="144" angle="311.11">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l12" x="26" y="206" width="180" height="180" angle="282.67">
+      <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">120</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">120</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l15" x="52" y="240" width="144" height="144" angle="338.89">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l13" x="26" y="206" width="180" height="180" angle="309.33">
+      <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">140</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">140</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l16" x="52" y="240" width="144" height="144" angle="366.67">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l14" x="26" y="206" width="180" height="180" angle="336">
+      <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">160</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">160</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l17" x="52" y="240" width="144" height="144" angle="394.44">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l15" x="26" y="206" width="180" height="180" angle="362.67">
+      <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">180</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">180</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l18" x="52" y="240" width="144" height="144" angle="422.22">
-      <PartText x="57" y="0" width="30" height="14" alpha="200">
+    <Group name="lbl_l16" x="26" y="206" width="180" height="180" angle="416">
+      <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="10" color="#000000">200</Font>
+          <Font family="oswald_semibold" size="15" color="#000000">220</Font>
         </Text>
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Line startX="94" startY="306" endX="154" endY="306">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
+      <Ellipse x="59" y="239" width="114" height="114">
+        <Fill color="#0E1012" />
+      </Ellipse>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </PartDraw>
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Line startX="78" startY="291" endX="150" endY="291">
+        <Stroke color="#5D666F" thickness="1.2" />
+      </Line>
+      <Line startX="150" startY="291" endX="172" endY="326">
+        <Stroke color="#5D666F" thickness="1.2" />
       </Line>
     </PartDraw>
-    <Group name="heart_rate" x="88" y="308" width="72" height="52">
+
+    <!-- Petit cœur dessiné (deux disques + un carré à 45°) -->
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Ellipse x="144.6" y="331.7" width="7.6" height="7.6">
+        <Fill color="#7D8893" />
+      </Ellipse>
+      <Ellipse x="151.8" y="331.7" width="7.6" height="7.6">
+        <Fill color="#7D8893" />
+      </Ellipse>
+    </PartDraw>
+    <PartDraw x="146" y="333" width="12" height="12" angle="45">
+      <Rectangle x="0.8" y="0.8" width="10.4" height="10.4">
+        <Fill color="#7D8893" />
+      </Rectangle>
+    </PartDraw>
+    <Group name="heart_rate" x="76" y="296" width="80" height="40">
       <Launch target="HEALTH_HEART_RATE" />
       <Condition>
         <Expressions>
           <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_ok">
-          <Group name="hr_v19" x="0" y="0" width="72" height="36">
-            <PartText x="0" y="0" width="72" height="36">
+          <Group name="hr_v17" x="0" y="0" width="80" height="40">
+            <PartText x="0" y="0" width="80" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="oswald_semibold" size="30" color="#F2F5F8"><Template><![CDATA[%s]]><Parameter expression="round([HEART_RATE])" /></Template></Font>
+                <Font family="oswald_semibold" size="36" color="#E8EDF2"><Template><![CDATA[%s]]><Parameter expression="round([HEART_RATE])" /></Template></Font>
               </Text>
             </PartText>
           </Group>
         </Compare>
         <Default>
-          <Group name="hr_v20" x="0" y="0" width="72" height="36">
-            <PartText x="0" y="0" width="72" height="36">
+          <Group name="hr_v18" x="0" y="0" width="80" height="40">
+            <PartText x="0" y="0" width="80" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="oswald_semibold" size="30" color="#F2F5F8">--</Font>
+                <Font family="oswald_semibold" size="36" color="#E8EDF2">--</Font>
               </Text>
             </PartText>
           </Group>
         </Default>
       </Condition>
-      <PartText x="6" y="34" width="60" height="12">
-        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="chakrapetch_semibold" size="9" color="#7D8893" letterSpacing="1.5">BPM</Font>
-        </Text>
-      </PartText>
     </Group>
 
-    <!-- Compteur droit : jours de la semaine + mois et jour -->
+    <!-- Compteur droit : couronne des jours (jour courant en couleur) + mois et jour -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="244" y="242" width="140" height="140">
-        <Fill color="#0D0F12" />
+      <Ellipse x="236" y="210" width="172" height="172">
+        <Fill color="#101214" />
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="244" y="242" width="140" height="140">
-        <Stroke color="#3E454D" thickness="2" />
+      <Ellipse x="237.5" y="211.5" width="169" height="169">
+        <Stroke color="#30363C" thickness="3" />
       </Ellipse>
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Arc centerX="314" centerY="312" width="116" height="116" startAngle="-77.14" endAngle="282.86" direction="CLOCKWISE">
-        <Stroke color="[CONFIGURATION.second.1]" thickness="18" />
+      <Arc centerX="322" centerY="296" width="140" height="140" startAngle="-55.71" endAngle="304.29" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.1]" thickness="22" />
       </Arc>
-      <Arc centerX="314" centerY="312" width="116" height="116" startAngle="-77.14" endAngle="-25.71" direction="CLOCKWISE">
-        <Stroke color="[CONFIGURATION.second.0]" thickness="18" />
-        <Transform target="startAngle" value="-77.1429 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
-        <Transform target="endAngle" value="-25.7143 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
+      <Arc centerX="322" centerY="296" width="140" height="140" startAngle="-55.71" endAngle="-4.29" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.0]" thickness="22" />
+        <Transform target="startAngle" value="-55.7143 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
+        <Transform target="endAngle" value="-4.2857 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
       </Arc>
-      <Arc centerX="314" centerY="312" width="116" height="116" startAngle="-77.93" endAngle="282.07" direction="CLOCKWISE">
-        <Stroke color="#0D0F12" thickness="18" dashIntervals="1.6 50.46" />
+      <Arc centerX="322" centerY="296" width="140" height="140" startAngle="-56.74" endAngle="303.26" direction="CLOCKWISE">
+        <Stroke color="#15181B" thickness="22" dashIntervals="2.5 60.33" />
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438" alpha="0">
-      <Arc centerX="314" centerY="312" width="116" height="116" startAngle="-77.14" endAngle="-25.71" direction="CLOCKWISE">
+      <Arc centerX="322" centerY="296" width="162" height="162" startAngle="-55.71" endAngle="-4.29" direction="CLOCKWISE">
         <Stroke color="[CONFIGURATION.second.0]" thickness="2" />
-        <Transform target="startAngle" value="-77.1429 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
-        <Transform target="endAngle" value="-25.7143 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
+        <Transform target="startAngle" value="-55.7143 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
+        <Transform target="endAngle" value="-4.2857 + 51.4286 * (([DAY_OF_WEEK] + 5) % 7)" />
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="255" />
     </PartDraw>
@@ -739,58 +1010,58 @@
     <ListConfiguration id="langue">
       <ListOption id="0">
         <Group name="langue_0" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l21" x="242" y="240" width="144" height="144" angle="-51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l19" x="230" y="204" width="184" height="184" angle="-30">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">LUN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l22" x="242" y="240" width="144" height="144" angle="0">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l20" x="230" y="204" width="184" height="184" angle="21.43">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MAR</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l23" x="242" y="240" width="144" height="144" angle="51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l21" x="230" y="204" width="184" height="184" angle="72.86">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MER</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MER</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l24" x="242" y="240" width="144" height="144" angle="-77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l22" x="230" y="204" width="184" height="184" angle="-55.71">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">JEU</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">JEU</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l25" x="242" y="240" width="144" height="144" angle="-25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l23" x="230" y="204" width="184" height="184" angle="-4.29">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">VEN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">VEN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l26" x="242" y="240" width="144" height="144" angle="25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l24" x="230" y="204" width="184" height="184" angle="47.14">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SAM</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SAM</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l27" x="242" y="240" width="144" height="144" angle="77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l25" x="230" y="204" width="184" height="184" angle="278.57">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">DIM</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">DIM</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -799,58 +1070,58 @@
       </ListOption>
       <ListOption id="1">
         <Group name="langue_1" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l28" x="242" y="240" width="144" height="144" angle="-51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l26" x="230" y="204" width="184" height="184" angle="-30">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MON</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MON</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l29" x="242" y="240" width="144" height="144" angle="0">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l27" x="230" y="204" width="184" height="184" angle="21.43">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">TUE</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">TUE</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l30" x="242" y="240" width="144" height="144" angle="51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l28" x="230" y="204" width="184" height="184" angle="72.86">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">WED</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">WED</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l31" x="242" y="240" width="144" height="144" angle="-77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l29" x="230" y="204" width="184" height="184" angle="-55.71">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">THU</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">THU</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l32" x="242" y="240" width="144" height="144" angle="-25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l30" x="230" y="204" width="184" height="184" angle="-4.29">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">FRI</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">FRI</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l33" x="242" y="240" width="144" height="144" angle="25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l31" x="230" y="204" width="184" height="184" angle="47.14">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SAT</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SAT</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l34" x="242" y="240" width="144" height="144" angle="77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l32" x="230" y="204" width="184" height="184" angle="278.57">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SUN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SUN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -859,58 +1130,58 @@
       </ListOption>
       <ListOption id="2">
         <Group name="langue_2" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l35" x="242" y="240" width="144" height="144" angle="-51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l33" x="230" y="204" width="184" height="184" angle="-30">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MO</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MO</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l36" x="242" y="240" width="144" height="144" angle="0">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l34" x="230" y="204" width="184" height="184" angle="21.43">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">DI</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">DI</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l37" x="242" y="240" width="144" height="144" angle="51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l35" x="230" y="204" width="184" height="184" angle="72.86">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MI</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MI</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l38" x="242" y="240" width="144" height="144" angle="-77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l36" x="230" y="204" width="184" height="184" angle="-55.71">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">DO</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">DO</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l39" x="242" y="240" width="144" height="144" angle="-25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l37" x="230" y="204" width="184" height="184" angle="-4.29">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">FR</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">FR</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l40" x="242" y="240" width="144" height="144" angle="25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l38" x="230" y="204" width="184" height="184" angle="47.14">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SA</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SA</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l41" x="242" y="240" width="144" height="144" angle="77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l39" x="230" y="204" width="184" height="184" angle="278.57">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SO</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SO</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -919,58 +1190,58 @@
       </ListOption>
       <ListOption id="3">
         <Group name="langue_3" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l42" x="242" y="240" width="144" height="144" angle="-51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l40" x="230" y="204" width="184" height="184" angle="-30">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">LUN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l43" x="242" y="240" width="144" height="144" angle="0">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l41" x="230" y="204" width="184" height="184" angle="21.43">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MAR</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l44" x="242" y="240" width="144" height="144" angle="51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l42" x="230" y="204" width="184" height="184" angle="72.86">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MIÉ</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MIÉ</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l45" x="242" y="240" width="144" height="144" angle="-77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l43" x="230" y="204" width="184" height="184" angle="-55.71">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">JUE</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">JUE</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l46" x="242" y="240" width="144" height="144" angle="-25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l44" x="230" y="204" width="184" height="184" angle="-4.29">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">VIE</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">VIE</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l47" x="242" y="240" width="144" height="144" angle="25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l45" x="230" y="204" width="184" height="184" angle="47.14">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SÁB</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SÁB</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l48" x="242" y="240" width="144" height="144" angle="77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l46" x="230" y="204" width="184" height="184" angle="278.57">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">DOM</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">DOM</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -979,58 +1250,58 @@
       </ListOption>
       <ListOption id="4">
         <Group name="langue_4" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l49" x="242" y="240" width="144" height="144" angle="-51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l47" x="230" y="204" width="184" height="184" angle="-30">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">LUN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l50" x="242" y="240" width="144" height="144" angle="0">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l48" x="230" y="204" width="184" height="184" angle="21.43">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MAR</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l51" x="242" y="240" width="144" height="144" angle="51.43">
-            <PartText x="55" y="0" width="34" height="14" alpha="210">
+          <Group name="lbl_l49" x="230" y="204" width="184" height="184" angle="72.86">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">MER</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">MER</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l52" x="242" y="240" width="144" height="144" angle="-77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l50" x="230" y="204" width="184" height="184" angle="-55.71">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">GIO</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">GIO</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l53" x="242" y="240" width="144" height="144" angle="-25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l51" x="230" y="204" width="184" height="184" angle="-4.29">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">VEN</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">VEN</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l54" x="242" y="240" width="144" height="144" angle="25.71">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l52" x="230" y="204" width="184" height="184" angle="47.14">
+            <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">SAB</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">SAB</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l55" x="242" y="240" width="144" height="144" angle="77.14">
-            <PartText x="55" y="130" width="34" height="14" alpha="210">
+          <Group name="lbl_l53" x="230" y="204" width="184" height="184" angle="278.57">
+            <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                <Font family="chakrapetch_semibold" size="11" color="#000000">DOM</Font>
+                <Font family="oswald_semibold" size="19" color="#000000">DOM</Font>
               </Text>
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -1038,108 +1309,147 @@
         </Group>
       </ListOption>
     </ListConfiguration>
-    <PartText x="278" y="278" width="72" height="24">
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Ellipse x="265" y="239" width="114" height="114">
+        <Fill color="#0E1012" />
+      </Ellipse>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </PartDraw>
+    <PartText x="282" y="254" width="80" height="32">
       <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-        <Font family="chakrapetch_semibold" size="15" color="#C9D1D9" letterSpacing="1"><Upper><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+        <Font family="oswald_semibold" size="25" color="#C9D1D9"><Upper><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
       </Text>
     </PartText>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Line startX="284" startY="306" endX="344" endY="306">
-        <Stroke color="#3E454D" thickness="1.2" cap="ROUND" />
+      <Line startX="288" startY="291" endX="356" endY="291">
+        <Stroke color="#5D666F" thickness="1.2" />
       </Line>
     </PartDraw>
-    <PartText x="278" y="308" width="72" height="36">
+    <PartText x="282" y="296" width="80" height="40">
       <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-        <Font family="oswald_semibold" size="30" color="#F2F5F8"><Template><![CDATA[%s]]><Parameter expression="[DAY]" /></Template></Font>
+        <Font family="oswald_semibold" size="36" color="#E8EDF2"><Template><![CDATA[%s]]><Parameter expression="[DAY]" /></Template></Font>
       </Text>
     </PartText>
 
-    <!-- Petit compteur bas : progression des pas vers l'objectif -->
+    <!-- Petit compteur bas, posé sur les deux autres : progression vers l'objectif de pas -->
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="179" y="346" width="80" height="80">
-        <Fill color="#0D0F12" />
+      <Ellipse x="169" y="315" width="100" height="100">
+        <Fill color="#101214" />
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="179" y="346" width="80" height="80">
-        <Stroke color="#3E454D" thickness="2" />
+      <Ellipse x="170.5" y="316.5" width="97" height="97">
+        <Stroke color="#30363C" thickness="3" />
       </Ellipse>
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Arc centerX="219" centerY="386" width="62" height="62" startAngle="223.71" endAngle="496.29" direction="CLOCKWISE">
-        <Stroke color="#5A636D" thickness="6" dashIntervals="1.4 14.83" />
+      <Ellipse x="183" y="329" width="72" height="72">
+        <Fill color="#0E1012" />
+      </Ellipse>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </PartDraw>
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Arc centerX="219" centerY="365" width="84" height="84" startAngle="223.36" endAngle="496.64" direction="CLOCKWISE">
+        <Stroke color="[CONFIGURATION.second.0]" thickness="5" dashIntervals="2.4 19.59" />
       </Arc>
-      <Arc centerX="219" centerY="386" width="50" height="50" startAngle="225" endAngle="495" direction="CLOCKWISE">
+    </PartDraw>
+    <PartDraw x="0" y="0" width="438" height="438">
+      <Arc centerX="219" centerY="365" width="56" height="56" startAngle="225" endAngle="495" direction="CLOCKWISE">
+        <Stroke color="#2B3036" thickness="3" />
+      </Arc>
+      <Arc centerX="219" centerY="365" width="56" height="56" startAngle="225" endAngle="495" direction="CLOCKWISE">
         <Stroke color="[CONFIGURATION.second.0]" thickness="3" />
         <Transform target="endAngle" value="225 + 270 * [STEP_PERCENT] / 100" />
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
-    <PartText x="195" y="398" width="48" height="14">
+    <PartText x="193" y="375" width="20" height="16">
       <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-        <Font family="chakrapetch_semibold" size="10" color="#8E99A5"><Template><![CDATA[%s]]><Parameter expression="[STEP_COUNT]" /></Template></Font>
+        <Font family="oswald_semibold" size="12" color="#4F5A64">0</Font>
+      </Text>
+    </PartText>
+    <PartText x="225" y="375" width="20" height="16">
+      <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+        <Font family="oswald_semibold" size="12" color="#4F5A64">%</Font>
+      </Text>
+    </PartText>
+    <PartText x="195" y="390" width="48" height="14">
+      <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+        <Font family="oswald_semibold" size="11" color="#6B757F"><Template><![CDATA[%s]]><Parameter expression="[STEP_COUNT]" /></Template></Font>
       </Text>
     </PartText>
 
     <!-- Aiguille des pas -->
-    <PartDraw x="187" y="354" width="64" height="64">
+    <PartDraw x="184" y="330" width="70" height="70">
       <Transform target="angle" value="225 + 270 * [STEP_PERCENT] / 100" />
-      <Line startX="32" startY="38" endX="32" endY="5">
-        <Stroke color="[CONFIGURATION.second.0]" thickness="3" cap="ROUND" />
+      <Line startX="35" startY="42" endX="35" endY="5">
+        <Stroke color="[CONFIGURATION.second.0]" thickness="3.5" cap="ROUND" />
       </Line>
     </PartDraw>
     <PartDraw x="0" y="0" width="438" height="438">
-      <Ellipse x="214" y="381" width="10" height="10">
-        <Fill color="#2B3036" />
-        <Stroke color="[CONFIGURATION.second.0]" thickness="1.5" />
+      <Ellipse x="214" y="360" width="10" height="10">
+        <Fill color="#0E1012" />
+        <Stroke color="[CONFIGURATION.second.0]" thickness="2" />
       </Ellipse>
     </PartDraw>
 
     <!-- Complication 1 — conteneur de données, en haut du compteur cardio -->
-    <ComplicationSlot slotId="1" x="86" y="276" width="76" height="28" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT EMPTY" displayName="slot_data">
+    <ComplicationSlot slotId="1" x="70" y="252" width="120" height="48" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT EMPTY" displayName="slot_data">
       <DefaultProviderPolicy defaultSystemProvider="SUNRISE_SUNSET" defaultSystemProviderType="SHORT_TEXT" />
-      <BoundingBox x="0" y="0" width="76" height="28" />
+      <BoundingBox x="0" y="0" width="120" height="48" />
       <Complication type="SHORT_TEXT">
-        <PartText x="0" y="0" width="76" height="28">
+        <PartText x="0" y="0" width="92" height="36">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="15" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+            <Font family="oswald_semibold" size="25" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
           </Text>
         </PartText>
+        <PartImage x="100" y="30" width="18" height="18" tintColor="#8E99A5">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
       </Complication>
       <Complication type="RANGED_VALUE">
-        <PartText x="0" y="0" width="76" height="28">
+        <PartText x="0" y="0" width="92" height="36">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="15" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+            <Font family="oswald_semibold" size="25" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
           </Text>
         </PartText>
+        <PartImage x="100" y="30" width="18" height="18" tintColor="#8E99A5">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
       </Complication>
       <Complication type="GOAL_PROGRESS">
-        <PartText x="0" y="0" width="76" height="28">
+        <PartText x="0" y="0" width="92" height="36">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="15" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+            <Font family="oswald_semibold" size="25" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
           </Text>
         </PartText>
+        <PartImage x="100" y="30" width="18" height="18" tintColor="#8E99A5">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
       </Complication>
       <Complication type="LONG_TEXT">
-        <PartText x="0" y="0" width="76" height="28">
+        <PartText x="0" y="0" width="92" height="36">
           <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="chakrapetch_semibold" size="15" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+            <Font family="oswald_semibold" size="25" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
           </Text>
         </PartText>
+        <PartImage x="100" y="30" width="18" height="18" tintColor="#8E99A5">
+          <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+        </PartImage>
       </Complication>
     </ComplicationSlot>
 
     <!-- Complications 2 à 6 — raccourcis invisibles (choisir « Raccourci d'appli ») -->
-    <ComplicationSlot slotId="2" x="40" y="116" width="84" height="84" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_tl">
+    <ComplicationSlot slotId="2" x="40" y="110" width="84" height="84" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_tl">
       <BoundingOval x="0" y="0" width="84" height="84" />
       <Complication type="SMALL_IMAGE" />
       <Complication type="MONOCHROMATIC_IMAGE" />
       <Complication type="SHORT_TEXT" />
       <Complication type="EMPTY" />
     </ComplicationSlot>
-    <ComplicationSlot slotId="3" x="316" y="168" width="84" height="70" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_tr">
-      <BoundingOval x="0" y="0" width="84" height="70" />
+    <ComplicationSlot slotId="3" x="356" y="150" width="56" height="56" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_tr">
+      <BoundingOval x="0" y="0" width="56" height="56" />
       <Complication type="SMALL_IMAGE" />
       <Complication type="MONOCHROMATIC_IMAGE" />
       <Complication type="SHORT_TEXT" />
@@ -1152,14 +1462,14 @@
       <Complication type="SHORT_TEXT" />
       <Complication type="EMPTY" />
     </ComplicationSlot>
-    <ComplicationSlot slotId="5" x="278" y="276" width="72" height="72" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_date">
+    <ComplicationSlot slotId="5" x="286" y="260" width="72" height="72" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_date">
       <BoundingOval x="0" y="0" width="72" height="72" />
       <Complication type="SMALL_IMAGE" />
       <Complication type="MONOCHROMATIC_IMAGE" />
       <Complication type="SHORT_TEXT" />
       <Complication type="EMPTY" />
     </ComplicationSlot>
-    <ComplicationSlot slotId="6" x="189" y="356" width="60" height="60" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_steps">
+    <ComplicationSlot slotId="6" x="189" y="335" width="60" height="60" supportedTypes="SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY" displayName="slot_sc_steps">
       <BoundingOval x="0" y="0" width="60" height="60" />
       <Complication type="SMALL_IMAGE" />
       <Complication type="MONOCHROMATIC_IMAGE" />
