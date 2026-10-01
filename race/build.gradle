@@ -12,7 +12,22 @@ android {
         versionName "1.0"
     }
 
+    // Clé debug fixe, versionnée : l'APK construit par GitHub Actions (machine neuve à chaque
+    // fois) et celui construit en local ont la même signature, donc se mettent à jour l'un
+    // l'autre sans désinstaller. Mots de passe standard d'Android, sans valeur secrète.
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
         }

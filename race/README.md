@@ -59,6 +59,10 @@ Sans rien installer : l'APK est construit par GitHub Actions (workflow « APK Ra
 push qui touche `race/`. Onglet **Actions** du dépôt → dernière exécution → artefact
 `race-debug-apk` (un zip contenant `race-debug.apk`).
 
+L'APK est signé avec une clé debug fixe (`race/debug.keystore`) : les versions successives
+s'installent par-dessus. Si une ancienne version signée autrement est déjà installée
+(`INSTALL_FAILED_UPDATE_INCOMPATIBLE`), la désinstaller une fois : `adb uninstall com.jvienne.race`.
+
 En local :
 
 ```bash
