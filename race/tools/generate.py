@@ -67,10 +67,9 @@ DAYS = [
 
 # main : [vive, vive, sombre] — triplet utilisé tel quel par le dégradé radial du fond
 M0, M2 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.2]"
-# Couleur des compteurs (jauges, aiguille, batterie). Par défaut celle du cadran
-# (main.0 vive, main.3 mi-luminosité) ; le réglage « compteurs » bascule sur « second ».
-# Les couches des compteurs lisent S0/S1 à l'appel : counters() les redéfinit.
-S0, S1 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]"
+# Couleur des compteurs (jauges, aiguille, batterie) : réglage indépendant, comme l'original.
+# second.0 vive, second.1 mi-luminosité (partie non remplie des bandes).
+S0, S1 = "[CONFIGURATION.second.0]", "[CONFIGURATION.second.1]"
 
 OSWALD = "oswald_semibold"
 CHAKRA = "chakrapetch_semibold"
@@ -87,7 +86,6 @@ SAMPLE = {
 }
 _PM = MAIN[int(os.environ.get("RACE_PREVIEW_MAIN", "0"))]   # couleur de l'aperçu seulement
 DEFAULT_COLORS = {M0: _PM[1], "[CONFIGURATION.main.1]": _PM[1], M2: _PM[2],
-                  "[CONFIGURATION.main.3]": dim(_PM[1]),
                   "[CONFIGURATION.second.0]": SECOND[0][1], "[CONFIGURATION.second.1]": SECOND[0][2]}
 
 # ---------------------------------------------------------------------------
@@ -120,7 +118,8 @@ STEP_R = 50
 
 HR_START, HR_SWEEP, HR_MIN, HR_MAX = 176, 240, 40, 220   # 40 en bas, 220 en haut à droite
 HR_BAND_START = HR_START - 12                             # marge pour l'étiquette « 40 »
-HR_BAND_END = HR_START + 264                              # la bande s'arrête vers 80°
+HR_BAND_END = HR_START + 250                              # la bande s'arrête vers 66° :
+                                                          # l'icône de la donnée loge à 90°
 DAY_SEG = 360 / 7
 DAY_BASE = -30 - DAY_SEG / 2  # lundi centré à -30°
 STEP_START, STEP_SWEEP = 225, 270
@@ -895,7 +894,7 @@ SLOT_TYPES_SHORTCUT = "SMALL_IMAGE MONOCHROMATIC_IMAGE SHORT_TEXT EMPTY"
 def layer_complications():
     cx, cy = LEFT_C
     O.comment("Complication 1 — conteneur de données, en haut du compteur cardio")
-    x, y, w, h = 70, 252, 120, 48   # texte à gauche, icône du fournisseur à droite
+    x, y, w, h = 70, 252, 120, 56   # texte en haut, icône du fournisseur à droite (90°)
     O.open(f'<ComplicationSlot slotId="1" x="{f(x)}" y="{f(y)}" width="{w}" height="{h}" '
            f'supportedTypes="{SLOT_TYPES_DATA}" displayName="slot_data">')
     O.x('<DefaultProviderPolicy defaultSystemProvider="SUNRISE_SUNSET" '
@@ -906,7 +905,7 @@ def layer_complications():
     for t in SLOT_TYPES_DATA.split()[:-1]:
         O.open(f'<Complication type="{t}">')
         text(x, y, 92, 36, ("expr", "[COMPLICATION.TEXT]"), "", OSWALD, 25, "#C9D1D9")
-        O.open('<PartImage x="100" y="30" width="18" height="18" tintColor="#8E99A5">')
+        O.open('<PartImage x="100" y="35" width="18" height="18" tintColor="#8E99A5">')
         O.x('<Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />')
         O.close("</PartImage>")
         O.close("</Complication>")
@@ -916,7 +915,7 @@ def layer_complications():
     O.s(f'<text x="{f(x + 46)}" y="{f(y + 18)}" font-family="Oswald" font-size="25" '
         f'fill="#C9D1D9" text-anchor="middle" dominant-baseline="central">'
         f'{SAMPLE["slot1"]}</text>', "normal")
-    sun_x, sun_y = x + 109, y + 39   # icône d'exemple : soleil levant
+    sun_x, sun_y = x + 109, y + 44   # icône d'exemple : soleil levant
     O.s(f'<g stroke="#8E99A5" stroke-width="1.6" fill="none">'
         f'<path d="M {f(sun_x - 7)} {f(sun_y + 2)} A 7 7 0 0 1 {f(sun_x + 7)} {f(sun_y + 2)}" />'
         f'<line x1="{f(sun_x - 9)}" y1="{f(sun_y + 5)}" x2="{f(sun_x + 9)}" y2="{f(sun_y + 5)}" />'
@@ -944,31 +943,11 @@ def layer_complications():
 # ---------------------------------------------------------------------------
 
 def counters():
-    """Batterie + 3 compteurs, en deux variantes de couleur (réglage « compteurs »)."""
-    global S0, S1
-
-    def variant_with(c0, c1):
-        def fn():
-            global S0, S1
-            S0, S1 = c0, c1
-            layer_battery()
-            layer_heart()
-            layer_date()
-            layer_steps()
-        return fn
-    O.comment("Compteurs : couleur du cadran (FALSE, défaut) ou couleur à part (TRUE)")
-    O.open('<BooleanConfiguration id="compteurs">')
-    for opt, c0, c1, shown in (("FALSE", "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]", True),
-                               ("TRUE", "[CONFIGURATION.second.0]", "[CONFIGURATION.second.1]", False)):
-        O.open(f'<BooleanOption id="{opt}">')
-        O.mode_stack.append(("both", None) if shown else ("none", None))
-        group_open(f"compteurs_{opt.lower()}")
-        variant_with(c0, c1)()
-        group_close()
-        O.mode_stack.pop()
-        O.close("</BooleanOption>")
-    O.close("</BooleanConfiguration>")
-    S0, S1 = "[CONFIGURATION.main.0]", "[CONFIGURATION.main.3]"
+    """Batterie + 3 compteurs, dans la couleur des compteurs (réglage « second »)."""
+    layer_battery()
+    layer_heart()
+    layer_date()
+    layer_steps()
 
 
 def build():
@@ -986,14 +965,12 @@ def config_xml():
     lines = ['  <UserConfigurations>',
              '    <ColorConfiguration id="main" displayName="cfg_main" defaultValue="0">']
     for i, (name, a, b) in enumerate(MAIN):
-        lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {a} {b} {dim(a)}" />')
+        lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {a} {b}" />')
     lines += ['    </ColorConfiguration>',
               '    <ColorConfiguration id="second" displayName="cfg_second" defaultValue="0">']
     for i, (name, a, b) in enumerate(SECOND):
         lines.append(f'      <ColorOption id="{i}" displayName="{name}" colors="{a} {b}" />')
     lines.append('    </ColorConfiguration>')
-    lines.append('    <BooleanConfiguration id="compteurs" displayName="cfg_compteurs" '
-                 'defaultValue="FALSE" />')
     for cid, opts in [("cockpit", ["opt_default", "opt_darker"]),
                       ("motif", ["opt_none", "opt_dots", "opt_stripes"]),
                       ("ombre", ["opt_default", "opt_less_shadow"]),

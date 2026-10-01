@@ -38,9 +38,8 @@ date, pas. Appui long → Personnaliser → Complications → choisir une appli.
 
 | Réglage | Options |
 |---|---|
-| Couleur principale | 10 couleurs (cadran, dégradé radial) |
-| Compteurs : couleur à part | Non (défaut : les compteurs prennent la couleur principale), Oui |
-| Couleur à part des compteurs | 13 couleurs (jauges, aiguille, batterie), utilisée si l'option précédente est à Oui |
+| Couleur du cadran | 10 couleurs (fond et chiffres des heures) |
+| Couleur des compteurs | 13 couleurs, indépendante du cadran : bandes cardio et jours, aiguille des pas, batterie |
 | Cockpit | Par défaut, Assombri |
 | Motif | Aucun, Points, Rayures |
 | Ombre | Par défaut, Moins d'ombre |
