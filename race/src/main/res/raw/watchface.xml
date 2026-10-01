@@ -57,20 +57,17 @@
 
   <Scene>
 
-    <!-- Fond du cadran : dégradé radial de la couleur principale + vignette -->
+    <!-- Fond du cadran : aplat de la couleur principale, assombri vers les bords par un PNG -->
     <PartDraw x="0" y="0" width="438" height="438">
       <Ellipse x="0" y="0" width="438" height="438">
-        <Fill color="[CONFIGURATION.main.0]">
-          <RadialGradient centerX="219" centerY="150" radius="320" colors="[CONFIGURATION.main]" positions="0 0.42 1" />
-        </Fill>
-      </Ellipse>
-      <Ellipse x="0" y="0" width="438" height="438">
-        <Fill color="#00000000">
-          <RadialGradient centerX="219" centerY="219" radius="219" colors="#00000000 #00000000 #90000000" positions="0 0.82 1" />
-        </Fill>
+        <Fill color="[CONFIGURATION.main.0]" />
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
+    <PartImage x="0" y="0" width="438" height="438">
+      <Image resource="dial_shade" />
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </PartImage>
 
     <!-- Motif sur le cadran -->
     <ListConfiguration id="motif">
@@ -644,36 +641,18 @@
     <ListConfiguration id="ombre">
       <ListOption id="0">
         <Group name="ombre_0" x="0" y="0" width="438" height="438">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-46" y="156" width="530" height="530">
-              <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="421" radius="265" colors="#78000000 #78000000 #00000000" positions="0 0.9547 1" />
-              </Fill>
-            </Ellipse>
-            <Ellipse x="163" y="136" width="112" height="112">
-              <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="192" radius="56" colors="#78000000 #78000000 #00000000" positions="0 0.7857 1" />
-              </Fill>
-            </Ellipse>
+          <PartImage x="0" y="120" width="438" height="318">
+            <Image resource="cockpit_shadow" />
             <Variant mode="AMBIENT" target="alpha" value="0" />
-          </PartDraw>
+          </PartImage>
         </Group>
       </ListOption>
       <ListOption id="1">
         <Group name="ombre_1" x="0" y="0" width="438" height="438">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Ellipse x="-41" y="161" width="520" height="520">
-              <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="421" radius="260" colors="#3C000000 #3C000000 #00000000" positions="0 0.9731 1" />
-              </Fill>
-            </Ellipse>
-            <Ellipse x="168" y="141" width="102" height="102">
-              <Fill color="#00000000">
-                <RadialGradient centerX="219" centerY="192" radius="51" colors="#3C000000 #3C000000 #00000000" positions="0 0.8627 1" />
-              </Fill>
-            </Ellipse>
+          <PartImage x="0" y="120" width="438" height="318">
+            <Image resource="cockpit_shadow_less" />
             <Variant mode="AMBIENT" target="alpha" value="0" />
-          </PartDraw>
+          </PartImage>
         </Group>
       </ListOption>
     </ListConfiguration>
@@ -685,19 +664,17 @@
           <Group name="cockpit_fill" x="0" y="0" width="438" height="438">
             <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
               <Rectangle x="0" y="0" width="90" height="60">
-                <Fill color="#1F2327" />
+                <Fill color="#22262B" />
               </Rectangle>
             </PartDraw>
             <PartDraw x="219" y="148" width="90" height="60" pivotX="0.0000" pivotY="0.0000" angle="33">
               <Rectangle x="0" y="0" width="90" height="60">
-                <Fill color="#1F2327" />
+                <Fill color="#22262B" />
               </Rectangle>
             </PartDraw>
             <PartDraw x="0" y="0" width="438" height="438">
               <Ellipse x="-34" y="168" width="506" height="506">
-                <Fill color="#1F2327">
-                  <LinearGradient startX="0" startY="148" endX="0" endY="438" colors="#1F2327 #08090A" positions="0 1" />
-                </Fill>
+                <Fill color="#22262B" />
               </Ellipse>
             </PartDraw>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -709,19 +686,17 @@
           <Group name="cockpit_fill" x="0" y="0" width="438" height="438">
             <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
               <Rectangle x="0" y="0" width="90" height="60">
-                <Fill color="#111315" />
+                <Fill color="#121417" />
               </Rectangle>
             </PartDraw>
             <PartDraw x="219" y="148" width="90" height="60" pivotX="0.0000" pivotY="0.0000" angle="33">
               <Rectangle x="0" y="0" width="90" height="60">
-                <Fill color="#111315" />
+                <Fill color="#121417" />
               </Rectangle>
             </PartDraw>
             <PartDraw x="0" y="0" width="438" height="438">
               <Ellipse x="-34" y="168" width="506" height="506">
-                <Fill color="#111315">
-                  <LinearGradient startX="0" startY="148" endX="0" endY="438" colors="#111315 #030303" positions="0 1" />
-                </Fill>
+                <Fill color="#121417" />
               </Ellipse>
             </PartDraw>
             <Variant mode="AMBIENT" target="alpha" value="0" />
@@ -729,6 +704,10 @@
         </Group>
       </ListOption>
     </ListConfiguration>
+    <PartImage x="0" y="120" width="438" height="318">
+      <Image resource="cockpit_shade" />
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </PartImage>
     <Group name="cockpit_ambient" x="0" y="0" width="438" height="438" alpha="0">
       <PartDraw x="129" y="148" width="90" height="60" pivotX="1.0000" pivotY="0.0000" angle="-33">
         <Rectangle x="0" y="0" width="90" height="60">
@@ -851,7 +830,7 @@
       </Arc>
       <Variant mode="AMBIENT" target="alpha" value="255" />
     </PartDraw>
-    <Group name="lbl_l9" x="26" y="206" width="180" height="180" angle="-4">
+    <Group name="lbl_l1" x="26" y="206" width="180" height="180" angle="-4">
       <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">40</Font>
@@ -859,7 +838,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l10" x="26" y="206" width="180" height="180" angle="22.67">
+    <Group name="lbl_l2" x="26" y="206" width="180" height="180" angle="22.67">
       <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">60</Font>
@@ -867,7 +846,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l11" x="26" y="206" width="180" height="180" angle="49.33">
+    <Group name="lbl_l3" x="26" y="206" width="180" height="180" angle="49.33">
       <PartText x="73" y="150" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">80</Font>
@@ -875,7 +854,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l12" x="26" y="206" width="180" height="180" angle="282.67">
+    <Group name="lbl_l4" x="26" y="206" width="180" height="180" angle="282.67">
       <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">120</Font>
@@ -883,7 +862,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l13" x="26" y="206" width="180" height="180" angle="309.33">
+    <Group name="lbl_l5" x="26" y="206" width="180" height="180" angle="309.33">
       <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">140</Font>
@@ -891,7 +870,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l14" x="26" y="206" width="180" height="180" angle="336">
+    <Group name="lbl_l6" x="26" y="206" width="180" height="180" angle="336">
       <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">160</Font>
@@ -899,7 +878,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l15" x="26" y="206" width="180" height="180" angle="362.67">
+    <Group name="lbl_l7" x="26" y="206" width="180" height="180" angle="362.67">
       <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">180</Font>
@@ -907,7 +886,7 @@
       </PartText>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
-    <Group name="lbl_l16" x="26" y="206" width="180" height="180" angle="416">
+    <Group name="lbl_l8" x="26" y="206" width="180" height="180" angle="416">
       <PartText x="73" y="10" width="34" height="20" alpha="225">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="oswald_semibold" size="15" color="#000000">220</Font>
@@ -951,7 +930,7 @@
           <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_ok">
-          <Group name="hr_v17" x="0" y="0" width="80" height="40">
+          <Group name="hr_v9" x="0" y="0" width="80" height="40">
             <PartText x="0" y="0" width="80" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="36" color="#E8EDF2"><Template><![CDATA[%s]]><Parameter expression="round([HEART_RATE])" /></Template></Font>
@@ -960,7 +939,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="hr_v18" x="0" y="0" width="80" height="40">
+          <Group name="hr_v10" x="0" y="0" width="80" height="40">
             <PartText x="0" y="0" width="80" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="36" color="#E8EDF2">--</Font>
@@ -1010,7 +989,7 @@
     <ListConfiguration id="langue">
       <ListOption id="0">
         <Group name="langue_0" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l19" x="230" y="204" width="184" height="184" angle="-30">
+          <Group name="lbl_l11" x="230" y="204" width="184" height="184" angle="-30">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
@@ -1018,7 +997,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l20" x="230" y="204" width="184" height="184" angle="21.43">
+          <Group name="lbl_l12" x="230" y="204" width="184" height="184" angle="21.43">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
@@ -1026,7 +1005,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l21" x="230" y="204" width="184" height="184" angle="72.86">
+          <Group name="lbl_l13" x="230" y="204" width="184" height="184" angle="72.86">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MER</Font>
@@ -1034,7 +1013,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l22" x="230" y="204" width="184" height="184" angle="-55.71">
+          <Group name="lbl_l14" x="230" y="204" width="184" height="184" angle="-55.71">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">JEU</Font>
@@ -1042,7 +1021,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l23" x="230" y="204" width="184" height="184" angle="-4.29">
+          <Group name="lbl_l15" x="230" y="204" width="184" height="184" angle="-4.29">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">VEN</Font>
@@ -1050,7 +1029,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l24" x="230" y="204" width="184" height="184" angle="47.14">
+          <Group name="lbl_l16" x="230" y="204" width="184" height="184" angle="47.14">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SAM</Font>
@@ -1058,7 +1037,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l25" x="230" y="204" width="184" height="184" angle="278.57">
+          <Group name="lbl_l17" x="230" y="204" width="184" height="184" angle="278.57">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">DIM</Font>
@@ -1070,7 +1049,7 @@
       </ListOption>
       <ListOption id="1">
         <Group name="langue_1" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l26" x="230" y="204" width="184" height="184" angle="-30">
+          <Group name="lbl_l18" x="230" y="204" width="184" height="184" angle="-30">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MON</Font>
@@ -1078,7 +1057,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l27" x="230" y="204" width="184" height="184" angle="21.43">
+          <Group name="lbl_l19" x="230" y="204" width="184" height="184" angle="21.43">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">TUE</Font>
@@ -1086,7 +1065,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l28" x="230" y="204" width="184" height="184" angle="72.86">
+          <Group name="lbl_l20" x="230" y="204" width="184" height="184" angle="72.86">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">WED</Font>
@@ -1094,7 +1073,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l29" x="230" y="204" width="184" height="184" angle="-55.71">
+          <Group name="lbl_l21" x="230" y="204" width="184" height="184" angle="-55.71">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">THU</Font>
@@ -1102,7 +1081,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l30" x="230" y="204" width="184" height="184" angle="-4.29">
+          <Group name="lbl_l22" x="230" y="204" width="184" height="184" angle="-4.29">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">FRI</Font>
@@ -1110,7 +1089,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l31" x="230" y="204" width="184" height="184" angle="47.14">
+          <Group name="lbl_l23" x="230" y="204" width="184" height="184" angle="47.14">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SAT</Font>
@@ -1118,7 +1097,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l32" x="230" y="204" width="184" height="184" angle="278.57">
+          <Group name="lbl_l24" x="230" y="204" width="184" height="184" angle="278.57">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SUN</Font>
@@ -1130,7 +1109,7 @@
       </ListOption>
       <ListOption id="2">
         <Group name="langue_2" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l33" x="230" y="204" width="184" height="184" angle="-30">
+          <Group name="lbl_l25" x="230" y="204" width="184" height="184" angle="-30">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MO</Font>
@@ -1138,7 +1117,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l34" x="230" y="204" width="184" height="184" angle="21.43">
+          <Group name="lbl_l26" x="230" y="204" width="184" height="184" angle="21.43">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">DI</Font>
@@ -1146,7 +1125,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l35" x="230" y="204" width="184" height="184" angle="72.86">
+          <Group name="lbl_l27" x="230" y="204" width="184" height="184" angle="72.86">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MI</Font>
@@ -1154,7 +1133,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l36" x="230" y="204" width="184" height="184" angle="-55.71">
+          <Group name="lbl_l28" x="230" y="204" width="184" height="184" angle="-55.71">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">DO</Font>
@@ -1162,7 +1141,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l37" x="230" y="204" width="184" height="184" angle="-4.29">
+          <Group name="lbl_l29" x="230" y="204" width="184" height="184" angle="-4.29">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">FR</Font>
@@ -1170,7 +1149,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l38" x="230" y="204" width="184" height="184" angle="47.14">
+          <Group name="lbl_l30" x="230" y="204" width="184" height="184" angle="47.14">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SA</Font>
@@ -1178,7 +1157,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l39" x="230" y="204" width="184" height="184" angle="278.57">
+          <Group name="lbl_l31" x="230" y="204" width="184" height="184" angle="278.57">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SO</Font>
@@ -1190,7 +1169,7 @@
       </ListOption>
       <ListOption id="3">
         <Group name="langue_3" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l40" x="230" y="204" width="184" height="184" angle="-30">
+          <Group name="lbl_l32" x="230" y="204" width="184" height="184" angle="-30">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
@@ -1198,7 +1177,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l41" x="230" y="204" width="184" height="184" angle="21.43">
+          <Group name="lbl_l33" x="230" y="204" width="184" height="184" angle="21.43">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
@@ -1206,7 +1185,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l42" x="230" y="204" width="184" height="184" angle="72.86">
+          <Group name="lbl_l34" x="230" y="204" width="184" height="184" angle="72.86">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MIÉ</Font>
@@ -1214,7 +1193,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l43" x="230" y="204" width="184" height="184" angle="-55.71">
+          <Group name="lbl_l35" x="230" y="204" width="184" height="184" angle="-55.71">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">JUE</Font>
@@ -1222,7 +1201,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l44" x="230" y="204" width="184" height="184" angle="-4.29">
+          <Group name="lbl_l36" x="230" y="204" width="184" height="184" angle="-4.29">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">VIE</Font>
@@ -1230,7 +1209,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l45" x="230" y="204" width="184" height="184" angle="47.14">
+          <Group name="lbl_l37" x="230" y="204" width="184" height="184" angle="47.14">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SÁB</Font>
@@ -1238,7 +1217,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l46" x="230" y="204" width="184" height="184" angle="278.57">
+          <Group name="lbl_l38" x="230" y="204" width="184" height="184" angle="278.57">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">DOM</Font>
@@ -1250,7 +1229,7 @@
       </ListOption>
       <ListOption id="4">
         <Group name="langue_4" x="0" y="0" width="438" height="438">
-          <Group name="lbl_l47" x="230" y="204" width="184" height="184" angle="-30">
+          <Group name="lbl_l39" x="230" y="204" width="184" height="184" angle="-30">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">LUN</Font>
@@ -1258,7 +1237,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l48" x="230" y="204" width="184" height="184" angle="21.43">
+          <Group name="lbl_l40" x="230" y="204" width="184" height="184" angle="21.43">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MAR</Font>
@@ -1266,7 +1245,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l49" x="230" y="204" width="184" height="184" angle="72.86">
+          <Group name="lbl_l41" x="230" y="204" width="184" height="184" angle="72.86">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">MER</Font>
@@ -1274,7 +1253,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l50" x="230" y="204" width="184" height="184" angle="-55.71">
+          <Group name="lbl_l42" x="230" y="204" width="184" height="184" angle="-55.71">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">GIO</Font>
@@ -1282,7 +1261,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l51" x="230" y="204" width="184" height="184" angle="-4.29">
+          <Group name="lbl_l43" x="230" y="204" width="184" height="184" angle="-4.29">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">VEN</Font>
@@ -1290,7 +1269,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l52" x="230" y="204" width="184" height="184" angle="47.14">
+          <Group name="lbl_l44" x="230" y="204" width="184" height="184" angle="47.14">
             <PartText x="67" y="151" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">SAB</Font>
@@ -1298,7 +1277,7 @@
             </PartText>
             <Variant mode="AMBIENT" target="alpha" value="0" />
           </Group>
-          <Group name="lbl_l53" x="230" y="204" width="184" height="184" angle="278.57">
+          <Group name="lbl_l45" x="230" y="204" width="184" height="184" angle="278.57">
             <PartText x="67" y="11" width="50" height="22" alpha="230">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="oswald_semibold" size="19" color="#000000">DOM</Font>

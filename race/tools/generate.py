@@ -495,8 +495,8 @@ def image(x, y, w, h, resource, show="both", svg_href=None):
     variant(show)
     ambient_on(show)
     O.close("</PartImage>")
-    if svg_href:
-        O.s(f'<image x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}" href="{svg_href}" />', show)
+    href = svg_href or "file://" + os.path.join(os.path.abspath(RES), "drawable-nodpi", resource + ".png")
+    O.s(f'<image x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}" href="{href}" />', show)
 
 
 def list_config(cid, options):
@@ -548,13 +548,13 @@ def tangential_label(cx, cy, r, a, label, sample, font, size, color, w=40, h=16,
 
 
 def layer_dial():
-    O.comment("Fond du cadran : dégradé radial de la couleur principale + vignette")
+    # Les remplissages en dégradé (Fill + RadialGradient) ne s'affichent pas sur la montre
+    # (constaté sur l'émulateur Wear OS 6) : aplat de couleur + ombrage en PNG noir translucide.
+    O.comment("Fond du cadran : aplat de la couleur principale, assombri vers les bords par un PNG")
     draw_open("normal")
-    circle(C, C, C, fill=M0, gradient=("radial", {"cx": C, "cy": 150, "r": 320,
-                                                  "colors": "[CONFIGURATION.main]", "pos": "0 0.42 1"}))
-    circle(C, C, C, fill="#00000000", gradient=("radial", {
-        "cx": C, "cy": C, "r": C, "colors": "#00000000 #00000000 #90000000", "pos": "0 0.82 1"}))
+    circle(C, C, C, fill=M0)
     draw_close("normal")
+    image(0, 0, W, W, "dial_shade", show="normal")
 
     O.comment("Motif sur le cadran")
     list_config("motif", [
@@ -668,31 +668,24 @@ def layer_cockpit():
 
     O.comment("Ombre portée du cockpit")
 
-    def shadow(a, extra):
-        def fn():
-            draw_open("normal")
-            for (sx, sy), r0 in ((COCKPIT_C, COCKPIT_R), ((tx, ty + 44), 44)):
-                r = r0 + extra
-                circle(sx, sy, r, fill="#00000000", gradient=("radial", {
-                    "cx": sx, "cy": sy, "r": r,
-                    "colors": f"#{a}000000 #{a}000000 #00000000", "pos": f"0 {r0 / r:.4f} 1"}))
-            draw_close("normal")
-        return fn
-    list_config("ombre", [shadow("78", 12), shadow("3C", 7)])
+    list_config("ombre", [
+        lambda: image(0, SHADE_Y, W, W - SHADE_Y, "cockpit_shadow", show="normal"),
+        lambda: image(0, SHADE_Y, W, W - SHADE_Y, "cockpit_shadow_less", show="normal"),
+    ])
 
     O.comment("Cockpit : grand disque sombre + bosse en pointe sous l'index")
 
-    def cockpit(top, bottom):
+    def cockpit(top):
         def fn():
-            grad = {"x1": 0, "y1": ty, "x2": 0, "y2": W, "colors": f"{top} {bottom}", "pos": "0 1"}
             group_open("cockpit_fill", show="normal")
             roof(top)   # les pans d'abord : le disque recouvre leur bas
             draw_open()
-            circle(cx, cy, COCKPIT_R, fill=top, gradient=("linear", grad))
+            circle(cx, cy, COCKPIT_R, fill=top)
             draw_close()
             group_close("normal")
         return fn
-    list_config("cockpit", [cockpit("#1F2327", "#08090A"), cockpit("#111315", "#030303")])
+    list_config("cockpit", [cockpit("#22262B"), cockpit("#121417")])
+    image(0, SHADE_Y, W, W - SHADE_Y, "cockpit_shade", show="normal")  # assombri vers le bas
     group_open("cockpit_ambient", show="ambient")  # AOD : noir pur, masque le bas du cadran
     roof("#000000")
     draw_open()
@@ -986,6 +979,50 @@ def png(path, w, h, alpha_at):
                  + chunk(b"IDAT", zlib.compress(bytes(raw), 9)) + chunk(b"IEND", b""))
 
 
+SHADE_Y = 120   # les PNG d'ombrage du cockpit commencent ici (inutile de couvrir le haut)
+
+
+def cockpit_distance(x, y):
+    """Distance signée au cockpit (disque + bosse en pointe) : < 0 dedans, > 0 dehors."""
+    cx, cy = COCKPIT_C
+    tx, ty = ROOF_TIP
+    d_disc = math.hypot(x - cx, y - cy) - COCKPIT_R
+    k = math.tan(math.radians(ROOF_SLOPE))
+    dx = abs(x - tx)
+    if dx <= roof_join():
+        d_roof = ((ty + dx * k) - y) * math.cos(math.radians(ROOF_SLOPE))
+        return min(d_disc, d_roof)
+    return d_disc
+
+
+def write_shading():
+    out = os.path.join(RES, "drawable-nodpi")
+    h = W - SHADE_Y
+
+    def dial_shade(x, y):  # vignette : clair en haut au centre, sombre vers le bord
+        r = math.hypot(x - C, y - 150)
+        t = max(0.0, min(1.0, (r - 110) / 230))
+        return int(200 * t ** 1.6)
+    png(os.path.join(out, "dial_shade.png"), W, W, dial_shade)
+
+    def shadow(alpha, spread):
+        def fn(x, y):
+            d = cockpit_distance(x, y + SHADE_Y)
+            if d <= 0 or d >= spread:
+                return 0
+            return int(alpha * (1 - d / spread) ** 1.5)
+        return fn
+    png(os.path.join(out, "cockpit_shadow.png"), W, h, shadow(150, 26))
+    png(os.path.join(out, "cockpit_shadow_less.png"), W, h, shadow(80, 14))
+
+    def cockpit_shade(x, y):  # dégradé vertical, uniquement dans le cockpit
+        yy = y + SHADE_Y
+        if cockpit_distance(x, yy) > -0.5:
+            return 0
+        return int(185 * max(0.0, (yy - ROOF_TIP[1]) / (W - ROOF_TIP[1])))
+    png(os.path.join(out, "cockpit_shade.png"), W, h, cockpit_shade)
+
+
 def write_patterns():
     out = os.path.join(RES, "drawable-nodpi")
 
@@ -1003,6 +1040,7 @@ def write_patterns():
 def write():
     build()
     write_patterns()
+    write_shading()
     head = ['<?xml version="1.0" encoding="utf-8"?>',
             "<!-- Race — cadran Watch Face Format, 438 x 438, Galaxy Watch8 Classic 46 mm.",
             "     FICHIER GÉNÉRÉ par race/tools/generate.py : ne pas éditer à la main. -->",

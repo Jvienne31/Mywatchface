@@ -65,8 +65,10 @@ En local :
 adb install -r race/build/outputs/apk/debug/race-debug.apk
 ```
 
-Sur un **émulateur** : Android Studio → Device Manager → créer un appareil *Wear OS Large
-Round* avec une image **Wear OS 5 (API 34) ou plus récente**, le démarrer, puis
+Sur un **émulateur** : Android Studio → Device Manager → créer un appareil Wear OS rond avec une
+image **Wear OS 5 (API 34) ou plus récente** — idéalement un profil « Galaxy Watch8 Classic »
+(*New Hardware Profile* : type Wear OS, écran rond 1,34", 438 × 438 px ; image Wear OS 6,
+API 36, la base de One UI 8 Watch) — le démarrer, puis
 `adb install -r race-debug.apk` (ou glisser l'APK sur la fenêtre de l'émulateur). Appui long
 sur le cadran actuel → faire défiler → *Race*.
 
@@ -100,9 +102,17 @@ lisibles (l'original les laisse tête en bas).
   `MINUTE`, `MINUTE_Z`, `SECOND`, `AMPM_STRING`, `DAY`, `DAY_OF_WEEK`, `MONTH_S`,
   `BATTERY_PERCENT`, `HEART_RATE`, `STEP_COUNT`, `STEP_PERCENT`.
 
-## À valider au premier build
+## Constaté sur émulateur (Wear OS 6, API 36)
 
-Non compilé ici (le dépôt Maven de Google n'était pas joignable) et pas encore vu sur montre.
+- Disque des heures, anneau des secondes, pastille, compteurs, réglages : conformes à l'aperçu.
+- **Les remplissages en dégradé (`Fill` + `RadialGradient` / `LinearGradient`) ne s'affichent
+  pas** : seul l'aplat apparaît. Le fond, l'ombre et le cockpit sont donc des aplats assombris
+  par des PNG noirs translucides générés par le script (`dial_shade`, `cockpit_shade`,
+  `cockpit_shadow*`). Le XML ne contient plus aucun dégradé.
+
+## Encore à valider
+
+Pas encore vu sur la vraie montre.
 
 - **Alignement vertical du texte** dans les `PartText` : l'aperçu centre le texte dans sa
   boîte ; si la montre le place autrement, ajuster `y`/`h` dans le script.
