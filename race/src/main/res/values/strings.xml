@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Race</string>
+
+    <string name="cfg_main">Couleur principale</string>
+    <string name="cfg_second">Couleur des compteurs</string>
+    <string name="cfg_cockpit">Cockpit</string>
+    <string name="cfg_motif">Motif</string>
+    <string name="cfg_ombre">Ombre</string>
+    <string name="cfg_langue">Jours de la semaine</string>
+
+    <string name="col_cyan">Cyan</string>
+    <string name="col_vert">Vert</string>
+    <string name="col_orange">Orange</string>
+    <string name="col_jaune">Jaune</string>
+    <string name="col_rouge">Rouge</string>
+    <string name="col_bleu">Bleu</string>
+    <string name="col_violet">Violet</string>
+    <string name="col_rose">Rose</string>
+    <string name="col_lime">Lime</string>
+    <string name="col_blanc">Blanc</string>
+    <string name="col_turquoise">Turquoise</string>
+    <string name="col_or">Or</string>
+    <string name="col_gris">Gris</string>
+
+    <string name="opt_default">Par défaut</string>
+    <string name="opt_darker">Assombri</string>
+    <string name="opt_none">Aucun</string>
+    <string name="opt_dots">Points</string>
+    <string name="opt_stripes">Rayures</string>
+    <string name="opt_less_shadow">Moins d’ombre</string>
+
+    <string name="lang_fr">Français</string>
+    <string name="lang_en">English</string>
+    <string name="lang_de">Deutsch</string>
+    <string name="lang_es">Español</string>
+    <string name="lang_it">Italiano</string>
+
+    <string name="slot_data">Donnée (compteur cardio)</string>
+    <string name="slot_sc_tl">Raccourci haut gauche</string>
+    <string name="slot_sc_tr">Raccourci droite</string>
+    <string name="slot_sc_top">Raccourci haut</string>
+    <string name="slot_sc_date">Raccourci date</string>
+    <string name="slot_sc_steps">Raccourci pas</string>
+</resources>

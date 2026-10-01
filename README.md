@@ -5,6 +5,8 @@ Le paquet ne contient **aucun code** : uniquement des ressources (`android:hasCo
 
 ![Aperçu](app/src/main/res/drawable-nodpi/preview.png)
 
+> Le dépôt contient aussi **Race**, un cadran numérique « cockpit » : voir [race/README.md](race/README.md).
+
 ## Ce que fait le cadran
 
 - Toile **438 × 438**, sans graduation peinte : la lunette du Watch8 Classic est physique.
