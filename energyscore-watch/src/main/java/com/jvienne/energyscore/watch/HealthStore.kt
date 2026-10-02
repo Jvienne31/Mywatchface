@@ -19,6 +19,10 @@ object HealthStore {
         }.apply()
     }
 
+    /** Heure de la dernière réception (ms), 0 si rien reçu. */
+    fun lastUpdate(context: Context): Long =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getLong(KEY_TS, 0L)
+
     /** Valeur en cache, ou null si le téléphone ne l'a pas (encore) envoyée. */
     fun get(context: Context, key: String): Float? {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)

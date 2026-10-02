@@ -218,6 +218,17 @@ def gen():
         android:icon="@drawable/ic_m_bolt"
         android:allowBackup="false">
 
+        <!-- Écran de contrôle (icône dans la liste des applis) : dernières valeurs reçues. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- L'appli téléphone fait la lecture Samsung Health : la montre n'en dépend pas pour
              s'installer, mais ses données viennent du téléphone. -->
         <meta-data
