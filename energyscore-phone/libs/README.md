@@ -1,43 +1,52 @@
-# SDK Samsung Health Data à déposer ici
+# Santé Sync : SDK Samsung Health Data
 
-Ce module a besoin du fichier `.aar` du **Samsung Health Data SDK** (ex: `health-data-api-1.1.0.aar`)
-pour compiler. Il n'est pas distribué sur Maven — Samsung ne le publie qu'en téléchargement direct,
-réservé aux comptes développeur.
+L'appli téléphone (`energyscore-phone`) lit Samsung Health avec le **Samsung Health Data SDK**
+(fichier `.aar`). Elle envoie les valeurs à l'appli montre (`energyscore-watch`), qui les
+propose en complications dans Prisme et dans tout autre cadran.
 
-**Attention à ne pas confondre deux comptes différents :**
-- **Compte Google Play / developer.android.com** (celui déjà utilisé pour Android Studio) →
-  ne donne **pas** accès au SDK Samsung, ce sont deux portails indépendants.
-- **Compte Samsung** sur **developer.samsung.com** → c'est celui-là qu'il faut, un Samsung
-  Account classique suffit (le même que pour un Galaxy Watch/téléphone), aucun frais ni
-  partenariat requis pour la lecture en mode développeur.
+Les deux applis ont le même identifiant `com.jvienne.santesync` et la même clé, ce
+qu'exige le Data Layer Wear OS. Installez l'APK téléphone sur le téléphone et l'APK montre
+sur la montre.
 
-## Marche à suivre
+## D'où vient le .aar
 
-1. Se connecter avec un compte Samsung sur https://developer.samsung.com (pas le compte Google
-   Play Console)
-2. Aller sur https://developer.samsung.com/health/data (section "Samsung Health Data SDK")
-3. Télécharger le SDK — le zip contient le `.aar`, le javadoc, la licence, et un projet
-   d'exemple ("Hello SDK") avec du vrai code de lecture de données (permissions, requêtes).
-4. Copier le `.aar` ici : `energyscore-phone/libs/`
-5. Dans l'appli **Samsung Health** du téléphone : Paramètres → à propos → (menu développeur) →
-   activer **"Developer mode for data read"**. Ce mode permet de lire ses propres données
-   (dont `EnergyScoreType`) sans passer par le programme partenaire Samsung, tant que l'appli
-   reste un usage personnel non distribué publiquement.
-6. Rebuild le module `energyscore-phone`.
+- **Compilation automatique (GitHub Actions, `build-sante.yml`)** : copie du SDK 1.0.0
+  publiée dans le dépôt open source `the-momentum/open_wearables_android_sdk`. Elle est figée
+  sur un commit et vérifiée par SHA-256. Elle n'est pas versionnée ici.
+- **Copie officielle** :
+  1. Connectez-vous avec votre compte Samsung sur https://developer.samsung.com/health/data.
+  2. Téléchargez le SDK.
+  3. Copiez le `.aar` dans ce dossier, puis compilez dans Android Studio.
 
-## Pourquoi ce n'est pas déjà fait automatiquement
+  Le fichier est ignoré par Git : la licence Samsung interdit de le redistribuer.
 
-- Le SDK n'est accessible qu'après connexion à un compte développeur Samsung — impossible à
-  télécharger depuis cet environnement (accès direct à developer.samsung.com bloqué ici).
-- La licence Samsung ne permet pas de redistribuer le `.aar` dans un dépôt Git — c'est pour ça
-  qu'il est dans `.gitignore`.
+## Sur le téléphone : mode développeur Samsung Health
 
-## État du code dans ce module
+1. Ouvrez *Samsung Health > Paramètres > À propos de Samsung Health*.
+2. Touchez une dizaine de fois le numéro de version.
+3. Activez **Developer mode for data read**.
 
-`MainActivity.kt` contient le vrai appel SDK (pas un squelette) : récupération du store,
-permission, filtre temporel, lecture, envoi à la montre — reconstruit à partir d'exemples de code
-officiels réels trouvés pour un type de donnée équivalent (fréquence cardiaque). Le nom du champ (`EnergyScoreType.ENERGY_SCORE`) et le filtre par dates
-(`LocalDateFilter`) ont été vérifiés dans la référence de l'API Samsung. Un seul point reste à
-confirmer : si `requestPermissions` s'utilise directement comme fonction suspend ou demande un
-callback. Android Studio règle les deux en quelques secondes via l'autocomplétion dès que le SDK est
-importé — pas besoin de redemander, juste corriger si le nom proposé diffère.
+Ce mode permet de lire ses propres données sans accord partenaire avec Samsung, pour un
+usage personnel.
+
+## Données transmises (26 complications)
+
+Toutes sont définies dans `energyscore-watch/tools/gen_metrics.py`. Ce fichier génère le code
+des deux applis.
+
+| Famille | Données |
+|---|---|
+| Scores | énergie, sommeil |
+| Sommeil | durée (avec l'objectif) |
+| Activité | pas (avec l'objectif), distance, calories actives (avec l'objectif) et totales, temps actif (avec l'objectif), étages |
+| Alimentation | eau (avec l'objectif), calories consommées (avec l'objectif) |
+| Cœur | fréquence cardiaque (dernière, min et max du jour), SpO2, tension |
+| Mesures | température cutanée et corporelle, glycémie |
+| Corps | poids, masse grasse, muscle squelettique, IMC |
+| Dernière séance | durée, distance, VO2 max |
+
+Le code de lecture (`HealthReader.kt`) suit les signatures exactes du SDK 1.0.0, relevées
+avec `javap` dans le `.aar`.
+
+La synchronisation se fait au lancement de l'appli, avec le bouton, puis automatiquement
+toutes les 30 minutes (WorkManager).
