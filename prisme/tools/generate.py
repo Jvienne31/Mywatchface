@@ -213,22 +213,12 @@ def layer_seconds():
     draw_close("normal")
 
 
-def dome_background(cx, cy, r):
-    """Fond agrandi sous la loupe : bandes x1,2 autour du centre du dôme, découpées en disque."""
-    group_open(f"dome_bg_{cx}", show="normal")
-    cid = O.gid("lens")
-    O.defs.append(f'<clipPath id="{cid}"><circle cx="{cx}" cy="{cy}" r="{r}" /></clipPath>')
-    O.s(f'<g clip-path="url(#{cid})">', "normal")
-    O.mode_stack.append(("none", None))
-    draw_open(x=cx - r, y=cy - r, w=2 * r, h=2 * r, render_mode="MASK")
-    circle(cx, cy, r, fill="#FFFFFF")
-    draw_close()
-    O.mode_stack.pop()
-    group_open(f"dome_mag_{cx}", scale=DOME_K, pivot=(cx, cy))
-    bands("both", f"bands_mag_{cx}")
-    group_close()
-    O.s("</g>", "normal")
-    group_close("normal")
+def dome_background(cx, cy, r, color):
+    """Fond du dôme : disque uni de la couleur de la bande où il se trouve. (Les bandes
+    agrandies laissaient un croissant de la bande voisine au bord du dôme haut.)"""
+    box_draw(cx - r, cy - r, 2 * r, 2 * r)
+    circle(cx, cy, r, fill=color)
+    draw_close("normal")
 
 
 
@@ -281,18 +271,19 @@ def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None):
 
 
 def patch(name, x, y, w, h, oval):
-    """Fond du cadran (bandes + ombrage) découpé à la forme de l'emplacement : cache la
-    donnée intégrée dessous. Dans un emplacement agrandi, le fond est agrandi aussi (loupe)."""
+    """Fond du cadran découpé à la forme de l'emplacement : cache la donnée intégrée dessous.
+    oval : couleur unie du dôme ; sinon bandes + ombrage découpés au rectangle."""
+    if oval:
+        box_draw(x, y, w, h)
+        circle(x + w / 2, y + h / 2, DOME_R / DOME_K, fill=oval)   # x1,2 par la loupe = rayon du dôme
+        draw_close()
+        return
     group_open(name, x, y, w, h)
     draw_open(x=x, y=y, w=w, h=h, render_mode="MASK")
-    if oval:
-        circle(x + w / 2, y + h / 2, w / 2, fill="#FFFFFF")
-    else:
-        rect(x, y, w, h, "#FFFFFF")
+    rect(x, y, w, h, "#FFFFFF")
     draw_close()
     bands("both", f"{name}_bands")
-    if not oval:
-        image(0, 0, W, W, "bands_shade")
+    image(0, 0, W, W, "bands_shade")
     group_close()
 
 
@@ -363,8 +354,9 @@ def dome_slot(sid, name, center, gr, ink, soft, track, color, builtin):
     O.comment(f"Dôme {name} : ombre, fond agrandi, emplacement agrandi x{DOME_K}, verre")
     image(cx - DOME_R - 14 + 3, cy - DOME_R - 14 + 5, 2 * DOME_R + 28, 2 * DOME_R + 28, "dome_shadow",
           show="normal")
-    dome_background(cx, cy, DOME_R)
-    slot(sid, name, x, y, s, s, GAUGE_TYPES, builtin, render, oval=True, scale=DOME_K)
+    bg = BAND[0] if sid == 3 else BAND[3]   # bande sous le dôme (bas gauche : 0, haut droite : 3)
+    dome_background(cx, cy, DOME_R, bg)
+    slot(sid, name, x, y, s, s, GAUGE_TYPES, builtin, render, oval=bg, scale=DOME_K)
     image(cx - DOME_R - 2, cy - DOME_R - 2, 2 * DOME_R + 4, 2 * DOME_R + 4, "dome_glass", show="normal")
 
 

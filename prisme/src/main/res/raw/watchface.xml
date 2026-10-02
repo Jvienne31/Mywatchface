@@ -763,32 +763,12 @@
       <Image resource="dome_shadow" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartImage>
-    <Group name="dome_bg_68" x="0" y="0" width="438" height="438">
-      <PartDraw x="22" y="216" width="92" height="92" renderMode="MASK">
-        <Ellipse x="0" y="0" width="92" height="92">
-          <Fill color="#FFFFFF" />
-        </Ellipse>
-      </PartDraw>
-      <Group name="dome_mag_68" x="0" y="0" width="438" height="438" pivotX="0.1553" pivotY="0.5982" scaleX="1.2" scaleY="1.2">
-        <Group name="bands_mag_68" x="0" y="0" width="438" height="438" angle="18">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Rectangle x="0" y="0" width="128" height="438">
-              <Fill color="[CONFIGURATION.palette.0]" />
-            </Rectangle>
-            <Rectangle x="128" y="0" width="78" height="438">
-              <Fill color="[CONFIGURATION.palette.1]" />
-            </Rectangle>
-            <Rectangle x="206" y="0" width="80" height="438">
-              <Fill color="[CONFIGURATION.palette.2]" />
-            </Rectangle>
-            <Rectangle x="286" y="0" width="152" height="438">
-              <Fill color="[CONFIGURATION.palette.3]" />
-            </Rectangle>
-          </PartDraw>
-        </Group>
-      </Group>
+    <PartDraw x="22" y="216" width="92" height="92">
+      <Ellipse x="0" y="0" width="92" height="92">
+        <Fill color="[CONFIGURATION.palette.0]" />
+      </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
-    </Group>
+    </PartDraw>
     <Group name="data3" x="0" y="0" width="438" height="438" pivotX="0.1553" pivotY="0.5982" scaleX="1.2" scaleY="1.2">
       <PartDraw x="34" y="226" width="68" height="68" alpha="160">
         <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
@@ -819,29 +799,11 @@
     <ComplicationSlot slotId="3" x="26" y="220" width="84" height="84" scaleX="1.2" scaleY="1.2" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_dome_bl" isCustomizable="TRUE">
       <BoundingOval x="0" y="0" width="84" height="84" />
       <Complication type="RANGED_VALUE">
-        <Group name="patch3_ranged_value" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch3_ranged_value_bands" x="-26" y="-220" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.0]" />
+          </Ellipse>
+        </PartDraw>
         <PartDraw x="8" y="6" width="68" height="68" alpha="160">
           <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
@@ -868,29 +830,11 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
-        <Group name="patch3_goal_progress" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch3_goal_progress_bands" x="-26" y="-220" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.0]" />
+          </Ellipse>
+        </PartDraw>
         <PartDraw x="8" y="6" width="68" height="68" alpha="160">
           <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
@@ -917,29 +861,11 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
-        <Group name="patch3_short_text" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch3_short_text_bands" x="-26" y="-220" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.0]" />
+          </Ellipse>
+        </PartDraw>
         <PartImage x="34" y="18" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -955,29 +881,11 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
-        <Group name="patch3_monochromatic_image" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch3_monochromatic_image_bands" x="-26" y="-220" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.0]" />
+          </Ellipse>
+        </PartDraw>
         <PartImage x="27" y="27" width="30" height="30" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -997,32 +905,12 @@
       <Image resource="dome_shadow" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartImage>
-    <Group name="dome_bg_354" x="0" y="0" width="438" height="438">
-      <PartDraw x="308" y="78" width="92" height="92" renderMode="MASK">
-        <Ellipse x="0" y="0" width="92" height="92">
-          <Fill color="#FFFFFF" />
-        </Ellipse>
-      </PartDraw>
-      <Group name="dome_mag_354" x="0" y="0" width="438" height="438" pivotX="0.8082" pivotY="0.2831" scaleX="1.2" scaleY="1.2">
-        <Group name="bands_mag_354" x="0" y="0" width="438" height="438" angle="18">
-          <PartDraw x="0" y="0" width="438" height="438">
-            <Rectangle x="0" y="0" width="128" height="438">
-              <Fill color="[CONFIGURATION.palette.0]" />
-            </Rectangle>
-            <Rectangle x="128" y="0" width="78" height="438">
-              <Fill color="[CONFIGURATION.palette.1]" />
-            </Rectangle>
-            <Rectangle x="206" y="0" width="80" height="438">
-              <Fill color="[CONFIGURATION.palette.2]" />
-            </Rectangle>
-            <Rectangle x="286" y="0" width="152" height="438">
-              <Fill color="[CONFIGURATION.palette.3]" />
-            </Rectangle>
-          </PartDraw>
-        </Group>
-      </Group>
+    <PartDraw x="308" y="78" width="92" height="92">
+      <Ellipse x="0" y="0" width="92" height="92">
+        <Fill color="[CONFIGURATION.palette.3]" />
+      </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
-    </Group>
+    </PartDraw>
     <Group name="data4" x="0" y="0" width="438" height="438" pivotX="0.8082" pivotY="0.2831" scaleX="1.2" scaleY="1.2">
       <PartDraw x="322" y="90" width="64" height="64" alpha="95">
         <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
@@ -1058,29 +946,11 @@
     <ComplicationSlot slotId="4" x="312" y="82" width="84" height="84" scaleX="1.2" scaleY="1.2" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_dome_tr" isCustomizable="TRUE">
       <BoundingOval x="0" y="0" width="84" height="84" />
       <Complication type="RANGED_VALUE">
-        <Group name="patch4_ranged_value" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch4_ranged_value_bands" x="-312" y="-82" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.3]" />
+          </Ellipse>
+        </PartDraw>
         <PartDraw x="10" y="8" width="64" height="64" alpha="95">
           <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
@@ -1107,29 +977,11 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
-        <Group name="patch4_goal_progress" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch4_goal_progress_bands" x="-312" y="-82" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.3]" />
+          </Ellipse>
+        </PartDraw>
         <PartDraw x="10" y="8" width="64" height="64" alpha="95">
           <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
@@ -1156,29 +1008,11 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
-        <Group name="patch4_short_text" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch4_short_text_bands" x="-312" y="-82" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.3]" />
+          </Ellipse>
+        </PartDraw>
         <PartImage x="34" y="18" width="16" height="16" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -1194,29 +1028,11 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
-        <Group name="patch4_monochromatic_image" x="0" y="0" width="84" height="84">
-          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
-            <Ellipse x="0" y="0" width="84" height="84">
-              <Fill color="#FFFFFF" />
-            </Ellipse>
-          </PartDraw>
-          <Group name="patch4_monochromatic_image_bands" x="-312" y="-82" width="438" height="438" angle="18">
-            <PartDraw x="0" y="0" width="438" height="438">
-              <Rectangle x="0" y="0" width="128" height="438">
-                <Fill color="[CONFIGURATION.palette.0]" />
-              </Rectangle>
-              <Rectangle x="128" y="0" width="78" height="438">
-                <Fill color="[CONFIGURATION.palette.1]" />
-              </Rectangle>
-              <Rectangle x="206" y="0" width="80" height="438">
-                <Fill color="[CONFIGURATION.palette.2]" />
-              </Rectangle>
-              <Rectangle x="286" y="0" width="152" height="438">
-                <Fill color="[CONFIGURATION.palette.3]" />
-              </Rectangle>
-            </PartDraw>
-          </Group>
-        </Group>
+        <PartDraw x="0" y="0" width="84" height="84">
+          <Ellipse x="3.67" y="3.67" width="76.67" height="76.67">
+            <Fill color="[CONFIGURATION.palette.3]" />
+          </Ellipse>
+        </PartDraw>
         <PartImage x="27" y="27" width="30" height="30" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -1239,7 +1055,7 @@
           <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_ok">
-          <Group name="g32" x="0" y="0" width="438" height="438">
+          <Group name="g30" x="0" y="0" width="438" height="438">
             <PartText x="338" y="202" width="66" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
@@ -1248,7 +1064,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g33" x="0" y="0" width="438" height="438">
+          <Group name="g31" x="0" y="0" width="438" height="438">
             <PartText x="338" y="202" width="66" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]">--</Font>
@@ -4178,7 +3994,7 @@
           <Expression name="hr_aod"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_aod">
-          <Group name="g35" x="0" y="0" width="438" height="438">
+          <Group name="g33" x="0" y="0" width="438" height="438">
             <PartText x="338" y="196" width="66" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="28" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
@@ -4187,7 +4003,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g36" x="0" y="0" width="438" height="438">
+          <Group name="g34" x="0" y="0" width="438" height="438">
             <PartText x="338" y="196" width="66" height="40">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="28" color="#C9D1D9">--</Font>
