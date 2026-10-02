@@ -5,100 +5,58 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.wearable.PutDataMapRequest
-import com.google.android.gms.wearable.Wearable
-import com.samsung.android.sdk.health.data.HealthDataService
-import com.samsung.android.sdk.health.data.permission.AccessType
-import com.samsung.android.sdk.health.data.permission.Permission
-import com.samsung.android.sdk.health.data.request.DataType
-import com.samsung.android.sdk.health.data.request.LocalDateFilter
-import com.samsung.android.sdk.health.data.request.Ordering
+import com.samsung.android.sdk.health.data.error.ResolvablePlatformException
 import kotlinx.coroutines.launch
-import java.time.LocalDate
+import java.text.DateFormat
+import java.util.Date
 
 /**
- * Lit le score d'énergie Samsung Health (Samsung Health Data SDK, mode développeur — pas besoin
- * d'accord partenaire pour un usage personnel non distribué) et le pousse vers la montre via le
- * Data Layer Wear OS, où `energyscore-watch` l'expose comme un vrai fournisseur de complication.
- *
- * Ce fichier suit le pattern officiel confirmé pour la lecture d'un type de donnée instantané
- * (ex. HeartRateType) :
- *   val store = HealthDataService.getStore(context)
- *   val request = DataType.<Type>.readDataRequestBuilder.setLocalTimeFilter(filter)....build()
- *   val list = store.readData(request).dataList
- *
- * Vérifié dans la référence de l'API Samsung : champ EnergyScoreType.ENERGY_SCORE, lecture par
- * filtre de dates (LocalDateFilter). Reste à confirmer dans Android Studio une fois le .aar en
- * place : si `requestPermissions` s'appelle directement (suspend) ou via un callback d'activité.
- * Tout le reste (permission, filtre temporel, lecture, envoi à la montre) est le vrai appel SDK.
+ * Écran unique : autorise la lecture Samsung Health, synchronise vers la montre et affiche
+ * ce qui a été envoyé. Ensuite la synchronisation se fait seule toutes les 30 minutes.
  */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
+    private lateinit var valuesText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         statusText = findViewById(R.id.statusText)
+        valuesText = findViewById(R.id.valuesText)
         findViewById<Button>(R.id.syncButton).setOnClickListener { syncNow() }
-
+        SyncWorker.schedule(this)
         syncNow()
     }
 
     private fun syncNow() {
         lifecycleScope.launch {
+            statusText.text = getString(R.string.status_running)
             try {
-                val score = readEnergyScore()
-                if (score == null) {
+                val reader = HealthReader(this@MainActivity)
+                var granted = reader.grantedPermissions()
+                if (granted.size < HealthReader.PERMISSIONS.size) {
+                    granted = reader.requestPermissions(this@MainActivity)
+                }
+                if (granted.isEmpty()) {
                     statusText.text = getString(R.string.status_permission_needed)
                     return@launch
                 }
-                pushToWatch(score)
-                statusText.text = getString(R.string.status_synced, score)
+                val values = WatchSync.run(this@MainActivity)
+                statusText.text = getString(
+                    R.string.status_synced, values.size,
+                    DateFormat.getTimeInstance(DateFormat.SHORT).format(Date(WatchSync.lastSyncMillis(this@MainActivity))),
+                )
+                valuesText.text = Keys.LABELS.entries.joinToString("\n") { (key, label) ->
+                    "$label : ${values[key]?.let { "%.1f".format(it).removeSuffix(",0").removeSuffix(".0") } ?: "—"}"
+                }
+            } catch (e: ResolvablePlatformException) {
+                // Samsung Health absent, trop ancien ou mode développeur à activer
+                statusText.text = getString(R.string.status_error, e.errorMessage ?: e.toString())
+                if (e.hasResolution) e.resolve(this@MainActivity)
             } catch (e: Exception) {
                 statusText.text = getString(R.string.status_error, e.message ?: e.toString())
             }
         }
-    }
-
-    private suspend fun readEnergyScore(): Int? {
-        val store = HealthDataService.getStore(applicationContext)
-
-        val permissions = setOf(Permission.of(DataType.EnergyScoreType, AccessType.READ))
-        var granted = store.getGrantedPermissions(permissions)
-        if (!granted.containsAll(permissions)) {
-            store.requestPermissions(permissions, this@MainActivity)
-            granted = store.getGrantedPermissions(permissions)
-        }
-        if (!granted.containsAll(permissions)) {
-            return null
-        }
-
-        val today = LocalDate.now()
-        // Le score d'énergie est une donnée par jour : son builder n'accepte qu'un filtre de dates
-        // (ReadDataRequest.LocalDateBuilder, cf. javadoc Samsung). Hier inclus, au cas où le
-        // score du jour n'est pas encore calculé au réveil.
-        val filter = LocalDateFilter.of(today.minusDays(1), today.plusDays(1))
-        val readRequest = DataType.EnergyScoreType.readDataRequestBuilder
-            .setLocalDateFilter(filter)
-            .setOrdering(Ordering.DESC)
-            .build()
-
-        val dataList = store.readData(readRequest).dataList
-        val latest = dataList.firstOrNull() ?: return null
-
-        // Champ confirmé dans la référence de l'API : EnergyScoreType.ENERGY_SCORE (obligatoire).
-        val score = latest.getValue(DataType.EnergyScoreType.ENERGY_SCORE) ?: return null
-        return score.toInt().coerceIn(0, 100)
-    }
-
-    private fun pushToWatch(score: Int) {
-        val request = PutDataMapRequest.create("/energy_score").apply {
-            dataMap.putInt("score", score)
-            dataMap.putLong("timestamp", System.currentTimeMillis())
-        }.asPutDataRequest().setUrgent()
-
-        Wearable.getDataClient(this).putDataItem(request)
     }
 }

@@ -1,46 +1,449 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- FICHIER GÉNÉRÉ par energyscore-watch/tools/gen_metrics.py : ne pas éditer à la main. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
         android:label="@string/app_name"
-        android:icon="@drawable/ic_energy_score"
+        android:icon="@drawable/ic_m_bolt"
         android:allowBackup="false">
 
+        <!-- L'appli téléphone fait la lecture Samsung Health : la montre n'en dépend pas pour
+             s'installer, mais ses données viennent du téléphone. -->
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <!-- Fournisseur de complication : sert le dernier score d'énergie reçu du téléphone. -->
+        <!-- Reçoit les données poussées par l'appli téléphone (Data Layer, chemin /sante). -->
         <service
-            android:name=".EnergyScoreComplicationService"
-            android:exported="true"
-            android:icon="@drawable/ic_energy_score"
-            android:label="@string/complication_label"
-            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT,RANGED_VALUE" />
-            <meta-data
-                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="0" />
-        </service>
-
-        <!-- Reçoit le score poussé depuis l'appli téléphone via le Data Layer Wear OS. -->
-        <service
-            android:name=".EnergyScoreSyncListenerService"
+            android:name=".HealthSyncListenerService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
                 <data
                     android:scheme="wear"
                     android:host="*"
-                    android:pathPrefix="/energy_score" />
+                    android:pathPrefix="/sante" />
             </intent-filter>
+        </service>
+
+        <!-- Une complication par donnée Samsung Health -->
+        <service
+            android:name=".EnergyProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_bolt"
+            android:label="@string/m_energy"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".SleepScoreProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_moon_star"
+            android:label="@string/m_sleep_score"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".SleepMinProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_moon"
+            android:label="@string/m_sleep_min"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".StepsProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_steps"
+            android:label="@string/m_steps"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".DistanceMProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_pin"
+            android:label="@string/m_distance_m"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".ActiveKcalProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_flame"
+            android:label="@string/m_active_kcal"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".TotalKcalProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_flame"
+            android:label="@string/m_total_kcal"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".ActiveMinProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_timer"
+            android:label="@string/m_active_min"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".FloorsProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_stairs"
+            android:label="@string/m_floors"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".WaterMlProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_drop"
+            android:label="@string/m_water_ml"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".FoodKcalProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_food"
+            android:label="@string/m_food_kcal"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE,GOAL_PROGRESS" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".HrLastProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_heart"
+            android:label="@string/m_hr_last"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".HrMinProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_heart"
+            android:label="@string/m_hr_min"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".HrMaxProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_heart"
+            android:label="@string/m_hr_max"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".Spo2Provider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_drop_o"
+            android:label="@string/m_spo2"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".SkinTempProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_thermo"
+            android:label="@string/m_skin_temp"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".BodyTempProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_thermo"
+            android:label="@string/m_body_temp"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".BpSysProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_heart_pulse"
+            android:label="@string/m_bp_sys"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".GlucoseProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_drop"
+            android:label="@string/m_glucose"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".WeightProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_scale"
+            android:label="@string/m_weight"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".BodyFatProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_person"
+            android:label="@string/m_body_fat"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT,RANGED_VALUE" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".MuscleProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_person"
+            android:label="@string/m_muscle"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".BmiProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_person"
+            android:label="@string/m_bmi"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".Vo2maxProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_runner"
+            android:label="@string/m_vo2max"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".LastExMinProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_runner"
+            android:label="@string/m_last_ex_min"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+        <service
+            android:name=".LastExMProvider"
+            android:exported="true"
+            android:icon="@drawable/ic_m_runner"
+            android:label="@string/m_last_ex_m"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT,LONG_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
         </service>
 
     </application>

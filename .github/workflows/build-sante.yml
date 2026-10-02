@@ -1,0 +1,53 @@
+# Construit les deux applis « Santé Sync » (téléphone : lecture Samsung Health ; montre :
+# complications) et les publie comme artefacts téléchargeables.
+#
+# Le SDK Samsung Health Data (.aar) n'est pas dans ce dépôt (licence Samsung). Pour la
+# compilation automatique, on récupère la copie publiée dans le dépôt open source
+# the-momentum/open_wearables_android_sdk, figée sur un commit et vérifiée par SHA-256.
+# Pour utiliser votre propre téléchargement officiel, placez-le dans energyscore-phone/libs/
+# et compilez dans Android Studio (voir energyscore-phone/libs/README.md).
+name: APK Santé Sync
+
+on:
+  push:
+    paths:
+      - "energyscore-phone/**"
+      - "energyscore-watch/**"
+      - "build.gradle"
+      - "settings.gradle"
+      - ".github/workflows/build-sante.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Récupérer le SDK Samsung Health Data 1.0.0 (copie vérifiée)
+        run: |
+          curl -fsSL -o energyscore-phone/libs/samsung-health-data-api-1.0.0.aar \
+            https://raw.githubusercontent.com/the-momentum/open_wearables_android_sdk/68824cdd89afe42222e7f3aff49b8abeee4f6349/sdk/libs/maven/com/samsung/android/health/data/1.0.0/data-1.0.0.aar
+          echo "7fd190ea2c6ced4aab349adac79e8f132828308b343703769c581023051f1d07  energyscore-phone/libs/samsung-health-data-api-1.0.0.aar" | sha256sum -c -
+
+      - name: Construire les APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :energyscore-watch:assembleDebug :energyscore-phone:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sante-sync-montre-apk
+          path: energyscore-watch/build/outputs/apk/debug/energyscore-watch-debug.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sante-sync-telephone-apk
+          path: energyscore-phone/build/outputs/apk/debug/energyscore-phone-debug.apk
+          if-no-files-found: error

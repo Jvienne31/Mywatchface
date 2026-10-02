@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FICHIER GÉNÉRÉ par energyscore-watch/tools/gen_metrics.py -->
+<resources>
+    <string name="m_energy">Score d\'énergie</string>
+    <string name="m_sleep_score">Score de sommeil</string>
+    <string name="m_sleep_min">Durée de sommeil</string>
+    <string name="m_steps">Pas (objectif)</string>
+    <string name="m_distance_m">Distance du jour</string>
+    <string name="m_active_kcal">Calories actives</string>
+    <string name="m_total_kcal">Calories totales</string>
+    <string name="m_active_min">Temps actif</string>
+    <string name="m_floors">Étages</string>
+    <string name="m_water_ml">Eau bue</string>
+    <string name="m_food_kcal">Calories consommées</string>
+    <string name="m_hr_last">Fréquence cardiaque (dernière)</string>
+    <string name="m_hr_min">Fréquence cardiaque min du jour</string>
+    <string name="m_hr_max">Fréquence cardiaque max du jour</string>
+    <string name="m_spo2">Oxygène dans le sang</string>
+    <string name="m_skin_temp">Température cutanée</string>
+    <string name="m_body_temp">Température corporelle</string>
+    <string name="m_bp_sys">Tension artérielle</string>
+    <string name="m_glucose">Glycémie</string>
+    <string name="m_weight">Poids</string>
+    <string name="m_body_fat">Masse grasse</string>
+    <string name="m_muscle">Masse musculaire squelettique</string>
+    <string name="m_bmi">IMC</string>
+    <string name="m_vo2max">VO2 max (dernière séance)</string>
+    <string name="m_last_ex_min">Dernière séance : durée</string>
+    <string name="m_last_ex_m">Dernière séance : distance</string>
+</resources>

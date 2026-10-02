@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Energy Score Sync</string>
+    <string name="app_name">Santé Sync</string>
     <string name="status_idle">En attente de synchronisation…</string>
-    <string name="status_permission_needed">Autorisation Samsung Health requise pour le score d\'énergie.</string>
-    <string name="status_synced">Score d\'énergie synchronisé : %1$d</string>
-    <string name="status_error">Erreur de synchronisation : %1$s</string>
-    <string name="action_sync_now">Synchroniser maintenant</string>
+    <string name="status_running">Lecture de Samsung Health…</string>
+    <string name="status_permission_needed">Autorisez la lecture dans Samsung Health (bouton ci-dessous), puis réessayez.</string>
+    <string name="status_synced">%1$d données envoyées à la montre (%2$s). Synchronisation automatique toutes les 30 min.</string>
+    <string name="status_error">Erreur : %1$s</string>
+    <string name="action_sync_now">Autoriser et synchroniser</string>
 </resources>

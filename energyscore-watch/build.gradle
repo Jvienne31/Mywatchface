@@ -8,14 +8,28 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.jvienne.energyscore.watch"
+        applicationId "com.jvienne.santesync"
         minSdk 33   // Wear OS 4
         targetSdk 35
         versionCode 1
         versionName "1.0"
     }
 
+    // Même identifiant et même clé que l'appli téléphone : le Data Layer Wear OS ne relie que
+    // des applis identiques des deux côtés. Clé debug versionnée (mots de passe standard).
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
         }
