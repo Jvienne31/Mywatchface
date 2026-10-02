@@ -1,3 +1,4 @@
 # Aperçus intermédiaires (contiennent des chemins absolus vers les polices)
 *.svg
 node_modules
+__pycache__
