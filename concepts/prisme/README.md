@@ -50,6 +50,48 @@ Avis : la colonne de trois bulles à droite charge l'équilibre et concurrence l
 la version à **deux dômes en diagonale** (pluie en haut à droite, calories en bas à gauche),
 qui fait écho aux bandes, reste la plus lisible.
 
+## Version retenue : 2 dômes, 18 palettes, 7 emplacements au choix
+
+### Palettes (réglage « Palette »)
+
+![18 palettes](planche-palettes.png)
+
+| Famille | Palettes |
+|---|---|
+| Tons terre et naturels (tendance « earthy », brun moka) | Volcan, Moka, Dune, Olive, Sauge, Forêt |
+| Bleus et eaux | Lagune, Abysse, Cobalt |
+| Pastels doux (lavande, pêche, jaune beurre) | Lavande, Pêche, Beurre |
+| Vins et rouges profonds | Cerise, Bordeaux |
+| Vifs et nocturnes | Néon, Aurore |
+| Neutres | Ardoise, Graphite |
+
+Chaque palette = 4 bandes (sombre → claire) + 1 accent. L'encre des chiffres et des textes est
+choisie **par bande selon la luminance** (la plus contrastée des deux extrêmes) : l'effet
+d'inversion des chiffres fonctionne avec toutes. En WFF : une `ColorConfiguration` à
+18 options de 5 couleurs (+ encres précalculées).
+
+### Emplacements de données (tous personnalisables)
+
+![Emplacements](emplacements-cadran.png)
+
+| N° | Zone | Par défaut | Exemples de choix |
+|---|---|---|---|
+| 1 | Haut gauche | Jour + date | Fuseau horaire, prochain événement |
+| 2 | Gauche | Météo (icône + température) | Lever / coucher du soleil, notifications |
+| 3 | Dôme bas gauche | Calories / objectif | Étages, minutes actives, eau, stress |
+| 4 | Dôme haut droite | Probabilité de pluie | Indice UV, SpO2, batterie du téléphone |
+| 5 | Droite | Fréquence cardiaque | Toute donnée courte |
+| 6 | Droite bas | Batterie | Toute donnée courte |
+| 7 | Bas | Pas + barre segmentée | Distance, objectif d'activité |
+
+Ce sont 7 complications (WFF : 8 maximum). Les dômes acceptent les types à plage de valeur
+(`RANGED_VALUE`, `GOAL_PROGRESS`) pour la jauge, ou un texte court ; les emplacements texte
+affichent l'icône fournie par la source de données.
+
+![Exemple](exemple-donnees-moka.png)
+
+*Exemple, palette Moka : UV et étages dans les dômes, lever du soleil à gauche.*
+
 Différences avec les cadrans « à bandes » existants : bandes diagonales (pas verticales),
 heure sur deux lignes (pas en escalier sur une ligne), chiffres penchés, données disposées
 dans les bandes extrêmes, palettes propres.

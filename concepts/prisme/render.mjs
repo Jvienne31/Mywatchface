@@ -24,11 +24,41 @@ const D = {
 const ANGLE = 18;
 const EDGES = [-400, 128, 206, 286, 900];
 
-const PALETTES = {
-  volcan:  { bands: ['#1C1A19', '#5E281B', '#C4562C', '#ECE0CB'], ink: ['#ECE0CB', '#ECE0CB', '#1C1A19', '#1C1A19'], accent: '#FF8A3D', light: '#ECE0CB', dark: '#1C1A19', soft: '#9B8E80' },
-  lagune:  { bands: ['#0A1729', '#0E4756', '#2A9BA6', '#DDEFF0'], ink: ['#DDEFF0', '#DDEFF0', '#0A1729', '#0A1729'], accent: '#7FE3EC', light: '#DDEFF0', dark: '#0A1729', soft: '#7F98A8' },
-  ardoise: { bands: ['#151719', '#353A40', '#78808A', '#E9EBED'], ink: ['#E9EBED', '#E9EBED', '#151719', '#151719'], accent: '#C8F03A', light: '#E9EBED', dark: '#151719', soft: '#8A929B' },
+// Palettes : 4 bandes (sombre -> claire) + accent. L'encre des chiffres et des textes est
+// calculée par bande selon sa luminance, pour que l'inversion marche avec toutes.
+const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const lum = (h) => { const [r, g, b] = hex(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+const mix = (a, b, k) => '#' + hex(a).map((v, i) => Math.round(v + (hex(b)[i] - v) * k).toString(16).padStart(2, '0')).join('');
+const pal = (label, bands, accent) => {
+  const light = bands[3], dark = bands[0];
+  // encre : celle des deux extrêmes qui contraste le plus avec la bande
+  const contrast = (x, y) => { const [l1, l2] = [lum(x), lum(y)].sort((u, v) => v - u); return (l1 + 0.05) / (l2 + 0.05); };
+  const ink = bands.map((bd) => (contrast(bd, light) >= contrast(bd, dark) ? light : dark));
+  return { label, bands, ink, accent, light, dark, soft: mix(light, dark, 0.45),
+           trackL: mix(bands[3], bands[2], 0.35), trackD: mix(bands[0], bands[1], 0.6) };
 };
+const PALETTES = {
+  volcan:   pal('Volcan',    ['#1C1A19', '#5E281B', '#C4562C', '#ECE0CB'], '#FF8A3D'),
+  lagune:   pal('Lagune',    ['#0A1729', '#0E4756', '#2A9BA6', '#DDEFF0'], '#7FE3EC'),
+  ardoise:  pal('Ardoise',   ['#151719', '#353A40', '#78808A', '#E9EBED'], '#C8F03A'),
+  moka:     pal('Moka',      ['#2B1D17', '#5A3B2E', '#A47864', '#EADBC8'], '#F0B86E'),
+  sauge:    pal('Sauge',     ['#18221C', '#3F5A4A', '#8FA98F', '#E6ECDF'], '#F2C14E'),
+  lavande:  pal('Lavande',   ['#1C1830', '#45386B', '#9C8FD0', '#ECE8F8'], '#FFB3C7'),
+  cerise:   pal('Cerise',    ['#1A0E12', '#5B1424', '#B3263E', '#F5E1DF'], '#FFC9A3'),
+  cobalt:   pal('Cobalt',    ['#0A1330', '#1E3A8A', '#4C7BF3', '#E4EAFB'], '#FFD23F'),
+  olive:    pal('Olive',     ['#1C1E12', '#474B26', '#8F9A4E', '#EEEDDA'], '#FF8C42'),
+  dune:     pal('Dune',      ['#2A2118', '#8C6A47', '#D2B48C', '#F7EFE2'], '#2FB3A8'),
+  neon:     pal('Néon',      ['#0B0B12', '#22224A', '#FF2E88', '#F4F4F8'], '#00E5FF'),
+  graphite: pal('Graphite',  ['#101010', '#2F2F2F', '#8A8A8A', '#F2F2F2'], '#FF3B30'),
+  foret:    pal('Forêt',     ['#0E1A14', '#1F3D2E', '#3E7C5A', '#DDEBE2'], '#E6C35C'),
+  peche:    pal('Pêche',     ['#2A1C1A', '#8A4F3D', '#F2A07B', '#FDEDE3'], '#2E6E9E'),
+  beurre:   pal('Beurre',    ['#26231A', '#6B6342', '#E8D27A', '#FBF6E3'], '#D9544D'),
+  bordeaux: pal('Bordeaux',  ['#1A0C10', '#4A1621', '#8E2C3B', '#EBDCCD'], '#D9AE62'),
+  abysse:   pal('Abysse',    ['#05121C', '#0B3954', '#087E8B', '#C4DCEC'], '#FF6B6B'),
+  aurore:   pal('Aurore',    ['#1A1530', '#5A2A6E', '#E0607E', '#FFE6D8'], '#FFC857'),
+};
+
 
 const polar = (r, a, cx = C, cy = C) => {
   const t = (a * Math.PI) / 180;
@@ -37,7 +67,12 @@ const polar = (r, a, cx = C, cy = C) => {
 const n = (v) => Math.round(v * 100) / 100;
 const fontUrl = (f) => pathToFileURL(join(here, '..', 'strate', 'fonts', f)).href;
 
-function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
+// Contenu des deux dômes (emplacements personnalisables : ce sont des complications)
+let DOME_TR = { label: 'PLUIE', value: `${D.rain}<tspan font-size="11">%</tspan>`, frac: D.rain / 100, icon: 'drop' };
+let DOME_BL = { label: 'KCAL', value: D.kcal, frac: D.kcal / D.kcalGoal, icon: 'flame' };
+let LEFT2 = null;   // 2e ligne de gauche : null = météo, sinon { icon, value }
+
+function face(c, aod = false, gauges = false, dome = false, allDomes = false, slots = false) {
   const p = [], defs = [];
   const rot = `rotate(${ANGLE} ${C} ${C})`;
   // Bandes (et leurs masques pour les chiffres)
@@ -82,6 +117,12 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
   const ICON = {
     drop: (x, y, col, k = 1) => `<path d="M ${x} ${n(y - 8 * k)} C ${n(x + 6 * k)} ${n(y - 1 * k)} ${n(x + 6 * k)} ${n(y + 5 * k)} ${x} ${n(y + 6 * k)} C ${n(x - 6 * k)} ${n(y + 5 * k)} ${n(x - 6 * k)} ${n(y - 1 * k)} ${x} ${n(y - 8 * k)} Z" fill="${col}"/>`,
     flame: (x, y, col, k = 1) => `<path d="M ${x} ${n(y - 9 * k)} C ${n(x + 8 * k)} ${n(y - 2 * k)} ${n(x + 7 * k)} ${n(y + 7 * k)} ${x} ${n(y + 7 * k)} C ${n(x - 7 * k)} ${n(y + 7 * k)} ${n(x - 7 * k)} ${y} ${n(x - 2 * k)} ${n(y - 3 * k)} C ${n(x - 2 * k)} ${n(y + 1 * k)} ${n(x + 1 * k)} ${n(y + 2 * k)} ${n(x + 1 * k)} ${n(y - 1 * k)} C ${n(x + 1 * k)} ${n(y - 4 * k)} ${n(x - 1 * k)} ${n(y - 6 * k)} ${x} ${n(y - 9 * k)} Z" fill="${col}"/>`,
+    uv: (x, y, col, k = 1) => `<circle cx="${x}" cy="${y}" r="${n(5 * k)}" fill="none" stroke="${col}" stroke-width="2"/>` +
+      [0, 60, 120, 180, 240, 300].map((a) => { const [a1, b1] = polar(8 * k, a, x, y), [a2, b2] = polar(10.5 * k, a, x, y);
+        return `<line x1="${n(a1)}" y1="${n(b1)}" x2="${n(a2)}" y2="${n(b2)}" stroke="${col}" stroke-width="1.8" stroke-linecap="round"/>`; }).join(''),
+    stairs: (x, y, col, k = 1) => `<path d="M ${n(x - 8 * k)} ${n(y + 7 * k)} h ${n(5 * k)} v ${n(-5 * k)} h ${n(5 * k)} v ${n(-5 * k)} h ${n(5 * k)} v ${n(-5 * k)}" fill="none" stroke="${col}" stroke-width="2.2" stroke-linejoin="round"/>`,
+    sunrise: (x, y, col, k = 1) => `<path d="M ${n(x - 8 * k)} ${n(y + 4 * k)} A ${n(8 * k)} ${n(8 * k)} 0 0 1 ${n(x + 8 * k)} ${n(y + 4 * k)}" fill="none" stroke="${col}" stroke-width="2"/>
+      <line x1="${n(x - 11 * k)}" y1="${n(y + 7 * k)}" x2="${n(x + 11 * k)}" y2="${n(y + 7 * k)}" stroke="${col}" stroke-width="2" stroke-linecap="round"/>`,
     // deux empreintes de pas, décalées
     steps: (x, y, col) => [[-5, 3, -12], [5, -4, 12]].map(([dx, dy, rot]) =>
       `<g transform="rotate(${rot} ${x + dx} ${y + dy})"><ellipse cx="${x + dx}" cy="${y + dy - 2}" rx="4" ry="6.5" fill="${col}"/>
@@ -133,9 +174,10 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
     let sun = `<circle cx="48" cy="181" r="6" fill="${aod ? soft : c.accent}"/>`;
     for (let k = 0; k < 8; k++) { const [a1, b1] = polar(8.5, k * 45, 48, 181), [a2, b2] = polar(11.5, k * 45, 48, 181);
       sun += `<line x1="${n(a1)}" y1="${n(b1)}" x2="${n(a2)}" y2="${n(b2)}" stroke="${aod ? soft : c.accent}" stroke-width="1.8" stroke-linecap="round"/>`; }
-    p.push(sun + t(82, 191, 28, L, D.temp));
+    if (LEFT2) p.push(ICON[LEFT2.icon](48, 182, aod ? soft : c.accent, 1.1) + t(86, 191, 26, L, LEFT2.value));
+    else p.push(sun + t(82, 191, 28, L, D.temp));
     // jauge calories (bas gauche, bande sombre)
-    p.push(lens(68, 262, 46, gauge(68, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent, 'flame')));
+    p.push(lens(68, 262, 46, gauge(68, 262, 30, DOME_BL.frac, DOME_BL.value, DOME_BL.label, L, soft, aod ? '#1a1d20' : c.trackD, c.accent, DOME_BL.icon)));
   } else if (!aod) {
     // soleil
     let sun = `<circle cx="66" cy="232" r="7" fill="${c.accent}"/>`;
@@ -145,15 +187,15 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
     p.push(t(66, 274, 30, L, D.temp));
   }
   // Données — droite (bande claire) : pluie (jauge), cardio, batterie
-  if (gauges) p.push(lens(354, 124, 46, gauge(354, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
-    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2], 'drop')));
+  if (gauges) p.push(lens(354, 124, 46, gauge(354, 122, 28, DOME_TR.frac, DOME_TR.value, DOME_TR.label,
+    Dk, soft, aod ? '#1a1d20' : c.trackL, aod ? soft : c.bands[2], DOME_TR.icon)));
   if (allDomes) {
     // cardio et batterie en jauges sous dôme, comme pluie et calories
     const hrCol = aod ? soft : c.bands[2];
     p.push(lens(374, 222, 40, gauge(374, 220, 24, (D.hr - 40) / 160,
-      D.hr, 'BPM', Dk, soft, aod ? '#1a1d20' : '#c3d6d8', hrCol)));
+      D.hr, 'BPM', Dk, soft, aod ? '#1a1d20' : c.trackL, hrCol)));
     p.push(lens(366, 312, 40, gauge(366, 310, 24, D.batt / 100,
-      `${D.batt}<tspan font-size="11">%</tspan>`, 'BATT', Dk, soft, aod ? '#1a1d20' : '#c3d6d8', hrCol)));
+      `${D.batt}<tspan font-size="11">%</tspan>`, 'BATT', Dk, soft, aod ? '#1a1d20' : c.trackL, hrCol)));
   } else {
     p.push(`<path d="M 370 196 C 360 189 363 180 370 185 C 377 180 380 189 370 196 Z" fill="${aod ? soft : c.bands[2]}"/>`);
     p.push(t(370, 228, 32, Dk, D.hr));
@@ -187,6 +229,20 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
     p.push(ICON.steps(C - 50, 362, '#6F7882') + t(C + 8, 372, 18, '#C9D1D9', `${D.steps} PAS`));
   }
 
+  if (slots) {
+    // schéma des emplacements personnalisables
+    const tag = (x, y, k) => `<circle cx="${x}" cy="${y}" r="11" fill="#FF3B6B"/><text x="${x}" y="${y + 5}" font-family="Barlow" font-weight="600" font-size="15" fill="#fff" text-anchor="middle">${k}</text>`;
+    const box = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="#FF3B6B" fill-opacity="0.12" stroke="#FF3B6B" stroke-width="2" stroke-dasharray="6 4"/>`;
+    const ring = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#FF3B6B" fill-opacity="0.12" stroke="#FF3B6B" stroke-width="2" stroke-dasharray="6 4"/>`;
+    p.push(box(26, 92, 84, 60) + tag(112, 94, 1));
+    p.push(box(30, 166, 90, 34) + tag(30, 166, 2));
+    p.push(ring(68, 262, 48) + tag(28, 228, 3));
+    p.push(ring(354, 124, 48) + tag(306, 86, 4));
+    p.push(box(336, 176, 68, 76) + tag(404, 176, 5));
+    p.push(box(336, 262, 68, 64) + tag(404, 262, 6));
+    p.push(box(116, 334, 220, 62) + tag(116, 334, 7));
+  }
+
   const style = `<style>
     @font-face { font-family: Shoulders; font-weight: 800; src: url('${fontUrl('big-shoulders-display-latin-800-normal.woff2')}'); }
     @font-face { font-family: Shoulders; font-weight: 300; src: url('${fontUrl('big-shoulders-display-latin-300-normal.woff2')}'); }
@@ -208,7 +264,7 @@ const render = async (svg, out) => {
   console.log(out);
 };
 const outs = [];
-for (const [name, c] of Object.entries(PALETTES)) {
+for (const [name, c] of Object.entries(PALETTES).slice(0, 3)) {
   const out = join(here, `prisme-${name}.png`);
   await render(face(c), out);
   outs.push(out);
@@ -219,10 +275,27 @@ await render(face(PALETTES.lagune, false, true), join(here, 'prisme-lagune-jauge
 await render(face(PALETTES.lagune, true, true), join(here, 'prisme-lagune-jauges-aod.png'));
 // Essai « dôme » : loupes de verre bombé sur les deux jauges
 await render(face(PALETTES.lagune, false, true, true), join(here, 'prisme-lagune-dome.png'));
+// Toutes les palettes, version retenue (2 dômes) -> planche-palettes.png
+const palOuts = [];
+for (const [name, c] of Object.entries(PALETTES)) {
+  const out = join(here, 'palettes', `${name}.png`);
+  await render(face(c, false, true, true), out);
+  palOuts.push([out, c.label]);
+}
+// Schéma des emplacements + exemple avec d'autres données
+await render(face(PALETTES.lagune, false, true, true, false, true), join(here, 'emplacements-cadran.png'));
+const saved = [DOME_TR, DOME_BL, LEFT2];
+DOME_TR = { label: 'UV', value: 3, frac: 3 / 11, icon: 'uv' };
+DOME_BL = { label: 'ÉTAGES', value: 8, frac: 8 / 10, icon: 'stairs' };
+LEFT2 = { icon: 'sunrise', value: '07:42' };
+await render(face(PALETTES.moka, false, true, true), join(here, 'exemple-donnees-moka.png'));
+[DOME_TR, DOME_BL, LEFT2] = saved;
 // Essai « 4 dômes » : cardio et batterie aussi en jauges sous dôme
 await render(face(PALETTES.lagune, false, true, true, true), join(here, 'prisme-lagune-4domes.png'));
 await browser.close();
 
+execFileSync('montage', [...palOuts.flatMap(([f, l]) => ['-label', l, f]), '-tile', '6x3', '-geometry', '200x200+14+10',
+  '-background', '#1E1F22', '-fill', '#E6E8EB', '-pointsize', '18', join(here, 'planche-palettes.png')]);
 execFileSync('convert', [...outs, join(here, 'prisme-aod.png'), '-background', '#1E1F22',
   '-splice', '24x0', '+append', '-chop', '24x0', join(here, 'planche.png')]);
 const skin = join(here, '..', '..', 'race', 'emulator', 'skin-galaxy-watch8-classic', 'background.png');
