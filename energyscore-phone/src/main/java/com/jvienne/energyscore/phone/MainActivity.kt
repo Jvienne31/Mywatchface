@@ -11,7 +11,7 @@ import com.samsung.android.sdk.health.data.HealthDataService
 import com.samsung.android.sdk.health.data.permission.AccessType
 import com.samsung.android.sdk.health.data.permission.Permission
 import com.samsung.android.sdk.health.data.request.DataType
-import com.samsung.android.sdk.health.data.request.LocalTimeFilter
+import com.samsung.android.sdk.health.data.request.LocalDateFilter
 import com.samsung.android.sdk.health.data.request.Ordering
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -27,11 +27,9 @@ import java.time.LocalDate
  *   val request = DataType.<Type>.readDataRequestBuilder.setLocalTimeFilter(filter)....build()
  *   val list = store.readData(request).dataList
  *
- * Deux points précis restent à confirmer dans Android Studio une fois le .aar en place (autocomplete
- * règle ça en quelques secondes, voir energyscore-phone/libs/README.md) :
- *   - le nom exact du champ de valeur sur EnergyScoreType (ici DataType.EnergyScoreType.SCORE) ;
- *   - si `requestPermissions` doit être appelée directement ou via un callback d'activité —
- *     ici elle est traitée comme suspend, cohérent avec le reste d'un SDK conçu pour coroutines.
+ * Vérifié dans la référence de l'API Samsung : champ EnergyScoreType.ENERGY_SCORE, lecture par
+ * filtre de dates (LocalDateFilter). Reste à confirmer dans Android Studio une fois le .aar en
+ * place : si `requestPermissions` s'appelle directement (suspend) ou via un callback d'activité.
  * Tout le reste (permission, filtre temporel, lecture, envoi à la montre) est le vrai appel SDK.
  */
 class MainActivity : AppCompatActivity() {
@@ -78,18 +76,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         val today = LocalDate.now()
-        val filter = LocalTimeFilter.of(today.atStartOfDay(), today.plusDays(1).atStartOfDay())
+        // Le score d'énergie est une donnée par jour : son builder n'accepte qu'un filtre de dates
+        // (ReadDataRequest.LocalDateBuilder, cf. javadoc Samsung). Hier inclus, au cas où le
+        // score du jour n'est pas encore calculé au réveil.
+        val filter = LocalDateFilter.of(today.minusDays(1), today.plusDays(1))
         val readRequest = DataType.EnergyScoreType.readDataRequestBuilder
-            .setLocalTimeFilter(filter)
+            .setLocalDateFilter(filter)
             .setOrdering(Ordering.DESC)
             .build()
 
         val dataList = store.readData(readRequest).dataList
         val latest = dataList.firstOrNull() ?: return null
 
-        // TODO : confirmer le nom du champ dans le javadoc du SDK une fois téléchargé
-        // (probablement DataType.EnergyScoreType.SCORE — cf. commentaire en tête de fichier).
-        val score = latest.getValue(DataType.EnergyScoreType.SCORE) ?: return null
+        // Champ confirmé dans la référence de l'API : EnergyScoreType.ENERGY_SCORE (obligatoire).
+        val score = latest.getValue(DataType.EnergyScoreType.ENERGY_SCORE) ?: return null
         return score.toInt().coerceIn(0, 100)
     }
 

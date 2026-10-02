@@ -36,11 +36,8 @@ réservé aux comptes développeur.
 
 `MainActivity.kt` contient le vrai appel SDK (pas un squelette) : récupération du store,
 permission, filtre temporel, lecture, envoi à la montre — reconstruit à partir d'exemples de code
-officiels réels trouvés pour un type de donnée équivalent (fréquence cardiaque). Deux détails
-précis restent à confirmer une fois le `.aar` en place, marqués `TODO` dans le fichier :
-- le nom exact du champ de valeur sur `EnergyScoreType` (`DataType.EnergyScoreType.SCORE` est une
-  supposition raisonnable mais non vérifiée contre le javadoc) ;
-- si `requestPermissions` s'utilise directement comme fonction suspend ou demande un callback.
-
-Android Studio règle les deux en quelques secondes via l'autocomplétion dès que le SDK est
+officiels réels trouvés pour un type de donnée équivalent (fréquence cardiaque). Le nom du champ (`EnergyScoreType.ENERGY_SCORE`) et le filtre par dates
+(`LocalDateFilter`) ont été vérifiés dans la référence de l'API Samsung. Un seul point reste à
+confirmer : si `requestPermissions` s'utilise directement comme fonction suspend ou demande un
+callback. Android Studio règle les deux en quelques secondes via l'autocomplétion dès que le SDK est
 importé — pas besoin de redemander, juste corriger si le nom proposé diffère.
