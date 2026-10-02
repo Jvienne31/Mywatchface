@@ -22,6 +22,15 @@ libellés ≥ 13 px, police condensée **Barlow Condensed SemiBold**.
 | Bas | Nombre de pas | `[STEP_COUNT]` |
 | Centre | Heures, minutes, trotteuse centrale | `[HOUR_0_11]`, `[MINUTE]`, `[SECOND]` |
 
+## Textures du fond
+
+![Textures](planche-textures.png)
+
+Réglage « Texture » : **soleillé**, **carbone** (sergé), **bambou fumé**, **clous de Paris**,
+**acier brossé**. En WFF : une image PNG 438 × 438 par texture dans une `ListConfiguration`
+(une seule chargée en mémoire), vignette commune par-dessus ; les textes restent sur fond
+sombre pour rester lisibles quelle que soit la texture.
+
 Coloris : anthracite / orange, bleu glacier / cyan, panda (cadran blanc, compteurs noirs) /
 rouge. AOD : noir pur, aiguilles et index en filet, anneau des pas conservé.
 

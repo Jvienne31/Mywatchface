@@ -59,7 +59,83 @@ const arcPath = (cx, cy, r, a0, a1) => {
 const T = (x, y, size, fill, txt, extra = '') =>
   `<text x="${n(x)}" y="${n(y)}" font-family="Barlow" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${txt}</text>`;
 
-function face(c, aod = false) {
+// Textures du fond. En WFF : une image PNG par texture, dans une ListConfiguration « texture »
+// (une seule chargée à la fois), comme le motif de Race.
+export const TEXTURES = {
+  soleille: 'Soleillé', carbone: 'Carbone', bambou: 'Bambou fumé',
+  clous: 'Clous de Paris', brosse: 'Acier brossé',
+};
+
+function dialTexture(c, tex, defs) {
+  const full = (fill, extra = '') => `<rect width="${W}" height="${W}" fill="${fill}" ${extra}/>`;
+  if (tex === 'soleille') {
+    const rays = [];
+    for (let i = 0; i < 720; i++) {
+      const a = i / 2;
+      const sheen = Math.pow(Math.max(0, Math.cos(((a - 315) * Math.PI) / 180)), 3) * 0.12
+                  + Math.pow(Math.max(0, Math.cos(((a - 135) * Math.PI) / 180)), 3) * 0.07;
+      const [x, y] = polar(C, a);
+      rays.push(`<line x1="${C}" y1="${C}" x2="${n(x)}" y2="${n(y)}" stroke="${c.ray}" stroke-opacity="${(0.012 + sheen * (i % 2 ? 1 : 0.5)).toFixed(3)}" stroke-width="0.9"/>`);
+    }
+    return full('url(#dial)') + `<g>${rays.join('')}</g>`;
+  }
+  if (tex === 'carbone') {
+    // sergé 2/2 : brins alternés, chacun avec un reflet en dégradé
+    defs.push(`<linearGradient id="cfA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#121315"/>
+      <stop offset="0.5" stop-color="#3c4046"/><stop offset="1" stop-color="#121315"/></linearGradient>`);
+    defs.push(`<linearGradient id="cfB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0e10"/>
+      <stop offset="0.5" stop-color="#2a2d32"/><stop offset="1" stop-color="#0d0e10"/></linearGradient>`);
+    defs.push(`<pattern id="carbon" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect x="0" y="0" width="7" height="14" fill="url(#cfA)"/><rect x="7" y="0" width="7" height="14" fill="url(#cfB)"/>
+      <rect x="7" y="7" width="7" height="7" fill="url(#cfA)"/><rect x="0" y="7" width="7" height="7" fill="url(#cfB)"/></pattern>`);
+    defs.push(`<radialGradient id="cfSheen" cx="${C - 60}" cy="${C - 90}" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.10"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`);
+    return full('url(#carbon)') + full('url(#cfSheen)');
+  }
+  if (tex === 'bambou') {
+    // tiges rondes (ombrées sur les bords), fibre fine, noeuds en relief décalés ; fumé pour
+    // garder le texte clair lisible
+    defs.push(`<filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.35 0.004" numOctaves="2" seed="7"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.25  0 0 0 0 0.16  0 0 0 0 0.06  0 0 0 -1.2 0.9"/></filter>`);
+    defs.push(`<linearGradient id="culm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5a3d1c"/><stop offset="0.18" stop-color="#a57c45"/><stop offset="0.42" stop-color="#d4b07a"/>
+      <stop offset="0.62" stop-color="#b68b52"/><stop offset="0.9" stop-color="#6e4a22"/><stop offset="1" stop-color="#3a2510"/></linearGradient>`);
+    defs.push(`<linearGradient id="node" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e1d0b" stop-opacity="0.85"/><stop offset="0.45" stop-color="#2e1d0b" stop-opacity="0.35"/>
+      <stop offset="0.55" stop-color="#f6dfb0" stop-opacity="0.55"/><stop offset="1" stop-color="#f6dfb0" stop-opacity="0"/></linearGradient>`);
+    let s = full('#3a2510');
+    const sw = 36;
+    for (let k = 0, x = -6; x < W; k++, x += sw) {
+      s += `<rect x="${x + 1}" y="0" width="${sw - 2}" height="${W}" fill="url(#culm)"/>`;
+      for (let y = ((k * 53) % 110) - 40; y < W; y += 128) {
+        s += `<rect x="${x + 1}" y="${y}" width="${sw - 2}" height="8" fill="url(#node)"/>`;
+        s += `<ellipse cx="${x + sw / 2}" cy="${y + 2}" rx="${sw / 2 - 1}" ry="1.4" fill="#24170a" opacity="0.6"/>`;
+      }
+    }
+    return s + `<rect width="${W}" height="${W}" filter="url(#grain)" opacity="0.7"/>` + full('#140c04', 'opacity="0.42"');
+  }
+  if (tex === 'clous') {
+    // clous de Paris : petites pyramides, quatre facettes éclairées différemment
+    const b = c.dial[1];
+    defs.push(`<pattern id="hob" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="11" height="11" fill="${b}"/>
+      <path d="M0 0 L11 0 L5.5 5.5 Z" fill="#fff" fill-opacity="0.16"/><path d="M11 0 L11 11 L5.5 5.5 Z" fill="#000" fill-opacity="0.10"/>
+      <path d="M11 11 L0 11 L5.5 5.5 Z" fill="#000" fill-opacity="0.28"/><path d="M0 11 L0 0 L5.5 5.5 Z" fill="#fff" fill-opacity="0.05"/>
+      <rect width="11" height="11" fill="none" stroke="#000" stroke-opacity="0.35" stroke-width="0.8"/></pattern>`);
+    return full('url(#hob)') + full('url(#dial)', 'opacity="0.35"');
+  }
+  if (tex === 'brosse') {
+    // acier brossé : stries horizontales fines
+    defs.push(`<filter id="brush" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.002 0.85" numOctaves="2" seed="3"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 -0.12"/></filter>`);
+    return full('url(#dial)') + `<rect width="${W}" height="${W}" filter="url(#brush)" opacity="0.5"/>`;
+  }
+  throw new Error(tex);
+}
+
+function face(c, aod = false, tex = 'soleille') {
   const p = [], defs = [];
   const wText = aod ? '#D5DBE1' : (c.wellText || c.text);
   const wSoft = aod ? '#7C858F' : (c.wellSoft || c.soft);
@@ -76,19 +152,14 @@ function face(c, aod = false) {
   defs.push(`<radialGradient id="well" cx="0.5" cy="0.35" r="0.65"><stop offset="0" stop-color="${c.well}" stop-opacity="0.8"/>
     <stop offset="1" stop-color="#000" stop-opacity="0.95"/></radialGradient>`);
 
-  // --- Cadran soleillé -----------------------------------------------------------
+  // --- Fond du cadran : texture au choix (réglage « Texture ») ----------------------
   if (aod) p.push(`<rect width="${W}" height="${W}" fill="#000"/>`);
   else {
-    p.push(`<rect width="${W}" height="${W}" fill="url(#dial)"/>`);
-    const rays = [];
-    for (let i = 0; i < 720; i++) {
-      const a = i / 2;
-      const sheen = Math.pow(Math.max(0, Math.cos(((a - 315) * Math.PI) / 180)), 3) * 0.12
-                  + Math.pow(Math.max(0, Math.cos(((a - 135) * Math.PI) / 180)), 3) * 0.07;
-      const [x, y] = polar(C, a);
-      rays.push(`<line x1="${C}" y1="${C}" x2="${n(x)}" y2="${n(y)}" stroke="${c.ray}" stroke-opacity="${(0.012 + sheen * (i % 2 ? 1 : 0.5)).toFixed(3)}" stroke-width="0.9"/>`);
-    }
-    p.push(`<g>${rays.join('')}</g>`);
+    p.push(dialTexture(c, tex, defs));
+    // vignette commune : profondeur et lisibilité des textes clairs
+    defs.push(`<radialGradient id="vig" cx="${C}" cy="${C - 30}" r="${C + 20}" gradientUnits="userSpaceOnUse">
+      <stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></radialGradient>`);
+    p.push(`<rect width="${W}" height="${W}" fill="url(#vig)"/>`);
     p.push(`<circle cx="${C}" cy="${C}" r="${C - 6}" fill="none" stroke="#000" stroke-opacity="0.3" stroke-width="12"/>`);
   }
 
@@ -228,10 +299,18 @@ for (const [name, c] of Object.entries(COLORWAYS)) {
   outs.push(out);
 }
 await render(face(COLORWAYS['anthracite-orange'], true), join(here, 'meridien-aod.png'));
+const texOuts = [];
+for (const tex of Object.keys(TEXTURES)) {
+  const out = join(here, `texture-${tex}.png`);
+  await render(face(COLORWAYS['anthracite-orange'], false, tex), out);
+  texOuts.push(out);
+}
 await browser.close();
 
 execFileSync('convert', [...outs, join(here, 'meridien-aod.png'), '-background', '#1E1F22',
   '-splice', '24x0', '+append', '-chop', '24x0', join(here, 'planche.png')]);
+execFileSync('convert', [...texOuts, '-background', '#1E1F22', '-splice', '24x0', '+append',
+  '-chop', '24x0', join(here, 'planche-textures.png')]);
 const skin = join(here, '..', '..', 'race', 'emulator', 'skin-galaxy-watch8-classic', 'background.png');
 if (existsSync(skin)) {
   execFileSync('convert', [skin, outs[0], '-geometry', '+101+191', '-composite', join(here, 'meridien-montre.png')]);
