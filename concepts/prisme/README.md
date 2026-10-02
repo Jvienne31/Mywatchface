@@ -28,6 +28,15 @@ Deux jauges en arc dans les zones libres : **pluie** (haut droite, bande claire,
 `[WEATHER.CHANCE_OF_PRECIPITATION]`) et **calories / objectif** (bas gauche, bande sombre,
 complication `RANGED_VALUE`). La météo remonte sur une ligne à côté de la date.
 
+### Essai « dôme » : loupes sur les jauges
+
+![Essai dôme](prisme-lagune-dome.png)
+
+Chaque jauge est sous un dôme de verre : jauge **et fond** grossis d'environ 20 % (la limite
+entre bandes se décale comme à travers une lentille), bord assombri (réfraction), reflet en
+haut à gauche, croissant de lumière en bas à droite, ombre portée. En WFF : `Group` mis à
+l'échelle (`scaleX`/`scaleY`) sous un masque rond, verre et reflets en PNG translucide.
+
 Différences avec les cadrans « à bandes » existants : bandes diagonales (pas verticales),
 heure sur deux lignes (pas en escalier sur une ligne), chiffres penchés, données disposées
 dans les bandes extrêmes, palettes propres.

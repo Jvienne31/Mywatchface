@@ -37,7 +37,7 @@ const polar = (r, a, cx = C, cy = C) => {
 const n = (v) => Math.round(v * 100) / 100;
 const fontUrl = (f) => pathToFileURL(join(here, '..', 'strate', 'fonts', f)).href;
 
-function face(c, aod = false, gauges = false) {
+function face(c, aod = false, gauges = false, dome = false) {
   const p = [], defs = [];
   const rot = `rotate(${ANGLE} ${C} ${C})`;
   // Bandes (et leurs masques pour les chiffres)
@@ -84,7 +84,35 @@ function face(c, aod = false, gauges = false) {
       return `M ${n(x0)} ${n(y0)} A ${r} ${r} 0 ${b1 - b0 > 180 ? 1 : 0} 1 ${n(x1)} ${n(y1)}`; };
     return `<path d="${arc(a0, a1)}" fill="none" stroke="${track}" stroke-width="6" stroke-linecap="round"/>
       <path d="${arc(a0, af)}" fill="none" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
-      ${t(cx, cy + 7, 20, ink, value)}${t(cx, cy + r + 4, 11, labelInk, label, 'letter-spacing="1.6"')}`;
+      ${t(cx, cy + 7, 20, ink, value)}${t(cx, cy + r - 1, 11, labelInk, label, 'letter-spacing="1.6"')}`;
+  }
+  // Loupe : le contenu (bandes + jauge) est redessiné agrandi dans un disque, puis
+  // ombre portée, bord assombri (réfraction), reflet et croissant de lumière.
+  // En WFF : Group mis à l'échelle (scaleX/scaleY) sous un masque rond + PNG de verre.
+  const bandsSvg = () => {
+    let b = '';
+    for (let i = 0; i < 4; i++)
+      b += `<rect x="${EDGES[i]}" y="-300" width="${EDGES[i + 1] - EDGES[i]}" height="1100" fill="${aod ? '#000' : c.bands[i]}" transform="${rot}"/>`;
+    return b;
+  };
+  function lens(cx, cy, R, inner, k = 1.2) {
+    if (!dome || aod) return inner;
+    const id = `lens${Math.round(cx)}`;
+    defs.push(`<clipPath id="${id}"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath>`);
+    defs.push(`<radialGradient id="${id}e" cx="${cx}" cy="${cy}" r="${R}" gradientUnits="userSpaceOnUse">
+      <stop offset="0.72" stop-color="#000" stop-opacity="0"/><stop offset="0.93" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.55"/></radialGradient>`);
+    defs.push(`<radialGradient id="${id}h" cx="${cx - R * 0.38}" cy="${cy - R * 0.45}" r="${R * 0.62}" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`);
+    defs.push(`<filter id="${id}s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>`);
+    const mag = `translate(${cx} ${cy}) scale(${k}) translate(${-cx} ${-cy})`;
+    return `<circle cx="${cx + 3}" cy="${cy + 5}" r="${R}" fill="#000" opacity="0.38" filter="url(#${id}s)"/>
+      <g clip-path="url(#${id})"><g transform="${mag}">${bandsSvg()}${inner}</g>
+        <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}e)"/>
+        <ellipse cx="${n(cx - R * 0.3)}" cy="${n(cy - R * 0.42)}" rx="${n(R * 0.5)}" ry="${n(R * 0.28)}" fill="url(#${id}h)" transform="rotate(-30 ${n(cx - R * 0.3)} ${n(cy - R * 0.42)})"/>
+        <path d="M ${n(cx + R * 0.15)} ${n(cy + R * 0.86)} A ${R * 0.9} ${R * 0.9} 0 0 0 ${n(cx + R * 0.86)} ${n(cy + R * 0.2)}" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="2.2" stroke-linecap="round"/></g>
+      <circle cx="${cx}" cy="${cy}" r="${R - 0.5}" fill="none" stroke="#fff" stroke-opacity="0.45" stroke-width="1"/>
+      <circle cx="${cx}" cy="${cy}" r="${R + 0.8}" fill="none" stroke="#000" stroke-opacity="0.35" stroke-width="1.2"/>`;
   }
   const t = (x, y, size, fill, txt, extra = '') =>
     `<text x="${n(x)}" y="${n(y)}" font-family="Barlow" font-weight="600" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${txt}</text>`;
@@ -97,7 +125,7 @@ function face(c, aod = false, gauges = false) {
       sun += `<line x1="${n(a1)}" y1="${n(b1)}" x2="${n(a2)}" y2="${n(b2)}" stroke="${aod ? soft : c.accent}" stroke-width="1.8" stroke-linecap="round"/>`; }
     p.push(sun + t(82, 191, 28, L, D.temp));
     // jauge calories (bas gauche, bande sombre)
-    p.push(gauge(66, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent));
+    p.push(lens(68, 262, 46, gauge(68, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent)));
   } else if (!aod) {
     // soleil
     let sun = `<circle cx="66" cy="232" r="7" fill="${c.accent}"/>`;
@@ -107,8 +135,8 @@ function face(c, aod = false, gauges = false) {
     p.push(t(66, 274, 30, L, D.temp));
   }
   // Données — droite (bande claire) : pluie (jauge), cardio, batterie
-  if (gauges) p.push(gauge(358, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
-    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2]));
+  if (gauges) p.push(lens(354, 124, 46, gauge(354, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
+    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2])));
   p.push(`<path d="M 370 196 C 360 189 363 180 370 185 C 377 180 380 189 370 196 Z" fill="${aod ? soft : c.bands[2]}"/>`);
   p.push(t(370, 228, 32, Dk, D.hr));
   p.push(t(370, 244, 12, soft, 'BPM', 'letter-spacing="2"'));
@@ -157,6 +185,8 @@ await render(face(PALETTES.volcan, true), join(here, 'prisme-aod.png'));
 // Essai « plus de données » : jauges pluie (haut droite) et calories (bas gauche), palette lagune
 await render(face(PALETTES.lagune, false, true), join(here, 'prisme-lagune-jauges.png'));
 await render(face(PALETTES.lagune, true, true), join(here, 'prisme-lagune-jauges-aod.png'));
+// Essai « dôme » : loupes de verre bombé sur les deux jauges
+await render(face(PALETTES.lagune, false, true, true), join(here, 'prisme-lagune-dome.png'));
 await browser.close();
 
 execFileSync('convert', [...outs, join(here, 'prisme-aod.png'), '-background', '#1E1F22',
