@@ -37,6 +37,10 @@ entre bandes se décale comme à travers une lentille), bord assombri (réfracti
 haut à gauche, croissant de lumière en bas à droite, ombre portée. En WFF : `Group` mis à
 l'échelle (`scaleX`/`scaleY`) sous un masque rond, verre et reflets en PNG translucide.
 
+Pictogrammes : goutte (pluie) et flamme (calories) dans les dômes ; empreintes devant le
+nombre de pas. Barre des pas en **10 segments penchés** comme les bandes (segment en cours à
+demi-teinte, contour sombre pour rester lisible sur toutes les bandes) et pourcentage au bout.
+
 ### Essai « 4 dômes »
 
 ![Essai 4 dômes](prisme-lagune-4domes.png)

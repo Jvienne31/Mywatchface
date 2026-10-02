@@ -78,13 +78,23 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
   // Données — gauche (bande sombre) : jour, date, météo
   const L = aod ? '#C9D1D9' : c.light, Dk = aod ? '#C9D1D9' : c.dark, soft = aod ? '#6F7882' : c.soft;
   // Jauge en arc (270°, ouverte en bas) : valeur au centre, libellé dans l'ouverture
-  function gauge(cx, cy, r, frac, value, label, ink, labelInk, track, color) {
+  // Pictogrammes (traits pleins, lisibles à 12-16 px)
+  const ICON = {
+    drop: (x, y, col, k = 1) => `<path d="M ${x} ${n(y - 8 * k)} C ${n(x + 6 * k)} ${n(y - 1 * k)} ${n(x + 6 * k)} ${n(y + 5 * k)} ${x} ${n(y + 6 * k)} C ${n(x - 6 * k)} ${n(y + 5 * k)} ${n(x - 6 * k)} ${n(y - 1 * k)} ${x} ${n(y - 8 * k)} Z" fill="${col}"/>`,
+    flame: (x, y, col, k = 1) => `<path d="M ${x} ${n(y - 9 * k)} C ${n(x + 8 * k)} ${n(y - 2 * k)} ${n(x + 7 * k)} ${n(y + 7 * k)} ${x} ${n(y + 7 * k)} C ${n(x - 7 * k)} ${n(y + 7 * k)} ${n(x - 7 * k)} ${y} ${n(x - 2 * k)} ${n(y - 3 * k)} C ${n(x - 2 * k)} ${n(y + 1 * k)} ${n(x + 1 * k)} ${n(y + 2 * k)} ${n(x + 1 * k)} ${n(y - 1 * k)} C ${n(x + 1 * k)} ${n(y - 4 * k)} ${n(x - 1 * k)} ${n(y - 6 * k)} ${x} ${n(y - 9 * k)} Z" fill="${col}"/>`,
+    // deux empreintes de pas, décalées
+    steps: (x, y, col) => [[-5, 3, -12], [5, -4, 12]].map(([dx, dy, rot]) =>
+      `<g transform="rotate(${rot} ${x + dx} ${y + dy})"><ellipse cx="${x + dx}" cy="${y + dy - 2}" rx="4" ry="6.5" fill="${col}"/>
+       <ellipse cx="${x + dx}" cy="${y + dy + 7}" rx="3" ry="2.6" fill="${col}"/></g>`).join(''),
+  };
+  function gauge(cx, cy, r, frac, value, label, ink, labelInk, track, color, icon) {
     const a0 = -135, a1 = 135, af = a0 + (a1 - a0) * Math.min(1, frac);
     const arc = (b0, b1) => { const [x0, y0] = polar(r, b0, cx, cy), [x1, y1] = polar(r, b1, cx, cy);
       return `M ${n(x0)} ${n(y0)} A ${r} ${r} 0 ${b1 - b0 > 180 ? 1 : 0} 1 ${n(x1)} ${n(y1)}`; };
     return `<path d="${arc(a0, a1)}" fill="none" stroke="${track}" stroke-width="6" stroke-linecap="round"/>
       <path d="${arc(a0, af)}" fill="none" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
-      ${t(cx, cy + 7, 20, ink, value)}${t(cx, cy + r - 1, 11, labelInk, label, 'letter-spacing="1.6"')}`;
+      ${icon ? ICON[icon](cx, cy - 13, color, 0.85) : ''}
+      ${t(cx, cy + (icon ? 12 : 7), 20, ink, value)}${t(cx, cy + r - 1, 11, labelInk, label, 'letter-spacing="1.6"')}`;
   }
   // Loupe : le contenu (bandes + jauge) est redessiné agrandi dans un disque, puis
   // ombre portée, bord assombri (réfraction), reflet et croissant de lumière.
@@ -125,7 +135,7 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
       sun += `<line x1="${n(a1)}" y1="${n(b1)}" x2="${n(a2)}" y2="${n(b2)}" stroke="${aod ? soft : c.accent}" stroke-width="1.8" stroke-linecap="round"/>`; }
     p.push(sun + t(82, 191, 28, L, D.temp));
     // jauge calories (bas gauche, bande sombre)
-    p.push(lens(68, 262, 46, gauge(68, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent)));
+    p.push(lens(68, 262, 46, gauge(68, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent, 'flame')));
   } else if (!aod) {
     // soleil
     let sun = `<circle cx="66" cy="232" r="7" fill="${c.accent}"/>`;
@@ -136,7 +146,7 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
   }
   // Données — droite (bande claire) : pluie (jauge), cardio, batterie
   if (gauges) p.push(lens(354, 124, 46, gauge(354, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
-    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2])));
+    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2], 'drop')));
   if (allDomes) {
     // cardio et batterie en jauges sous dôme, comme pluie et calories
     const hrCol = aod ? soft : c.bands[2];
@@ -153,15 +163,28 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
     p.push(t(370, 310, 26, Dk, `${D.batt}<tspan font-size="15">%</tspan>`));
   }
 
-  // Bas : pas (barre penchée comme les bandes) + calories
+  // Bas : pas — empreintes, nombre, barre de 10 segments penchés comme les bandes, %
   if (!aod) {
-    p.push(`<g transform="translate(${C} 372) skewX(-${ANGLE - 6})">
-      <rect x="-70" y="0" width="140" height="7" rx="3.5" fill="#000" fill-opacity="0.35"/>
-      <rect x="-70" y="0" width="${n(140 * D.stepPct / 100)}" height="7" rx="3.5" fill="${c.accent}"/></g>`);
-    p.push(t(C - 30, 364, 22, c.ink[1], `${D.steps}`, '') + t(C + 30, 364, 13, c.ink[2], 'PAS', 'letter-spacing="2"'));
-    if (!gauges) p.push(t(C + 4, 402, 15, c.ink[2], `${D.kcal} KCAL`, 'letter-spacing="1.5"'));
+    const seg = 10, sw = 14, sg = 3.5, sh = 12, y = 377;
+    const x0 = C - (seg * (sw + sg) - sg) / 2 - 8;
+    const lit = D.stepPct / 10;
+    let bar = '';
+    for (let i = 0; i < seg; i++) {
+      const fill = i < Math.floor(lit) ? c.accent : '#000';
+      const op = i < Math.floor(lit) ? 1 : (i < lit ? 0.55 : 0.28);
+      bar += `<rect x="${n(x0 + i * (sw + sg))}" y="0" width="${sw}" height="${sh}" rx="1.5" fill="${i < lit ? c.accent : fill}" fill-opacity="${op}"
+        ${i < lit ? `stroke="${c.dark}" stroke-opacity="0.55" stroke-width="1"` : ''}/>`;
+    }
+    p.push(`<g transform="translate(0 ${y}) skewX(-${ANGLE})" >${bar}</g>`);
+    const barEnd = x0 + seg * (sw + sg);
+    p.push(t(barEnd + 2, y + 11, 17, c.dark, `${D.stepPct}<tspan font-size="11">%</tspan>`, 'text-anchor="start"').replace('text-anchor="middle" ', ''));
+    // empreintes + nombre + libellé, au-dessus de la barre
+    p.push(ICON.steps(C - 66, 352, c.accent));
+    p.push(`<text x="${C - 50}" y="364" font-family="Barlow" font-weight="600" font-size="26" fill="${c.light}" style="paint-order:stroke" stroke="${c.bands[1]}" stroke-width="0.6">${D.steps}</text>`);
+    p.push(`<text x="${C + 18}" y="364" font-family="Barlow" font-weight="600" font-size="13" letter-spacing="2" fill="${c.dark}">PAS</text>`);
+    if (!gauges) p.push(t(C + 4, 410, 15, c.ink[2], `${D.kcal} KCAL`, 'letter-spacing="1.5"'));
   } else {
-    p.push(t(C, 372, 18, '#C9D1D9', `${D.steps} PAS`));
+    p.push(ICON.steps(C - 50, 362, '#6F7882') + t(C + 8, 372, 18, '#C9D1D9', `${D.steps} PAS`));
   }
 
   const style = `<style>
