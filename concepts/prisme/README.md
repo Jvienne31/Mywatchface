@@ -20,6 +20,14 @@ Palettes : **volcan** (charbon, rouille, terre cuite, sable), **lagune** (marine
 turquoise, glace), **ardoise** (graphite, gris, acier, craie) avec accents orange / cyan / lime.
 AOD : noir pur, chiffres en graisse fine (minutes en couleur d'accent).
 
+### Essai « plus de données » (lagune)
+
+![Essai jauges](prisme-lagune-jauges.png)
+
+Deux jauges en arc dans les zones libres : **pluie** (haut droite, bande claire,
+`[WEATHER.CHANCE_OF_PRECIPITATION]`) et **calories / objectif** (bas gauche, bande sombre,
+complication `RANGED_VALUE`). La météo remonte sur une ligne à côté de la date.
+
 Différences avec les cadrans « à bandes » existants : bandes diagonales (pas verticales),
 heure sur deux lignes (pas en escalier sur une ligne), chiffres penchés, données disposées
 dans les bandes extrêmes, palettes propres.

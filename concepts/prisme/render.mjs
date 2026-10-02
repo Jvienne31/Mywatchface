@@ -17,7 +17,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const W = 438, C = W / 2;
 const D = {
   hh: '10', mm: '09', s: 36, dow: 'VEN', date: '02 OCT', temp: '18°', hr: 72, batt: 86,
-  steps: '6 420', stepPct: 64, kcal: 412,
+  steps: '6 420', stepPct: 64, kcal: 412, kcalGoal: 600, rain: 20,
 };
 
 // Bandes : bords à x = 128, 206, 286 (mesuré à mi-hauteur), inclinées de ANGLE degrés.
@@ -37,7 +37,7 @@ const polar = (r, a, cx = C, cy = C) => {
 const n = (v) => Math.round(v * 100) / 100;
 const fontUrl = (f) => pathToFileURL(join(here, '..', 'strate', 'fonts', f)).href;
 
-function face(c, aod = false) {
+function face(c, aod = false, gauges = false) {
   const p = [], defs = [];
   const rot = `rotate(${ANGLE} ${C} ${C})`;
   // Bandes (et leurs masques pour les chiffres)
@@ -77,11 +77,28 @@ function face(c, aod = false) {
 
   // Données — gauche (bande sombre) : jour, date, météo
   const L = aod ? '#C9D1D9' : c.light, Dk = aod ? '#C9D1D9' : c.dark, soft = aod ? '#6F7882' : c.soft;
+  // Jauge en arc (270°, ouverte en bas) : valeur au centre, libellé dans l'ouverture
+  function gauge(cx, cy, r, frac, value, label, ink, labelInk, track, color) {
+    const a0 = -135, a1 = 135, af = a0 + (a1 - a0) * Math.min(1, frac);
+    const arc = (b0, b1) => { const [x0, y0] = polar(r, b0, cx, cy), [x1, y1] = polar(r, b1, cx, cy);
+      return `M ${n(x0)} ${n(y0)} A ${r} ${r} 0 ${b1 - b0 > 180 ? 1 : 0} 1 ${n(x1)} ${n(y1)}`; };
+    return `<path d="${arc(a0, a1)}" fill="none" stroke="${track}" stroke-width="6" stroke-linecap="round"/>
+      <path d="${arc(a0, af)}" fill="none" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
+      ${t(cx, cy + 7, 20, ink, value)}${t(cx, cy + r + 4, 11, labelInk, label, 'letter-spacing="1.6"')}`;
+  }
   const t = (x, y, size, fill, txt, extra = '') =>
     `<text x="${n(x)}" y="${n(y)}" font-family="Barlow" font-weight="600" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${txt}</text>`;
-  p.push(t(66, 132, 28, c.accent, D.dow, 'letter-spacing="1.5"'));
-  p.push(t(66, 154, 17, L, D.date, 'letter-spacing="1"'));
-  if (!aod) {
+  p.push(t(66, gauges ? 118 : 132, 28, c.accent, D.dow, 'letter-spacing="1.5"'));
+  p.push(t(66, gauges ? 140 : 154, 17, L, D.date, 'letter-spacing="1"'));
+  if (gauges) {
+    // météo compacte : soleil + température sur une ligne
+    let sun = `<circle cx="48" cy="181" r="6" fill="${aod ? soft : c.accent}"/>`;
+    for (let k = 0; k < 8; k++) { const [a1, b1] = polar(8.5, k * 45, 48, 181), [a2, b2] = polar(11.5, k * 45, 48, 181);
+      sun += `<line x1="${n(a1)}" y1="${n(b1)}" x2="${n(a2)}" y2="${n(b2)}" stroke="${aod ? soft : c.accent}" stroke-width="1.8" stroke-linecap="round"/>`; }
+    p.push(sun + t(82, 191, 28, L, D.temp));
+    // jauge calories (bas gauche, bande sombre)
+    p.push(gauge(66, 262, 30, D.kcal / D.kcalGoal, D.kcal, 'KCAL', L, soft, aod ? '#1a1d20' : '#1c2c3c', c.accent));
+  } else if (!aod) {
     // soleil
     let sun = `<circle cx="66" cy="232" r="7" fill="${c.accent}"/>`;
     for (let k = 0; k < 8; k++) { const [a1, b1] = polar(10, k * 45, 66, 232), [a2, b2] = polar(13.5, k * 45, 66, 232);
@@ -89,7 +106,9 @@ function face(c, aod = false) {
     p.push(sun);
     p.push(t(66, 274, 30, L, D.temp));
   }
-  // Données — droite (bande claire) : cardio, batterie
+  // Données — droite (bande claire) : pluie (jauge), cardio, batterie
+  if (gauges) p.push(gauge(358, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
+    Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2]));
   p.push(`<path d="M 370 196 C 360 189 363 180 370 185 C 377 180 380 189 370 196 Z" fill="${aod ? soft : c.bands[2]}"/>`);
   p.push(t(370, 228, 32, Dk, D.hr));
   p.push(t(370, 244, 12, soft, 'BPM', 'letter-spacing="2"'));
@@ -103,7 +122,7 @@ function face(c, aod = false) {
       <rect x="-70" y="0" width="140" height="7" rx="3.5" fill="#000" fill-opacity="0.35"/>
       <rect x="-70" y="0" width="${n(140 * D.stepPct / 100)}" height="7" rx="3.5" fill="${c.accent}"/></g>`);
     p.push(t(C - 30, 364, 22, c.ink[1], `${D.steps}`, '') + t(C + 30, 364, 13, c.ink[2], 'PAS', 'letter-spacing="2"'));
-    p.push(t(C + 4, 402, 15, c.ink[2], `${D.kcal} KCAL`, 'letter-spacing="1.5"'));
+    if (!gauges) p.push(t(C + 4, 402, 15, c.ink[2], `${D.kcal} KCAL`, 'letter-spacing="1.5"'));
   } else {
     p.push(t(C, 372, 18, '#C9D1D9', `${D.steps} PAS`));
   }
@@ -135,6 +154,9 @@ for (const [name, c] of Object.entries(PALETTES)) {
   outs.push(out);
 }
 await render(face(PALETTES.volcan, true), join(here, 'prisme-aod.png'));
+// Essai « plus de données » : jauges pluie (haut droite) et calories (bas gauche), palette lagune
+await render(face(PALETTES.lagune, false, true), join(here, 'prisme-lagune-jauges.png'));
+await render(face(PALETTES.lagune, true, true), join(here, 'prisme-lagune-jauges-aod.png'));
 await browser.close();
 
 execFileSync('convert', [...outs, join(here, 'prisme-aod.png'), '-background', '#1E1F22',
