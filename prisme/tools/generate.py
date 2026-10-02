@@ -119,36 +119,17 @@ wff.FONTS = {DIGITS: "ShouldersXB", DIGITS_AOD: "ShouldersL", DATA: "BarlowSB", 
 
 ANGLE = 18
 EDGES = [0, 128, 206, 286, W]        # bords des bandes dans le repère tourné
-HH_C, MM_C = (C - 30, 130), (C + 34, 272)   # centres des deux lignes de chiffres
-DIGIT_SIZE = 172
-DOME_TR, DOME_BL, DOME_R, DOME_K = (354, 124), (68, 262), 46, 1.2
+HH_C, MM_C = (C - 22, 128), (C + 24, 266)   # centres des deux lignes de chiffres
+DIGIT_SIZE = 160
+OUTLINE_R, OUTLINE_N = 4.5, 12              # contour des chiffres : 12 copies décalées
+MINUTE_TINT = 55                            # minutes : voile d'accent (0-255) sur le clair
+DOME_TR, DOME_BL, DOME_R, DOME_K = (354, 122), (66, 268), 50, 1.2
 SAMPLE = {"hh": "10", "mm": "09", "s": 36, "day": "02", "mon": "OCT", "dow": "VENDREDI",
           "temp": 18, "rain": 20, "uv": 3, "hr": 72, "batt": 86, "steps": 6420, "pct": 64}
 
 # ---------------------------------------------------------------------------
 # Masques : l'aperçu SVG utilise des clipPath, le XML des Group renderMode="MASK"
 # ---------------------------------------------------------------------------
-
-def svg_band_clip(i):
-    cid = f"band{i}"
-    x0, x1 = EDGES[i], EDGES[i + 1]
-    if not any(cid in d for d in O.defs):
-        O.defs.append(f'<clipPath id="{cid}"><rect x="{x0}" y="-200" width="{x1 - x0}" height="{W + 400}" '
-                      f'transform="rotate({ANGLE} {C} {C})" /></clipPath>')
-    return cid
-
-
-def band_mask(i):
-    """Masque XML en forme de bande i (rien dans l'aperçu : il utilise le clipPath)."""
-    O.mode_stack.append(("none", None))
-    group_open(f"mask_band{i}", angle=ANGLE, render_mode="MASK")
-    draw_open()
-    x0, x1 = EDGES[i], EDGES[i + 1]
-    rect(x0, 0, x1 - x0, W, "#FFFFFF")
-    draw_close()
-    group_close()
-    O.mode_stack.pop()
-
 
 def bands(show="normal", name="bands"):
     """Les 4 bandes (Group tourné). Le carré tourné contient tout le disque inscrit."""
@@ -170,38 +151,43 @@ def layer_background():
     image(0, 0, W, W, "bands_shade", show="normal")
 
 
-def hour_texts(tag, font, color_h, color_m, show):
-    """HH (12 ou 24 h selon la montre) et MM."""
+def hour_texts(tag, draw):
+    """HH (12 ou 24 h selon la montre) et MM. draw(center, expr, is_minute)."""
     condition(f"h24_{tag}", "[IS_24_HOUR_MODE]",
-              lambda: _digits(HH_C, "[HOUR_0_23_Z]", font, color_h, show),
-              lambda: _digits(HH_C, "[HOUR_1_12_Z]", font, color_h, show), True)
-    _digits(MM_C, "[MINUTE_Z]", font, color_m, show, wrap=False)
+              lambda: _group(lambda: draw(HH_C, "[HOUR_0_23_Z]", False)),
+              lambda: _group(lambda: draw(HH_C, "[HOUR_1_12_Z]", False)), True)
+    draw(MM_C, "[MINUTE_Z]", True)
 
 
-def _digits(center, expr, font, color, show, wrap=True):
+def _digit(center, expr, font, color, dx=0, dy=0, alpha=None):
     w, h = 250, 170
     cx, cy = center
     sample = SAMPLE["hh"] if "HOUR" in expr else SAMPLE["mm"]
-    if wrap:   # enfant d'un Compare / Default : un Group est requis
-        group_open(O.gid("d"))
-    text(cx - w / 2, cy - h / 2, w, h, ("expr", expr), sample, font, DIGIT_SIZE, color,
-         show=show, slant=True)
-    if wrap:
-        group_close()
+    text(cx - w / 2 + dx, cy - h / 2 + dy, w, h, ("expr", expr), sample, font, DIGIT_SIZE, color,
+         alpha=alpha, slant=True)
+
+
+def outlined_digits(center, expr, is_minute):
+    """Chiffres clairs, contour sombre, ombre portée ; minutes voilées d'accent.
+    Le contour (Font > Outline) n'est pas rendu sur la montre : il est fait de 12 copies
+    du chiffre décalées en cercle dans la couleur sombre, sous le chiffre."""
+    _digit(center, expr, DIGITS, "#000000", 3, 6, alpha=110)          # ombre
+    for k in range(OUTLINE_N):
+        a = 2 * math.pi * k / OUTLINE_N
+        _digit(center, expr, DIGITS, BAND[0], OUTLINE_R * math.cos(a), OUTLINE_R * math.sin(a))
+    _digit(center, expr, DIGITS, BAND[3])
+    if is_minute:
+        _digit(center, expr, DIGITS, ACCENT, alpha=MINUTE_TINT)
 
 
 def layer_digits():
-    O.comment("Chiffres : dessinés une fois par bande, dans l'encre de la bande, découpés par la bande")
-    for i in range(4):
-        group_open(f"ink{i}", show="normal")
-        O.s(f'<g clip-path="url(#{svg_band_clip(i)})">', "normal")
-        band_mask(i)
-        hour_texts(i, DIGITS, INK[i], INK[i], "both")
-        O.s("</g>", "normal")
-        group_close("normal")
+    O.comment("Chiffres : clairs, contour sombre (copies décalées), ombre ; minutes teintées d'accent")
+    group_open("digits", show="normal")
+    hour_texts("n", outlined_digits)
+    group_close("normal")
     O.comment("AOD : chiffres fins sur noir, minutes en accent")
     group_open("digits_aod", show="ambient")
-    hour_texts("aod", DIGITS_AOD, "#D5DBE1", ACCENT, "both")
+    hour_texts("aod", lambda c, e, m: _digit(c, e, DIGITS_AOD, ACCENT if m else "#D5DBE1"))
     group_close("ambient")
 
 
@@ -216,7 +202,7 @@ def layer_seconds():
 def dome_background(cx, cy, r, color):
     """Fond du dôme : disque uni de la couleur de la bande où il se trouve. (Les bandes
     agrandies laissaient un croissant de la bande voisine au bord du dôme haut.)"""
-    box_draw(cx - r, cy - r, 2 * r, 2 * r)
+    box_draw(cx - r, cy - r, 2 * r, 2 * r, show="normal")
     circle(cx, cy, r, fill=color)
     draw_close("normal")
 
@@ -287,10 +273,10 @@ def patch(name, x, y, w, h, oval):
     group_close()
 
 
-def box_draw(x, y, w, h, alpha=None):
+def box_draw(x, y, w, h, alpha=None, show="both"):
     """PartDraw local (x / y entiers) couvrant la zone x, y, w, h."""
     x0, y0 = int(math.floor(x)), int(math.floor(y))
-    draw_open(x=x0, y=y0, w=int(math.ceil(x + w)) - x0, h=int(math.ceil(y + h)) - y0, alpha=alpha)
+    draw_open(x=x0, y=y0, w=int(math.ceil(x + w)) - x0, h=int(math.ceil(y + h)) - y0, alpha=alpha, show=show)
 
 
 def value_unit(cx, y, h, content, sample, unit, size, color, unit_size=None):
@@ -306,21 +292,21 @@ def gauge(cx, cy, r, frac_expr, frac_sample, value, label, soft, track, color, i
     """Jauge en arc 270° : piste, valeur au centre, pictogramme au-dessus, libellé dans
     l'ouverture. value : callable(cx, y, h) qui dessine la valeur."""
     a0, a1 = -135, 135
-    box_draw(cx - r - 4, cy - r - 4, 2 * r + 8, 2 * r + 8, alpha=track[1])
-    arc(cx, cy, r, a0, a1, track[0], 6, cap="ROUND")
+    box_draw(cx - r - 5, cy - r - 5, 2 * r + 10, 2 * r + 10, alpha=track[1])
+    arc(cx, cy, r, a0, a1, track[0], 7, cap="ROUND")
     draw_close()
-    box_draw(cx - r - 4, cy - r - 4, 2 * r + 8, 2 * r + 8)
-    arc(cx, cy, r, a0, a1, color, 6, cap="ROUND",
+    box_draw(cx - r - 5, cy - r - 5, 2 * r + 10, 2 * r + 10)
+    arc(cx, cy, r, a0, a1, color, 7, cap="ROUND",
         end_expr=f"{a0} + {a1 - a0} * clamp({frac_expr}, 0, 1)",
         svg_a1=a0 + (a1 - a0) * frac_sample)
     draw_close()
     if icon:
-        icon_img(cx, cy - 13, 15, icon, color)
+        icon_img(cx, cy - 16, 16, icon, color)
     elif comp_ic:
-        comp_icon(cx, cy - 13, 14, color)
-    value(cx, cy - 1, 26)
-    text(cx - 30, cy + r - 9, 60, 16, label, label if isinstance(label, str) else "", DATA_M, 11,
-         soft[0], alpha=soft[1], spacing="0.12")
+        comp_icon(cx, cy - 16, 16, color)
+    value(cx, cy - 13, 32)
+    text(cx - 34, cy + r - 11, 68, 17, label, label if isinstance(label, str) else "", DATA_M, 13,
+         soft[0], alpha=soft[1], spacing="0.1")
 
 
 def icon_img(cx, cy, size, name, tint):
@@ -342,12 +328,12 @@ def dome_slot(sid, name, center, gr, ink, soft, track, color, builtin):
     def render(t):
         if t in FRAC:
             gauge(cx, cy - 2, gr, FRAC[t], 0.5,
-                  lambda x_, y_, h_: text(x_ - 30, y_, 60, h_, CTEXT, "", DATA, 20, ink),
+                  lambda x_, y_, h_: text(x_ - 34, y_, 68, h_, CTEXT, "", DATA, 22, ink),
                   CTITLE, soft, track, color, comp_ic=True)
-        elif t == "SHORT_TEXT":
-            comp_icon(cx, cy - 16, 16, color)
-            text(cx - 32, cy - 4, 64, 26, CTEXT, "", DATA, 20, ink)
-            text(cx - 30, cy + 18, 60, 16, CTITLE, "", DATA_M, 11, soft[0], alpha=soft[1])
+        elif t == "SHORT_TEXT":   # texte plus large : « 6h 29m » ne doit pas être tronqué
+            comp_icon(cx, cy - 19, 18, color)
+            text(cx - 40, cy - 9, 80, 30, CTEXT, "", DATA, 22, ink)
+            text(cx - 38, cy + 18, 76, 17, CTITLE, "", DATA_M, 13, soft[0], alpha=soft[1])
         elif t == "MONOCHROMATIC_IMAGE":
             comp_icon(cx, cy, 30, color)
 
@@ -365,14 +351,14 @@ def text_slot(sid, name, x, y, w, h, ink, soft, tint, builtin, big=26, centered=
     def render(t):
         if t in ("SHORT_TEXT", "LONG_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
             if centered:   # colonne droite : icône au-dessus, valeur, titre
-                comp_icon(x + w / 2, y + 12, 18, tint)
-                text(x, y + 22, w, 36, CTEXT, "", DATA, big, ink)
-                text(x, y + h - 16, w, 16, CTITLE, "", DATA_M, 12, soft[0], alpha=soft[1], spacing="0.12")
+                comp_icon(x + w / 2, y + 12, 22, tint)
+                text(x, y + 24, w, big + 6, CTEXT, "", DATA, big, ink)
+                text(x, y + h - 18, w, 18, CTITLE, "", DATA_M, 14, soft[0], alpha=soft[1], spacing="0.1")
             else:          # colonne gauche : icône à gauche, valeur, titre dessous
-                comp_icon(x + 16, y + h / 2, 22, tint)
-                text(x + 32, y, w - 32, h * 0.62, CTEXT, "", DATA, big, ink, align="START")
-                text(x + 32, y + h * 0.6, w - 32, h * 0.4, CTITLE, "", DATA_M, 12, soft[0], alpha=soft[1], align="START",
-                     spacing="0.1")
+                comp_icon(x + 18, y + h / 2, 28, tint)
+                text(x + 38, y, w - 38, h * 0.62, CTEXT, "", DATA, big, ink, align="START")
+                text(x + 38, y + h * 0.6, w - 38, h * 0.4, CTITLE, "", DATA_M, 14, soft[0], alpha=soft[1],
+                     align="START", spacing="0.1")
         elif t == "MONOCHROMATIC_IMAGE":
             comp_icon(x + w / 2, y + h / 2, min(w, h) - 12, tint)
     slot(sid, name, x, y, w, h, TEXT_TYPES, builtin, render)
@@ -382,10 +368,10 @@ def text_slot(sid, name, x, y, w, h, ink, soft, tint, builtin, big=26, centered=
 
 def builtin_date():
     # « 02 OCT » en gros (jour du mois en accent), jour de la semaine en petit dessous
-    text(30, 108, 56, 44, ("expr", "[DAY_Z]"), SAMPLE["day"], DATA, 36, ACCENT, align="END")
-    text(90, 116, 56, 34, ("expr", "[MONTH_S]"), SAMPLE["mon"], DATA, 22, INK[0], align="START", upper=True)
-    text(30, 145, 116, 20, ("expr", "[DAY_OF_WEEK_F]"), SAMPLE["dow"], DATA_M, 15, SOFT_D[0], alpha=SOFT_D[1], align="START",
-         upper=True, spacing="0.13")
+    text(30, 100, 52, 46, ("expr", "[DAY_Z]"), SAMPLE["day"], DATA, 48, ACCENT, align="END")
+    text(87, 113, 66, 34, ("expr", "[MONTH_S]"), SAMPLE["mon"], DATA, 28, INK[0], align="START", upper=True)
+    text(38, 149, 122, 21, ("expr", "[DAY_OF_WEEK_F]"), SAMPLE["dow"], DATA_M, 18, SOFT_D[0], alpha=SOFT_D[1],
+         align="START", upper=True, spacing="0.08")
 
 
 WEATHER_ICONS = [  # [WEATHER.CONDITION] -> pictogramme (défaut : nuage)
@@ -395,7 +381,7 @@ WEATHER_ICONS = [  # [WEATHER.CONDITION] -> pictogramme (défaut : nuage)
 
 
 def builtin_weather():
-    ix, iy, isz = 46, 185, 26
+    ix, iy, isz = 52, 192, 32
     O.open("<Condition>")
     O.open("<Expressions>")
     for k, (codes, _) in enumerate(WEATHER_ICONS):
@@ -420,10 +406,10 @@ def builtin_weather():
     O.close("</Condition>")
 
     condition("w_ok", "[WEATHER.IS_AVAILABLE]",
-              lambda: _group(lambda: text(64, 168, 70, 36, ("expr", "[WEATHER.TEMPERATURE]"),
-                                          f"{SAMPLE['temp']}°", DATA, 28, INK[0], align="START",
+              lambda: _group(lambda: text(74, 172, 84, 42, ("expr", "[WEATHER.TEMPERATURE]"),
+                                          f"{SAMPLE['temp']}°", DATA, 38, INK[0], align="START",
                                           fmt="%s°")),
-              lambda: _group(lambda: text(64, 168, 70, 36, "--", "--", DATA, 28, INK[0], align="START")),
+              lambda: _group(lambda: text(74, 172, 84, 42, "--", "--", DATA, 38, INK[0], align="START")),
               True)
 
 
@@ -434,39 +420,39 @@ def _group(fn):
 
 
 def builtin_uv():
-    gauge(DOME_BL[0], DOME_BL[1] - 2, 30, "[WEATHER.UV_INDEX] / 11", SAMPLE["uv"] / 11,
-          lambda x, y, h: text(x - 30, y, 60, h, ("expr", "[WEATHER.UV_INDEX]"), SAMPLE["uv"], DATA, 20, INK[0]),
+    gauge(DOME_BL[0], DOME_BL[1] - 2, 31, "[WEATHER.UV_INDEX] / 11", SAMPLE["uv"] / 11,
+          lambda x, y, h: text(x - 30, y, 60, h, ("expr", "[WEATHER.UV_INDEX]"), SAMPLE["uv"], DATA, 27, INK[0]),
           "UV", SOFT_D, TRACK_D, ACCENT, "uv")
 
 
 def builtin_rain():
-    gauge(DOME_TR[0], DOME_TR[1] - 2, 28, "[WEATHER.CHANCE_OF_PRECIPITATION] / 100", SAMPLE["rain"] / 100,
+    gauge(DOME_TR[0], DOME_TR[1] - 2, 31, "[WEATHER.CHANCE_OF_PRECIPITATION] / 100", SAMPLE["rain"] / 100,
           lambda x, y, h: value_unit(x, y, h, ("expr", "[WEATHER.CHANCE_OF_PRECIPITATION]"), SAMPLE["rain"],
-                                     "%", 20, INK[3], 12),
+                                     "%", 27, INK[3], 15),
           "PLUIE", SOFT_L, TRACK_L, BAND[2], "drop")
 
 
 def builtin_hr():
-    icon_img(371, 191, 18, "heart", BAND[2])
+    icon_img(374, 190, 22, "heart", BAND[2])
     condition("hr_ok", "[HEART_RATE] > 0",
-              lambda: _group(lambda: text(338, 202, 66, 40, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 32,
+              lambda: _group(lambda: text(334, 196, 80, 48, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 46,
                                           INK[3])),
-              lambda: _group(lambda: text(338, 202, 66, 40, "--", "--", DATA, 32, INK[3])), True)
-    text(340, 236, 60, 16, "BPM", "BPM", DATA_M, 12, SOFT_L[0], alpha=SOFT_L[1], spacing="0.17")
+              lambda: _group(lambda: text(334, 196, 80, 48, "--", "--", DATA, 46, INK[3])), True)
+    text(334, 243, 80, 17, "BPM", "BPM", DATA_M, 15, SOFT_L[0], alpha=SOFT_L[1], spacing="0.15")
 
 
 def builtin_battery():
-    box_draw(356, 268, 30, 16)
-    rrect(358, 270, 22, 12, 2.5, "#00000000", stroke=INK[3], th=1.8)
-    rect(380.5, 273.5, 2.5, 5, INK[3])
-    rect(360.5, 272.5, 17, 7, BAND[2], width_expr="17 * [BATTERY_PERCENT] / 100",
-         svg_w=17 * SAMPLE["batt"] / 100)
+    box_draw(356, 272, 38, 20)
+    rrect(358, 274, 30, 16, 3, "#00000000", stroke=INK[3], th=2)
+    rect(389, 279, 3, 6, INK[3])
+    rect(360.5, 276.5, 25, 11, BAND[2], width_expr="25 * [BATTERY_PERCENT] / 100",
+         svg_w=25 * SAMPLE["batt"] / 100)
     draw_close()
-    value_unit(370, 288, 34, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 26, INK[3], 15)
+    value_unit(374, 294, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 38, INK[3], 20)
 
 
-SEG_N, SEG_W, SEG_GAP, SEG_H, SEG_Y = 10, 14, 3.5, 12, 377
-SEG_X0 = C - (SEG_N * (SEG_W + SEG_GAP) - SEG_GAP) / 2 - 8
+SEG_N, SEG_W, SEG_GAP, SEG_H, SEG_Y = 10, 15, 4, 15, 378
+SEG_X0 = C - 106
 
 
 def steps_bar(frac_expr, frac_sample, pct):
@@ -499,63 +485,63 @@ def steps_bar(frac_expr, frac_sample, pct):
         seg(i, ACCENT)
         draw_close()
         O.mode_stack.pop()
-    pct(x_end + 2, SEG_Y - 5, 22)
+    pct(x_end + 2, SEG_Y - 6, 27)
 
 
 def builtin_steps():
-    icon_img(C - 66, 352, 22, "steps", ACCENT)
-    text(C - 52, 336, 72, 34, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 26, INK[1], align="START")
-    text(C + 12, 342, 40, 26, "PAS", "PAS", DATA_M, 13, INK[1], align="START", spacing="0.15")
+    icon_img(C - 78, 352, 30, "steps", ACCENT)
+    text(C - 58, 331, 92, 40, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 36, INK[1], align="START")
+    text(C + 34, 349, 44, 20, "PAS", "PAS", DATA_M, 17, INK[3], align="START", spacing="0.12")   # sur la bande claire
     steps_bar("[STEP_PERCENT] / 100", SAMPLE["pct"] / 100,
               lambda x, y, h: _pct_after(x, y, h, ("expr", "[STEP_PERCENT]"), SAMPLE["pct"]))
 
 
 def _pct_after(x, y, h, content, sample):
-    text(x, y, 28, h, content, sample, DATA, 17, INK[2], align="END")
-    text(x + 29, y + 4, 14, h - 6, "%", "%", DATA, 11, INK[2], align="START")
+    text(x, y, 30, h, content, sample, DATA, 22, INK[2], align="END")
+    text(x + 31, y + 5, 18, h - 7, "%", "%", DATA, 15, INK[2], align="START")
 
 
 def layer_slots():
     O.comment("Emplacement 1 — date (intégrée) ou source au choix")
-    text_slot(1, "slot_date", 30, 104, 118, 62, INK[0], SOFT_D, ACCENT, builtin_date, big=30)
+    text_slot(1, "slot_date", 30, 100, 128, 70, INK[0], SOFT_D, ACCENT, builtin_date, big=38)
     O.comment("Emplacement 2 — météo (intégrée) ou source au choix")
-    text_slot(2, "slot_left", 30, 168, 112, 38, INK[0], SOFT_D, ACCENT, builtin_weather, big=26)
+    text_slot(2, "slot_left", 30, 172, 128, 44, INK[0], SOFT_D, ACCENT, builtin_weather, big=34)
     O.comment("Emplacement 3 — dôme bas gauche : indice UV (intégré) ou source au choix")
-    dome_slot(3, "slot_dome_bl", DOME_BL, 30, INK[0], SOFT_D, TRACK_D, ACCENT, builtin_uv)
+    dome_slot(3, "slot_dome_bl", DOME_BL, 31, INK[0], SOFT_D, TRACK_D, ACCENT, builtin_uv)
     O.comment("Emplacement 4 — dôme haut droite : pluie (intégrée) ou source au choix")
-    dome_slot(4, "slot_dome_tr", DOME_TR, 28, INK[3], SOFT_L, TRACK_L, BAND[2], builtin_rain)
+    dome_slot(4, "slot_dome_tr", DOME_TR, 31, INK[3], SOFT_L, TRACK_L, BAND[2], builtin_rain)
     O.comment("Emplacement 5 — cardio (intégré) ou source au choix")
-    text_slot(5, "slot_right", 336, 178, 70, 76, INK[3], SOFT_L, BAND[2], builtin_hr, big=28, centered=True)
+    text_slot(5, "slot_right", 334, 176, 80, 86, INK[3], SOFT_L, BAND[2], builtin_hr, big=36, centered=True)
     O.comment("Emplacement 6 — batterie (intégrée) ou source au choix")
-    text_slot(6, "slot_right2", 336, 264, 70, 60, INK[3], SOFT_L, BAND[2], builtin_battery, big=24, centered=True)
+    text_slot(6, "slot_right2", 334, 268, 80, 66, INK[3], SOFT_L, BAND[2], builtin_battery, big=30, centered=True)
     O.comment("Emplacement 7 — pas (intégrés) ou source au choix")
 
     def steps_render(t):
-        comp_icon(C - 66, 352, 22, ACCENT)
-        text(C - 52, 336, 150, 34, CTEXT, "", DATA, 26, INK[1], align="START")
+        comp_icon(C - 78, 352, 28, ACCENT)
+        text(C - 58, 331, 170, 40, CTEXT, "", DATA, 36, INK[1], align="START")
         if t in FRAC:
             steps_bar(FRAC[t], 0.5,
                       lambda x, y, h: _pct_after(x, y, h, ("expr", f"round(100 * clamp({FRAC[t]}, 0, 1))"), ""))
         else:   # source sans progression (texte) : son titre à la place de la barre
-            text(C - 80, SEG_Y - 4, 160, 22, CTITLE, "", DATA_M, 14, INK[1], alpha=190, spacing="0.12")
-    slot(7, "slot_bottom", 112, 334, 236, 62,
+            text(C - 90, SEG_Y - 4, 180, 24, CTITLE, "", DATA_M, 17, INK[1], alpha=190, spacing="0.1")
+    slot(7, "slot_bottom", 100, 330, 256, 68,
          "GOAL_PROGRESS RANGED_VALUE SHORT_TEXT LONG_TEXT EMPTY", builtin_steps, steps_render)
 
 
 def layer_aod():
     O.comment("AOD : date, cardio, batterie, pas en texte simple sur noir")
     group_open("aod_data", show="ambient")
-    text(30, 108, 56, 44, ("expr", "[DAY_Z]"), SAMPLE["day"], DATA, 34, ACCENT, align="END")
-    text(90, 116, 56, 34, ("expr", "[MONTH_S]"), SAMPLE["mon"], DATA, 20, "#C9D1D9", align="START", upper=True)
-    text(30, 145, 116, 20, ("expr", "[DAY_OF_WEEK_F]"), SAMPLE["dow"], DATA_M, 14, "#7D8791", align="START",
-         upper=True, spacing="0.13")
+    text(30, 100, 52, 46, ("expr", "[DAY_Z]"), SAMPLE["day"], DATA, 44, ACCENT, align="END")
+    text(87, 113, 66, 34, ("expr", "[MONTH_S]"), SAMPLE["mon"], DATA, 26, "#C9D1D9", align="START", upper=True)
+    text(38, 149, 122, 21, ("expr", "[DAY_OF_WEEK_F]"), SAMPLE["dow"], DATA_M, 17, "#7D8791", align="START",
+         upper=True, spacing="0.08")
     condition("hr_aod", "[HEART_RATE] > 0",
-              lambda: _group(lambda: text(338, 196, 66, 40, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 28,
+              lambda: _group(lambda: text(334, 198, 80, 46, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 42,
                                           "#C9D1D9")),
-              lambda: _group(lambda: text(338, 196, 66, 40, "--", "--", DATA, 28, "#C9D1D9")), True)
-    text(340, 230, 60, 16, "BPM", "BPM", DATA_M, 11, "#7D8791", spacing="0.17")
-    value_unit(370, 280, 34, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 24, "#C9D1D9", 14)
-    text(C - 70, 348, 140, 30, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 22, "#C9D1D9")
+              lambda: _group(lambda: text(334, 198, 80, 46, "--", "--", DATA, 42, "#C9D1D9")), True)
+    text(334, 243, 80, 17, "BPM", "BPM", DATA_M, 14, "#7D8791", spacing="0.15")
+    value_unit(374, 290, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 34, "#C9D1D9", 18)
+    text(C - 80, 340, 160, 38, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 32, "#C9D1D9")
     group_close("ambient")
 
 

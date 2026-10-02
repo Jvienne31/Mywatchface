@@ -3,8 +3,8 @@
 Cadran numérique pour Galaxy Watch8 Classic (Wear OS 5+, WFF v2, sans code).
 Maquette validée : `concepts/prisme/` (version « 2 dômes », palette Lagune).
 
-- Heures et minutes sur deux lignes, en italique. Les chiffres changent de couleur à
-  chaque bande pour rester lisibles.
+- Heures et minutes sur deux lignes, en italique : chiffres clairs avec contour sombre et
+  ombre, lisibles sur toutes les bandes ; minutes légèrement teintées de la couleur d'accent.
 - 4 bandes diagonales. 18 palettes sont proposées dans *Personnaliser > Palette* : Lagune
   (par défaut), Volcan, Ardoise, Moka, Sauge, Lavande, Cerise, Cobalt, Olive, Dune, Néon,
   Graphite, Forêt, Pêche, Beurre, Bordeaux, Abysse, Aurore.
@@ -45,12 +45,13 @@ Ces choix tiennent compte des limites constatées sur l'émulateur avec Race.
 
 - Pas de dégradé (non rendu). Le volume vient de PNG translucides : `bands_shade`,
   `dome_glass`, `dome_shadow`.
-- Inversion des chiffres : les chiffres sont dessinés une fois par bande, dans l'encre de
-  cette bande. Chaque copie est découpée par un `Group renderMode="MASK"` en forme de bande.
+- Contour des chiffres : l'élément `Outline` n'est pas rendu sur la montre. Chaque chiffre
+  est donc dessiné 12 fois, décalé en cercle de 4,5 px dans la couleur sombre, puis par-dessus
+  dans la couleur claire. Une copie noire translucide décalée fait l'ombre.
 - Un `ColorOption` porte au plus 5 couleurs : les 4 bandes et l'accent. Les autres
   couleurs en découlent.
-  - Encre claire sur les bandes 0-1, sombre sur les bandes 2-3. Le générateur vérifie un
-    contraste d'au moins 3,5 pour chaque palette.
+  - Données : encre claire sur les bandes 0-1, sombre sur les bandes 2-3. Le générateur
+    vérifie un contraste d'au moins 3,5 pour chaque palette.
   - Textes « doux » et pistes des jauges : une couleur de la palette avec de la
     transparence.
 - Pourcentages : la valeur et le « % » sont deux textes séparés. Le format n'a pas de
