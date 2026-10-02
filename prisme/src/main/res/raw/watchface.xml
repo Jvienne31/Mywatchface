@@ -4105,6 +4105,11 @@
             <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
           </Text>
         </PartText>
+        <PartText x="27" y="39" width="160" height="22" alpha="190">
+          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+            <Font family="barlowcondensed_medium" size="14" color="[CONFIGURATION.palette.3]" letterSpacing="0.12"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font>
+          </Text>
+        </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
         <Group name="patch7_long_text" x="0" y="0" width="236" height="62">
@@ -4139,6 +4144,11 @@
         <PartText x="55" y="2" width="150" height="34">
           <Text align="START" ellipsis="TRUE" maxLines="1">
             <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+          </Text>
+        </PartText>
+        <PartText x="27" y="39" width="160" height="22" alpha="190">
+          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+            <Font family="barlowcondensed_medium" size="14" color="[CONFIGURATION.palette.3]" letterSpacing="0.12"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font>
           </Text>
         </PartText>
       </Complication>

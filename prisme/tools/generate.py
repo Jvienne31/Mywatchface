@@ -544,6 +544,8 @@ def layer_slots():
         if t in FRAC:
             steps_bar(FRAC[t], 0.5,
                       lambda x, y, h: _pct_after(x, y, h, ("expr", f"round(100 * clamp({FRAC[t]}, 0, 1))"), ""))
+        else:   # source sans progression (texte) : son titre à la place de la barre
+            text(C - 80, SEG_Y - 4, 160, 22, CTITLE, "", DATA_M, 14, INK[1], alpha=190, spacing="0.12")
     slot(7, "slot_bottom", 112, 334, 236, 62,
          "GOAL_PROGRESS RANGED_VALUE SHORT_TEXT LONG_TEXT EMPTY", builtin_steps, steps_render)
 
