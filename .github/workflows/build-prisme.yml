@@ -1,0 +1,36 @@
+# Construit l'APK de debug du cadran Prisme et le publie comme artefact téléchargeable.
+# Déclenché à chaque push qui touche prisme/, ou à la main depuis l'onglet Actions.
+name: APK Prisme
+
+on:
+  push:
+    paths:
+      - "prisme/**"
+      - "build.gradle"
+      - "settings.gradle"
+      - ".github/workflows/build-prisme.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Pas d'action setup-android : le SDK est déjà sur ubuntu-latest ($ANDROID_HOME).
+
+      - name: Construire l'APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :prisme:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prisme-debug-apk
+          path: prisme/build/outputs/apk/debug/prisme-debug.apk
+          if-no-files-found: error

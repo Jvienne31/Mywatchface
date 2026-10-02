@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prisme</string>
+
+    <string name="cfg_palette">Palette</string>
+
+    <string name="pal_lagune">Lagune</string>
+    <string name="pal_volcan">Volcan</string>
+    <string name="pal_ardoise">Ardoise</string>
+    <string name="pal_moka">Moka</string>
+    <string name="pal_sauge">Sauge</string>
+    <string name="pal_lavande">Lavande</string>
+    <string name="pal_cerise">Cerise</string>
+    <string name="pal_cobalt">Cobalt</string>
+    <string name="pal_olive">Olive</string>
+    <string name="pal_dune">Dune</string>
+    <string name="pal_neon">Néon</string>
+    <string name="pal_graphite">Graphite</string>
+    <string name="pal_foret">Forêt</string>
+    <string name="pal_peche">Pêche</string>
+    <string name="pal_beurre">Beurre</string>
+    <string name="pal_bordeaux">Bordeaux</string>
+    <string name="pal_abysse">Abysse</string>
+    <string name="pal_aurore">Aurore</string>
+
+    <string name="slot_date">Date (haut gauche)</string>
+    <string name="slot_left">Météo (gauche)</string>
+    <string name="slot_dome_bl">Dôme bas gauche (UV)</string>
+    <string name="slot_dome_tr">Dôme haut droite (pluie)</string>
+    <string name="slot_right">Cardio (droite)</string>
+    <string name="slot_right2">Batterie (droite)</string>
+    <string name="slot_bottom">Pas (bas)</string>
+</resources>

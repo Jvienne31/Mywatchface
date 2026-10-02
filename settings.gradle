@@ -8,5 +8,6 @@ dependencyResolutionManagement {
 rootProject.name = "Mywatchface"
 include ":app"
 include ":race"
+include ":prisme"
 include ":energyscore-watch"
 include ":energyscore-phone"
