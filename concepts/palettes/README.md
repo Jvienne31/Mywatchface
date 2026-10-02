@@ -21,7 +21,7 @@ incliné), les charnières, le tableau des départs. Sur la montre, la bascule d
 changement de minute est animable (`Transform` sur `scaleY`).
 
 Coloris : gare (noir / jaune), cuivre, arctique (palettes blanches / bleu). AOD : palettes en
-filet, chiffres gris, LED des 5 minutes seulement ; ≈ 10 % de pixels allumés.
+filet, chiffres gris, LED des 5 minutes seulement ; ≈ 8 % de pixels allumés.
 
 Polices : Barlow Condensed (OFL, `../strate/fonts/`).
 
