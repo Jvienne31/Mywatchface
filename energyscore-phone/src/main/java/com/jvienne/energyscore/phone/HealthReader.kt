@@ -71,7 +71,7 @@ class HealthReader(context: Context) {
             }
         }
 
-        suspend fun <T> aggregate(request: AggregateRequest<T>): T? =
+        suspend fun <T : Any> aggregate(request: AggregateRequest<T>): T? =
             store.aggregateData(request).dataList.firstOrNull()?.value
 
         /** Dernières mesures sur [days] jours, la plus récente d'abord. */
