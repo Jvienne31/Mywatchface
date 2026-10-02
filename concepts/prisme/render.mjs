@@ -37,7 +37,7 @@ const polar = (r, a, cx = C, cy = C) => {
 const n = (v) => Math.round(v * 100) / 100;
 const fontUrl = (f) => pathToFileURL(join(here, '..', 'strate', 'fonts', f)).href;
 
-function face(c, aod = false, gauges = false, dome = false) {
+function face(c, aod = false, gauges = false, dome = false, allDomes = false) {
   const p = [], defs = [];
   const rot = `rotate(${ANGLE} ${C} ${C})`;
   // Bandes (et leurs masques pour les chiffres)
@@ -66,7 +66,7 @@ function face(c, aod = false, gauges = false, dome = false) {
     return s;
   };
   p.push(digits(D.hh, C - 30, 192, 172));
-  p.push(digits(D.mm, C + 34, 334, 172));
+  p.push(digits(D.mm, C + (allDomes ? 18 : 34), 334, 172));   // décalées si 4 dômes
 
   // Secondes : fin anneau au bord
   {
@@ -137,12 +137,21 @@ function face(c, aod = false, gauges = false, dome = false) {
   // Données — droite (bande claire) : pluie (jauge), cardio, batterie
   if (gauges) p.push(lens(354, 124, 46, gauge(354, 122, 28, D.rain / 100, `${D.rain}<tspan font-size="11">%</tspan>`, 'PLUIE',
     Dk, soft, aod ? '#1a1d20' : '#c3d6d8', aod ? soft : c.bands[2])));
-  p.push(`<path d="M 370 196 C 360 189 363 180 370 185 C 377 180 380 189 370 196 Z" fill="${aod ? soft : c.bands[2]}"/>`);
-  p.push(t(370, 228, 32, Dk, D.hr));
-  p.push(t(370, 244, 12, soft, 'BPM', 'letter-spacing="2"'));
-  p.push(`<rect x="357" y="270" width="22" height="12" rx="2.5" fill="none" stroke="${Dk}" stroke-width="1.8"/>
-    <rect x="379.5" y="273.5" width="2.5" height="5" rx="1" fill="${Dk}"/><rect x="359.5" y="272.5" width="${n(17 * D.batt / 100)}" height="7" rx="1" fill="${aod ? soft : c.bands[2]}"/>`);
-  p.push(t(370, 310, 26, Dk, `${D.batt}<tspan font-size="15">%</tspan>`));
+  if (allDomes) {
+    // cardio et batterie en jauges sous dôme, comme pluie et calories
+    const hrCol = aod ? soft : c.bands[2];
+    p.push(lens(374, 222, 40, gauge(374, 220, 24, (D.hr - 40) / 160,
+      D.hr, 'BPM', Dk, soft, aod ? '#1a1d20' : '#c3d6d8', hrCol)));
+    p.push(lens(366, 312, 40, gauge(366, 310, 24, D.batt / 100,
+      `${D.batt}<tspan font-size="11">%</tspan>`, 'BATT', Dk, soft, aod ? '#1a1d20' : '#c3d6d8', hrCol)));
+  } else {
+    p.push(`<path d="M 370 196 C 360 189 363 180 370 185 C 377 180 380 189 370 196 Z" fill="${aod ? soft : c.bands[2]}"/>`);
+    p.push(t(370, 228, 32, Dk, D.hr));
+    p.push(t(370, 244, 12, soft, 'BPM', 'letter-spacing="2"'));
+    p.push(`<rect x="357" y="270" width="22" height="12" rx="2.5" fill="none" stroke="${Dk}" stroke-width="1.8"/>
+      <rect x="379.5" y="273.5" width="2.5" height="5" rx="1" fill="${Dk}"/><rect x="359.5" y="272.5" width="${n(17 * D.batt / 100)}" height="7" rx="1" fill="${aod ? soft : c.bands[2]}"/>`);
+    p.push(t(370, 310, 26, Dk, `${D.batt}<tspan font-size="15">%</tspan>`));
+  }
 
   // Bas : pas (barre penchée comme les bandes) + calories
   if (!aod) {
@@ -187,6 +196,8 @@ await render(face(PALETTES.lagune, false, true), join(here, 'prisme-lagune-jauge
 await render(face(PALETTES.lagune, true, true), join(here, 'prisme-lagune-jauges-aod.png'));
 // Essai « dôme » : loupes de verre bombé sur les deux jauges
 await render(face(PALETTES.lagune, false, true, true), join(here, 'prisme-lagune-dome.png'));
+// Essai « 4 dômes » : cardio et batterie aussi en jauges sous dôme
+await render(face(PALETTES.lagune, false, true, true, true), join(here, 'prisme-lagune-4domes.png'));
 await browser.close();
 
 execFileSync('convert', [...outs, join(here, 'prisme-aod.png'), '-background', '#1E1F22',

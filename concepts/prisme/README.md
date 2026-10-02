@@ -37,6 +37,15 @@ entre bandes se décale comme à travers une lentille), bord assombri (réfracti
 haut à gauche, croissant de lumière en bas à droite, ombre portée. En WFF : `Group` mis à
 l'échelle (`scaleX`/`scaleY`) sous un masque rond, verre et reflets en PNG translucide.
 
+### Essai « 4 dômes »
+
+![Essai 4 dômes](prisme-lagune-4domes.png)
+
+Cardio et batterie aussi en jauges sous dôme (minutes décalées de 16 px vers la gauche).
+Avis : la colonne de trois bulles à droite charge l'équilibre et concurrence les minutes ;
+la version à **deux dômes en diagonale** (pluie en haut à droite, calories en bas à gauche),
+qui fait écho aux bandes, reste la plus lisible.
+
 Différences avec les cadrans « à bandes » existants : bandes diagonales (pas verticales),
 heure sur deux lignes (pas en escalier sur une ligne), chiffres penchés, données disposées
 dans les bandes extrêmes, palettes propres.
