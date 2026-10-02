@@ -62,7 +62,7 @@ const T = (x, y, size, fill, txt, extra = '') =>
 // Textures du fond. En WFF : une image PNG par texture, dans une ListConfiguration « texture »
 // (une seule chargée à la fois), comme le motif de Race.
 export const TEXTURES = {
-  soleille: 'Soleillé', carbone: 'Carbone', bambou: 'Bambou fumé',
+  soleille: 'Soleillé', carbone: 'Carbone', bambou: 'Fibre de bambou',
   clous: 'Clous de Paris', brosse: 'Acier brossé',
 };
 
@@ -93,27 +93,39 @@ function dialTexture(c, tex, defs) {
     return full('url(#carbon)') + full('url(#cfSheen)');
   }
   if (tex === 'bambou') {
-    // tiges rondes (ombrées sur les bords), fibre fine, noeuds en relief décalés ; fumé pour
-    // garder le texte clair lisible
-    defs.push(`<filter id="grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.35 0.004" numOctaves="2" seed="7"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.25  0 0 0 0 0.16  0 0 0 0 0.06  0 0 0 -1.2 0.9"/></filter>`);
-    defs.push(`<linearGradient id="culm" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5a3d1c"/><stop offset="0.18" stop-color="#a57c45"/><stop offset="0.42" stop-color="#d4b07a"/>
-      <stop offset="0.62" stop-color="#b68b52"/><stop offset="0.9" stop-color="#6e4a22"/><stop offset="1" stop-color="#3a2510"/></linearGradient>`);
-    defs.push(`<linearGradient id="node" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2e1d0b" stop-opacity="0.85"/><stop offset="0.45" stop-color="#2e1d0b" stop-opacity="0.35"/>
-      <stop offset="0.55" stop-color="#f6dfb0" stop-opacity="0.55"/><stop offset="1" stop-color="#f6dfb0" stop-opacity="0"/></linearGradient>`);
-    let s = full('#3a2510');
-    const sw = 36;
-    for (let k = 0, x = -6; x < W; k++, x += sw) {
-      s += `<rect x="${x + 1}" y="0" width="${sw - 2}" height="${W}" fill="url(#culm)"/>`;
-      for (let y = ((k * 53) % 110) - 40; y < W; y += 128) {
-        s += `<rect x="${x + 1}" y="${y}" width="${sw - 2}" height="8" fill="url(#node)"/>`;
-        s += `<ellipse cx="${x + sw / 2}" cy="${y + 2}" rx="${sw / 2 - 1}" ry="1.4" fill="#24170a" opacity="0.6"/>`;
-      }
+    // fibre de bambou tissée : lanières plates entrecroisées (toile), chacune striée de
+    // fibres fines dans son sens, ombre aux croisements ; teinte naturelle fumée
+    const L = 15;                                   // largeur d'une lanière
+    defs.push(`<filter id="fibH" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.9" numOctaves="2" seed="11"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.98  0 0 0 0 0.88  0 0 0 0 0.68  0 0 0 1.5 -0.55"/></filter>`);
+    defs.push(`<filter id="fibV" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9 0.012" numOctaves="2" seed="5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.98  0 0 0 0 0.88  0 0 0 0 0.68  0 0 0 1.5 -0.55"/></filter>`);
+    defs.push(`<linearGradient id="ribH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0.3" stop-color="#000" stop-opacity="0"/><stop offset="0.7" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.5"/></linearGradient>`);
+    defs.push(`<linearGradient id="ribV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0.3" stop-color="#000" stop-opacity="0"/><stop offset="0.7" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.5"/></linearGradient>`);
+    // masques : cases où la lanière horizontale passe dessus (damier)
+    let over = '';
+    for (let i = 0; i * L < W; i++) for (let j = 0; j * L < W; j++)
+      if ((i + j) % 2 === 0) over += `<rect x="${i * L}" y="${j * L}" width="${L}" height="${L}"/>`;
+    defs.push(`<clipPath id="overH">${over}</clipPath>`);
+    let ribsH = '', ribsV = '';
+    for (let k = 0; k * L < W; k++) {
+      ribsH += `<rect x="0" y="${k * L + 0.6}" width="${W}" height="${L - 1.2}" fill="url(#ribH)"/>`;
+      ribsV += `<rect x="${k * L + 0.6}" y="0" width="${L - 1.2}" height="${W}" fill="url(#ribV)"/>`;
     }
-    return s + `<rect width="${W}" height="${W}" filter="url(#grain)" opacity="0.7"/>` + full('#140c04', 'opacity="0.42"');
+    const base = '#8C6A3F';
+    return full('#1d140a')
+      // couche verticale (dessous)
+      + `<g><rect width="${W}" height="${W}" fill="${base}"/><rect width="${W}" height="${W}" filter="url(#fibV)" opacity="0.55"/>${ribsV}</g>`
+      // couche horizontale, visible une case sur deux
+      + `<g clip-path="url(#overH)"><rect width="${W}" height="${W}" fill="#94713F"/>
+         <rect width="${W}" height="${W}" filter="url(#fibH)" opacity="0.55"/>${ribsH}</g>`
+      + full('#120b04', 'opacity="0.5"');
   }
   if (tex === 'clous') {
     // clous de Paris : petites pyramides, quatre facettes éclairées différemment

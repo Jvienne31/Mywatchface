@@ -26,7 +26,7 @@ libellés ≥ 13 px, police condensée **Barlow Condensed SemiBold**.
 
 ![Textures](planche-textures.png)
 
-Réglage « Texture » : **soleillé**, **carbone** (sergé), **bambou fumé**, **clous de Paris**,
+Réglage « Texture » : **soleillé**, **carbone** (sergé), **fibre de bambou** (lanières tissées en toile), **clous de Paris**,
 **acier brossé**. En WFF : une image PNG 438 × 438 par texture dans une `ListConfiguration`
 (une seule chargée en mémoire), vignette commune par-dessus ; les textes restent sur fond
 sombre pour rester lisibles quelle que soit la texture.
