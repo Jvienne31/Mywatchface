@@ -167,8 +167,10 @@ function face(c, aod = false, gauges = false, dome = false, allDomes = false, sl
   }
   const t = (x, y, size, fill, txt, extra = '') =>
     `<text x="${n(x)}" y="${n(y)}" font-family="Barlow" font-weight="600" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${txt}</text>`;
-  p.push(t(66, gauges ? 118 : 132, 28, c.accent, D.dow, 'letter-spacing="1.5"'));
-  p.push(t(66, gauges ? 140 : 154, 17, L, D.date, 'letter-spacing="1"'));
+  // Date en gros (jour du mois en accent + mois), jour de la semaine en petit dessous
+  const [dd, mon] = D.date.split(' ');
+  p.push(t(66, gauges ? 124 : 138, 36, c.accent, `${dd}<tspan font-size="22" fill="${L}" dx="4">${mon}</tspan>`));
+  p.push(t(66, gauges ? 145 : 159, 15, soft, D.dow === 'VEN' ? 'VENDREDI' : D.dow, 'letter-spacing="2"'));
   if (gauges) {
     // météo compacte : soleil + température sur une ligne
     let sun = `<circle cx="48" cy="181" r="6" fill="${aod ? soft : c.accent}"/>`;

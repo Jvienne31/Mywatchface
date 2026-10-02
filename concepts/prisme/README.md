@@ -76,7 +76,7 @@ d'inversion des chiffres fonctionne avec toutes. En WFF : une `ColorConfiguratio
 
 | N° | Zone | Par défaut | Exemples de choix |
 |---|---|---|---|
-| 1 | Haut gauche | Jour + date | Fuseau horaire, prochain événement |
+| 1 | Haut gauche | Date en gros (jour du mois en accent + mois), jour de la semaine en petit dessous | Fuseau horaire, prochain événement |
 | 2 | Gauche | Météo (icône + température) | Lever / coucher du soleil, notifications |
 | 3 | Dôme bas gauche | Calories / objectif | Étages, minutes actives, eau, stress |
 | 4 | Dôme haut droite | Probabilité de pluie | Indice UV, SpO2, batterie du téléphone |
