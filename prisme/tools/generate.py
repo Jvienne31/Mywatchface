@@ -249,32 +249,51 @@ CTEXT, CTITLE = ("expr", "[COMPLICATION.TEXT]"), ("expr", "[COMPLICATION.TITLE]"
 
 
 def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None):
-    """ComplicationSlot masqué en AOD. builtin() : contenu du type EMPTY (seul rendu dans
-    l'aperçu) ; render(t) : contenu pour une source de type t (XML seulement)."""
+    """Donnée intégrée dessinée sur le cadran + ComplicationSlot par-dessus (masqués en AOD).
+
+    Le moteur de la montre ne dessine pas la branche EMPTY d'un emplacement sans source
+    (constaté sur émulateur) : la donnée intégrée est donc hors de l'emplacement. Quand une
+    source est choisie, l'emplacement redessine d'abord le fond (bandes découpées à sa forme)
+    pour cacher la donnée intégrée, puis la donnée de la source. render(t) : XML seulement."""
+    px, py = x + w / 2, y + h / 2
+    group_open(f"data{sid}", show="normal", scale=scale, pivot=(px, py) if scale else None)
+    builtin()
+    group_close("normal")
+
     sc = f' scaleX="{scale}" scaleY="{scale}"' if scale else ""
     O.open(f'<ComplicationSlot slotId="{sid}" x="{x}" y="{y}" width="{w}" height="{h}"{sc} '
            f'supportedTypes="{types}" displayName="{name}" isCustomizable="TRUE">')
     O.x(f'<{"BoundingOval" if oval else "BoundingBox"} x="0" y="0" width="{w}" height="{h}" />')
     O.origin.append((x, y))
-    O.mode_stack.append(("normal", None))
-    if scale:
-        px, py = x + w / 2, y + h / 2
-        O.s(f'<g transform="translate({f(px)} {f(py)}) scale({scale}) translate({f(-px)} {f(-py)})">')
+    O.mode_stack.append(("none", None))
     for t in types.split():
-        O.open(f'<Complication type="{t}">')
         if t == "EMPTY":
-            builtin()
-        else:
-            O.mode_stack.append(("none", None))
-            render(t)
-            O.mode_stack.pop()
+            O.x('<Complication type="EMPTY" />')
+            continue
+        O.open(f'<Complication type="{t}">')
+        patch(f"patch{sid}_{t.lower()}", x, y, w, h, oval)
+        render(t)
         O.close("</Complication>")
-    if scale:
-        O.s("</g>")
     O.mode_stack.pop()
     O.origin.pop()
     O.x('<Variant mode="AMBIENT" target="alpha" value="0" />')
     O.close("</ComplicationSlot>")
+
+
+def patch(name, x, y, w, h, oval):
+    """Fond du cadran (bandes + ombrage) découpé à la forme de l'emplacement : cache la
+    donnée intégrée dessous. Dans un emplacement agrandi, le fond est agrandi aussi (loupe)."""
+    group_open(name, x, y, w, h)
+    draw_open(x=x, y=y, w=w, h=h, render_mode="MASK")
+    if oval:
+        circle(x + w / 2, y + h / 2, w / 2, fill="#FFFFFF")
+    else:
+        rect(x, y, w, h, "#FFFFFF")
+    draw_close()
+    bands("both", f"{name}_bands")
+    if not oval:
+        image(0, 0, W, W, "bands_shade")
+    group_close()
 
 
 def box_draw(x, y, w, h, alpha=None):
@@ -536,7 +555,10 @@ def layer_aod():
     text(90, 116, 56, 34, ("expr", "[MONTH_S]"), SAMPLE["mon"], DATA, 20, "#C9D1D9", align="START", upper=True)
     text(30, 145, 116, 20, ("expr", "[DAY_OF_WEEK_F]"), SAMPLE["dow"], DATA_M, 14, "#7D8791", align="START",
          upper=True, spacing="0.13")
-    text(338, 196, 66, 40, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 28, "#C9D1D9")
+    condition("hr_aod", "[HEART_RATE] > 0",
+              lambda: _group(lambda: text(338, 196, 66, 40, ("expr", "[HEART_RATE]"), SAMPLE["hr"], DATA, 28,
+                                          "#C9D1D9")),
+              lambda: _group(lambda: text(338, 196, 66, 40, "--", "--", DATA, 28, "#C9D1D9")), True)
     text(340, 230, 60, 16, "BPM", "BPM", DATA_M, 11, "#7D8791", spacing="0.17")
     value_unit(370, 280, 34, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 24, "#C9D1D9", 14)
     text(C - 70, 348, 140, 30, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 22, "#C9D1D9")

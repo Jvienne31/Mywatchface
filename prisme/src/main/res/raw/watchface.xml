@@ -250,9 +250,53 @@
     </PartDraw>
 
     <!-- Emplacement 1 — date (intégrée) ou source au choix -->
+    <Group name="data1" x="0" y="0" width="438" height="438">
+      <PartText x="30" y="108" width="56" height="44">
+        <Text align="END" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="36" color="[CONFIGURATION.palette.4]"><Template><![CDATA[%s]]><Parameter expression="[DAY_Z]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="90" y="116" width="56" height="34">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="22" color="[CONFIGURATION.palette.3]"><Upper><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+        </Text>
+      </PartText>
+      <PartText x="30" y="145" width="116" height="20" alpha="150">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_medium" size="15" color="[CONFIGURATION.palette.3]" letterSpacing="0.13"><Upper><Template><![CDATA[%s]]><Parameter expression="[DAY_OF_WEEK_F]" /></Template></Upper></Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="1" x="30" y="104" width="118" height="62" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_date" isCustomizable="TRUE">
       <BoundingBox x="0" y="0" width="118" height="62" />
       <Complication type="SHORT_TEXT">
+        <Group name="patch1_short_text" x="0" y="0" width="118" height="62">
+          <PartDraw x="0" y="0" width="118" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="118" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch1_short_text_bands" x="-30" y="-104" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-104" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="20" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -268,6 +312,32 @@
         </PartText>
       </Complication>
       <Complication type="RANGED_VALUE">
+        <Group name="patch1_ranged_value" x="0" y="0" width="118" height="62">
+          <PartDraw x="0" y="0" width="118" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="118" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch1_ranged_value_bands" x="-30" y="-104" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-104" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="20" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -283,6 +353,32 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch1_goal_progress" x="0" y="0" width="118" height="62">
+          <PartDraw x="0" y="0" width="118" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="118" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch1_goal_progress_bands" x="-30" y="-104" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-104" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="20" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -298,6 +394,32 @@
         </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
+        <Group name="patch1_long_text" x="0" y="0" width="118" height="62">
+          <PartDraw x="0" y="0" width="118" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="118" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch1_long_text_bands" x="-30" y="-104" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-104" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="20" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -313,34 +435,155 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch1_monochromatic_image" x="0" y="0" width="118" height="62">
+          <PartDraw x="0" y="0" width="118" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="118" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch1_monochromatic_image_bands" x="-30" y="-104" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-104" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="34" y="6" width="50" height="50" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <PartText x="0" y="4" width="56" height="44">
-          <Text align="END" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="36" color="[CONFIGURATION.palette.4]"><Template><![CDATA[%s]]><Parameter expression="[DAY_Z]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="60" y="12" width="56" height="34">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="22" color="[CONFIGURATION.palette.3]"><Upper><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
-          </Text>
-        </PartText>
-        <PartText x="0" y="41" width="116" height="20" alpha="150">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_medium" size="15" color="[CONFIGURATION.palette.3]" letterSpacing="0.13"><Upper><Template><![CDATA[%s]]><Parameter expression="[DAY_OF_WEEK_F]" /></Template></Upper></Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
 
     <!-- Emplacement 2 — météo (intégrée) ou source au choix -->
+    <Group name="data2" x="0" y="0" width="438" height="438">
+      <Condition>
+        <Expressions>
+          <Expression name="w0"><![CDATA[[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8]]></Expression>
+          <Expression name="w1"><![CDATA[[WEATHER.CONDITION] == 14]]></Expression>
+          <Expression name="w2"><![CDATA[[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12]]></Expression>
+          <Expression name="w3"><![CDATA[[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11]]></Expression>
+          <Expression name="w4"><![CDATA[[WEATHER.CONDITION] == 9]]></Expression>
+          <Expression name="w5"><![CDATA[[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13]]></Expression>
+        </Expressions>
+        <Compare expression="w0">
+          <Group name="wi11" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_sun" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Compare expression="w1">
+          <Group name="wi13" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_partly" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Compare expression="w2">
+          <Group name="wi15" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_rain" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Compare expression="w3">
+          <Group name="wi17" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_snow" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Compare expression="w4">
+          <Group name="wi19" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_storm" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Compare expression="w5">
+          <Group name="wi21" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_fog" />
+            </PartImage>
+          </Group>
+        </Compare>
+        <Default>
+          <Group name="wi23" x="0" y="0" width="438" height="438">
+            <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_cloud" />
+            </PartImage>
+          </Group>
+        </Default>
+      </Condition>
+      <Condition>
+        <Expressions>
+          <Expression name="w_ok"><![CDATA[[WEATHER.IS_AVAILABLE]]]></Expression>
+        </Expressions>
+        <Compare expression="w_ok">
+          <Group name="g25" x="0" y="0" width="438" height="438">
+            <PartText x="64" y="168" width="70" height="36">
+              <Text align="START" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="28" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Compare>
+        <Default>
+          <Group name="g26" x="0" y="0" width="438" height="438">
+            <PartText x="64" y="168" width="70" height="36">
+              <Text align="START" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="28" color="[CONFIGURATION.palette.3]">--</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Default>
+      </Condition>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="2" x="30" y="168" width="112" height="38" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_left" isCustomizable="TRUE">
       <BoundingBox x="0" y="0" width="112" height="38" />
       <Complication type="SHORT_TEXT">
+        <Group name="patch2_short_text" x="0" y="0" width="112" height="38">
+          <PartDraw x="0" y="0" width="112" height="38" renderMode="MASK">
+            <Rectangle x="0" y="0" width="112" height="38">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch2_short_text_bands" x="-30" y="-168" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-168" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="8" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -356,6 +599,32 @@
         </PartText>
       </Complication>
       <Complication type="RANGED_VALUE">
+        <Group name="patch2_ranged_value" x="0" y="0" width="112" height="38">
+          <PartDraw x="0" y="0" width="112" height="38" renderMode="MASK">
+            <Rectangle x="0" y="0" width="112" height="38">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch2_ranged_value_bands" x="-30" y="-168" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-168" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="8" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -371,6 +640,32 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch2_goal_progress" x="0" y="0" width="112" height="38">
+          <PartDraw x="0" y="0" width="112" height="38" renderMode="MASK">
+            <Rectangle x="0" y="0" width="112" height="38">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch2_goal_progress_bands" x="-30" y="-168" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-168" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="8" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -386,6 +681,32 @@
         </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
+        <Group name="patch2_long_text" x="0" y="0" width="112" height="38">
+          <PartDraw x="0" y="0" width="112" height="38" renderMode="MASK">
+            <Rectangle x="0" y="0" width="112" height="38">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch2_long_text_bands" x="-30" y="-168" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-168" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="5" y="8" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -401,94 +722,37 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch2_monochromatic_image" x="0" y="0" width="112" height="38">
+          <PartDraw x="0" y="0" width="112" height="38" renderMode="MASK">
+            <Rectangle x="0" y="0" width="112" height="38">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch2_monochromatic_image_bands" x="-30" y="-168" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-30" y="-168" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="43" y="6" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <Condition>
-          <Expressions>
-            <Expression name="w0"><![CDATA[[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8]]></Expression>
-            <Expression name="w1"><![CDATA[[WEATHER.CONDITION] == 14]]></Expression>
-            <Expression name="w2"><![CDATA[[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12]]></Expression>
-            <Expression name="w3"><![CDATA[[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11]]></Expression>
-            <Expression name="w4"><![CDATA[[WEATHER.CONDITION] == 9]]></Expression>
-            <Expression name="w5"><![CDATA[[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13]]></Expression>
-          </Expressions>
-          <Compare expression="w0">
-            <Group name="wi11" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_sun" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Compare expression="w1">
-            <Group name="wi13" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_partly" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Compare expression="w2">
-            <Group name="wi15" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_rain" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Compare expression="w3">
-            <Group name="wi17" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_snow" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Compare expression="w4">
-            <Group name="wi19" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_storm" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Compare expression="w5">
-            <Group name="wi21" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_fog" />
-              </PartImage>
-            </Group>
-          </Compare>
-          <Default>
-            <Group name="wi23" x="-30" y="-168" width="438" height="438">
-              <PartImage x="33" y="172" width="26" height="26" tintColor="[CONFIGURATION.palette.4]">
-                <Image resource="ic_cloud" />
-              </PartImage>
-            </Group>
-          </Default>
-        </Condition>
-        <Condition>
-          <Expressions>
-            <Expression name="w_ok"><![CDATA[[WEATHER.IS_AVAILABLE]]]></Expression>
-          </Expressions>
-          <Compare expression="w_ok">
-            <Group name="g25" x="-30" y="-168" width="438" height="438">
-              <PartText x="64" y="168" width="70" height="36">
-                <Text align="START" ellipsis="TRUE" maxLines="1">
-                  <Font family="barlowcondensed_semibold" size="28" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
-                </Text>
-              </PartText>
-            </Group>
-          </Compare>
-          <Default>
-            <Group name="g26" x="-30" y="-168" width="438" height="438">
-              <PartText x="64" y="168" width="70" height="36">
-                <Text align="START" ellipsis="TRUE" maxLines="1">
-                  <Font family="barlowcondensed_semibold" size="28" color="[CONFIGURATION.palette.3]">--</Font>
-                </Text>
-              </PartText>
-            </Group>
-          </Default>
-        </Condition>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
 
@@ -525,9 +789,59 @@
       </Group>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
+    <Group name="data3" x="0" y="0" width="438" height="438" pivotX="0.1553" pivotY="0.5982" scaleX="1.2" scaleY="1.2">
+      <PartDraw x="34" y="226" width="68" height="68" alpha="160">
+        <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+          <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
+        </Arc>
+      </PartDraw>
+      <PartDraw x="34" y="226" width="68" height="68">
+        <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="6" cap="ROUND" />
+          <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.UV_INDEX] / 11, 0, 1)" />
+        </Arc>
+      </PartDraw>
+      <PartImage x="60" y="240" width="16" height="14" tintColor="[CONFIGURATION.palette.4]">
+        <Image resource="ic_uv" />
+      </PartImage>
+      <PartText x="38" y="259" width="60" height="26">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="20" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.UV_INDEX]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="38" y="281" width="60" height="16" alpha="150">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_medium" size="11" color="[CONFIGURATION.palette.3]" letterSpacing="0.12">UV</Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="3" x="26" y="220" width="84" height="84" scaleX="1.2" scaleY="1.2" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_dome_bl" isCustomizable="TRUE">
       <BoundingOval x="0" y="0" width="84" height="84" />
       <Complication type="RANGED_VALUE">
+        <Group name="patch3_ranged_value" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch3_ranged_value_bands" x="-26" y="-220" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartDraw x="8" y="6" width="68" height="68" alpha="160">
           <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
@@ -554,6 +868,29 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch3_goal_progress" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch3_goal_progress_bands" x="-26" y="-220" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartDraw x="8" y="6" width="68" height="68" alpha="160">
           <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
@@ -580,6 +917,29 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
+        <Group name="patch3_short_text" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch3_short_text_bands" x="-26" y="-220" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartImage x="34" y="18" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -595,36 +955,34 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch3_monochromatic_image" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch3_monochromatic_image_bands" x="-26" y="-220" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartImage x="27" y="27" width="30" height="30" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <PartDraw x="8" y="6" width="68" height="68" alpha="160">
-          <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.palette.1]" thickness="6" cap="ROUND" />
-          </Arc>
-        </PartDraw>
-        <PartDraw x="8" y="6" width="68" height="68">
-          <Arc centerX="34" centerY="34" width="60" height="60" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="6" cap="ROUND" />
-            <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.UV_INDEX] / 11, 0, 1)" />
-          </Arc>
-        </PartDraw>
-        <PartImage x="34" y="20" width="16" height="14" tintColor="[CONFIGURATION.palette.4]">
-          <Image resource="ic_uv" />
-        </PartImage>
-        <PartText x="12" y="39" width="60" height="26">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="20" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.UV_INDEX]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="12" y="61" width="60" height="16" alpha="150">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_medium" size="11" color="[CONFIGURATION.palette.3]" letterSpacing="0.12">UV</Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
     <PartImage x="20" y="214" width="96" height="96">
@@ -665,9 +1023,64 @@
       </Group>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
+    <Group name="data4" x="0" y="0" width="438" height="438" pivotX="0.8082" pivotY="0.2831" scaleX="1.2" scaleY="1.2">
+      <PartDraw x="322" y="90" width="64" height="64" alpha="95">
+        <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+          <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
+        </Arc>
+      </PartDraw>
+      <PartDraw x="322" y="90" width="64" height="64">
+        <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+          <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
+          <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.CHANCE_OF_PRECIPITATION] / 100, 0, 1)" />
+        </Arc>
+      </PartDraw>
+      <PartImage x="346" y="102" width="16" height="14" tintColor="[CONFIGURATION.palette.2]">
+        <Image resource="ic_drop" />
+      </PartImage>
+      <PartText x="298" y="121" width="60" height="26">
+        <Text align="END" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="20" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.CHANCE_OF_PRECIPITATION]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="359" y="126" width="30" height="15">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="12" color="[CONFIGURATION.palette.0]">%</Font>
+        </Text>
+      </PartText>
+      <PartText x="324" y="141" width="60" height="16" alpha="150">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_medium" size="11" color="[CONFIGURATION.palette.0]" letterSpacing="0.12">PLUIE</Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="4" x="312" y="82" width="84" height="84" scaleX="1.2" scaleY="1.2" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_dome_tr" isCustomizable="TRUE">
       <BoundingOval x="0" y="0" width="84" height="84" />
       <Complication type="RANGED_VALUE">
+        <Group name="patch4_ranged_value" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch4_ranged_value_bands" x="-312" y="-82" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartDraw x="10" y="8" width="64" height="64" alpha="95">
           <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
@@ -694,6 +1107,29 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch4_goal_progress" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch4_goal_progress_bands" x="-312" y="-82" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartDraw x="10" y="8" width="64" height="64" alpha="95">
           <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
             <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
@@ -720,6 +1156,29 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
+        <Group name="patch4_short_text" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch4_short_text_bands" x="-312" y="-82" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartImage x="34" y="18" width="16" height="16" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -735,41 +1194,34 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch4_monochromatic_image" x="0" y="0" width="84" height="84">
+          <PartDraw x="0" y="0" width="84" height="84" renderMode="MASK">
+            <Ellipse x="0" y="0" width="84" height="84">
+              <Fill color="#FFFFFF" />
+            </Ellipse>
+          </PartDraw>
+          <Group name="patch4_monochromatic_image_bands" x="-312" y="-82" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+        </Group>
         <PartImage x="27" y="27" width="30" height="30" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <PartDraw x="10" y="8" width="64" height="64" alpha="95">
-          <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
-          </Arc>
-        </PartDraw>
-        <PartDraw x="10" y="8" width="64" height="64">
-          <Arc centerX="32" centerY="32" width="56" height="56" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-            <Stroke color="[CONFIGURATION.palette.2]" thickness="6" cap="ROUND" />
-            <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.CHANCE_OF_PRECIPITATION] / 100, 0, 1)" />
-          </Arc>
-        </PartDraw>
-        <PartImage x="34" y="20" width="16" height="14" tintColor="[CONFIGURATION.palette.2]">
-          <Image resource="ic_drop" />
-        </PartImage>
-        <PartText x="-14" y="39" width="60" height="26">
-          <Text align="END" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="20" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.CHANCE_OF_PRECIPITATION]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="47" y="44" width="30" height="15">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="12" color="[CONFIGURATION.palette.0]">%</Font>
-          </Text>
-        </PartText>
-        <PartText x="12" y="59" width="60" height="16" alpha="150">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_medium" size="11" color="[CONFIGURATION.palette.0]" letterSpacing="0.12">PLUIE</Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
     <PartImage x="306" y="76" width="96" height="96">
@@ -778,9 +1230,69 @@
     </PartImage>
 
     <!-- Emplacement 5 — cardio (intégré) ou source au choix -->
+    <Group name="data5" x="0" y="0" width="438" height="438">
+      <PartImage x="362" y="182" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
+        <Image resource="ic_heart" />
+      </PartImage>
+      <Condition>
+        <Expressions>
+          <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
+        </Expressions>
+        <Compare expression="hr_ok">
+          <Group name="g32" x="0" y="0" width="438" height="438">
+            <PartText x="338" y="202" width="66" height="40">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Compare>
+        <Default>
+          <Group name="g33" x="0" y="0" width="438" height="438">
+            <PartText x="338" y="202" width="66" height="40">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]">--</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Default>
+      </Condition>
+      <PartText x="340" y="236" width="60" height="16" alpha="150">
+        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_medium" size="12" color="[CONFIGURATION.palette.0]" letterSpacing="0.17">BPM</Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="5" x="336" y="178" width="70" height="76" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_right" isCustomizable="TRUE">
       <BoundingBox x="0" y="0" width="70" height="76" />
       <Complication type="SHORT_TEXT">
+        <Group name="patch5_short_text" x="0" y="0" width="70" height="76">
+          <PartDraw x="0" y="0" width="70" height="76" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="76">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch5_short_text_bands" x="-336" y="-178" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-178" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -796,6 +1308,32 @@
         </PartText>
       </Complication>
       <Complication type="RANGED_VALUE">
+        <Group name="patch5_ranged_value" x="0" y="0" width="70" height="76">
+          <PartDraw x="0" y="0" width="70" height="76" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="76">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch5_ranged_value_bands" x="-336" y="-178" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-178" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -811,6 +1349,32 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch5_goal_progress" x="0" y="0" width="70" height="76">
+          <PartDraw x="0" y="0" width="70" height="76" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="76">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch5_goal_progress_bands" x="-336" y="-178" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-178" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -826,6 +1390,32 @@
         </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
+        <Group name="patch5_long_text" x="0" y="0" width="70" height="76">
+          <PartDraw x="0" y="0" width="70" height="76" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="76">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch5_long_text_bands" x="-336" y="-178" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-178" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -841,50 +1431,96 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch5_monochromatic_image" x="0" y="0" width="70" height="76">
+          <PartDraw x="0" y="0" width="70" height="76" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="76">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch5_monochromatic_image_bands" x="-336" y="-178" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-178" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="6" y="9" width="58" height="58" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <PartImage x="26" y="4" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
-          <Image resource="ic_heart" />
-        </PartImage>
-        <Condition>
-          <Expressions>
-            <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
-          </Expressions>
-          <Compare expression="hr_ok">
-            <Group name="g32" x="-336" y="-178" width="438" height="438">
-              <PartText x="338" y="202" width="66" height="40">
-                <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                  <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
-                </Text>
-              </PartText>
-            </Group>
-          </Compare>
-          <Default>
-            <Group name="g33" x="-336" y="-178" width="438" height="438">
-              <PartText x="338" y="202" width="66" height="40">
-                <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-                  <Font family="barlowcondensed_semibold" size="32" color="[CONFIGURATION.palette.0]">--</Font>
-                </Text>
-              </PartText>
-            </Group>
-          </Default>
-        </Condition>
-        <PartText x="4" y="58" width="60" height="16" alpha="150">
-          <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_medium" size="12" color="[CONFIGURATION.palette.0]" letterSpacing="0.17">BPM</Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
 
     <!-- Emplacement 6 — batterie (intégrée) ou source au choix -->
+    <Group name="data6" x="0" y="0" width="438" height="438">
+      <PartDraw x="356" y="268" width="30" height="16">
+        <RoundRectangle x="2" y="2" width="22" height="12" cornerRadiusX="2.5" cornerRadiusY="2.5">
+          <Fill color="#00000000" />
+          <Stroke color="[CONFIGURATION.palette.0]" thickness="1.8" />
+        </RoundRectangle>
+        <Rectangle x="24.5" y="5.5" width="2.5" height="5">
+          <Fill color="[CONFIGURATION.palette.0]" />
+        </Rectangle>
+        <Rectangle x="4.5" y="4.5" width="17" height="7">
+          <Fill color="[CONFIGURATION.palette.2]" />
+          <Transform target="width" value="17 * [BATTERY_PERCENT] / 100" />
+        </Rectangle>
+      </PartDraw>
+      <PartText x="314" y="288" width="60" height="34">
+        <Text align="END" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="375" y="294" width="30" height="20">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="15" color="[CONFIGURATION.palette.0]">%</Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="6" x="336" y="264" width="70" height="60" supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE EMPTY" displayName="slot_right2" isCustomizable="TRUE">
       <BoundingBox x="0" y="0" width="70" height="60" />
       <Complication type="SHORT_TEXT">
+        <Group name="patch6_short_text" x="0" y="0" width="70" height="60">
+          <PartDraw x="0" y="0" width="70" height="60" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="60">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch6_short_text_bands" x="-336" y="-264" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-264" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -900,6 +1536,32 @@
         </PartText>
       </Complication>
       <Complication type="RANGED_VALUE">
+        <Group name="patch6_ranged_value" x="0" y="0" width="70" height="60">
+          <PartDraw x="0" y="0" width="70" height="60" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="60">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch6_ranged_value_bands" x="-336" y="-264" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-264" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -915,6 +1577,32 @@
         </PartText>
       </Complication>
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch6_goal_progress" x="0" y="0" width="70" height="60">
+          <PartDraw x="0" y="0" width="70" height="60" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="60">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch6_goal_progress_bands" x="-336" y="-264" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-264" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -930,6 +1618,32 @@
         </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
+        <Group name="patch6_long_text" x="0" y="0" width="70" height="60">
+          <PartDraw x="0" y="0" width="70" height="60" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="60">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch6_long_text_bands" x="-336" y="-264" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-264" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="26" y="3" width="18" height="18" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -945,42 +1659,848 @@
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
+        <Group name="patch6_monochromatic_image" x="0" y="0" width="70" height="60">
+          <PartDraw x="0" y="0" width="70" height="60" renderMode="MASK">
+            <Rectangle x="0" y="0" width="70" height="60">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch6_monochromatic_image_bands" x="-336" y="-264" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-336" y="-264" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="11" y="6" width="48" height="48" tintColor="[CONFIGURATION.palette.2]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
       </Complication>
-      <Complication type="EMPTY">
-        <PartDraw x="20" y="4" width="30" height="16">
-          <RoundRectangle x="2" y="2" width="22" height="12" cornerRadiusX="2.5" cornerRadiusY="2.5">
-            <Fill color="#00000000" />
-            <Stroke color="[CONFIGURATION.palette.0]" thickness="1.8" />
-          </RoundRectangle>
-          <Rectangle x="24.5" y="5.5" width="2.5" height="5">
-            <Fill color="[CONFIGURATION.palette.0]" />
-          </Rectangle>
-          <Rectangle x="4.5" y="4.5" width="17" height="7">
-            <Fill color="[CONFIGURATION.palette.2]" />
-            <Transform target="width" value="17 * [BATTERY_PERCENT] / 100" />
-          </Rectangle>
-        </PartDraw>
-        <PartText x="-22" y="24" width="60" height="34">
-          <Text align="END" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="39" y="30" width="30" height="20">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="15" color="[CONFIGURATION.palette.0]">%</Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
 
     <!-- Emplacement 7 — pas (intégrés) ou source au choix -->
+    <Group name="data7" x="0" y="0" width="438" height="438">
+      <PartImage x="142" y="341" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
+        <Image resource="ic_steps" />
+      </PartImage>
+      <PartText x="167" y="336" width="72" height="34">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[STEP_COUNT]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="231" y="342" width="40" height="26">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.15">PAS</Font>
+        </Text>
+      </PartText>
+      <PartDraw x="119" y="375" width="188" height="16" alpha="72">
+        <Line startX="8.04" startY="2.5" endX="22.04" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="7.71" startY="3.5" endX="21.71" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="7.39" startY="4.5" endX="21.39" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="7.06" startY="5.5" endX="21.06" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="6.74" startY="6.5" endX="20.74" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="6.41" startY="7.5" endX="20.41" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="6.09" startY="8.5" endX="20.09" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="5.76" startY="9.5" endX="19.76" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="5.44" startY="10.5" endX="19.44" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="5.11" startY="11.5" endX="19.11" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="4.79" startY="12.5" endX="18.79" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="4.46" startY="13.5" endX="18.46" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="25.54" startY="2.5" endX="39.54" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="25.21" startY="3.5" endX="39.21" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="24.89" startY="4.5" endX="38.89" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="24.56" startY="5.5" endX="38.56" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="24.24" startY="6.5" endX="38.24" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="23.91" startY="7.5" endX="37.91" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="23.59" startY="8.5" endX="37.59" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="23.26" startY="9.5" endX="37.26" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="22.94" startY="10.5" endX="36.94" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="22.61" startY="11.5" endX="36.61" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="22.29" startY="12.5" endX="36.29" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="21.96" startY="13.5" endX="35.96" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="43.04" startY="2.5" endX="57.04" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="42.71" startY="3.5" endX="56.71" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="42.39" startY="4.5" endX="56.39" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="42.06" startY="5.5" endX="56.06" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="41.74" startY="6.5" endX="55.74" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="41.41" startY="7.5" endX="55.41" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="41.09" startY="8.5" endX="55.09" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="40.76" startY="9.5" endX="54.76" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="40.44" startY="10.5" endX="54.44" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="40.11" startY="11.5" endX="54.11" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="39.79" startY="12.5" endX="53.79" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="39.46" startY="13.5" endX="53.46" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="60.54" startY="2.5" endX="74.54" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="60.21" startY="3.5" endX="74.21" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="59.89" startY="4.5" endX="73.89" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="59.56" startY="5.5" endX="73.56" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="59.24" startY="6.5" endX="73.24" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="58.91" startY="7.5" endX="72.91" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="58.59" startY="8.5" endX="72.59" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="58.26" startY="9.5" endX="72.26" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="57.94" startY="10.5" endX="71.94" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="57.61" startY="11.5" endX="71.61" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="57.29" startY="12.5" endX="71.29" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="56.96" startY="13.5" endX="70.96" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="78.04" startY="2.5" endX="92.04" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="77.71" startY="3.5" endX="91.71" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="77.39" startY="4.5" endX="91.39" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="77.06" startY="5.5" endX="91.06" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="76.74" startY="6.5" endX="90.74" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="76.41" startY="7.5" endX="90.41" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="76.09" startY="8.5" endX="90.09" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="75.76" startY="9.5" endX="89.76" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="75.44" startY="10.5" endX="89.44" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="75.11" startY="11.5" endX="89.11" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="74.79" startY="12.5" endX="88.79" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="74.46" startY="13.5" endX="88.46" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="95.54" startY="2.5" endX="109.54" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="95.21" startY="3.5" endX="109.21" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="94.89" startY="4.5" endX="108.89" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="94.56" startY="5.5" endX="108.56" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="94.24" startY="6.5" endX="108.24" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="93.91" startY="7.5" endX="107.91" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="93.59" startY="8.5" endX="107.59" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="93.26" startY="9.5" endX="107.26" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="92.94" startY="10.5" endX="106.94" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="92.61" startY="11.5" endX="106.61" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="92.29" startY="12.5" endX="106.29" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="91.96" startY="13.5" endX="105.96" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="113.04" startY="2.5" endX="127.04" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="112.71" startY="3.5" endX="126.71" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="112.39" startY="4.5" endX="126.39" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="112.06" startY="5.5" endX="126.06" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="111.74" startY="6.5" endX="125.74" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="111.41" startY="7.5" endX="125.41" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="111.09" startY="8.5" endX="125.09" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="110.76" startY="9.5" endX="124.76" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="110.44" startY="10.5" endX="124.44" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="110.11" startY="11.5" endX="124.11" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="109.79" startY="12.5" endX="123.79" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="109.46" startY="13.5" endX="123.46" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="130.54" startY="2.5" endX="144.54" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="130.21" startY="3.5" endX="144.21" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="129.89" startY="4.5" endX="143.89" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="129.56" startY="5.5" endX="143.56" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="129.24" startY="6.5" endX="143.24" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="128.91" startY="7.5" endX="142.91" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="128.59" startY="8.5" endX="142.59" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="128.26" startY="9.5" endX="142.26" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="127.94" startY="10.5" endX="141.94" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="127.61" startY="11.5" endX="141.61" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="127.29" startY="12.5" endX="141.29" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="126.96" startY="13.5" endX="140.96" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="148.04" startY="2.5" endX="162.04" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="147.71" startY="3.5" endX="161.71" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="147.39" startY="4.5" endX="161.39" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="147.06" startY="5.5" endX="161.06" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="146.74" startY="6.5" endX="160.74" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="146.41" startY="7.5" endX="160.41" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="146.09" startY="8.5" endX="160.09" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="145.76" startY="9.5" endX="159.76" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="145.44" startY="10.5" endX="159.44" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="145.11" startY="11.5" endX="159.11" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="144.79" startY="12.5" endX="158.79" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="144.46" startY="13.5" endX="158.46" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="165.54" startY="2.5" endX="179.54" endY="2.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="165.21" startY="3.5" endX="179.21" endY="3.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="164.89" startY="4.5" endX="178.89" endY="4.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="164.56" startY="5.5" endX="178.56" endY="5.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="164.24" startY="6.5" endX="178.24" endY="6.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="163.91" startY="7.5" endX="177.91" endY="7.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="163.59" startY="8.5" endX="177.59" endY="8.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="163.26" startY="9.5" endX="177.26" endY="9.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="162.94" startY="10.5" endX="176.94" endY="10.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="162.61" startY="11.5" endX="176.61" endY="11.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="162.29" startY="12.5" endX="176.29" endY="12.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+        <Line startX="161.96" startY="13.5" endX="175.96" endY="13.5">
+          <Stroke color="#000000" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="121" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 0) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 0) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="138" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 1) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 1) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="156" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 2) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 2) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="173" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 3) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 3) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="191" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 4) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 4) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="208" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 5) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 5) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="226" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 6) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 6) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="243" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 7) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 7) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="261" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 8) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 8) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartDraw x="278" y="375" width="23" height="16">
+        <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 9) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 9) &gt; 0 ? 140 : 0)" />
+        <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+        <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
+          <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
+        </Line>
+      </PartDraw>
+      <PartText x="302" y="372" width="28" height="22">
+        <Text align="END" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="17" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[STEP_PERCENT]" /></Template></Font>
+        </Text>
+      </PartText>
+      <PartText x="331" y="376" width="14" height="16">
+        <Text align="START" ellipsis="TRUE" maxLines="1">
+          <Font family="barlowcondensed_semibold" size="11" color="[CONFIGURATION.palette.0]">%</Font>
+        </Text>
+      </PartText>
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+    </Group>
     <ComplicationSlot slotId="7" x="112" y="334" width="236" height="62" supportedTypes="GOAL_PROGRESS RANGED_VALUE SHORT_TEXT LONG_TEXT EMPTY" displayName="slot_bottom" isCustomizable="TRUE">
       <BoundingBox x="0" y="0" width="236" height="62" />
       <Complication type="GOAL_PROGRESS">
+        <Group name="patch7_goal_progress" x="0" y="0" width="236" height="62">
+          <PartDraw x="0" y="0" width="236" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="236" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch7_goal_progress_bands" x="-112" y="-334" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-112" y="-334" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="30" y="7" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -1753,6 +3273,32 @@
         </PartText>
       </Complication>
       <Complication type="RANGED_VALUE">
+        <Group name="patch7_ranged_value" x="0" y="0" width="236" height="62">
+          <PartDraw x="0" y="0" width="236" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="236" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch7_ranged_value_bands" x="-112" y="-334" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-112" y="-334" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="30" y="7" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -2525,6 +4071,32 @@
         </PartText>
       </Complication>
       <Complication type="SHORT_TEXT">
+        <Group name="patch7_short_text" x="0" y="0" width="236" height="62">
+          <PartDraw x="0" y="0" width="236" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="236" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch7_short_text_bands" x="-112" y="-334" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-112" y="-334" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="30" y="7" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -2535,6 +4107,32 @@
         </PartText>
       </Complication>
       <Complication type="LONG_TEXT">
+        <Group name="patch7_long_text" x="0" y="0" width="236" height="62">
+          <PartDraw x="0" y="0" width="236" height="62" renderMode="MASK">
+            <Rectangle x="0" y="0" width="236" height="62">
+              <Fill color="#FFFFFF" />
+            </Rectangle>
+          </PartDraw>
+          <Group name="patch7_long_text_bands" x="-112" y="-334" width="438" height="438" angle="18">
+            <PartDraw x="0" y="0" width="438" height="438">
+              <Rectangle x="0" y="0" width="128" height="438">
+                <Fill color="[CONFIGURATION.palette.0]" />
+              </Rectangle>
+              <Rectangle x="128" y="0" width="78" height="438">
+                <Fill color="[CONFIGURATION.palette.1]" />
+              </Rectangle>
+              <Rectangle x="206" y="0" width="80" height="438">
+                <Fill color="[CONFIGURATION.palette.2]" />
+              </Rectangle>
+              <Rectangle x="286" y="0" width="152" height="438">
+                <Fill color="[CONFIGURATION.palette.3]" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <PartImage x="-112" y="-334" width="438" height="438">
+            <Image resource="bands_shade" />
+          </PartImage>
+        </Group>
         <PartImage x="30" y="7" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
           <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
         </PartImage>
@@ -2544,783 +4142,7 @@
           </Text>
         </PartText>
       </Complication>
-      <Complication type="EMPTY">
-        <PartImage x="30" y="7" width="22" height="22" tintColor="[CONFIGURATION.palette.4]">
-          <Image resource="ic_steps" />
-        </PartImage>
-        <PartText x="55" y="2" width="72" height="34">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[STEP_COUNT]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="119" y="8" width="40" height="26">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.15">PAS</Font>
-          </Text>
-        </PartText>
-        <PartDraw x="7" y="41" width="188" height="16" alpha="72">
-          <Line startX="8.04" startY="2.5" endX="22.04" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="7.71" startY="3.5" endX="21.71" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="7.39" startY="4.5" endX="21.39" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="7.06" startY="5.5" endX="21.06" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="6.74" startY="6.5" endX="20.74" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="6.41" startY="7.5" endX="20.41" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="6.09" startY="8.5" endX="20.09" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="5.76" startY="9.5" endX="19.76" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="5.44" startY="10.5" endX="19.44" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="5.11" startY="11.5" endX="19.11" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="4.79" startY="12.5" endX="18.79" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="4.46" startY="13.5" endX="18.46" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="25.54" startY="2.5" endX="39.54" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="25.21" startY="3.5" endX="39.21" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="24.89" startY="4.5" endX="38.89" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="24.56" startY="5.5" endX="38.56" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="24.24" startY="6.5" endX="38.24" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="23.91" startY="7.5" endX="37.91" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="23.59" startY="8.5" endX="37.59" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="23.26" startY="9.5" endX="37.26" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="22.94" startY="10.5" endX="36.94" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="22.61" startY="11.5" endX="36.61" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="22.29" startY="12.5" endX="36.29" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="21.96" startY="13.5" endX="35.96" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="43.04" startY="2.5" endX="57.04" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="42.71" startY="3.5" endX="56.71" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="42.39" startY="4.5" endX="56.39" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="42.06" startY="5.5" endX="56.06" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="41.74" startY="6.5" endX="55.74" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="41.41" startY="7.5" endX="55.41" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="41.09" startY="8.5" endX="55.09" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="40.76" startY="9.5" endX="54.76" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="40.44" startY="10.5" endX="54.44" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="40.11" startY="11.5" endX="54.11" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="39.79" startY="12.5" endX="53.79" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="39.46" startY="13.5" endX="53.46" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="60.54" startY="2.5" endX="74.54" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="60.21" startY="3.5" endX="74.21" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="59.89" startY="4.5" endX="73.89" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="59.56" startY="5.5" endX="73.56" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="59.24" startY="6.5" endX="73.24" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="58.91" startY="7.5" endX="72.91" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="58.59" startY="8.5" endX="72.59" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="58.26" startY="9.5" endX="72.26" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="57.94" startY="10.5" endX="71.94" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="57.61" startY="11.5" endX="71.61" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="57.29" startY="12.5" endX="71.29" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="56.96" startY="13.5" endX="70.96" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="78.04" startY="2.5" endX="92.04" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="77.71" startY="3.5" endX="91.71" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="77.39" startY="4.5" endX="91.39" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="77.06" startY="5.5" endX="91.06" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="76.74" startY="6.5" endX="90.74" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="76.41" startY="7.5" endX="90.41" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="76.09" startY="8.5" endX="90.09" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="75.76" startY="9.5" endX="89.76" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="75.44" startY="10.5" endX="89.44" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="75.11" startY="11.5" endX="89.11" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="74.79" startY="12.5" endX="88.79" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="74.46" startY="13.5" endX="88.46" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="95.54" startY="2.5" endX="109.54" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="95.21" startY="3.5" endX="109.21" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="94.89" startY="4.5" endX="108.89" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="94.56" startY="5.5" endX="108.56" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="94.24" startY="6.5" endX="108.24" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="93.91" startY="7.5" endX="107.91" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="93.59" startY="8.5" endX="107.59" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="93.26" startY="9.5" endX="107.26" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="92.94" startY="10.5" endX="106.94" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="92.61" startY="11.5" endX="106.61" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="92.29" startY="12.5" endX="106.29" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="91.96" startY="13.5" endX="105.96" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="113.04" startY="2.5" endX="127.04" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="112.71" startY="3.5" endX="126.71" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="112.39" startY="4.5" endX="126.39" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="112.06" startY="5.5" endX="126.06" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="111.74" startY="6.5" endX="125.74" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="111.41" startY="7.5" endX="125.41" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="111.09" startY="8.5" endX="125.09" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="110.76" startY="9.5" endX="124.76" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="110.44" startY="10.5" endX="124.44" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="110.11" startY="11.5" endX="124.11" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="109.79" startY="12.5" endX="123.79" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="109.46" startY="13.5" endX="123.46" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="130.54" startY="2.5" endX="144.54" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="130.21" startY="3.5" endX="144.21" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="129.89" startY="4.5" endX="143.89" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="129.56" startY="5.5" endX="143.56" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="129.24" startY="6.5" endX="143.24" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="128.91" startY="7.5" endX="142.91" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="128.59" startY="8.5" endX="142.59" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="128.26" startY="9.5" endX="142.26" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="127.94" startY="10.5" endX="141.94" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="127.61" startY="11.5" endX="141.61" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="127.29" startY="12.5" endX="141.29" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="126.96" startY="13.5" endX="140.96" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="148.04" startY="2.5" endX="162.04" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="147.71" startY="3.5" endX="161.71" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="147.39" startY="4.5" endX="161.39" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="147.06" startY="5.5" endX="161.06" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="146.74" startY="6.5" endX="160.74" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="146.41" startY="7.5" endX="160.41" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="146.09" startY="8.5" endX="160.09" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="145.76" startY="9.5" endX="159.76" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="145.44" startY="10.5" endX="159.44" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="145.11" startY="11.5" endX="159.11" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="144.79" startY="12.5" endX="158.79" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="144.46" startY="13.5" endX="158.46" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="165.54" startY="2.5" endX="179.54" endY="2.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="165.21" startY="3.5" endX="179.21" endY="3.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="164.89" startY="4.5" endX="178.89" endY="4.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="164.56" startY="5.5" endX="178.56" endY="5.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="164.24" startY="6.5" endX="178.24" endY="6.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="163.91" startY="7.5" endX="177.91" endY="7.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="163.59" startY="8.5" endX="177.59" endY="8.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="163.26" startY="9.5" endX="177.26" endY="9.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="162.94" startY="10.5" endX="176.94" endY="10.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="162.61" startY="11.5" endX="176.61" endY="11.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="162.29" startY="12.5" endX="176.29" endY="12.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-          <Line startX="161.96" startY="13.5" endX="175.96" endY="13.5">
-            <Stroke color="#000000" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="9" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 0) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 0) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="26" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 1) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 1) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="44" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 2) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 2) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="61" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 3) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 3) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="79" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 4) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 4) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="96" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 5) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 5) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="114" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 6) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 6) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="131" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 7) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 7) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="149" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 8) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 8) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.04" startY="2.5" endX="20.04" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.71" startY="3.5" endX="19.71" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.39" startY="4.5" endX="19.39" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.06" startY="5.5" endX="19.06" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.74" startY="6.5" endX="18.74" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.41" startY="7.5" endX="18.41" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.09" startY="8.5" endX="18.09" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.76" startY="9.5" endX="17.76" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.44" startY="10.5" endX="17.44" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.11" startY="11.5" endX="17.11" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.79" startY="12.5" endX="16.79" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.46" startY="13.5" endX="16.46" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartDraw x="166" y="41" width="23" height="16">
-          <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 9) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 9) &gt; 0 ? 140 : 0)" />
-          <Line startX="6.54" startY="2.5" endX="20.54" endY="2.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="6.21" startY="3.5" endX="20.21" endY="3.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.89" startY="4.5" endX="19.89" endY="4.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.56" startY="5.5" endX="19.56" endY="5.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="5.24" startY="6.5" endX="19.24" endY="6.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.91" startY="7.5" endX="18.91" endY="7.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.59" startY="8.5" endX="18.59" endY="8.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="4.26" startY="9.5" endX="18.26" endY="9.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.94" startY="10.5" endX="17.94" endY="10.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.61" startY="11.5" endX="17.61" endY="11.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="3.29" startY="12.5" endX="17.29" endY="12.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-          <Line startX="2.96" startY="13.5" endX="16.96" endY="13.5">
-            <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
-          </Line>
-        </PartDraw>
-        <PartText x="190" y="38" width="28" height="22">
-          <Text align="END" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="17" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[STEP_PERCENT]" /></Template></Font>
-          </Text>
-        </PartText>
-        <PartText x="219" y="42" width="14" height="16">
-          <Text align="START" ellipsis="TRUE" maxLines="1">
-            <Font family="barlowcondensed_semibold" size="11" color="[CONFIGURATION.palette.0]">%</Font>
-          </Text>
-        </PartText>
-      </Complication>
+      <Complication type="EMPTY" />
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </ComplicationSlot>
 
@@ -3341,11 +4163,29 @@
           <Font family="barlowcondensed_medium" size="14" color="#7D8791" letterSpacing="0.13"><Upper><Template><![CDATA[%s]]><Parameter expression="[DAY_OF_WEEK_F]" /></Template></Upper></Font>
         </Text>
       </PartText>
-      <PartText x="338" y="196" width="66" height="40">
-        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="barlowcondensed_semibold" size="28" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
-        </Text>
-      </PartText>
+      <Condition>
+        <Expressions>
+          <Expression name="hr_aod"><![CDATA[[HEART_RATE] > 0]]></Expression>
+        </Expressions>
+        <Compare expression="hr_aod">
+          <Group name="g35" x="0" y="0" width="438" height="438">
+            <PartText x="338" y="196" width="66" height="40">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="28" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Compare>
+        <Default>
+          <Group name="g36" x="0" y="0" width="438" height="438">
+            <PartText x="338" y="196" width="66" height="40">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="28" color="#C9D1D9">--</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </Default>
+      </Condition>
       <PartText x="340" y="230" width="60" height="16">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="11" color="#7D8791" letterSpacing="0.17">BPM</Font>
