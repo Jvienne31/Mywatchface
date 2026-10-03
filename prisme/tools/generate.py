@@ -214,8 +214,12 @@ def dome_background(cx, cy, r, color):
 # Emplacements (ComplicationSlot) : donnée intégrée si vide, sinon source choisie
 # ---------------------------------------------------------------------------
 
-TEXT_TYPES = "SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE EMPTY"
-GAUGE_TYPES = "RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY"
+# Tous les types du format sur chaque emplacement : le sélecteur ne propose une source que si
+# l'un de ses types est accepté (une donnée publiée seulement en image ou en graphique
+# serait sinon invisible).
+IMAGE_TYPES = "SMALL_IMAGE PHOTO_IMAGE WEIGHTED_ELEMENTS"
+TEXT_TYPES = f"SHORT_TEXT RANGED_VALUE GOAL_PROGRESS LONG_TEXT MONOCHROMATIC_IMAGE {IMAGE_TYPES} EMPTY"
+GAUGE_TYPES = f"RANGED_VALUE GOAL_PROGRESS SHORT_TEXT LONG_TEXT MONOCHROMATIC_IMAGE {IMAGE_TYPES} EMPTY"
 FRAC = {
     "RANGED_VALUE": "([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / "
                     "([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])",
@@ -248,12 +252,26 @@ def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None):
             continue
         O.open(f'<Complication type="{t}">')
         patch(f"patch{sid}_{t.lower()}", x, y, w, h, oval)
-        render(t)
+        if t in ("SMALL_IMAGE", "PHOTO_IMAGE"):
+            source_image(t, x, y, w, h, oval)
+        elif t == "WEIGHTED_ELEMENTS":   # graphique de la source non dessiné : son texte
+            render("SHORT_TEXT")
+        else:
+            render(t)
         O.close("</Complication>")
     O.mode_stack.pop()
     O.origin.pop()
     O.x('<Variant mode="AMBIENT" target="alpha" value="0" />')
     O.close("</ComplicationSlot>")
+
+
+def source_image(t, x, y, w, h, oval):
+    """Image fournie par la source (vignette ou photo), centrée ; carré inscrit si dôme."""
+    side = min(w, h) * (0.7 if oval else 1)
+    rx, ry = rel(x + (w - side) / 2, y + (h - side) / 2)
+    O.open(f'<PartImage {wff._box(rx, ry, side, side)}>')
+    O.x(f'<Image resource="[COMPLICATION.{t}]" />')
+    O.close("</PartImage>")
 
 
 def patch(name, x, y, w, h, oval):
@@ -330,7 +348,7 @@ def dome_slot(sid, name, center, gr, ink, soft, track, color, builtin):
             gauge(cx, cy - 2, gr, FRAC[t], 0.5,
                   lambda x_, y_, h_: text(x_ - 34, y_, 68, h_, CTEXT, "", DATA, 22, ink),
                   CTITLE, soft, track, color, comp_ic=True)
-        elif t == "SHORT_TEXT":   # texte plus large : « 6h 29m » ne doit pas être tronqué
+        elif t in ("SHORT_TEXT", "LONG_TEXT"):   # texte plus large : « 6h 29m » ne doit pas être tronqué
             comp_icon(cx, cy - 19, 18, color)
             text(cx - 40, cy - 9, 80, 30, CTEXT, "", DATA, 22, ink)
             text(cx - 38, cy + 18, 76, 17, CTITLE, "", DATA_M, 13, soft[0], alpha=soft[1])
@@ -525,7 +543,7 @@ def layer_slots():
         else:   # source sans progression (texte) : son titre à la place de la barre
             text(C - 90, SEG_Y - 4, 180, 24, CTITLE, "", DATA_M, 17, INK[1], alpha=190, spacing="0.1")
     slot(7, "slot_bottom", 100, 330, 256, 68,
-         "GOAL_PROGRESS RANGED_VALUE SHORT_TEXT LONG_TEXT EMPTY", builtin_steps, steps_render)
+         f"GOAL_PROGRESS RANGED_VALUE SHORT_TEXT LONG_TEXT MONOCHROMATIC_IMAGE {IMAGE_TYPES} EMPTY", builtin_steps, steps_render)
 
 
 def layer_aod():
