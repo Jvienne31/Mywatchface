@@ -653,7 +653,8 @@
     </ComplicationSlot>
 
     <!-- Emplacement 2 — météo (intégrée) ou source au choix -->
-    <Group name="data2" x="0" y="0" width="438" height="438">
+    <Group name="data2" x="30" y="172" width="128" height="44">
+      <Launch target="com.samsung.android.watch.weather" />
       <Condition>
         <Expressions>
           <Expression name="w0"><![CDATA[[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8]]></Expression>
@@ -664,49 +665,49 @@
           <Expression name="w5"><![CDATA[[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13]]></Expression>
         </Expressions>
         <Compare expression="w0">
-          <Group name="wi5" x="0" y="0" width="438" height="438">
+          <Group name="wi5" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_sun" />
             </PartImage>
           </Group>
         </Compare>
         <Compare expression="w1">
-          <Group name="wi7" x="0" y="0" width="438" height="438">
+          <Group name="wi7" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_partly" />
             </PartImage>
           </Group>
         </Compare>
         <Compare expression="w2">
-          <Group name="wi9" x="0" y="0" width="438" height="438">
+          <Group name="wi9" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_rain" />
             </PartImage>
           </Group>
         </Compare>
         <Compare expression="w3">
-          <Group name="wi11" x="0" y="0" width="438" height="438">
+          <Group name="wi11" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_snow" />
             </PartImage>
           </Group>
         </Compare>
         <Compare expression="w4">
-          <Group name="wi13" x="0" y="0" width="438" height="438">
+          <Group name="wi13" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_storm" />
             </PartImage>
           </Group>
         </Compare>
         <Compare expression="w5">
-          <Group name="wi15" x="0" y="0" width="438" height="438">
+          <Group name="wi15" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_fog" />
             </PartImage>
           </Group>
         </Compare>
         <Default>
-          <Group name="wi17" x="0" y="0" width="438" height="438">
+          <Group name="wi17" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_cloud" />
             </PartImage>
@@ -718,7 +719,7 @@
           <Expression name="w_ok"><![CDATA[[WEATHER.IS_AVAILABLE]]]></Expression>
         </Expressions>
         <Compare expression="w_ok">
-          <Group name="g19" x="0" y="0" width="438" height="438">
+          <Group name="g19" x="-30" y="-172" width="438" height="438">
             <PartText x="74" y="172" width="84" height="42">
               <Text align="START" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="38" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
@@ -727,7 +728,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g20" x="0" y="0" width="438" height="438">
+          <Group name="g20" x="-30" y="-172" width="438" height="438">
             <PartText x="74" y="172" width="84" height="42">
               <Text align="START" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="38" color="[CONFIGURATION.palette.3]">--</Font>
@@ -1055,27 +1056,28 @@
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
-    <Group name="data3" x="0" y="0" width="438" height="438" pivotX="0.1507" pivotY="0.6119" scaleX="1.2" scaleY="1.2">
-      <PartDraw x="30" y="230" width="72" height="72" alpha="160">
+    <Group name="data3" x="20" y="222" width="92" height="92" pivotX="0.5000" pivotY="0.5000" scaleX="1.2" scaleY="1.2">
+      <Launch target="com.samsung.android.watch.weather" />
+      <PartDraw x="10" y="8" width="72" height="72" alpha="160">
         <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
           <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
         </Arc>
       </PartDraw>
-      <PartDraw x="30" y="230" width="72" height="72">
+      <PartDraw x="10" y="8" width="72" height="72">
         <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="7" cap="ROUND" />
           <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.UV_INDEX] / 11, 0, 1)" />
         </Arc>
       </PartDraw>
-      <PartImage x="58" y="242" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
+      <PartImage x="38" y="20" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
         <Image resource="ic_uv" />
       </PartImage>
-      <PartText x="36" y="253" width="60" height="32">
+      <PartText x="16" y="31" width="60" height="32">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.UV_INDEX]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="32" y="286" width="68" height="17" alpha="150">
+      <PartText x="12" y="64" width="68" height="17" alpha="150">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">UV</Font>
         </Text>
@@ -1257,32 +1259,33 @@
       </Ellipse>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </PartDraw>
-    <Group name="data4" x="0" y="0" width="438" height="438" pivotX="0.8082" pivotY="0.2785" scaleX="1.2" scaleY="1.2">
-      <PartDraw x="318" y="84" width="72" height="72" alpha="95">
+    <Group name="data4" x="308" y="76" width="92" height="92" pivotX="0.5000" pivotY="0.5000" scaleX="1.2" scaleY="1.2">
+      <Launch target="com.samsung.android.watch.weather" />
+      <PartDraw x="10" y="8" width="72" height="72" alpha="95">
         <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
           <Stroke color="[CONFIGURATION.palette.2]" thickness="7" cap="ROUND" />
         </Arc>
       </PartDraw>
-      <PartDraw x="318" y="84" width="72" height="72">
+      <PartDraw x="10" y="8" width="72" height="72">
         <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
           <Stroke color="[CONFIGURATION.palette.2]" thickness="7" cap="ROUND" />
           <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.CHANCE_OF_PRECIPITATION] / 100, 0, 1)" />
         </Arc>
       </PartDraw>
-      <PartImage x="346" y="96" width="16" height="16" tintColor="[CONFIGURATION.palette.2]">
+      <PartImage x="38" y="20" width="16" height="16" tintColor="[CONFIGURATION.palette.2]">
         <Image resource="ic_drop" />
       </PartImage>
-      <PartText x="298" y="107" width="60" height="32">
+      <PartText x="-10" y="31" width="60" height="32">
         <Text align="END" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.CHANCE_OF_PRECIPITATION]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="359" y="112" width="30" height="20">
+      <PartText x="51" y="36" width="30" height="20">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="15" color="[CONFIGURATION.palette.0]">%</Font>
         </Text>
       </PartText>
-      <PartText x="320" y="140" width="68" height="17" alpha="150">
+      <PartText x="12" y="64" width="68" height="17" alpha="150">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.0]" letterSpacing="0.1">PLUIE</Font>
         </Text>
@@ -2124,21 +2127,22 @@
     </ComplicationSlot>
 
     <!-- Emplacement 7 — pas (intégrés) ou source au choix -->
-    <Group name="data7" x="0" y="0" width="438" height="438">
-      <PartImage x="126" y="337" width="30" height="30" tintColor="[CONFIGURATION.palette.4]">
+    <Group name="data7" x="100" y="330" width="256" height="68">
+      <Launch target="com.samsung.android.wear.shealth" />
+      <PartImage x="26" y="7" width="30" height="30" tintColor="[CONFIGURATION.palette.4]">
         <Image resource="ic_steps" />
       </PartImage>
-      <PartText x="161" y="331" width="92" height="40">
+      <PartText x="61" y="1" width="92" height="40">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="36" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[STEP_COUNT]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="253" y="349" width="44" height="20">
+      <PartText x="153" y="19" width="44" height="20">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="17" color="[CONFIGURATION.palette.0]" letterSpacing="0.12">PAS</Font>
         </Text>
       </PartText>
-      <PartDraw x="107" y="376" width="202" height="19" alpha="72">
+      <PartDraw x="7" y="46" width="202" height="19" alpha="72">
         <Line startX="8.23" startY="2.62" endX="23.23" endY="2.62">
           <Stroke color="#000000" thickness="2" />
         </Line>
@@ -2500,7 +2504,7 @@
           <Stroke color="#000000" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="109" y="376" width="23" height="19">
+      <PartDraw x="9" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 0) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 0) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2539,7 +2543,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="128" y="376" width="23" height="19">
+      <PartDraw x="28" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 1) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 1) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2578,7 +2582,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="147" y="376" width="23" height="19">
+      <PartDraw x="47" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 2) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 2) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2617,7 +2621,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="166" y="376" width="23" height="19">
+      <PartDraw x="66" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 3) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 3) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2656,7 +2660,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="185" y="376" width="23" height="19">
+      <PartDraw x="85" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 4) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 4) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2695,7 +2699,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="204" y="376" width="23" height="19">
+      <PartDraw x="104" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 5) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 5) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2734,7 +2738,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="223" y="376" width="23" height="19">
+      <PartDraw x="123" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 6) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 6) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2773,7 +2777,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="242" y="376" width="23" height="19">
+      <PartDraw x="142" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 7) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 7) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2812,7 +2816,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="261" y="376" width="23" height="19">
+      <PartDraw x="161" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 8) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 8) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2851,7 +2855,7 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartDraw x="280" y="376" width="23" height="19">
+      <PartDraw x="180" y="46" width="23" height="19">
         <Transform target="alpha" value="(([STEP_PERCENT] / 100) * 10 - 9) &gt;= 1 ? 255 : ((([STEP_PERCENT] / 100) * 10 - 9) &gt; 0 ? 140 : 0)" />
         <Line startX="6.23" startY="2.62" endX="21.23" endY="2.62">
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
@@ -2890,12 +2894,12 @@
           <Stroke color="[CONFIGURATION.palette.4]" thickness="2" />
         </Line>
       </PartDraw>
-      <PartText x="305" y="372" width="30" height="27">
+      <PartText x="205" y="42" width="30" height="27">
         <Text align="END" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="22" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[STEP_PERCENT]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="336" y="377" width="18" height="20">
+      <PartText x="236" y="47" width="18" height="20">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="15" color="[CONFIGURATION.palette.0]">%</Font>
         </Text>
