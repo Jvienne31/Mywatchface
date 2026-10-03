@@ -6,9 +6,9 @@ Mise à jour : 3 octobre 2026. Branche de travail : `claude/sweet-johnson-122okj
 
 | Dossier | Quoi | État |
 |---|---|---|
-| `prisme/` | **Cadran Prisme** (WFF v2, sans code) : 18 palettes, 7 emplacements, 2 dômes, AOD | Fonctionne sur la Watch8 Classic. Doc : `prisme/docs/GUIDE.md` |
+| `prisme/` | **Cadran Prisme** (WFF v2, sans code) : 18 palettes, 7 emplacements, 2 dômes, AOD, réglage des secondes, batterie rouge sous 20 % | Fonctionne sur la Watch8 Classic (validé le 3 octobre 2026). Doc : `prisme/docs/GUIDE.md` |
 | `energyscore-phone/` | **Santé Sync, téléphone** : lit Samsung Health (Health Data SDK) et envoie à la montre toutes les 30 min | Fonctionne en mode développeur Samsung Health |
-| `energyscore-watch/` | **Santé Sync, montre** : 26 complications, mesures en direct (Health Services), toucher → Samsung Health | Fonctionne |
+| `energyscore-watch/` | **Santé Sync, montre** : 26 complications, mesures en direct (Health Services), toucher → Samsung Health, tuile « Santé du jour », écran en Compose | Fonctionne |
 | `race/` | Reproduction de S4U Race (exercice) | **Ne pas publier** : copie d'un cadran existant |
 | `concepts/` | Maquettes : Prisme, Méridien (luxe), Strate, Palettes, Nocturne | Méridien et Strate gardés pour plus tard |
 | `app/` | Ancien projet | — |
@@ -63,4 +63,6 @@ Chaque point est vérifié, sur la montre ou dans la documentation.
 
 ## Idées en attente
 
-Voir la fin de la conversation du 3 octobre 2026 et la section « Idées » du skill.
+- Second cadran : Méridien ou Strate (maquettes dans `concepts/`), après Prisme.
+- Toucher l'heure pour ouvrir le réveil : écarté (pas de double toucher en WFF, un toucher simple se déclenche par accident).
+- Voir aussi la section « Idées » du skill.

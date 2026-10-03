@@ -45,6 +45,27 @@ Téléphone (Samsung Health Data SDK)            Montre (complications)
     adaptative** (`mipmap-anydpi/ic_launcher.xml` : fond, avant-plan dans la zone sûre de
     66 dp, monochrome). Un vecteur blanc seul s'affiche comme un rond blanc.
 
+## Tuile et écran Compose (compilés et validés sur la montre, Kotlin 1.9.24)
+
+- **Compose for Wear OS** :
+  - `kotlinCompilerExtensionVersion 1.5.14`, `activity-compose:1.9.3`, puis
+    `wear.compose:compose-material` et `compose-foundation` en 1.3.1 ;
+  - lunette tournante à brancher soi-même : `onRotaryScrollEvent`, puis `scrollBy` et
+    `focusRequester` ;
+  - avec `ComponentActivity`, la signature est
+    `onRequestPermissionsResult(…, permissions: Array<String>, …)` : `Array<out String>` ne
+    compile pas.
+- **Tuile** :
+  - dépendances `wear.tiles:tiles:1.4.1` et `wear.protolayout:protolayout:1.2.1` ;
+  - `TileService` avec `Futures.immediateFuture` (Guava) ;
+  - anneau : un `Arc` et un `ArcLine` dans une `Box` ;
+  - toucher : `LaunchAction` vers sa propre activité. Ouvrir une autre appli exige le nom exact
+    de sa classe, que Samsung Health ne publie pas ;
+  - rafraîchissement : `TileService.getUpdater(ctx).requestUpdate(…)` à chaque donnée reçue ;
+  - manifeste : permission `BIND_TILE_PROVIDER` et métadonnée `androidx.wear.tiles.PREVIEW`
+    (une image) ;
+  - pas de police personnalisée dans une tuile.
+
 ## Téléphone
 
 - **Lecture.** Chaque donnée est lue dans son propre `try` : une permission refusée ou une

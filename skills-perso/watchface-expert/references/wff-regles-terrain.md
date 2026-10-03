@@ -89,6 +89,18 @@ l'émulateur Wear OS 6 (API 36) et sur une Galaxy Watch8 Classic.
   `paquet/activité` ou un lien profond `app://…`.
 - **[montre]** Fonctionne sous un emplacement vide (le Group de la donnée par défaut est sous
   le `ComplicationSlot`).
+- **Pas de double toucher ni d'appui long**, dans aucune version du format (v1 à v5). Ne pas
+  mettre d'action sur une grande zone souvent effleurée, comme l'heure. Alternative à proposer :
+  le double appui sur le bouton du haut de la montre, réglable dans *Paramètres > Fonctions
+  avancées*.
+
+## Réglages et conditions
+
+- **Réglage à choix** : `ListConfiguration` déclarée dans `UserConfigurations`, avec
+  `ListOption id displayName`. Dans la scène, `<ListConfiguration id>` contient un `ListOption`
+  par choix, avec un seul enfant (`Group`).
+- **Couleur conditionnelle**, par exemple batterie rouge à 20 % ou moins : `Condition` sur
+  `[BATTERY_PERCENT] <= 20`, chaque branche dans un `Group`. `[BATTERY_IS_LOW]` existe aussi.
 
 ## Tags utiles (v2)
 

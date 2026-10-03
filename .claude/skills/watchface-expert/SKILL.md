@@ -114,6 +114,13 @@ ou sur l'émulateur. Elles priment sur la documentation.
 - Météo (WFF v2) : `[WEATHER.*]`, avec les codes de condition 1 et 8 (soleil), 14 (nuageux),
   4, 6 et 12 (pluie), 5, 7, 10 et 11 (neige), 9 (orage), 3 et 13 (brouillard).
 - **Il n'existe ni calories, ni distance, ni score** parmi les données intégrées du format.
+- **Pas de double toucher ni d'appui long** dans aucune version du format (v1 à v5) : seul le
+  toucher simple existe (`Launch`, `Images change="TAP"`). Ne pas mettre d'action sur une grande
+  zone souvent effleurée (l'heure) : l'utilisateur la déclencherait par accident.
+- **Réglage à choix** : `ListConfiguration` déclarée dans `UserConfigurations` (avec
+  `ListOption displayName`), puis `<ListConfiguration id>` dans la scène, un `Group` par option.
+- **Couleur conditionnelle** (batterie rouge à 20 % ou moins) : `Condition` sur
+  `[BATTERY_PERCENT] <= 20`, chaque branche dans un `Group`.
 
 ## 3. Samsung Health : ce qu'on peut lire, et où (vérifié)
 
@@ -168,6 +175,17 @@ ou sur l'émulateur. Elles priment sur la documentation.
 - **Pièges de l'appli montre** :
   - sans activité LAUNCHER, l'appli semble ne pas s'installer (pas d'icône) ;
   - prévoir une icône adaptative.
+- **Tuile et écran Compose (compilés et validés sur la montre)** avec Kotlin 1.9.24 :
+  - Compose : `kotlinCompilerExtensionVersion 1.5.14`, `activity-compose:1.9.3`,
+    `wear.compose:compose-material` et `compose-foundation` `1.3.1` ; lunette à la main avec
+    `onRotaryScrollEvent` + `scrollBy` + `focusRequester` ; `ComponentActivity` attend
+    `onRequestPermissionsResult(…, permissions: Array<String>, …)` (pas `Array<out String>`).
+  - Tuile : `wear.tiles:tiles:1.4.1` + `wear.protolayout:protolayout:1.2.1`, `TileService` avec
+    `Futures.immediateFuture` (Guava), `Arc`/`ArcLine` dans une `Box` pour un anneau,
+    `LaunchAction` vers sa propre activité (une tuile ne peut pas ouvrir Samsung Health, il faut
+    le nom de classe exact). Rafraîchir avec `TileService.getUpdater(ctx).requestUpdate(…)` à
+    chaque donnée reçue. Manifeste : permission `BIND_TILE_PROVIDER`, métadonnée
+    `androidx.wear.tiles.PREVIEW` (image). Pas de police personnalisée dans une tuile.
 
 ## 5. Publication
 
@@ -190,7 +208,5 @@ ou sur l'émulateur. Elles priment sur la documentation.
 
 ## 7. Idées
 
-- Tuile Santé Sync (Tiles) : tableau de bord des scores à côté du cadran.
-- Compose for Wear OS pour l'écran de l'appli montre.
 - Méridien (cadran de luxe, textures carbone, bambou, soleillé…) et Strate.
 - Appli téléphone compagnon pour installer le cadran.
