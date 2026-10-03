@@ -79,3 +79,32 @@
   listes sont parfois incomplètes ou tardives.
 - **Émulateur** : profil matériel et skin Watch8 Classic possibles. Samsung Health n'y est pas,
   et le comportement des emplacements peut différer : valider sur la montre.
+
+## Exemples officiels Google : github.com/android/wear-os-samples (lu le 3 octobre 2026)
+
+- **Déboguer un cadran WFF sur la montre** : les erreurs d'expression et de rendu sont dans le
+  journal du moteur de cadrans :
+  `adb logcat --pid=$(adb shell pidof -s com.google.wear.watchface.runtime)`.
+  À lancer dès qu'un élément ne s'affiche pas.
+- **Flavors (WFF v2)** : des préréglages complets proposés dans l'éditeur du cadran. Chaque
+  `Flavor` fixe les options de configuration (`<Configuration id optionId>`) et les sources
+  par défaut des emplacements (`<ComplicationSlot slotId><DefaultProviderPolicy …>`). Exemple :
+  `WatchFaceFormat/Flavors`.
+- **Prévisions météo (WFF v2)** :
+  - par heure : `[WEATHER.HOURS.n.TEMPERATURE|CONDITION|IS_DAY|IS_AVAILABLE]` ;
+  - par jour : `[WEATHER.DAYS.n.TEMPERATURE_HIGH|LOW|CONDITION_DAY|CHANCE_OF_PRECIPITATION]`.
+  Exemple : `WatchFaceFormat/Weather`.
+- **Complications Test Suite** (`Complications/`) : sources factices de tous les types.
+  L'installer pour vérifier que chaque emplacement d'un cadran affiche correctement chaque type.
+- **Tuiles** (`WearTilesKotlin/`) :
+  - versions récentes : tiles 1.6 et protolayout 1.4 avec `protolayout-material3` ;
+  - « Golden Tiles » : les modèles de mise en page du kit de design ;
+  - ces versions demandent Kotlin 2.x ; le projet est en 1.9.24.
+- **Watch Face Push** (`WatchFacePush/`, Wear OS 6 et plus) :
+  - une appli montre peut installer et mettre à jour des cadrans WFF : `addWatchFace`,
+    `updateWatchFace`, `setWatchFaceAsActive` ;
+  - chaque cadran exige un jeton de validation, généré par
+    `com.google.android.wearable.watchface.validator:validator-push` ;
+  - permission `SET_PUSHED_WATCH_FACE_AS_ACTIVE`.
+- **Wear Widgets** (`WearWidget/`) : surfaces en Remote Compose (alpha), converties en tuile sur
+  les montres plus anciennes. À surveiller, pas encore à utiliser.
