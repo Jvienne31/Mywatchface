@@ -1,7 +1,5 @@
 package com.jvienne.energyscore.watch
 
-import android.content.ComponentName
-import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
@@ -29,11 +27,7 @@ class HealthSyncListenerService : WearableListenerService() {
             updated = true
         }
         if (!updated) return
-        for (provider in ALL_PROVIDERS) {
-            ComplicationDataSourceUpdateRequester.create(
-                context = applicationContext,
-                complicationDataSourceComponent = ComponentName(applicationContext, provider),
-            ).requestUpdateAll()
-        }
+        PassiveDataService.register(applicationContext)   // entretient l'écoute en direct
+        PassiveDataService.requestUpdate(applicationContext, ALL_PROVIDERS)
     }
 }

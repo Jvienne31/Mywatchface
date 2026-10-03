@@ -213,9 +213,17 @@ def gen():
 
     <uses-feature android:name="android.hardware.type.watch" />
 
+    <!-- Pas, distance, calories, étages en direct (Health Services) -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+    <!-- Toucher une complication ouvre Samsung Health sur la montre -->
+    <queries>
+        <package android:name="com.samsung.android.wear.shealth" />
+    </queries>
+
     <application
         android:label="@string/app_name"
-        android:icon="@drawable/ic_m_bolt"
+        android:icon="@mipmap/ic_launcher"
         android:allowBackup="false">
 
         <!-- Écran de contrôle (icône dans la liste des applis) : dernières valeurs reçues. -->
@@ -234,6 +242,12 @@ def gen():
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
+
+        <!-- Reçoit les valeurs du jour mesurées par la montre (Health Services, mode passif) -->
+        <service
+            android:name=".PassiveDataService"
+            android:exported="true"
+            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" />
 
         <!-- Reçoit les données poussées par l'appli téléphone (Data Layer, chemin /sante). -->
         <service

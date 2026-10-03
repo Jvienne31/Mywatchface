@@ -329,18 +329,19 @@
     </PartDraw>
 
     <!-- Emplacement 1 — date (intégrée) ou source au choix -->
-    <Group name="data1" x="0" y="0" width="438" height="438">
-      <PartText x="30" y="100" width="52" height="46">
+    <Group name="data1" x="30" y="100" width="128" height="70">
+      <Launch target="CALENDAR" />
+      <PartText x="0" y="0" width="52" height="46">
         <Text align="END" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="48" color="[CONFIGURATION.palette.4]"><Template><![CDATA[%s]]><Parameter expression="[DAY_Z]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="87" y="113" width="66" height="34">
+      <PartText x="57" y="13" width="66" height="34">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="28" color="[CONFIGURATION.palette.3]"><Upper><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
         </Text>
       </PartText>
-      <PartText x="38" y="149" width="122" height="21" alpha="150">
+      <PartText x="8" y="49" width="122" height="21" alpha="150">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="18" color="[CONFIGURATION.palette.3]" letterSpacing="0.08"><Upper><Template><![CDATA[%s]]><Parameter expression="[DAY_OF_WEEK_F]" /></Template></Upper></Font>
         </Text>
@@ -1451,8 +1452,9 @@
     </PartImage>
 
     <!-- Emplacement 5 — cardio (intégré) ou source au choix -->
-    <Group name="data5" x="0" y="0" width="438" height="438">
-      <PartImage x="363" y="179" width="22" height="22" tintColor="[CONFIGURATION.palette.2]">
+    <Group name="data5" x="334" y="176" width="80" height="86">
+      <Launch target="HEALTH_HEART_RATE" />
+      <PartImage x="29" y="3" width="22" height="22" tintColor="[CONFIGURATION.palette.2]">
         <Image resource="ic_heart" />
       </PartImage>
       <Condition>
@@ -1460,7 +1462,7 @@
           <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_ok">
-          <Group name="g24" x="0" y="0" width="438" height="438">
+          <Group name="g24" x="-334" y="-176" width="438" height="438">
             <PartText x="334" y="196" width="80" height="48">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="46" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
@@ -1469,7 +1471,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g25" x="0" y="0" width="438" height="438">
+          <Group name="g25" x="-334" y="-176" width="438" height="438">
             <PartText x="334" y="196" width="80" height="48">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="46" color="[CONFIGURATION.palette.0]">--</Font>
@@ -1478,7 +1480,7 @@
           </Group>
         </Default>
       </Condition>
-      <PartText x="334" y="243" width="80" height="17" alpha="150">
+      <PartText x="0" y="67" width="80" height="17" alpha="150">
         <Text align="CENTER" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_medium" size="15" color="[CONFIGURATION.palette.0]" letterSpacing="0.15">BPM</Font>
         </Text>
@@ -1790,8 +1792,9 @@
     </ComplicationSlot>
 
     <!-- Emplacement 6 — batterie (intégrée) ou source au choix -->
-    <Group name="data6" x="0" y="0" width="438" height="438">
-      <PartDraw x="356" y="272" width="38" height="20">
+    <Group name="data6" x="334" y="268" width="80" height="66">
+      <Launch target="BATTERY_STATUS" />
+      <PartDraw x="22" y="4" width="38" height="20">
         <RoundRectangle x="2" y="2" width="30" height="16" cornerRadiusX="3" cornerRadiusY="3">
           <Fill color="#00000000" />
           <Stroke color="[CONFIGURATION.palette.0]" thickness="2" />
@@ -1804,12 +1807,12 @@
           <Transform target="width" value="25 * [BATTERY_PERCENT] / 100" />
         </Rectangle>
       </PartDraw>
-      <PartText x="320" y="294" width="60" height="36">
+      <PartText x="-14" y="26" width="60" height="36">
         <Text align="END" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="38" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
         </Text>
       </PartText>
-      <PartText x="381" y="297" width="30" height="26">
+      <PartText x="47" y="29" width="30" height="26">
         <Text align="START" ellipsis="TRUE" maxLines="1">
           <Font family="barlowcondensed_semibold" size="20" color="[CONFIGURATION.palette.0]">%</Font>
         </Text>

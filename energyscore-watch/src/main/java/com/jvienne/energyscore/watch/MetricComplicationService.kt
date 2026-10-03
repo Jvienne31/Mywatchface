@@ -1,5 +1,7 @@
 package com.jvienne.energyscore.watch
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
@@ -40,13 +42,14 @@ abstract class MetricComplicationService : SuspendingComplicationDataSourceServi
         val title = PlainComplicationText.Builder(metric.title).build()
         val description = PlainComplicationText.Builder(metric.label).build()
         val icon = MonochromaticImage.Builder(Icon.createWithResource(this, metric.icon)).build()
+        val tap = tapAction()
 
         return when (type) {
             ComplicationType.SHORT_TEXT -> ShortTextComplicationData.Builder(text, description)
-                .setTitle(title).setMonochromaticImage(icon).build()
+                .setTitle(title).setMonochromaticImage(icon).setTapAction(tap).build()
 
             ComplicationType.LONG_TEXT -> LongTextComplicationData.Builder(text, description)
-                .setTitle(title).setMonochromaticImage(icon).build()
+                .setTitle(title).setMonochromaticImage(icon).setTapAction(tap).build()
 
             ComplicationType.RANGED_VALUE -> {
                 // objectif, sinon maximum fixe, sinon la valeur elle-même (jauge pleine)
@@ -54,16 +57,28 @@ abstract class MetricComplicationService : SuspendingComplicationDataSourceServi
                 RangedValueComplicationData.Builder(
                     value = (value ?: 0f).coerceIn(0f, max), min = 0f, max = max,
                     contentDescription = description,
-                ).setText(text).setTitle(title).setMonochromaticImage(icon).build()
+                ).setText(text).setTitle(title).setMonochromaticImage(icon).setTapAction(tap).build()
             }
 
             ComplicationType.GOAL_PROGRESS -> {
                 val target = (goal ?: metric.previewGoal ?: 1f).coerceAtLeast(1f)
                 GoalProgressComplicationData.Builder(value ?: 0f, target, description)
-                    .setText(text).setTitle(title).setMonochromaticImage(icon).build()
+                    .setText(text).setTitle(title).setMonochromaticImage(icon).setTapAction(tap).build()
             }
 
             else -> null
         }
+    }
+
+    /** Toucher la complication ouvre Samsung Health sur la montre (sinon l'écran Santé Sync). */
+    private fun tapAction(): PendingIntent {
+        val intent = (packageManager.getLaunchIntentForPackage(SAMSUNG_HEALTH)
+            ?: Intent(this, MainActivity::class.java)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        return PendingIntent.getActivity(this, 0, intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
+    private companion object {
+        const val SAMSUNG_HEALTH = "com.samsung.android.wear.shealth"
     }
 }

@@ -1,55 +1,59 @@
 package com.jvienne.energyscore.watch
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.Gravity
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 
 /**
- * Écran de contrôle de la montre : dernières valeurs reçues du téléphone, et un essai de
- * lecture directe de Samsung Health sur la montre (voir [DirectReadTest]).
+ * Écran de contrôle de la montre : valeurs disponibles pour les complications. Demande aussi
+ * l'autorisation « activité physique » pour les mesures en direct (Health Services).
  */
 class MainActivity : Activity() {
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-    private lateinit var received: TextView
-    private lateinit var testResult: TextView
+    private lateinit var info: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        received = text(14f)
-        testResult = text(13f)
-        val button = Button(this).apply {
-            text = "Test lecture directe"
-            setOnClickListener { runTest() }
-        }
-        val column = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
+        info = TextView(this).apply {
+            textSize = 14f
             gravity = Gravity.CENTER_HORIZONTAL
             setPadding(40, 56, 40, 80)   // marges larges : écran rond
-            addView(received)
-            addView(button)
-            addView(testResult)
         }
-        setContentView(ScrollView(this).apply { addView(column) })
+        setContentView(ScrollView(this).apply { addView(info) })
+        if (checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), 1)
+        } else {
+            PassiveDataService.register(this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        PassiveDataService.register(this)
+        refresh()
     }
 
     override fun onResume() {
         super.onResume()
+        refresh()
+    }
+
+    private fun refresh() {
         val ts = HealthStore.lastUpdate(this)
-        val header = if (ts == 0L) {
-            "Santé Sync\n\nRien reçu du téléphone.\nOuvrez Santé Sync sur le téléphone et touchez « Autoriser et synchroniser »."
+        val phone = if (ts == 0L) {
+            "Téléphone : rien reçu.\nOuvrez Santé Sync sur le téléphone."
         } else {
-            "Santé Sync\nReçu à ${DateFormat.getTimeFormat(this).format(ts)}"
+            "Téléphone : reçu à ${DateFormat.getTimeFormat(this).format(ts)}"
+        }
+        val live = if (checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
+            "Montre : pas, distance, calories, étages en direct"
+        } else {
+            "Montre : autorisation « activité physique » refusée (mesures en direct désactivées)"
         }
         val lines = Metric.values().mapNotNull { m ->
             HealthStore.get(this, m.key)?.let { v ->
@@ -57,21 +61,6 @@ class MainActivity : Activity() {
                 "${m.label} : ${m.format.text(v, extra)}"
             }
         }
-        received.text = (listOf(header, "") + lines + "").joinToString("\n")
-    }
-
-    private fun runTest() {
-        testResult.text = "Essai en cours…"
-        scope.launch { testResult.text = DirectReadTest.run(this@MainActivity) }
-    }
-
-    override fun onDestroy() {
-        scope.cancel()
-        super.onDestroy()
-    }
-
-    private fun text(size: Float) = TextView(this).apply {
-        textSize = size
-        gravity = Gravity.CENTER_HORIZONTAL
+        info.text = (listOf("Santé Sync", phone, live, "") + lines).joinToString("\n")
     }
 }

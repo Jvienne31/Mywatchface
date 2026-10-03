@@ -228,7 +228,7 @@ FRAC = {
 CTEXT, CTITLE = ("expr", "[COMPLICATION.TEXT]"), ("expr", "[COMPLICATION.TITLE]")
 
 
-def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None):
+def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None, launch=None):
     """Donnée intégrée dessinée sur le cadran + ComplicationSlot par-dessus (masqués en AOD).
 
     Le moteur de la montre ne dessine pas la branche EMPTY d'un emplacement sans source
@@ -236,7 +236,10 @@ def slot(sid, name, x, y, w, h, types, builtin, render, oval=False, scale=None):
     source est choisie, l'emplacement redessine d'abord le fond (bandes découpées à sa forme)
     pour cacher la donnée intégrée, puis la donnée de la source. render(t) : XML seulement."""
     px, py = x + w / 2, y + h / 2
-    group_open(f"data{sid}", show="normal", scale=scale, pivot=(px, py) if scale else None)
+    if launch:   # zone sensible = l'emplacement : toucher ouvre l'appli système correspondante
+        group_open(f"data{sid}", x, y, w, h, show="normal", launch=launch)
+    else:
+        group_open(f"data{sid}", show="normal", scale=scale, pivot=(px, py) if scale else None)
     builtin()
     group_close("normal")
 
@@ -364,7 +367,7 @@ def dome_slot(sid, name, center, gr, ink, soft, track, color, builtin):
     image(cx - DOME_R - 2, cy - DOME_R - 2, 2 * DOME_R + 4, 2 * DOME_R + 4, "dome_glass", show="normal")
 
 
-def text_slot(sid, name, x, y, w, h, ink, soft, tint, builtin, big=26, centered=False):
+def text_slot(sid, name, x, y, w, h, ink, soft, tint, builtin, big=26, centered=False, launch=None):
     """Emplacement texte : source au choix = icône + texte + titre."""
     def render(t):
         if t in ("SHORT_TEXT", "LONG_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
@@ -379,7 +382,7 @@ def text_slot(sid, name, x, y, w, h, ink, soft, tint, builtin, big=26, centered=
                      align="START", spacing="0.1")
         elif t == "MONOCHROMATIC_IMAGE":
             comp_icon(x + w / 2, y + h / 2, min(w, h) - 12, tint)
-    slot(sid, name, x, y, w, h, TEXT_TYPES, builtin, render)
+    slot(sid, name, x, y, w, h, TEXT_TYPES, builtin, render, launch=launch)
 
 
 # --- Données intégrées --------------------------------------------------------
@@ -521,7 +524,7 @@ def _pct_after(x, y, h, content, sample):
 
 def layer_slots():
     O.comment("Emplacement 1 — date (intégrée) ou source au choix")
-    text_slot(1, "slot_date", 30, 100, 128, 70, INK[0], SOFT_D, ACCENT, builtin_date, big=38)
+    text_slot(1, "slot_date", 30, 100, 128, 70, INK[0], SOFT_D, ACCENT, builtin_date, big=38, launch="CALENDAR")
     O.comment("Emplacement 2 — météo (intégrée) ou source au choix")
     text_slot(2, "slot_left", 30, 172, 128, 44, INK[0], SOFT_D, ACCENT, builtin_weather, big=34)
     O.comment("Emplacement 3 — dôme bas gauche : indice UV (intégré) ou source au choix")
@@ -529,9 +532,9 @@ def layer_slots():
     O.comment("Emplacement 4 — dôme haut droite : pluie (intégrée) ou source au choix")
     dome_slot(4, "slot_dome_tr", DOME_TR, 31, INK[3], SOFT_L, TRACK_L, BAND[2], builtin_rain)
     O.comment("Emplacement 5 — cardio (intégré) ou source au choix")
-    text_slot(5, "slot_right", 334, 176, 80, 86, INK[3], SOFT_L, BAND[2], builtin_hr, big=36, centered=True)
+    text_slot(5, "slot_right", 334, 176, 80, 86, INK[3], SOFT_L, BAND[2], builtin_hr, big=36, centered=True, launch="HEALTH_HEART_RATE")
     O.comment("Emplacement 6 — batterie (intégrée) ou source au choix")
-    text_slot(6, "slot_right2", 334, 268, 80, 66, INK[3], SOFT_L, BAND[2], builtin_battery, big=30, centered=True)
+    text_slot(6, "slot_right2", 334, 268, 80, 66, INK[3], SOFT_L, BAND[2], builtin_battery, big=30, centered=True, launch="BATTERY_STATUS")
     O.comment("Emplacement 7 — pas (intégrés) ou source au choix")
 
     def steps_render(t):
