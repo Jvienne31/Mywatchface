@@ -29,5 +29,6 @@ class HealthSyncListenerService : WearableListenerService() {
         if (!updated) return
         PassiveDataService.register(applicationContext)   // entretient l'écoute en direct
         PassiveDataService.requestUpdate(applicationContext, ALL_PROVIDERS)
+        SanteTileService.refresh(applicationContext)
     }
 }

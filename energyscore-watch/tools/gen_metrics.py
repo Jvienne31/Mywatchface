@@ -226,7 +226,7 @@ def gen():
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false">
 
-        <!-- Écran de contrôle (icône dans la liste des applis) : dernières valeurs reçues. -->
+        <!-- Écran de l'appli (icône dans la liste des applis) : toutes les données, en Compose. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -260,6 +260,21 @@ def gen():
                     android:host="*"
                     android:pathPrefix="/sante" />
             </intent-filter>
+        </service>
+
+        <!-- Tuile « Santé du jour » : on glisse vers la gauche depuis le cadran -->
+        <service
+            android:name=".SanteTileService"
+            android:exported="true"
+            android:label="@string/tile_label"
+            android:icon="@drawable/ic_m_bolt"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/tile_preview" />
         </service>
 
         <!-- Une complication par donnée Samsung Health -->

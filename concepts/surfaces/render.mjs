@@ -136,3 +136,19 @@ await page.evaluate(() => document.fonts.ready);
 await page.screenshot({ path: join(here, 'planche.png'), fullPage: true });
 await browser.close();
 unlinkSync(tmp);
+
+// Aperçu de la tuile pour le sélecteur de la montre (res/drawable-nodpi/tile_preview.png)
+{
+  const b = await chromium.launch();
+  const p = await b.newPage({ viewport: { width: S, height: S } });
+  writeFileSync(tmp, `<!doctype html><html><head><meta charset="utf-8"><style>
+    @font-face{font-family:Barlow;font-weight:500;src:url(${font('barlow-condensed-latin-500-normal.woff2')})}
+    @font-face{font-family:Barlow;font-weight:600;src:url(${font('barlow-condensed-latin-600-normal.woff2')})}
+    body{margin:0;background:transparent}.lab{font-family:Barlow;font-weight:500;letter-spacing:.04em}
+    .val,.big{font-family:Barlow;font-weight:600}</style></head><body>${tile.replace('Actualiser', 'Détails')}</body></html>`);
+  await p.goto(pathToFileURL(tmp).href);
+  await p.evaluate(() => document.fonts.ready);
+  await p.screenshot({ path: join(root, 'energyscore-watch/src/main/res/drawable-nodpi/tile_preview.png'), omitBackground: true });
+  await b.close();
+  unlinkSync(tmp);
+}

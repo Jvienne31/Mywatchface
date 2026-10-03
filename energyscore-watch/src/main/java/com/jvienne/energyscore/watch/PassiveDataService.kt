@@ -28,6 +28,7 @@ class PassiveDataService : PassiveListenerService() {
         if (values.isEmpty()) return
         HealthStore.putLocal(applicationContext, values)
         requestUpdate(applicationContext, LOCAL_PROVIDERS)
+        SanteTileService.refresh(applicationContext)
     }
 
     companion object {

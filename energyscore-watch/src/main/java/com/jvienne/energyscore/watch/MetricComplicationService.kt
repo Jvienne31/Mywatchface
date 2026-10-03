@@ -78,7 +78,7 @@ abstract class MetricComplicationService : SuspendingComplicationDataSourceServi
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
-    private companion object {
+    companion object {
         const val SAMSUNG_HEALTH = "com.samsung.android.wear.shealth"
     }
 }
