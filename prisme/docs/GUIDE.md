@@ -3,7 +3,7 @@
 Cadran numérique pour Galaxy Watch (Wear OS 5 et plus), conçu sur une Galaxy Watch8
 Classic.
 
-![Prisme, palette Lagune](lagune.png)
+![Prisme au poignet : 4 palettes et le mode toujours allumé](vitrine.png)
 
 ## En un coup d'œil
 
@@ -15,7 +15,8 @@ Classic.
   en valeur deux données.
 - **Sept emplacements de données**. Chacun montre une donnée par défaut et accepte n'importe
   quelle complication de la montre.
-- **Arc des secondes** sur le pourtour, dans la couleur d'accent.
+- **Secondes** au choix (*Personnaliser > Secondes*) : arc qui se remplit sur le pourtour (par défaut), point qui tourne, ou aucune.
+- **Batterie faible** : à 20 % ou moins, la pile et le pourcentage passent en rouge (aussi en mode toujours allumé).
 - **Mode toujours allumé (AOD)** : fond noir, chiffres fins, environ 6 % des pixels allumés.
 
 ## Les données
