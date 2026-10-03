@@ -29,7 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import wff  # noqa: E402
 from wff import (O, W, C, f, polar, rel, escape, draw_open, draw_close, rect, circle, arc,  # noqa: E402
-                 line, rrect, text, group_open, group_close, image, condition)
+                 line, rrect, text, group_open, group_close, image, condition, list_config)
 
 RES = os.path.join(HERE, "..", "src", "main", "res")
 wff.RES = RES
@@ -191,12 +191,24 @@ def layer_digits():
     group_close("ambient")
 
 
+SECONDS_OPTIONS = [("sec_arc", "Arc"), ("sec_dot", "Point"), ("sec_none", "Aucune")]
+
+
 def layer_seconds():
-    O.comment("Secondes : arc au bord")
-    draw_open("normal")
-    arc(C, C, C - 5, 0, 360, ACCENT, 4, cap="ROUND", end_expr="6 * [SECOND]",
-        svg_a1=6 * SAMPLE["s"])
-    draw_close("normal")
+    O.comment("Secondes au choix (réglage) : arc qui se remplit, point qui tourne, ou rien")
+
+    def sec_arc():
+        draw_open("normal")
+        arc(C, C, C - 5, 0, 360, ACCENT, 4, cap="ROUND", end_expr="6 * [SECOND]",
+            svg_a1=6 * SAMPLE["s"])
+        draw_close("normal")
+
+    def sec_dot():
+        draw_open("normal", angle_expr="6 * [SECOND]", svg_angle=6 * SAMPLE["s"])
+        circle(C, 8, 5, fill=ACCENT)
+        draw_close("normal")
+
+    list_config("secondes", [sec_arc, sec_dot, lambda: None])
 
 
 def dome_background(cx, cy, r, color):
@@ -465,18 +477,28 @@ def builtin_hr():
     text(334, 243, 80, 17, "BPM", "BPM", DATA_M, 15, SOFT_L[0], alpha=SOFT_L[1], spacing="0.15")
 
 
-def builtin_battery():
+BATT_LOW = "[BATTERY_PERCENT] <= 20"      # batterie faible : pile et valeur en rouge
+LOW_RED, LOW_RED_AOD = "#D7263D", "#FF5A5F"
+
+
+def _battery(fill, ink):
     box_draw(356, 272, 38, 20)
-    rrect(358, 274, 30, 16, 3, "#00000000", stroke=INK[3], th=2)
-    rect(389, 279, 3, 6, INK[3])
-    rect(360.5, 276.5, 25, 11, BAND[2], width_expr="25 * [BATTERY_PERCENT] / 100",
+    rrect(358, 274, 30, 16, 3, "#00000000", stroke=ink, th=2)
+    rect(389, 279, 3, 6, ink)
+    rect(360.5, 276.5, 25, 11, fill, width_expr="25 * [BATTERY_PERCENT] / 100",
          svg_w=25 * SAMPLE["batt"] / 100)
     draw_close()
-    value_unit(374, 294, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 38, INK[3], 20)
+    value_unit(374, 294, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 38, ink, 20)
 
 
-SEG_N, SEG_W, SEG_GAP, SEG_H, SEG_Y = 10, 15, 4, 15, 378
-SEG_X0 = C - 106
+def builtin_battery():
+    condition("batt_low", BATT_LOW,
+              lambda: _group(lambda: _battery(LOW_RED, LOW_RED)),
+              lambda: _group(lambda: _battery(BAND[2], INK[3])), SAMPLE["batt"] <= 20)
+
+
+SEG_N, SEG_W, SEG_GAP, SEG_H, SEG_Y = 10, 12, 4, 15, 378
+SEG_X0 = C - 91                         # pictogramme à gauche, pourcentage à droite : dans l'arc des secondes
 
 
 def steps_bar(frac_expr, frac_sample, pct):
@@ -509,13 +531,19 @@ def steps_bar(frac_expr, frac_sample, pct):
         seg(i, ACCENT)
         draw_close()
         O.mode_stack.pop()
-    pct(x_end + 2, SEG_Y - 6, 27)
+    pct(x_end - 2, SEG_Y - 6, 27)
+
+
+# Bloc des pas : « 6420 PAS » sur une ligne (nombre calé à droite, libellé collé derrière),
+# puis pictogramme + barre + pourcentage sur la ligne du dessous.
+STEPS_SPLIT = C - 8                     # fin du nombre, début de « PAS »
+STEPS_ICON = (SEG_X0 - 17, SEG_Y + SEG_H / 2)
 
 
 def builtin_steps():
-    icon_img(C - 78, 352, 30, "steps", ACCENT)
-    text(C - 58, 331, 92, 40, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 36, INK[1], align="START")
-    text(C + 34, 349, 44, 20, "PAS", "PAS", DATA_M, 17, INK[3], align="START", spacing="0.12")   # sur la bande claire
+    icon_img(*STEPS_ICON, 24, "steps", ACCENT)
+    text(STEPS_SPLIT - 120, 331, 120, 40, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 36, INK[1], align="END")
+    text(STEPS_SPLIT + 4, 347, 44, 21, "PAS", "PAS", DATA, 18, INK[1], align="START", spacing="0.1")
     steps_bar("[STEP_PERCENT] / 100", SAMPLE["pct"] / 100,
               lambda x, y, h: _pct_after(x, y, h, ("expr", "[STEP_PERCENT]"), SAMPLE["pct"]))
 
@@ -541,8 +569,8 @@ def layer_slots():
     O.comment("Emplacement 7 — pas (intégrés) ou source au choix")
 
     def steps_render(t):
-        comp_icon(C - 78, 352, 28, ACCENT)
-        text(C - 58, 331, 170, 40, CTEXT, "", DATA, 36, INK[1], align="START")
+        comp_icon(*STEPS_ICON, 24, ACCENT)
+        text(C - 100, 331, 200, 40, CTEXT, "", DATA, 36, INK[1])
         if t in FRAC:
             steps_bar(FRAC[t], 0.5,
                       lambda x, y, h: _pct_after(x, y, h, ("expr", f"round(100 * clamp({FRAC[t]}, 0, 1))"), ""))
@@ -565,7 +593,11 @@ def layer_aod():
                                           "#C9D1D9")),
               lambda: _group(lambda: text(334, 198, 80, 46, "--", "--", DATA, 42, "#C9D1D9")), True)
     text(334, 243, 80, 17, "BPM", "BPM", DATA_M, 14, "#7D8791", spacing="0.15")
-    value_unit(374, 290, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 34, "#C9D1D9", 18)
+    condition("batt_low_aod", BATT_LOW,
+              lambda: _group(lambda: value_unit(374, 290, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 34,
+                                                LOW_RED_AOD, 18)),
+              lambda: _group(lambda: value_unit(374, 290, 36, ("expr", "[BATTERY_PERCENT]"), SAMPLE["batt"], "%", 34,
+                                                "#C9D1D9", 18)), SAMPLE["batt"] <= 20)
     text(C - 80, 340, 160, 38, ("expr", "[STEP_COUNT]"), SAMPLE["steps"], DATA, 32, "#C9D1D9")
     group_close("ambient")
 
@@ -679,7 +711,11 @@ def config_xml():
     for i, (name, bands_, accent) in enumerate(PALETTES):
         lines.append(f'      <ColorOption id="{i}" displayName="{name}" '
                      f'colors="{" ".join(palette_colors(bands_, accent))}" />')
-    lines += ['    </ColorConfiguration>', '  </UserConfigurations>']
+    lines.append('    </ColorConfiguration>')
+    lines.append('    <ListConfiguration id="secondes" displayName="cfg_secondes" defaultValue="0">')
+    for i, (name, _) in enumerate(SECONDS_OPTIONS):
+        lines.append(f'      <ListOption id="{i}" displayName="{name}" />')
+    lines += ['    </ListConfiguration>', '  </UserConfigurations>']
     return lines
 
 

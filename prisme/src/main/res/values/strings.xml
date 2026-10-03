@@ -3,6 +3,10 @@
     <string name="app_name">Prisme</string>
 
     <string name="cfg_palette">Palette</string>
+    <string name="cfg_secondes">Secondes</string>
+    <string name="sec_arc">Arc</string>
+    <string name="sec_dot">Point</string>
+    <string name="sec_none">Aucune</string>
 
     <string name="pal_lagune">Lagune</string>
     <string name="pal_volcan">Volcan</string>
