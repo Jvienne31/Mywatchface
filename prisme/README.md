@@ -2,6 +2,7 @@
 
 Cadran numérique pour Galaxy Watch8 Classic (Wear OS 5+, WFF v2, sans code).
 Maquette validée : `concepts/prisme/` (version « 2 dômes », palette Lagune).
+Guide utilisateur : [`docs/GUIDE.md`](docs/GUIDE.md).
 
 - Heures et minutes sur deux lignes, en italique : chiffres clairs avec contour sombre et
   ombre, lisibles sur toutes les bandes ; minutes légèrement teintées de la couleur d'accent.
