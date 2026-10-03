@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'   // Samsung Health Data SDK (essai de lecture directe sur la montre)
 }
 
 android {
@@ -49,4 +50,10 @@ dependencies {
     implementation "androidx.wear.watchface:watchface-complications-data-source-ktx:1.2.1"
     implementation "com.google.android.gms:play-services-wearable:18.2.0"
     implementation "androidx.concurrent:concurrent-futures-ktx:1.2.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+    implementation "com.google.code.gson:gson:2.9.0"
+
+    // Essai : le Samsung Health Data SDK fonctionne-t-il aussi sur la montre ? Même .aar que
+    // l'appli téléphone (energyscore-phone/libs, non versionné).
+    implementation fileTree(dir: '../energyscore-phone/libs', include: ['*.aar'])
 }
