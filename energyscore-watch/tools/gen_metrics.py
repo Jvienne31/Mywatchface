@@ -6,7 +6,8 @@
 Génère (ne pas éditer à la main) :
   energyscore-watch : Metric.kt, Providers.kt, AndroidManifest.xml, values/metrics.xml,
                       drawable/ic_m_*.xml (une complication par donnée)
-  energyscore-phone : Keys.kt (clés du Data Layer, contrat commun aux deux applis)
+  energyscore-phone : Keys.kt (clés du Data Layer, contrat commun aux deux applis),
+                      PhoneMetric.kt, Format.kt (copie de celui de la montre), drawable/ic_m_*.xml
 
 Chaque ligne : identifiant, libellé du sélecteur, titre court (affiché sous la valeur),
 format, clé d'objectif (ou None), maximum fixe (ou None), valeur et objectif d'aperçu,
@@ -132,6 +133,32 @@ def gen():
     lines += ["    )", "}", ""]
     write(os.path.join(PHONE, "java", PPKG, "Keys.kt"), "\n".join(lines))
 
+    # --- téléphone : description des données pour l'écran, mise en forme identique à la montre ---
+    lines = [head, "package com.jvienne.energyscore.phone", "",
+             "/** Données affichées par l'appli téléphone (même table que les complications). */",
+             "enum class PhoneMetric(",
+             "    val key: String,",
+             "    val label: String,",
+             "    val title: String,",
+             "    val format: Format,",
+             "    val goalKey: String?,",
+             "    val max: Float?,",
+             "    val icon: Int,",
+             ") {"]
+    for m in METRICS:
+        mid, label, title, fmt, goal, mx, _, _, icon = m
+        g = f'"{goal}"' if goal else "null"
+        lab = label.replace('"', '\\"')
+        lines.append(f'    {mid.upper()}("{mid}", "{lab}", "{title}", Format.{fmt}, {g}, {fl(mx)}, '
+                     f'R.drawable.ic_m_{icon}),')
+    lines[-1] = lines[-1].rstrip(",") + ";"
+    lines += ["}", ""]
+    write(os.path.join(PHONE, "java", PPKG, "PhoneMetric.kt"), "\n".join(lines))
+    with open(os.path.join(WATCH, "java", WPKG, "Format.kt"), encoding="utf-8") as fh:
+        fmt_src = fh.read().replace("package com.jvienne.energyscore.watch", "package com.jvienne.energyscore.phone")
+    write(os.path.join(PHONE, "java", PPKG, "Format.kt"),
+          "// FICHIER GÉNÉRÉ : copie de energyscore-watch/.../Format.kt par gen_metrics.py.\n\n" + fmt_src)
+
     # --- montre : Metric.kt ---
     lines = [head, "package com.jvienne.energyscore.watch", "",
              "/** Données affichables en complication (une par fournisseur, cf. Providers.kt). */",
@@ -175,17 +202,18 @@ def gen():
     lines += ["</resources>", ""]
     write(os.path.join(WATCH, "res", "values", "metrics.xml"), "\n".join(lines))
 
-    # --- montre : pictogrammes ---
+    # --- pictogrammes (montre et téléphone) ---
     for name, d in ICONS.items():
-        write(os.path.join(WATCH, "res", "drawable", f"ic_m_{name}.xml"),
-              '<?xml version="1.0" encoding="utf-8"?>\n'
-              '<!-- FICHIER GÉNÉRÉ par energyscore-watch/tools/gen_metrics.py -->\n'
-              '<vector xmlns:android="http://schemas.android.com/apk/res/android"\n'
-              '    android:width="24dp" android:height="24dp"\n'
-              '    android:viewportWidth="24" android:viewportHeight="24">\n'
-              f'    <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"\n'
-              f'        android:pathData="{d}" />\n'
-              '</vector>\n')
+        for target in (WATCH, PHONE):
+            write(os.path.join(target, "res", "drawable", f"ic_m_{name}.xml"),
+                  '<?xml version="1.0" encoding="utf-8"?>\n'
+                  '<!-- FICHIER GÉNÉRÉ par energyscore-watch/tools/gen_metrics.py -->\n'
+                  '<vector xmlns:android="http://schemas.android.com/apk/res/android"\n'
+                  '    android:width="24dp" android:height="24dp"\n'
+                  '    android:viewportWidth="24" android:viewportHeight="24">\n'
+                  f'    <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"\n'
+                  f'        android:pathData="{d}" />\n'
+                  '</vector>\n')
 
     # --- montre : manifeste ---
     svc = []

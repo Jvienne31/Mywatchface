@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.SanteSync" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <!-- Fond Lagune dès l'ouverture (pas d'éclair blanc avant l'affichage de l'écran Compose) -->
+    <style name="Theme.SanteSync" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/lagune_bg</item>
+    </style>
 </resources>
