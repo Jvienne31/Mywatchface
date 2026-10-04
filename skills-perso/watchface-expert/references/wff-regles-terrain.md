@@ -119,6 +119,15 @@ l'émulateur Wear OS 6 (API 36) et sur une Galaxy Watch8 Classic.
 - **Absents du format** : calories, distance, scores. Il faut une complication pour les
   afficher.
 
+- **[montre] Options de réglage sans icône** : l'éditeur Samsung (montre et Galaxy Wearable)
+  n'affiche que l'`icon` d'un `ListOption`, pas son `displayName`. Sans icône, on ne voit que des
+  ronds vides. Toujours fournir une icône par option : disque sombre et dessin clair, lisible sur
+  fond clair comme sombre.
+- **[montre] Tuile Material 3** : `graphicDataCard` et `textDataCard` masquent leur titre et leur
+  contenu quand la hauteur manque (seul le texte secondaire restait). Pour des pastilles petites,
+  utiliser `card { … }` avec un contenu écrit à la main (`Column` / `Row` et `text(…, typography,
+  color)`), avec un fond par `LayoutModifier.background(LayoutColor)`.
+
 ## AOD
 
 - Mesure : `convert aod.png -alpha off -colorspace gray -threshold 8% -format "%[fx:mean*100]" info:`.
