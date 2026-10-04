@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'com.jvienne.energyscore.watch'
-    compileSdk 35
+    compileSdk 36   // Watch Face Push (Wear OS 6)
 
     defaultConfig {
         applicationId "com.jvienne.santesync"
