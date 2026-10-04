@@ -775,12 +775,12 @@ def config_xml():
                      f'colors="{" ".join(palette_colors(bands_, accent))}" />')
     lines.append('    </ColorConfiguration>')
     lines.append('    <ListConfiguration id="secondes" displayName="cfg_secondes" defaultValue="0">')
-    for i, (name, _) in enumerate(SECONDS_OPTIONS):
-        lines.append(f'      <ListOption id="{i}" displayName="{name}" />')
+    for i, (name, _) in enumerate(SECONDS_OPTIONS):   # icône obligatoire : l'éditeur Samsung n'affiche qu'elle
+        lines.append(f'      <ListOption id="{i}" displayName="{name}" icon="opt_{name}" />')
     lines.append('    </ListConfiguration>')
     lines.append('    <ListConfiguration id="dome_gauche" displayName="cfg_dome_gauche" defaultValue="0">')
     for i, (name, _) in enumerate(FORECAST_OPTIONS):
-        lines.append(f'      <ListOption id="{i}" displayName="{name}" />')
+        lines.append(f'      <ListOption id="{i}" displayName="{name}" icon="opt_{name}" />')
     lines.append('    </ListConfiguration>')
     pal_index = {name: i for i, (name, _, _) in enumerate(PALETTES)}
     lines.append(f'    <Flavors defaultValue="{FLAVORS[0][0]}">')

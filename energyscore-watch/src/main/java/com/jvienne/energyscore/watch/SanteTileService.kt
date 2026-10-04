@@ -14,7 +14,7 @@ import androidx.wear.protolayout.LayoutElementBuilders.Spacer
 import androidx.wear.protolayout.ModifiersBuilders.Clickable
 import androidx.wear.protolayout.ResourceBuilders
 import androidx.wear.protolayout.TimelineBuilders
-import androidx.wear.protolayout.material3.CardColors
+import androidx.wear.protolayout.LayoutElementBuilders.Row
 import androidx.wear.protolayout.material3.ColorScheme
 import androidx.wear.protolayout.material3.MaterialScope
 import androidx.wear.protolayout.material3.PrimaryLayoutMargins
@@ -22,12 +22,13 @@ import androidx.wear.protolayout.material3.ProgressIndicatorColors
 import androidx.wear.protolayout.material3.Typography
 import androidx.wear.protolayout.material3.buttonGroup
 import androidx.wear.protolayout.material3.circularProgressIndicator
-import androidx.wear.protolayout.material3.graphicDataCard
+import androidx.wear.protolayout.material3.card
 import androidx.wear.protolayout.material3.materialScope
 import androidx.wear.protolayout.material3.primaryLayout
 import androidx.wear.protolayout.material3.text
-import androidx.wear.protolayout.material3.textDataCard
 import androidx.wear.protolayout.material3.textEdgeButton
+import androidx.wear.protolayout.modifiers.LayoutModifier
+import androidx.wear.protolayout.modifiers.background
 import androidx.wear.protolayout.modifiers.clickable
 import androidx.wear.protolayout.types.LayoutColor
 import androidx.wear.protolayout.types.layoutString
@@ -38,8 +39,8 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 
 /**
- * Tuile « Santé du jour », style Material 3 Expressive (modèle « Goal » des Golden Tiles de
- * Google) : grande pastille du score d'énergie avec son anneau, trois pastilles sommeil / pas /
+ * Tuile « Santé du jour », style Material 3 Expressive (d'après les Golden Tiles de Google) :
+ * grande pastille du score d'énergie avec son anneau, trois pastilles sommeil / pas /
  * distance, bouton de bord « Détails ». Lit le même cache que les complications
  * ([HealthStore]) et se redessine à chaque nouvelle donnée ([refresh]).
  */
@@ -62,7 +63,6 @@ class SanteTileService : TileService() {
     private fun layout(device: DeviceParameters): LayoutElement {
         val energy = reading(Metric.ENERGY)
         val sleep = reading(Metric.SLEEP_MIN)
-        val sleepScore = reading(Metric.SLEEP_SCORE)
         val steps = reading(Metric.STEPS)
         val distance = reading(Metric.DISTANCE_M)
         val open = clickable(
@@ -78,20 +78,12 @@ class SanteTileService : TileService() {
                         .setWidth(expand())
                         .setHeight(expand())
                         .addContent(energyCard(energy, open))
-                        .addContent(Spacer.Builder().setHeight(dp(4f)).build())
+                        .addContent(Spacer.Builder().setHeight(dp(6f)).build())
                         .addContent(
                             buttonGroup(height = weight(1f), spacing = 4f) {
-                                buttonGroupItem {
-                                    mini(open, sleep?.value, "Sommeil", sleepScore?.let { "score ${it.value}" })
-                                }
-                                buttonGroupItem {
-                                    mini(open, steps?.value?.let(::compactSteps), "Pas",
-                                        steps?.progress?.let { "${(it * 100).toInt()} %" })
-                                }
-                                buttonGroupItem {
-                                    mini(open, distance?.value?.substringBefore(' '), "Distance",
-                                        distance?.value?.substringAfter(' ', ""))
-                                }
+                                buttonGroupItem { mini(open, sleep?.value, "Sommeil") }
+                                buttonGroupItem { mini(open, steps?.value?.let(::compactSteps), "Pas") }
+                                buttonGroupItem { mini(open, distance?.value, "Distance") }
                             }
                         )
                         .build()
@@ -101,46 +93,59 @@ class SanteTileService : TileService() {
         }
     }
 
-    /** Grande pastille : score d'énergie, « sur 100 », anneau de progression à droite. */
+    /**
+     * Grande pastille : score d'énergie et « Énergie / 100 » à gauche, anneau à droite.
+     * Contenu dessiné à la main (card) : les cartes « de données » de Material 3 masquent leurs
+     * textes quand la hauteur manque [montre].
+     */
     private fun MaterialScope.energyCard(energy: Reading?, open: Clickable): LayoutElement =
-        graphicDataCard(
+        card(
             onClick = open,
-            height = weight(1.3f),
-            colors = CardColors(
-                backgroundColor = LayoutColor(Lagune.CARD),
-                titleColor = LayoutColor(Lagune.INK),
-                contentColor = LayoutColor(Lagune.ACCENT),
-            ),
-            horizontalAlignment = LayoutElementBuilders.HORIZONTAL_ALIGN_END,
-            title = { text((energy?.value ?: "--").layoutString, typography = Typography.NUMERAL_MEDIUM) },
-            content = { text("Énergie / 100".layoutString, typography = Typography.LABEL_SMALL) },
-            graphic = {
-                circularProgressIndicator(
-                    staticProgress = energy?.progress ?: 0f,
-                    colors = ProgressIndicatorColors(LayoutColor(Lagune.ACCENT), LayoutColor(Lagune.TRACK)),
+            modifier = LayoutModifier.background(LayoutColor(Lagune.CARD)),
+            width = expand(),
+            height = weight(1f),
+        ) {
+            Row.Builder()
+                .setWidth(expand())
+                .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
+                .addContent(
+                    Column.Builder()
+                        .setWidth(weight(1f))
+                        .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_START)
+                        .addContent(text((energy?.value ?: "--").layoutString, typography = Typography.NUMERAL_SMALL,
+                            color = LayoutColor(Lagune.INK)))
+                        .addContent(text("Énergie / 100".layoutString, typography = Typography.LABEL_SMALL,
+                            color = LayoutColor(Lagune.ACCENT)))
+                        .build()
                 )
-            },
-        )
+                .addContent(
+                    circularProgressIndicator(
+                        staticProgress = energy?.progress ?: 0f,
+                        size = dp(40f),
+                        strokeWidth = 6f,
+                        colors = ProgressIndicatorColors(LayoutColor(Lagune.ACCENT), LayoutColor(Lagune.TRACK)),
+                    )
+                )
+                .build()
+        }
 
-    /** Mini-pastille : valeur, libellé, complément. */
-    private fun MaterialScope.mini(open: Clickable, value: String?, label: String, sub: String?): LayoutElement {
-        val secondary: (MaterialScope.() -> LayoutElement)? =
-            if (sub.isNullOrEmpty()) null else { { text(sub.layoutString) } }
-        return textDataCard(
+    /** Mini-pastille : grande valeur, libellé dessous. */
+    private fun MaterialScope.mini(open: Clickable, value: String?, label: String): LayoutElement =
+        card(
             onClick = open,
+            modifier = LayoutModifier.background(LayoutColor(Lagune.CARD_2)),
             width = expand(),
             height = expand(),
-            colors = CardColors(
-                backgroundColor = LayoutColor(Lagune.CARD_2),
-                titleColor = LayoutColor(Lagune.INK),
-                contentColor = LayoutColor(Lagune.SOFT),
-                secondaryTextColor = LayoutColor(Lagune.ACCENT),
-            ),
-            title = { text((value ?: "--").layoutString) },
-            content = { text(label.layoutString) },
-            secondaryText = secondary,
-        )
-    }
+        ) {
+            Column.Builder()
+                .setWidth(expand())
+                .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_CENTER)
+                .addContent(text((value ?: "--").layoutString, typography = Typography.TITLE_MEDIUM,
+                    color = LayoutColor(Lagune.INK), maxLines = 1))
+                .addContent(text(label.layoutString, typography = Typography.LABEL_SMALL,
+                    color = LayoutColor(Lagune.SOFT), maxLines = 1))
+                .build()
+        }
 
     /** « 7 412 » tient mal dans une mini-pastille : « 7,4k » au-delà de 9 999. */
     private fun compactSteps(v: String): String {

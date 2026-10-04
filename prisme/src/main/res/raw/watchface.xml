@@ -27,15 +27,15 @@
       <ColorOption id="17" displayName="pal_aurore" colors="#1A1530 #5A2A6E #E0607E #FFE6D8 #FFC857" />
     </ColorConfiguration>
     <ListConfiguration id="secondes" displayName="cfg_secondes" defaultValue="0">
-      <ListOption id="0" displayName="sec_arc" />
-      <ListOption id="1" displayName="sec_dot" />
-      <ListOption id="2" displayName="sec_none" />
+      <ListOption id="0" displayName="sec_arc" icon="opt_sec_arc" />
+      <ListOption id="1" displayName="sec_dot" icon="opt_sec_dot" />
+      <ListOption id="2" displayName="sec_none" icon="opt_sec_none" />
     </ListConfiguration>
     <ListConfiguration id="dome_gauche" displayName="cfg_dome_gauche" defaultValue="0">
-      <ListOption id="0" displayName="dg_uv" />
-      <ListOption id="1" displayName="dg_maxmin" />
-      <ListOption id="2" displayName="dg_1h" />
-      <ListOption id="3" displayName="dg_3h" />
+      <ListOption id="0" displayName="dg_uv" icon="opt_dg_uv" />
+      <ListOption id="1" displayName="dg_maxmin" icon="opt_dg_maxmin" />
+      <ListOption id="2" displayName="dg_1h" icon="opt_dg_1h" />
+      <ListOption id="3" displayName="dg_3h" icon="opt_dg_3h" />
     </ListConfiguration>
     <Flavors defaultValue="fl_quotidien">
       <Flavor id="fl_quotidien" displayName="fl_quotidien" icon="fl_quotidien">
