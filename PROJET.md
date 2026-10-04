@@ -8,10 +8,14 @@ Mise à jour : 3 octobre 2026. Branche de travail : `claude/sweet-johnson-122okj
 |---|---|---|
 | `prisme/` | **Cadran Prisme** (WFF v2, sans code) : 18 palettes, 7 emplacements, 2 dômes, AOD, réglage des secondes, batterie rouge sous 20 % | Fonctionne sur la Watch8 Classic (validé le 3 octobre 2026). Doc : `prisme/docs/GUIDE.md` |
 | `energyscore-phone/` | **Santé Sync, téléphone** : lit Samsung Health (Health Data SDK) et envoie à la montre toutes les 30 min | Fonctionne en mode développeur Samsung Health |
-| `energyscore-watch/` | **Santé Sync, montre** : 26 complications, mesures en direct (Health Services), toucher → Samsung Health, tuile « Santé du jour », écran en Compose | Fonctionne |
+| `energyscore-watch/` | **Santé Sync, montre** : 26 complications, mesures en direct (Health Services), toucher → Samsung Health, tuile « Santé du jour » (Material 3), écran en Compose, installation de Prisme par Watch Face Push | Fonctionne (Watch Face Push : compilé et validé, à tester sur la montre) |
 | `race/` | Reproduction de S4U Race (exercice) | **Ne pas publier** : copie d'un cadran existant |
 | `concepts/` | Maquettes : Prisme, Méridien (luxe), Strate, Palettes, Nocturne | Méridien et Strate gardés pour plus tard |
 | `app/` | Ancien projet | — |
+
+Prisme existe en deux variantes : `standard` (paquet com.jvienne.prisme, installé à la main) et
+`push` (com.jvienne.santesync.watchfacepush.prisme, embarqué dans Santé Sync montre et installé
+par Watch Face Push). Outillage : Kotlin 2.1.21, AGP 8.9.1, Gradle 8.11.1.
 
 Les APK sont construits par GitHub Actions : `build-prisme.yml`, `build-sante.yml` et
 `build-race.yml`. Chaque exécution donne un APK à télécharger dans l'onglet Actions.

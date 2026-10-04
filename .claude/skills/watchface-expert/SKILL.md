@@ -235,6 +235,45 @@ ou sur l'émulateur. Elles priment sur la documentation.
 - **Wear Widgets** (`WearWidget/`) : surfaces en Remote Compose (alpha), converties en tuile sur
   les montres plus anciennes. À surveiller, pas encore à utiliser.
 
+### Watch Face Push et Kotlin 2 (en place dans Santé Sync, compilé le 4 octobre 2026)
+
+- **Outillage minimum** :
+  - Kotlin 2.1.21 avec le plugin `org.jetbrains.kotlin.plugin.compose` (remplace
+    `composeOptions`) ;
+  - AGP 8.9.1 et Gradle 8.11.1 ;
+  - `compileSdk 36` pour l'appli qui utilise `androidx.wear.watchfacepush:watchfacepush:1.0.0`.
+    Le contrôle des métadonnées AAR échoue sinon.
+  - `<uses-sdk tools:overrideLibrary="androidx.wear.watchfacepush"/>` et un test
+    `SDK_INT >= 36` pour garder `minSdk 33`.
+- **Cadran poussé** :
+  - paquet `<appli>.watchfacepush.<nom>` : une variante Gradle (`productFlavors push`) ;
+  - manifeste sans `<service>`, retiré avec `tools:node="remove"` dans `src/push`. Seuls
+    `manifest`, `uses-feature`, `uses-sdk`, `application`, `property` et `meta-data` sont admis ;
+  - `minifyEnabled true` (pas de dex) et `hasCode="false"`.
+- **Validateur** :
+  - `validator-push-cli-1.1.0-alpha01.jar` sur `dl.google.com/android/maven2`. La version
+    « alpha10 » citée par la documentation n'existe pas (404) ; c'est un jar autonome ;
+  - sortie : « Validation is successful » puis « No failing checks detected, generated token:
+    <jeton> », suivi de 10 contrôles (taille, contenu, manifeste, présence du WFF, validateur
+    WFF, mémoire, version WFF, minSdk, nom de paquet, signature).
+- **Appli** :
+  - API : `WatchFacePushManagerFactory.createWatchFacePushManager(ctx)`, puis `listWatchFaces()`
+    (`installedWatchFaceDetails` : `slotId`, `packageName`, `versionCode`), `addWatchFace(fd,
+    jeton)`, `updateWatchFace(slotId, fd, jeton)`, `setWatchFaceAsActive(slotId)`
+    (autorisation `SET_PUSHED_WATCH_FACE_AS_ACTIVE`) et `isWatchFaceActive(paquet)` ;
+  - permission `PUSH_WATCH_FACES` ;
+  - l'APK est passé par `ParcelFileDescriptor.open(fichier)`.
+- **Tuile Material 3** : `protolayout-material3:1.3.0` avec `tiles:1.5.0` compile sous AGP 8.9.
+  - Fonctions : `materialScope(ctx, device, allowDynamicTheme=false,
+    defaultColorScheme=ColorScheme(...))`, puis `primaryLayout(titleSlot, mainSlot, bottomSlot,
+    margins)`, `graphicDataCard`, `textDataCard`, `buttonGroup { buttonGroupItem { } }`,
+    `circularProgressIndicator`, `textEdgeButton`, `String.layoutString`, `LayoutColor(argb)` et
+    `clickable(launchAction(ComponentName), id)`.
+  - Les API 1.4 des exemples Google (`materialScopeWithResources`, `ProtoLayoutScope`) exigent
+    AGP 9.
+  - La liste exacte des signatures d'une version :
+    `raw.githubusercontent.com/androidx/androidx/androidx-main/<chemin>/api/<version>.txt`.
+
 ## 7. Idées
 
 - Méridien (cadran de luxe, textures carbone, bambou, soleillé…) et Strate.
