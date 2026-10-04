@@ -1,0 +1,37 @@
+# Construit la « Complication Test Suite » officielle de Google (android/wear-os-samples,
+# dossier Complications) : des sources de complications factices de tous les types, pour
+# vérifier que chaque emplacement de Prisme affiche bien chaque type de donnée.
+# Version figée sur un commit ; lancement à la main (onglet Actions > Run workflow).
+name: APK Complication Test Suite
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/build-complications-test.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: android/wear-os-samples
+          ref: 6b8737937cb0c1e7748ae3f0197014d7aa51ad31
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Construire l'APK
+        working-directory: Complications
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :Wearable:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: complication-test-suite-apk
+          path: Complications/Wearable/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
