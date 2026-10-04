@@ -47,7 +47,7 @@ jobs:
       - name: Valider Prisme et obtenir le jeton
         run: |
           curl -fsSL -o validator-push-cli.jar \
-            https://dl.google.com/android/maven2/com/google/android/wearable/watchface/validator/validator-push-cli/1.0.0-alpha10/validator-push-cli-1.0.0-alpha10.jar
+            https://dl.google.com/android/maven2/com/google/android/wearable/watchface/validator/validator-push-cli/1.1.0-alpha01/validator-push-cli-1.1.0-alpha01.jar
           APK=prisme/build/outputs/apk/push/debug/prisme-push-debug.apk
           java -jar validator-push-cli.jar --apk_path="$APK" --package_name=com.jvienne.santesync 2>&1 | tee validation.txt
           python3 .github/scripts/jeton_validation.py validation.txt > prisme_token.txt
