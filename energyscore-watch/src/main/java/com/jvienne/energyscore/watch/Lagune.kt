@@ -6,6 +6,7 @@ import android.content.Context
 object Lagune {
     const val BG = 0xFF0A1729.toInt()
     const val CARD = 0xFF13232E.toInt()
+    const val CARD_2 = 0xFF1B4450.toInt()   // pastilles secondaires (tuile)
     const val TRACK = 0xFF0E4756.toInt()
     const val BUTTON = 0xFF2A9BA6.toInt()
     const val INK = 0xFFDDEFF0.toInt()

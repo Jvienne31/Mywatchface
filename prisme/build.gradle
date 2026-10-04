@@ -24,9 +24,27 @@ android {
         }
     }
 
+    // Deux diffusions du même cadran :
+    //  - standard : paquet com.jvienne.prisme, installé à la main (Wear Installer, adb) ;
+    //  - push : paquet imposé par Watch Face Push (<appli>.watchfacepush.<cadran>), embarqué dans
+    //    l'appli montre Santé Sync qui l'installe et le met à jour elle-même (Wear OS 6).
+    //    Manifeste réduit (src/push), numéro de version = numéro de compilation GitHub.
+    flavorDimensions "diffusion"
+    productFlavors {
+        standard {
+            dimension "diffusion"
+        }
+        push {
+            dimension "diffusion"
+            applicationId "com.jvienne.santesync.watchfacepush.prisme"
+            versionCode((System.getenv("GITHUB_RUN_NUMBER") ?: "1").toInteger())
+        }
+    }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            minifyEnabled true   // aucun fichier dex dans l'APK (exigé par la validation Watch Face Push)
         }
         release {
             minifyEnabled false

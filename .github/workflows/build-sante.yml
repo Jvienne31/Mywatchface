@@ -13,6 +13,7 @@ on:
     paths:
       - "energyscore-phone/**"
       - "energyscore-watch/**"
+      - "prisme/**"
       - "build.gradle"
       - "settings.gradle"
       - ".github/workflows/build-sante.yml"
@@ -35,9 +36,27 @@ jobs:
             https://raw.githubusercontent.com/the-momentum/open_wearables_android_sdk/68824cdd89afe42222e7f3aff49b8abeee4f6349/sdk/libs/maven/com/samsung/android/health/data/1.0.0/data-1.0.0.aar
           echo "7fd190ea2c6ced4aab349adac79e8f132828308b343703769c581023051f1d07  energyscore-phone/libs/samsung-health-data-api-1.0.0.aar" | sha256sum -c -
 
-      - name: Construire les APK
+      # Watch Face Push : Prisme (variante « push ») est validé par l'outil officiel de Google,
+      # qui délivre un jeton ; l'APK et le jeton sont embarqués dans l'appli montre, qui
+      # installe et met à jour le cadran elle-même.
+      - name: Construire Prisme pour Watch Face Push
         run: |
           chmod +x gradlew
+          ./gradlew --no-daemon :prisme:assemblePushDebug
+
+      - name: Valider Prisme et obtenir le jeton
+        run: |
+          curl -fsSL -o validator-push-cli.jar \
+            https://dl.google.com/android/maven2/com/google/android/wearable/watchface/validator/validator-push-cli/1.0.0-alpha10/validator-push-cli-1.0.0-alpha10.jar
+          APK=prisme/build/outputs/apk/push/debug/prisme-push-debug.apk
+          java -jar validator-push-cli.jar --apk_path="$APK" --package_name=com.jvienne.santesync 2>&1 | tee validation.txt
+          python3 .github/scripts/jeton_validation.py validation.txt > prisme_token.txt
+          mkdir -p energyscore-watch/src/main/assets
+          cp "$APK" energyscore-watch/src/main/assets/prisme.apk
+          cp prisme_token.txt energyscore-watch/src/main/assets/prisme_token.txt
+
+      - name: Construire les APK
+        run: |
           ./gradlew --no-daemon :energyscore-watch:assembleDebug :energyscore-phone:assembleDebug
 
       - uses: actions/upload-artifact@v4

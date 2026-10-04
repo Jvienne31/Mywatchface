@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -58,6 +59,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 private val Bg = Color(Lagune.BG)
@@ -81,6 +83,11 @@ class MainActivity : ComponentActivity() {
     /** Incrémenté à chaque retour sur l'écran : relit le cache. */
     private var version by mutableIntStateOf(0)
 
+    // Cadran Prisme installé par Watch Face Push (Wear OS 6)
+    private var prisme by mutableStateOf<PrismeInstaller.State?>(null)
+    private var prismeMessage by mutableStateOf<String?>(null)
+    private var prismeBusy by mutableStateOf(false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!hasActivityPermission()) askPermission() else PassiveDataService.register(this)
@@ -93,25 +100,76 @@ class MainActivity : ComponentActivity() {
                 else "Téléphone : reçu à ${DateFormat.getTimeFormat(this).format(ts)}"
             }
             val live = remember(tick) { hasActivityPermission() }
-            SanteScreen(readings, phone, live, ::askPermission, ::openSamsungHealth)
+            val panel = prisme?.let { PrismePanel(it, prismeMessage, prismeBusy) }
+            SanteScreen(readings, phone, live, ::askPermission, ::openSamsungHealth, panel, ::prismeAction)
         }
     }
 
     override fun onResume() {
         super.onResume()
         version++
+        refreshPrisme()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_ACTIVATE) {
+            runPrisme { PrismeInstaller.activate(this) }
+            return
+        }
         PassiveDataService.register(this)
         version++
+    }
+
+    private fun refreshPrisme() {
+        if (!PrismeInstaller.supported(this)) return
+        lifecycleScope.launch {
+            prisme = runCatching { PrismeInstaller.state(this@MainActivity) }
+                .onFailure { prismeMessage = "Watch Face Push indisponible : ${it.message}" }
+                .getOrNull()
+        }
+    }
+
+    /** Bouton Prisme : installer, mettre à jour, ou mettre comme cadran actif. */
+    private fun prismeAction() {
+        val state = prisme ?: return
+        if (state.needsInstall || state.needsUpdate) {
+            runPrisme {
+                val message = PrismeInstaller.installOrUpdate(this)
+                if (state.needsInstall) activateOrAsk() ?: message else message
+            }
+        } else {
+            runPrisme { activateOrAsk() ?: "" }
+        }
+    }
+
+    /** Active Prisme si l'autorisation est accordée ; sinon la demande (null : réponse attendue). */
+    private suspend fun activateOrAsk(): String? =
+        if (checkSelfPermission(PrismeInstaller.PERMISSION_ACTIVATE) == PackageManager.PERMISSION_GRANTED) {
+            PrismeInstaller.activate(this)
+        } else {
+            requestPermissions(arrayOf(PrismeInstaller.PERMISSION_ACTIVATE), REQUEST_ACTIVATE)
+            null
+        }
+
+    private fun runPrisme(block: suspend () -> String) {
+        if (prismeBusy) return
+        lifecycleScope.launch {
+            prismeBusy = true
+            prismeMessage = runCatching { block() }.getOrElse { "Erreur : ${it.message}" }.ifEmpty { null }
+            prisme = runCatching { PrismeInstaller.state(this@MainActivity) }.getOrNull()
+            prismeBusy = false
+        }
     }
 
     private fun hasActivityPermission() =
         checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED
 
     private fun askPermission() = requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), 1)
+
+    private companion object {
+        const val REQUEST_ACTIVATE = 2
+    }
 
     private fun openSamsungHealth() {
         packageManager.getLaunchIntentForPackage(MetricComplicationService.SAMSUNG_HEALTH)
@@ -127,6 +185,8 @@ private fun SanteScreen(
     liveGranted: Boolean,
     onAskPermission: () -> Unit,
     onOpen: () -> Unit,
+    prisme: PrismePanel?,
+    onPrisme: () -> Unit,
 ) {
     val listState = rememberScalingLazyListState()
     val focus = remember { FocusRequester() }
@@ -157,6 +217,9 @@ private fun SanteScreen(
                         "Santé Sync", color = Accent, fontFamily = Barlow, fontWeight = FontWeight.SemiBold,
                         fontSize = 20.sp, modifier = Modifier.padding(top = 18.dp, bottom = 2.dp),
                     )
+                }
+                if (prisme != null) {
+                    item { PrismeSection(prisme, onPrisme) }
                 }
                 if (readings.isEmpty()) {
                     item { Note("Aucune donnée pour l'instant.") }
@@ -229,4 +292,33 @@ private fun Note(text: String) {
         text, color = Soft, fontFamily = Barlow, fontWeight = FontWeight.Medium, fontSize = 14.sp,
         textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
     )
+}
+
+/** Ce que l'écran montre du cadran Prisme (Watch Face Push). */
+private data class PrismePanel(val state: PrismeInstaller.State, val message: String?, val busy: Boolean)
+
+@Composable
+private fun PrismeSection(p: PrismePanel, onClick: () -> Unit) {
+    val s = p.state
+    val label = when {
+        p.busy -> "Installation…"
+        s.needsInstall -> "Installer le cadran Prisme"
+        s.needsUpdate -> "Mettre à jour Prisme"
+        !s.active -> "Mettre Prisme comme cadran"
+        else -> null
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        if (label != null) {
+            Chip(
+                onClick = onClick,
+                enabled = !p.busy,
+                label = { Text(label, fontFamily = Barlow, fontWeight = FontWeight.SemiBold) },
+                colors = ChipDefaults.primaryChipColors(backgroundColor = Accent, contentColor = Bg),
+                modifier = Modifier.fillMaxWidth(),
+            )
+        } else {
+            Note("Prisme à jour (version ${s.installedVersion})")
+        }
+        p.message?.let { Note(it) }
+    }
 }

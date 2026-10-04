@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- FICHIER GÉNÉRÉ par energyscore-watch/tools/gen_metrics.py : ne pas éditer à la main. -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Watch Face Push n'existe qu'à partir de Wear OS 6 : appels protégés par un test de
+         version, la bibliothèque peut donc être acceptée sur Wear OS 4 et 5. -->
+    <uses-sdk tools:overrideLibrary="androidx.wear.watchfacepush" />
 
     <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Watch Face Push : installer / mettre à jour le cadran Prisme, puis l'activer -->
+    <uses-permission android:name="com.google.wear.permission.PUSH_WATCH_FACES" />
+    <uses-permission android:name="com.google.wear.permission.SET_PUSHED_WATCH_FACE_AS_ACTIVE" />
 
     <!-- Pas, distance, calories, étages en direct (Health Services) -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />

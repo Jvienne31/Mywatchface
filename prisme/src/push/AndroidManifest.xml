@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Variante Watch Face Push : le manifeste ne doit contenir que manifest, uses-feature,
+     uses-sdk, application, property et meta-data. Le service des cadrans classiques est retiré
+     (le format WFF n'en a pas besoin) ; l'aperçu reste déclaré dans xml/watch_face_info. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <service
+            android:name="androidx.wear.watchface.service.WatchFaceService"
+            tools:node="remove" />
+    </application>
+</manifest>

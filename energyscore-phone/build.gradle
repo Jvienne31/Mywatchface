@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
     id 'kotlin-parcelize'   // demandé par le Samsung Health Data SDK
 }
 
@@ -44,12 +45,8 @@ android {
         jvmTarget = "1.8"
     }
 
-    // Écran en Jetpack Compose (compilateur Compose assorti à Kotlin 1.9.24)
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "1.5.14"
     }
 }
 

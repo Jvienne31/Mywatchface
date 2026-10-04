@@ -7,3 +7,6 @@ local.properties
 # SDK propriétaire Samsung (licence non redistribuable) — chacun le télécharge soi-même,
 # voir energyscore-phone/libs/README.md
 energyscore-phone/libs/*.aar
+
+# Cadran Prisme embarqué pour Watch Face Push (produit par la CI)
+energyscore-watch/src/main/assets/
