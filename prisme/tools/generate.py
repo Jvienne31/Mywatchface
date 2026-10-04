@@ -193,6 +193,19 @@ def layer_digits():
 
 SECONDS_OPTIONS = [("sec_arc", "Arc"), ("sec_dot", "Point"), ("sec_none", "Aucune")]
 
+# Préréglages (Flavors, WFF v2) : palette, secondes, météo et sources des deux dômes d'un coup.
+# Les dômes « Santé » utilisent Santé Sync s'il est installé, sinon la donnée intégrée.
+SANTE = "com.jvienne.santesync/com.jvienne.energyscore.watch."
+FLAVORS = [
+    # id, nom, palette, secondes, dôme gauche (si intégré), {emplacement: (fournisseur Santé Sync, type)}
+    ("fl_quotidien", "Quotidien", "pal_lagune", 0, 0, {}),
+    ("fl_sante", "Santé", "pal_sauge", 1, 0, {4: ("EnergyProvider", "RANGED_VALUE"),
+                                             3: ("SleepScoreProvider", "RANGED_VALUE")}),
+    ("fl_sport", "Sport", "pal_volcan", 0, 0, {4: ("ActiveKcalProvider", "GOAL_PROGRESS"),
+                                              3: ("DistanceMProvider", "SHORT_TEXT")}),
+    ("fl_nuit", "Nuit", "pal_abysse", 2, 1, {}),
+]
+
 
 def layer_seconds():
     O.comment("Secondes au choix (réglage) : arc qui se remplit, point qui tourne, ou rien")
@@ -416,30 +429,36 @@ WEATHER_ICONS = [  # [WEATHER.CONDITION] -> pictogramme (défaut : nuage)
 ]
 
 
-def builtin_weather():
-    ix, iy, isz = 52, 192, 32
+def weather_icon(ix, iy, isz, cond="[WEATHER.CONDITION]", tint=None):
+    """Pictogramme de l'état du ciel (cond : [WEATHER.CONDITION] ou [WEATHER.HOURS.n.CONDITION])."""
+    tint = tint or ACCENT
+    names = [O.gid("w") for _ in WEATHER_ICONS]
     O.open("<Condition>")
     O.open("<Expressions>")
     for k, (codes, _) in enumerate(WEATHER_ICONS):
-        expr = " || ".join(f"[WEATHER.CONDITION] == {c}" for c in codes)
-        O.x(f'<Expression name="w{k}"><![CDATA[{expr}]]></Expression>')
+        expr = " || ".join(f"{cond} == {c}" for c in codes)
+        O.x(f'<Expression name="{names[k]}"><![CDATA[{expr}]]></Expression>')
     O.close("</Expressions>")
     for k, (_, ic) in enumerate(WEATHER_ICONS):
-        O.open(f'<Compare expression="w{k}">')
+        O.open(f'<Compare expression="{names[k]}">')
         O.mode_stack.append(("both", None) if ic == "sun" else ("none", None))
         group_open(O.gid("wi"))
-        icon_img(ix, iy, isz, ic, ACCENT)
+        icon_img(ix, iy, isz, ic, tint)
         group_close()
         O.mode_stack.pop()
         O.close("</Compare>")
     O.open("<Default>")
     O.mode_stack.append(("none", None))
     group_open(O.gid("wi"))
-    icon_img(ix, iy, isz, "cloud", ACCENT)
+    icon_img(ix, iy, isz, "cloud", tint)
     group_close()
     O.mode_stack.pop()
     O.close("</Default>")
     O.close("</Condition>")
+
+
+def builtin_weather():
+    weather_icon(52, 192, 32)
 
     condition("w_ok", "[WEATHER.IS_AVAILABLE]",
               lambda: _group(lambda: text(74, 172, 84, 42, ("expr", "[WEATHER.TEMPERATURE]"),
@@ -449,10 +468,53 @@ def builtin_weather():
               True)
 
 
+FORECAST_OPTIONS = [("dg_uv", "Indice UV"), ("dg_maxmin", "Max / min du jour"), ("dg_1h", "Météo dans 1 h"),
+                    ("dg_3h", "Météo dans 3 h")]
+
+
 def _group(fn):
     group_open(O.gid("g"))
     fn()
     group_close()
+
+
+def builtin_dome_left():
+    """Dôme bas gauche (donnée intégrée) : au choix, indice UV ou prévisions météo."""
+    cx, cy, r = DOME_BL[0], DOME_BL[1] - 2, 31
+
+    def ring():   # anneau décoratif à la place de la jauge
+        box_draw(cx - r - 5, cy - r - 5, 2 * r + 10, 2 * r + 10, alpha=TRACK_D[1])
+        arc(cx, cy, r, -135, 135, TRACK_D[0], 7, cap="ROUND")
+        draw_close()
+
+    def dashes():
+        return _group(lambda: text(cx - 30, cy - 14, 60, 28, "--", "--", DATA, 26, INK[0]))
+
+    def maxmin():
+        ring()
+
+        def body():
+            text(cx - 30, cy - 24, 60, 28, ("expr", "[WEATHER.TEMPERATURE_HIGH]"), "21°", DATA, 26, INK[0], fmt="%s°")
+            text(cx - 30, cy + 3, 60, 20, ("expr", "[WEATHER.TEMPERATURE_LOW]"), "12°", DATA, 18, SOFT_D[0],
+                 alpha=SOFT_D[1], fmt="%s°")
+        condition(O.gid("fc"), "[WEATHER.IS_AVAILABLE]", lambda: _group(body), dashes, True)
+        text(cx - 34, cy + r - 11, 68, 17, "MAX MIN", "MAX MIN", DATA_M, 13, SOFT_D[0], alpha=SOFT_D[1],
+             spacing="0.1")
+
+    def hours(n):
+        def opt():
+            ring()
+
+            def body():
+                weather_icon(cx, cy - 16, 18, f"[WEATHER.HOURS.{n}.CONDITION]")
+                text(cx - 30, cy - 9, 60, 30, ("expr", f"[WEATHER.HOURS.{n}.TEMPERATURE]"), "16°", DATA, 27,
+                     INK[0], fmt="%s°")
+            condition(O.gid("fc"), f"[WEATHER.HOURS.{n}.IS_AVAILABLE]", lambda: _group(body), dashes, True)
+            text(cx - 34, cy + r - 11, 68, 17, f"DANS {n} H", f"DANS {n} H", DATA_M, 13, SOFT_D[0],
+                 alpha=SOFT_D[1], spacing="0.1")
+        return opt
+
+    list_config("dome_gauche", [builtin_uv, maxmin, hours(1), hours(3)])
 
 
 def builtin_uv():
@@ -559,7 +621,7 @@ def layer_slots():
     O.comment("Emplacement 2 — météo (intégrée) ou source au choix")
     text_slot(2, "slot_left", 30, 172, 128, 44, INK[0], SOFT_D, ACCENT, builtin_weather, big=34, launch=APP_WEATHER)
     O.comment("Emplacement 3 — dôme bas gauche : indice UV (intégré) ou source au choix")
-    dome_slot(3, "slot_dome_bl", DOME_BL, 31, INK[0], SOFT_D, TRACK_D, ACCENT, builtin_uv, launch=APP_WEATHER)
+    dome_slot(3, "slot_dome_bl", DOME_BL, 31, INK[0], SOFT_D, TRACK_D, ACCENT, builtin_dome_left, launch=APP_WEATHER)
     O.comment("Emplacement 4 — dôme haut droite : pluie (intégrée) ou source au choix")
     dome_slot(4, "slot_dome_tr", DOME_TR, 31, INK[3], SOFT_L, TRACK_L, BAND[2], builtin_rain, launch=APP_WEATHER)
     O.comment("Emplacement 5 — cardio (intégré) ou source au choix")
@@ -715,7 +777,31 @@ def config_xml():
     lines.append('    <ListConfiguration id="secondes" displayName="cfg_secondes" defaultValue="0">')
     for i, (name, _) in enumerate(SECONDS_OPTIONS):
         lines.append(f'      <ListOption id="{i}" displayName="{name}" />')
-    lines += ['    </ListConfiguration>', '  </UserConfigurations>']
+    lines.append('    </ListConfiguration>')
+    lines.append('    <ListConfiguration id="dome_gauche" displayName="cfg_dome_gauche" defaultValue="0">')
+    for i, (name, _) in enumerate(FORECAST_OPTIONS):
+        lines.append(f'      <ListOption id="{i}" displayName="{name}" />')
+    lines.append('    </ListConfiguration>')
+    pal_index = {name: i for i, (name, _, _) in enumerate(PALETTES)}
+    lines.append(f'    <Flavors defaultValue="{FLAVORS[0][0]}">')
+    for fid, _, pal, sec, meteo, domes in FLAVORS:
+        lines.append(f'      <Flavor id="{fid}" displayName="{fid}" icon="{fid}">')
+        lines.append(f'        <Configuration id="palette" optionId="{pal_index[pal]}" />')
+        lines.append(f'        <Configuration id="secondes" optionId="{sec}" />')
+        lines.append(f'        <Configuration id="dome_gauche" optionId="{meteo}" />')
+        for sid in (3, 4):   # les deux dômes : source Santé Sync, ou vide (donnée intégrée)
+            lines.append(f'        <ComplicationSlot slotId="{sid}">')
+            if sid in domes:
+                svc, typ = domes[sid]
+                lines.append(f'          <DefaultProviderPolicy defaultSystemProvider="EMPTY" '
+                             f'defaultSystemProviderType="EMPTY" primaryProvider="{SANTE}{svc}" '
+                             f'primaryProviderType="{typ}" />')
+            else:
+                lines.append('          <DefaultProviderPolicy defaultSystemProvider="EMPTY" '
+                             'defaultSystemProviderType="EMPTY" />')
+            lines.append('        </ComplicationSlot>')
+        lines.append('      </Flavor>')
+    lines += ['    </Flavors>', '  </UserConfigurations>']
     return lines
 
 

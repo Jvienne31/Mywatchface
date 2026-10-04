@@ -7,6 +7,15 @@
     <string name="sec_arc">Arc</string>
     <string name="sec_dot">Point</string>
     <string name="sec_none">Aucune</string>
+    <string name="cfg_dome_gauche">Dôme gauche</string>
+    <string name="dg_uv">Indice UV</string>
+    <string name="dg_maxmin">Max / min du jour</string>
+    <string name="dg_1h">Météo dans 1 h</string>
+    <string name="dg_3h">Météo dans 3 h</string>
+    <string name="fl_quotidien">Quotidien</string>
+    <string name="fl_sante">Santé</string>
+    <string name="fl_sport">Sport</string>
+    <string name="fl_nuit">Nuit</string>
 
     <string name="pal_lagune">Lagune</string>
     <string name="pal_volcan">Volcan</string>
@@ -29,7 +38,7 @@
 
     <string name="slot_date">Date (haut gauche)</string>
     <string name="slot_left">Météo (gauche)</string>
-    <string name="slot_dome_bl">Dôme bas gauche (UV)</string>
+    <string name="slot_dome_bl">Dôme bas gauche (UV ou prévisions)</string>
     <string name="slot_dome_tr">Dôme haut droite (pluie)</string>
     <string name="slot_right">Cardio (droite)</string>
     <string name="slot_right2">Batterie (droite)</string>

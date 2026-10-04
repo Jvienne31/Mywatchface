@@ -31,6 +31,58 @@
       <ListOption id="1" displayName="sec_dot" />
       <ListOption id="2" displayName="sec_none" />
     </ListConfiguration>
+    <ListConfiguration id="dome_gauche" displayName="cfg_dome_gauche" defaultValue="0">
+      <ListOption id="0" displayName="dg_uv" />
+      <ListOption id="1" displayName="dg_maxmin" />
+      <ListOption id="2" displayName="dg_1h" />
+      <ListOption id="3" displayName="dg_3h" />
+    </ListConfiguration>
+    <Flavors defaultValue="fl_quotidien">
+      <Flavor id="fl_quotidien" displayName="fl_quotidien" icon="fl_quotidien">
+        <Configuration id="palette" optionId="0" />
+        <Configuration id="secondes" optionId="0" />
+        <Configuration id="dome_gauche" optionId="0" />
+        <ComplicationSlot slotId="3">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+        </ComplicationSlot>
+        <ComplicationSlot slotId="4">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+        </ComplicationSlot>
+      </Flavor>
+      <Flavor id="fl_sante" displayName="fl_sante" icon="fl_sante">
+        <Configuration id="palette" optionId="4" />
+        <Configuration id="secondes" optionId="1" />
+        <Configuration id="dome_gauche" optionId="0" />
+        <ComplicationSlot slotId="3">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.SleepScoreProvider" primaryProviderType="RANGED_VALUE" />
+        </ComplicationSlot>
+        <ComplicationSlot slotId="4">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.EnergyProvider" primaryProviderType="RANGED_VALUE" />
+        </ComplicationSlot>
+      </Flavor>
+      <Flavor id="fl_sport" displayName="fl_sport" icon="fl_sport">
+        <Configuration id="palette" optionId="1" />
+        <Configuration id="secondes" optionId="0" />
+        <Configuration id="dome_gauche" optionId="0" />
+        <ComplicationSlot slotId="3">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.DistanceMProvider" primaryProviderType="SHORT_TEXT" />
+        </ComplicationSlot>
+        <ComplicationSlot slotId="4">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.ActiveKcalProvider" primaryProviderType="GOAL_PROGRESS" />
+        </ComplicationSlot>
+      </Flavor>
+      <Flavor id="fl_nuit" displayName="fl_nuit" icon="fl_nuit">
+        <Configuration id="palette" optionId="16" />
+        <Configuration id="secondes" optionId="2" />
+        <Configuration id="dome_gauche" optionId="1" />
+        <ComplicationSlot slotId="3">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+        </ComplicationSlot>
+        <ComplicationSlot slotId="4">
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+        </ComplicationSlot>
+      </Flavor>
+    </Flavors>
   </UserConfigurations>
 
   <Scene>
@@ -683,57 +735,57 @@
       <Launch target="com.samsung.android.watch.weather" />
       <Condition>
         <Expressions>
-          <Expression name="w0"><![CDATA[[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8]]></Expression>
-          <Expression name="w1"><![CDATA[[WEATHER.CONDITION] == 14]]></Expression>
-          <Expression name="w2"><![CDATA[[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12]]></Expression>
-          <Expression name="w3"><![CDATA[[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11]]></Expression>
-          <Expression name="w4"><![CDATA[[WEATHER.CONDITION] == 9]]></Expression>
-          <Expression name="w5"><![CDATA[[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13]]></Expression>
+          <Expression name="w5"><![CDATA[[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8]]></Expression>
+          <Expression name="w6"><![CDATA[[WEATHER.CONDITION] == 14]]></Expression>
+          <Expression name="w7"><![CDATA[[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12]]></Expression>
+          <Expression name="w8"><![CDATA[[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11]]></Expression>
+          <Expression name="w9"><![CDATA[[WEATHER.CONDITION] == 9]]></Expression>
+          <Expression name="w10"><![CDATA[[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13]]></Expression>
         </Expressions>
-        <Compare expression="w0">
-          <Group name="wi5" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w5">
+          <Group name="wi11" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_sun" />
             </PartImage>
           </Group>
         </Compare>
-        <Compare expression="w1">
-          <Group name="wi7" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w6">
+          <Group name="wi13" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_partly" />
             </PartImage>
           </Group>
         </Compare>
-        <Compare expression="w2">
-          <Group name="wi9" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w7">
+          <Group name="wi15" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_rain" />
             </PartImage>
           </Group>
         </Compare>
-        <Compare expression="w3">
-          <Group name="wi11" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w8">
+          <Group name="wi17" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_snow" />
             </PartImage>
           </Group>
         </Compare>
-        <Compare expression="w4">
-          <Group name="wi13" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w9">
+          <Group name="wi19" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_storm" />
             </PartImage>
           </Group>
         </Compare>
-        <Compare expression="w5">
-          <Group name="wi15" x="-30" y="-172" width="438" height="438">
+        <Compare expression="w10">
+          <Group name="wi21" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_fog" />
             </PartImage>
           </Group>
         </Compare>
         <Default>
-          <Group name="wi17" x="-30" y="-172" width="438" height="438">
+          <Group name="wi23" x="-30" y="-172" width="438" height="438">
             <PartImage x="36" y="176" width="32" height="32" tintColor="[CONFIGURATION.palette.4]">
               <Image resource="ic_cloud" />
             </PartImage>
@@ -745,7 +797,7 @@
           <Expression name="w_ok"><![CDATA[[WEATHER.IS_AVAILABLE]]]></Expression>
         </Expressions>
         <Compare expression="w_ok">
-          <Group name="g19" x="-30" y="-172" width="438" height="438">
+          <Group name="g25" x="-30" y="-172" width="438" height="438">
             <PartText x="74" y="172" width="84" height="42">
               <Text align="START" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="38" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
@@ -754,7 +806,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g20" x="-30" y="-172" width="438" height="438">
+          <Group name="g26" x="-30" y="-172" width="438" height="438">
             <PartText x="74" y="172" width="84" height="42">
               <Text align="START" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="38" color="[CONFIGURATION.palette.3]">--</Font>
@@ -1084,30 +1136,270 @@
     </PartDraw>
     <Group name="data3" x="20" y="222" width="92" height="92" pivotX="0.5000" pivotY="0.5000" scaleX="1.2" scaleY="1.2">
       <Launch target="com.samsung.android.watch.weather" />
-      <PartDraw x="10" y="8" width="72" height="72" alpha="160">
-        <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-          <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
-        </Arc>
-      </PartDraw>
-      <PartDraw x="10" y="8" width="72" height="72">
-        <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
-          <Stroke color="[CONFIGURATION.palette.4]" thickness="7" cap="ROUND" />
-          <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.UV_INDEX] / 11, 0, 1)" />
-        </Arc>
-      </PartDraw>
-      <PartImage x="38" y="20" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
-        <Image resource="ic_uv" />
-      </PartImage>
-      <PartText x="16" y="31" width="60" height="32">
-        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.UV_INDEX]" /></Template></Font>
-        </Text>
-      </PartText>
-      <PartText x="12" y="64" width="68" height="17" alpha="150">
-        <Text align="CENTER" ellipsis="TRUE" maxLines="1">
-          <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">UV</Font>
-        </Text>
-      </PartText>
+      <ListConfiguration id="dome_gauche">
+        <ListOption id="0">
+          <Group name="dome_gauche_0" x="0" y="0" width="438" height="438">
+            <PartDraw x="10" y="8" width="72" height="72" alpha="160">
+              <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+                <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
+              </Arc>
+            </PartDraw>
+            <PartDraw x="10" y="8" width="72" height="72">
+              <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+                <Stroke color="[CONFIGURATION.palette.4]" thickness="7" cap="ROUND" />
+                <Transform target="endAngle" value="-135 + 270 * clamp([WEATHER.UV_INDEX] / 11, 0, 1)" />
+              </Arc>
+            </PartDraw>
+            <PartImage x="38" y="20" width="16" height="16" tintColor="[CONFIGURATION.palette.4]">
+              <Image resource="ic_uv" />
+            </PartImage>
+            <PartText x="16" y="31" width="60" height="32">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s]]><Parameter expression="[WEATHER.UV_INDEX]" /></Template></Font>
+              </Text>
+            </PartText>
+            <PartText x="12" y="64" width="68" height="17" alpha="150">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">UV</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </ListOption>
+        <ListOption id="1">
+          <Group name="dome_gauche_1" x="0" y="0" width="438" height="438">
+            <PartDraw x="10" y="8" width="72" height="72" alpha="160">
+              <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+                <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
+              </Arc>
+            </PartDraw>
+            <Condition>
+              <Expressions>
+                <Expression name="fc28"><![CDATA[[WEATHER.IS_AVAILABLE]]]></Expression>
+              </Expressions>
+              <Compare expression="fc28">
+                <Group name="g29" x="-20" y="-222" width="438" height="438">
+                  <PartText x="36" y="242" width="60" height="28">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE_HIGH]" /></Template></Font>
+                    </Text>
+                  </PartText>
+                  <PartText x="36" y="269" width="60" height="20" alpha="150">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="18" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.TEMPERATURE_LOW]" /></Template></Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Compare>
+              <Default>
+                <Group name="g30" x="-20" y="-222" width="438" height="438">
+                  <PartText x="36" y="252" width="60" height="28">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]">--</Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Default>
+            </Condition>
+            <PartText x="12" y="64" width="68" height="17" alpha="150">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">MAX MIN</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </ListOption>
+        <ListOption id="2">
+          <Group name="dome_gauche_2" x="0" y="0" width="438" height="438">
+            <PartDraw x="10" y="8" width="72" height="72" alpha="160">
+              <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+                <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
+              </Arc>
+            </PartDraw>
+            <Condition>
+              <Expressions>
+                <Expression name="fc31"><![CDATA[[WEATHER.HOURS.1.IS_AVAILABLE]]]></Expression>
+              </Expressions>
+              <Compare expression="fc31">
+                <Group name="g32" x="-20" y="-222" width="438" height="438">
+                  <Condition>
+                    <Expressions>
+                      <Expression name="w33"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 1 || [WEATHER.HOURS.1.CONDITION] == 8]]></Expression>
+                      <Expression name="w34"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 14]]></Expression>
+                      <Expression name="w35"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 4 || [WEATHER.HOURS.1.CONDITION] == 6 || [WEATHER.HOURS.1.CONDITION] == 12]]></Expression>
+                      <Expression name="w36"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 5 || [WEATHER.HOURS.1.CONDITION] == 7 || [WEATHER.HOURS.1.CONDITION] == 10 || [WEATHER.HOURS.1.CONDITION] == 11]]></Expression>
+                      <Expression name="w37"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 9]]></Expression>
+                      <Expression name="w38"><![CDATA[[WEATHER.HOURS.1.CONDITION] == 3 || [WEATHER.HOURS.1.CONDITION] == 13]]></Expression>
+                    </Expressions>
+                    <Compare expression="w33">
+                      <Group name="wi39" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_sun" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w34">
+                      <Group name="wi41" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_partly" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w35">
+                      <Group name="wi43" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_rain" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w36">
+                      <Group name="wi45" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_snow" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w37">
+                      <Group name="wi47" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_storm" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w38">
+                      <Group name="wi49" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_fog" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Default>
+                      <Group name="wi51" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_cloud" />
+                        </PartImage>
+                      </Group>
+                    </Default>
+                  </Condition>
+                  <PartText x="36" y="257" width="60" height="30">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.HOURS.1.TEMPERATURE]" /></Template></Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Compare>
+              <Default>
+                <Group name="g53" x="-20" y="-222" width="438" height="438">
+                  <PartText x="36" y="252" width="60" height="28">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]">--</Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Default>
+            </Condition>
+            <PartText x="12" y="64" width="68" height="17" alpha="150">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">DANS 1 H</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </ListOption>
+        <ListOption id="3">
+          <Group name="dome_gauche_3" x="0" y="0" width="438" height="438">
+            <PartDraw x="10" y="8" width="72" height="72" alpha="160">
+              <Arc centerX="36" centerY="36" width="62" height="62" startAngle="-135" endAngle="135" direction="CLOCKWISE">
+                <Stroke color="[CONFIGURATION.palette.1]" thickness="7" cap="ROUND" />
+              </Arc>
+            </PartDraw>
+            <Condition>
+              <Expressions>
+                <Expression name="fc54"><![CDATA[[WEATHER.HOURS.3.IS_AVAILABLE]]]></Expression>
+              </Expressions>
+              <Compare expression="fc54">
+                <Group name="g55" x="-20" y="-222" width="438" height="438">
+                  <Condition>
+                    <Expressions>
+                      <Expression name="w56"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 1 || [WEATHER.HOURS.3.CONDITION] == 8]]></Expression>
+                      <Expression name="w57"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 14]]></Expression>
+                      <Expression name="w58"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 4 || [WEATHER.HOURS.3.CONDITION] == 6 || [WEATHER.HOURS.3.CONDITION] == 12]]></Expression>
+                      <Expression name="w59"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 5 || [WEATHER.HOURS.3.CONDITION] == 7 || [WEATHER.HOURS.3.CONDITION] == 10 || [WEATHER.HOURS.3.CONDITION] == 11]]></Expression>
+                      <Expression name="w60"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 9]]></Expression>
+                      <Expression name="w61"><![CDATA[[WEATHER.HOURS.3.CONDITION] == 3 || [WEATHER.HOURS.3.CONDITION] == 13]]></Expression>
+                    </Expressions>
+                    <Compare expression="w56">
+                      <Group name="wi62" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_sun" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w57">
+                      <Group name="wi64" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_partly" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w58">
+                      <Group name="wi66" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_rain" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w59">
+                      <Group name="wi68" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_snow" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w60">
+                      <Group name="wi70" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_storm" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Compare expression="w61">
+                      <Group name="wi72" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_fog" />
+                        </PartImage>
+                      </Group>
+                    </Compare>
+                    <Default>
+                      <Group name="wi74" x="0" y="0" width="438" height="438">
+                        <PartImage x="57" y="241" width="18" height="18" tintColor="[CONFIGURATION.palette.4]">
+                          <Image resource="ic_cloud" />
+                        </PartImage>
+                      </Group>
+                    </Default>
+                  </Condition>
+                  <PartText x="36" y="257" width="60" height="30">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="27" color="[CONFIGURATION.palette.3]"><Template><![CDATA[%s°]]><Parameter expression="[WEATHER.HOURS.3.TEMPERATURE]" /></Template></Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Compare>
+              <Default>
+                <Group name="g76" x="-20" y="-222" width="438" height="438">
+                  <PartText x="36" y="252" width="60" height="28">
+                    <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                      <Font family="barlowcondensed_semibold" size="26" color="[CONFIGURATION.palette.3]">--</Font>
+                    </Text>
+                  </PartText>
+                </Group>
+              </Default>
+            </Condition>
+            <PartText x="12" y="64" width="68" height="17" alpha="150">
+              <Text align="CENTER" ellipsis="TRUE" maxLines="1">
+                <Font family="barlowcondensed_medium" size="13" color="[CONFIGURATION.palette.3]" letterSpacing="0.1">DANS 3 H</Font>
+              </Text>
+            </PartText>
+          </Group>
+        </ListOption>
+      </ListConfiguration>
       <Variant mode="AMBIENT" target="alpha" value="0" />
     </Group>
     <ComplicationSlot slotId="3" x="20" y="222" width="92" height="92" scaleX="1.2" scaleY="1.2" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT LONG_TEXT MONOCHROMATIC_IMAGE SMALL_IMAGE PHOTO_IMAGE WEIGHTED_ELEMENTS EMPTY" displayName="slot_dome_bl" isCustomizable="TRUE">
@@ -1491,7 +1783,7 @@
           <Expression name="hr_ok"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_ok">
-          <Group name="g24" x="-334" y="-176" width="438" height="438">
+          <Group name="g79" x="-334" y="-176" width="438" height="438">
             <PartText x="334" y="196" width="80" height="48">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="46" color="[CONFIGURATION.palette.0]"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
@@ -1500,7 +1792,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g25" x="-334" y="-176" width="438" height="438">
+          <Group name="g80" x="-334" y="-176" width="438" height="438">
             <PartText x="334" y="196" width="80" height="48">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="46" color="[CONFIGURATION.palette.0]">--</Font>
@@ -1828,7 +2120,7 @@
           <Expression name="batt_low"><![CDATA[[BATTERY_PERCENT] <= 20]]></Expression>
         </Expressions>
         <Compare expression="batt_low">
-          <Group name="g26" x="-334" y="-268" width="438" height="438">
+          <Group name="g81" x="-334" y="-268" width="438" height="438">
             <PartDraw x="356" y="272" width="38" height="20">
               <RoundRectangle x="2" y="2" width="30" height="16" cornerRadiusX="3" cornerRadiusY="3">
                 <Fill color="#00000000" />
@@ -1855,7 +2147,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g27" x="-334" y="-268" width="438" height="438">
+          <Group name="g82" x="-334" y="-268" width="438" height="438">
             <PartDraw x="356" y="272" width="38" height="20">
               <RoundRectangle x="2" y="2" width="30" height="16" cornerRadiusX="3" cornerRadiusY="3">
                 <Fill color="#00000000" />
@@ -4818,7 +5110,7 @@
           <Expression name="hr_aod"><![CDATA[[HEART_RATE] > 0]]></Expression>
         </Expressions>
         <Compare expression="hr_aod">
-          <Group name="g29" x="0" y="0" width="438" height="438">
+          <Group name="g84" x="0" y="0" width="438" height="438">
             <PartText x="334" y="198" width="80" height="46">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="42" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[HEART_RATE]" /></Template></Font>
@@ -4827,7 +5119,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g30" x="0" y="0" width="438" height="438">
+          <Group name="g85" x="0" y="0" width="438" height="438">
             <PartText x="334" y="198" width="80" height="46">
               <Text align="CENTER" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="42" color="#C9D1D9">--</Font>
@@ -4846,7 +5138,7 @@
           <Expression name="batt_low_aod"><![CDATA[[BATTERY_PERCENT] <= 20]]></Expression>
         </Expressions>
         <Compare expression="batt_low_aod">
-          <Group name="g31" x="0" y="0" width="438" height="438">
+          <Group name="g86" x="0" y="0" width="438" height="438">
             <PartText x="319" y="290" width="60" height="36">
               <Text align="END" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="34" color="#FF5A5F"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
@@ -4860,7 +5152,7 @@
           </Group>
         </Compare>
         <Default>
-          <Group name="g32" x="0" y="0" width="438" height="438">
+          <Group name="g87" x="0" y="0" width="438" height="438">
             <PartText x="319" y="290" width="60" height="36">
               <Text align="END" ellipsis="TRUE" maxLines="1">
                 <Font family="barlowcondensed_semibold" size="34" color="#C9D1D9"><Template><![CDATA[%s]]><Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
