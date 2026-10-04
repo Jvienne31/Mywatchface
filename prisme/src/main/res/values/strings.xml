@@ -7,7 +7,7 @@
     <string name="sec_arc">Arc</string>
     <string name="sec_dot">Point</string>
     <string name="sec_none">Aucune</string>
-    <string name="cfg_dome_gauche">Dôme gauche</string>
+    <string name="cfg_dome_gauche">Dôme gauche sans complication</string>
     <string name="dg_uv">Indice UV</string>
     <string name="dg_maxmin">Max / min du jour</string>
     <string name="dg_1h">Météo dans 1 h</string>

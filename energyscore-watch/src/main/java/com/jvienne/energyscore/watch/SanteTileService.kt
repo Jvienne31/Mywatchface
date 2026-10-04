@@ -8,6 +8,7 @@ import androidx.wear.protolayout.DimensionBuilders.dp
 import androidx.wear.protolayout.DimensionBuilders.expand
 import androidx.wear.protolayout.DimensionBuilders.weight
 import androidx.wear.protolayout.LayoutElementBuilders
+import androidx.wear.protolayout.LayoutElementBuilders.Box
 import androidx.wear.protolayout.LayoutElementBuilders.Column
 import androidx.wear.protolayout.LayoutElementBuilders.LayoutElement
 import androidx.wear.protolayout.LayoutElementBuilders.Spacer
@@ -22,6 +23,7 @@ import androidx.wear.protolayout.material3.ProgressIndicatorColors
 import androidx.wear.protolayout.material3.Typography
 import androidx.wear.protolayout.material3.buttonGroup
 import androidx.wear.protolayout.material3.circularProgressIndicator
+import androidx.wear.protolayout.material3.icon
 import androidx.wear.protolayout.material3.card
 import androidx.wear.protolayout.material3.materialScope
 import androidx.wear.protolayout.material3.primaryLayout
@@ -58,7 +60,22 @@ class SanteTileService : TileService() {
     override fun onTileResourcesRequest(
         requestParams: RequestBuilders.ResourcesRequest,
     ): ListenableFuture<ResourceBuilders.Resources> =
-        Futures.immediateFuture(ResourceBuilders.Resources.Builder().setVersion(RESOURCES_VERSION).build())
+        Futures.immediateFuture(
+            ResourceBuilders.Resources.Builder()
+                .setVersion(RESOURCES_VERSION)
+                .apply {
+                    ICONS.forEach { (id, res) ->
+                        addIdToImageMapping(
+                            id,
+                            ResourceBuilders.ImageResource.Builder()
+                                .setAndroidResourceByResId(
+                                    ResourceBuilders.AndroidImageResourceByResId.Builder().setResourceId(res).build()
+                                ).build(),
+                        )
+                    }
+                }
+                .build()
+        )
 
     private fun layout(device: DeviceParameters): LayoutElement {
         val energy = reading(Metric.ENERGY)
@@ -81,9 +98,9 @@ class SanteTileService : TileService() {
                         .addContent(Spacer.Builder().setHeight(dp(6f)).build())
                         .addContent(
                             buttonGroup(height = weight(1f), spacing = 4f) {
-                                buttonGroupItem { mini(open, sleep?.value, "Sommeil") }
-                                buttonGroupItem { mini(open, steps?.value?.let(::compactSteps), "Pas") }
-                                buttonGroupItem { mini(open, distance?.value, "Distance") }
+                                buttonGroupItem { mini(open, sleep?.value, "moon") }
+                                buttonGroupItem { mini(open, steps?.value?.let(::compactSteps), "steps") }
+                                buttonGroupItem { mini(open, distance?.value, "pin") }
                             }
                         )
                         .build()
@@ -94,9 +111,10 @@ class SanteTileService : TileService() {
     }
 
     /**
-     * Grande pastille : score d'énergie et « Énergie / 100 » à gauche, anneau à droite.
+     * Grande pastille sur une seule ligne : éclair, score, « /100 », anneau à droite.
      * Contenu dessiné à la main (card) : les cartes « de données » de Material 3 masquent leurs
-     * textes quand la hauteur manque [montre].
+     * textes quand la hauteur manque [montre]. Textes non agrandis par la taille de police du
+     * système (scalable = false), sinon ils sont coupés.
      */
     private fun MaterialScope.energyCard(energy: Reading?, open: Clickable): LayoutElement =
         card(
@@ -108,20 +126,18 @@ class SanteTileService : TileService() {
             Row.Builder()
                 .setWidth(expand())
                 .setVerticalAlignment(LayoutElementBuilders.VERTICAL_ALIGN_CENTER)
-                .addContent(
-                    Column.Builder()
-                        .setWidth(weight(1f))
-                        .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_START)
-                        .addContent(text((energy?.value ?: "--").layoutString, typography = Typography.NUMERAL_SMALL,
-                            color = LayoutColor(Lagune.INK)))
-                        .addContent(text("Énergie / 100".layoutString, typography = Typography.LABEL_SMALL,
-                            color = LayoutColor(Lagune.ACCENT)))
-                        .build()
-                )
+                .addContent(icon("bolt", width = dp(20f), height = dp(20f), tintColor = LayoutColor(Lagune.ACCENT)))
+                .addContent(Spacer.Builder().setWidth(dp(6f)).build())
+                .addContent(text((energy?.value ?: "--").layoutString, typography = Typography.NUMERAL_SMALL,
+                    color = LayoutColor(Lagune.INK), scalable = false))
+                .addContent(Spacer.Builder().setWidth(dp(3f)).build())
+                .addContent(text("/100".layoutString, typography = Typography.LABEL_MEDIUM,
+                    color = LayoutColor(Lagune.SOFT), scalable = false))
+                .addContent(Box.Builder().setWidth(weight(1f)).build())
                 .addContent(
                     circularProgressIndicator(
                         staticProgress = energy?.progress ?: 0f,
-                        size = dp(40f),
+                        size = dp(36f),
                         strokeWidth = 6f,
                         colors = ProgressIndicatorColors(LayoutColor(Lagune.ACCENT), LayoutColor(Lagune.TRACK)),
                     )
@@ -129,8 +145,8 @@ class SanteTileService : TileService() {
                 .build()
         }
 
-    /** Mini-pastille : grande valeur, libellé dessous. */
-    private fun MaterialScope.mini(open: Clickable, value: String?, label: String): LayoutElement =
+    /** Mini-pastille : pictogramme (sommeil, pas, distance) au-dessus de la valeur. */
+    private fun MaterialScope.mini(open: Clickable, value: String?, iconId: String): LayoutElement =
         card(
             onClick = open,
             modifier = LayoutModifier.background(LayoutColor(Lagune.CARD_2)),
@@ -140,10 +156,10 @@ class SanteTileService : TileService() {
             Column.Builder()
                 .setWidth(expand())
                 .setHorizontalAlignment(LayoutElementBuilders.HORIZONTAL_ALIGN_CENTER)
+                .addContent(icon(iconId, width = dp(18f), height = dp(18f), tintColor = LayoutColor(Lagune.ACCENT)))
+                .addContent(Spacer.Builder().setHeight(dp(2f)).build())
                 .addContent(text((value ?: "--").layoutString, typography = Typography.TITLE_MEDIUM,
-                    color = LayoutColor(Lagune.INK), maxLines = 1))
-                .addContent(text(label.layoutString, typography = Typography.LABEL_SMALL,
-                    color = LayoutColor(Lagune.SOFT), maxLines = 1))
+                    color = LayoutColor(Lagune.INK), maxLines = 1, scalable = false))
                 .build()
         }
 
@@ -154,7 +170,15 @@ class SanteTileService : TileService() {
     }
 
     companion object {
-        private const val RESOURCES_VERSION = "2"
+        private const val RESOURCES_VERSION = "3"
+
+        /** Pictogrammes de la tuile (mêmes dessins que les complications). */
+        private val ICONS = mapOf(
+            "bolt" to R.drawable.ic_m_bolt,
+            "moon" to R.drawable.ic_m_moon,
+            "steps" to R.drawable.ic_m_steps,
+            "pin" to R.drawable.ic_m_pin,
+        )
 
         /** Couleurs Lagune pour les rôles Material 3 utilisés par les composants. */
         private val LAGUNE = ColorScheme(

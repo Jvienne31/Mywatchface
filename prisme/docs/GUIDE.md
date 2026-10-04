@@ -48,6 +48,19 @@ Chaque emplacement accepte tous les types de complication. L'affichage s'adapte 
 La personnalisation depuis la montre est plus fiable que depuis l'appli Galaxy Wearable du
 téléphone, qui affiche parfois des listes incomplètes.
 
+## Préréglages et réglages
+
+*Personnaliser* propose, en plus des palettes :
+
+- **Préréglages** : Quotidien, Santé, Sport, Nuit. Chacun règle d'un coup la palette, les
+  secondes et les deux dômes. « Santé » met le score d'énergie et le score de sommeil de
+  Santé Sync dans les dômes ; « Sport », les calories actives et la distance.
+- **Secondes** : arc, point qui tourne, ou aucune.
+- **Dôme gauche sans complication** : ce que montre le dôme bas gauche **quand aucune
+  complication n'y est choisie** : indice UV, max / min du jour, météo dans 1 h ou dans 3 h.
+  Si une complication occupe le dôme (par exemple le score d'énergie du préréglage Santé),
+  ce réglage n'a pas d'effet : choisir « Vide » pour ce dôme dans *Complications* pour le voir.
+
 ## Les 18 palettes
 
 *Personnaliser > Palette*. Lagune est la palette par défaut.
