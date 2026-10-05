@@ -38,6 +38,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -189,6 +190,9 @@ private fun SanteScreen(
     onPrisme: () -> Unit,
 ) {
     val listState = rememberScalingLazyListState()
+    val context = LocalContext.current
+    var showSources by remember { mutableStateOf(false) }
+    val sources = remember(showSources) { if (showSources) ComplicationSources.list(context) else emptyList() }
     val focus = remember { FocusRequester() }
     val scope = rememberCoroutineScope()
     MaterialTheme {
@@ -226,6 +230,26 @@ private fun SanteScreen(
                 }
                 items(readings) { r -> MetricCard(r, onOpen) }
                 item { Note(phoneStatus) }
+                // Relevé des sources de complications (noms exacts pour les préréglages de Prisme)
+                item {
+                    Chip(
+                        onClick = { showSources = !showSources },
+                        label = {
+                            Text(if (showSources) "Masquer les sources" else "Sources de complications", fontFamily = Barlow)
+                        },
+                        colors = ChipDefaults.secondaryChipColors(),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                if (showSources) {
+                    items(sources) { src ->
+                        Column(Modifier.fillMaxWidth().padding(horizontal = 6.dp)) {
+                            Text(src.label, color = Ink, fontFamily = Barlow, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                            Text(src.component, color = Soft, fontSize = 10.sp)
+                            Text(src.types, color = Accent, fontSize = 9.sp)
+                        }
+                    }
+                }
                 item {
                     if (liveGranted) {
                         Note("Montre : pas, distance, calories et étages en direct")

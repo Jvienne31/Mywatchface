@@ -27,16 +27,10 @@ class PassiveDataService : PassiveListenerService() {
         dataPoints.getData(DataType.FLOORS_DAILY).lastOrNull()?.let { values["floors"] = it.value.toFloat() }
         if (values.isEmpty()) return
         HealthStore.putLocal(applicationContext, values)
-        requestUpdate(applicationContext, LOCAL_PROVIDERS)
         SanteTileService.refresh(applicationContext)
     }
 
     companion object {
-        private val LOCAL_PROVIDERS = listOf(
-            StepsProvider::class.java, DistanceMProvider::class.java,
-            TotalKcalProvider::class.java, FloorsProvider::class.java,
-        )
-
         /** (Ré)inscrit l'écoute passive ; sans effet tant que l'autorisation manque. */
         fun register(context: Context) {
             if (context.checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) !=

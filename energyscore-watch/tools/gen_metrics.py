@@ -52,6 +52,11 @@ METRICS = [
     ("last_ex_min", "Dernière séance : durée", "SÉANCE", "DURATION", None, None, 42, None, "runner"),
     ("last_ex_m", "Dernière séance : distance", "SÉANCE", "DISTANCE", None, None, 8120, None, "runner"),
 ]
+# Données exposées en complication : seulement les deux scores que Samsung réserve à ses propres
+# cadrans. Le reste (pas, cardio, sommeil, stress…) se choisit dans les complications Samsung
+# Health, accessibles à tous les cadrans ; ces valeurs restent lues pour l'écran et la tuile.
+COMPLICATIONS = ["energy", "sleep_score"]
+
 # Valeurs transmises sans complication propre (objectifs, 2e valeur de la tension)
 EXTRA_KEYS = ["sleep_goal_min", "steps_goal", "active_kcal_goal", "active_min_goal", "water_goal_ml",
               "food_kcal_goal", "bp_dia"]
@@ -185,12 +190,12 @@ def gen():
 
     # --- montre : un service par donnée ---
     lines = [head, "package com.jvienne.energyscore.watch", ""]
-    for m in METRICS:
+    for m in (m for m in METRICS if m[0] in COMPLICATIONS):
         lines.append(f"class {camel(m[0])}Provider : MetricComplicationService() "
                      f"{{ override val metric = Metric.{m[0].upper()} }}")
     lines += ["", "/** Tous les fournisseurs, pour demander leur mise à jour à la réception de données. */",
               "val ALL_PROVIDERS = listOf("]
-    lines += [f"    {camel(m[0])}Provider::class.java," for m in METRICS]
+    lines += [f"    {camel(m[0])}Provider::class.java," for m in METRICS if m[0] in COMPLICATIONS]
     lines += [")", ""]
     write(os.path.join(WATCH, "java", WPKG, "Providers.kt"), "\n".join(lines))
 
@@ -217,7 +222,7 @@ def gen():
 
     # --- montre : manifeste ---
     svc = []
-    for m in METRICS:
+    for m in (m for m in METRICS if m[0] in COMPLICATIONS):
         svc.append(f'''        <service
             android:name=".{camel(m[0])}Provider"
             android:exported="true"
@@ -256,6 +261,10 @@ def gen():
     <!-- Toucher une complication ouvre Samsung Health sur la montre -->
     <queries>
         <package android:name="com.samsung.android.wear.shealth" />
+        <!-- Liste des sources de complications installées (écran « Sources ») -->
+        <intent>
+            <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+        </intent>
     </queries>
 
     <application
@@ -314,7 +323,7 @@ def gen():
                 android:resource="@drawable/tile_preview" />
         </service>
 
-        <!-- Une complication par donnée Samsung Health -->
+        <!-- Complications : les deux scores Samsung Health réservés aux cadrans Samsung -->
 {"".join(svc)}
     </application>
 </manifest>
