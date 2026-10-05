@@ -17,6 +17,7 @@ import com.samsung.android.sdk.health.data.request.ReadDataRequest
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 
 /**
  * Lit tout ce que le Samsung Health Data SDK expose en lecture et le ramène à des nombres
@@ -99,8 +100,10 @@ class HealthReader(context: Context) {
             // score. Samsung Health affiche le score de la nuit (la période la plus longue) : la
             // sieste, plus récente, ne doit pas le remplacer [vu sur la montre : 36 au lieu de 54].
             val recent = latest(DataTypes.SLEEP.readDataRequestBuilder, days = 2, limit = 10)
-            val day = recent.firstOrNull()?.endLocalDateTime?.toLocalDate()
-            val sameDay = recent.filter { it.endLocalDateTime?.toLocalDate() == day }
+            fun wakeDate(p: HealthDataPoint): LocalDate? =
+                p.endTime?.let { LocalDateTime.ofInstant(it, p.zoneOffset ?: ZoneId.systemDefault()).toLocalDate() }
+            val day = recent.firstOrNull()?.let(::wakeDate)
+            val sameDay = recent.filter { wakeDate(it) == day }
             fun length(p: HealthDataPoint): Duration =
                 p.getValue(DataType.SleepType.DURATION) ?: Duration.between(p.startTime, p.endTime)
             val night = sameDay.maxByOrNull { length(it) }
