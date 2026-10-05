@@ -95,12 +95,25 @@ class HealthReader(context: Context) {
             put(Keys.ENERGY, p?.getValue(DataType.EnergyScoreType.ENERGY_SCORE))
         }
         read(DataTypes.SLEEP) {
-            val last = latest(DataTypes.SLEEP.readDataRequestBuilder, days = 2).firstOrNull()
-            put(Keys.SLEEP_SCORE, last?.getValue(DataType.SleepType.SLEEP_SCORE))
-            // durée de la nuit (somme des sommeils attribués à aujourd'hui), sinon dernier sommeil
-            val total = aggregate(DataType.SleepType.TOTAL_DURATION.requestBuilder.setLocalDateFilter(todayOnly).build())
-            val minutes = total?.toMinutes()?.takeIf { it > 0 } ?: last?.getValue(DataType.SleepType.DURATION)?.toMinutes()
-            put(Keys.SLEEP_MIN, minutes)
+            // Une journée peut compter plusieurs sommeils (nuit + sieste), chacun avec son propre
+            // score. Samsung Health affiche le score de la nuit (la période la plus longue) : la
+            // sieste, plus récente, ne doit pas le remplacer [vu sur la montre : 36 au lieu de 54].
+            val recent = latest(DataTypes.SLEEP.readDataRequestBuilder, days = 2, limit = 10)
+            val day = recent.firstOrNull()?.endLocalDateTime?.toLocalDate()
+            val sameDay = recent.filter { it.endLocalDateTime?.toLocalDate() == day }
+            fun length(p: HealthDataPoint): Duration =
+                p.getValue(DataType.SleepType.DURATION) ?: Duration.between(p.startTime, p.endTime)
+            val night = sameDay.maxByOrNull { length(it) }
+            put(Keys.SLEEP_SCORE, night?.getValue(DataType.SleepType.SLEEP_SCORE))
+            // Durée réelle (comme « Durée réelle de sommeil » de Samsung Health) : toutes les
+            // phases sauf l'éveil, nuit et siestes du jour ; à défaut, durée des enregistrements.
+            val asleep = sameDay.sumOf { p ->
+                val stages = p.getValue(DataType.SleepType.SESSIONS).orEmpty().flatMap { it.stages.orEmpty() }
+                if (stages.isEmpty()) length(p).toMinutes()
+                else stages.filter { it.stage != DataType.SleepType.StageType.AWAKE }
+                    .sumOf { Duration.between(it.startTime, it.endTime).toMinutes() }
+            }
+            put(Keys.SLEEP_MIN, asleep.takeIf { it > 0 })
         }
         read(DataTypes.SLEEP_GOAL) {
             val bed = aggregate(DataType.SleepGoalType.LAST_BED_TIME.requestBuilder.setLocalDateFilter(todayOnly).build())
