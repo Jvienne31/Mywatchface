@@ -201,8 +201,8 @@ FLAVORS = [
     ("fl_quotidien", "Quotidien", "pal_lagune", 0, 0, {}),
     ("fl_sante", "Santé", "pal_sauge", 1, 0, {4: ("EnergyProvider", "RANGED_VALUE"),
                                              3: ("SleepScoreProvider", "RANGED_VALUE")}),
-    # Sport : complications Samsung Health à brancher (noms des sources relevés sur la montre)
-    ("fl_sport", "Sport", "pal_volcan", 0, 0, {}),
+    ("fl_sport", "Sport", "pal_volcan", 0, 0, {4: ("ActiveKcalProvider", "GOAL_PROGRESS"),
+                                              3: ("DistanceMProvider", "SHORT_TEXT")}),
     ("fl_nuit", "Nuit", "pal_abysse", 2, 1, {}),
 ]
 

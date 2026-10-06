@@ -54,7 +54,7 @@ téléphone, qui affiche parfois des listes incomplètes.
 
 - **Préréglages** : Quotidien, Santé, Sport, Nuit. Chacun règle d'un coup la palette, les
   secondes et les deux dômes. « Santé » met le score d'énergie et le score de sommeil de
-  Santé Sync dans les dômes ; « Sport » (palette Volcan) sera relié aux complications Samsung Health.
+  Santé Sync dans les dômes ; « Sport », les calories actives et la distance.
 - **Secondes** : arc, point qui tourne, ou aucune.
 - **Dôme gauche sans complication** : ce que montre le dôme bas gauche **quand aucune
   complication n'y est choisie** : indice UV, max / min du jour, météo dans 1 h ou dans 3 h.
@@ -85,11 +85,11 @@ et plusieurs autres données de Samsung Health. Santé Sync (dossiers `energysco
 
 - **L'appli téléphone** lit Samsung Health avec le SDK officiel de Samsung. Elle envoie les
   valeurs à la montre toutes les 30 minutes.
-- **L'appli montre** propose en complications **les deux scores seulement** : énergie et
-  sommeil. Pour tout le reste (pas, cardio, durée de sommeil, stress, SpO2, eau…), choisir
-  directement les complications **Samsung Health** dans Prisme : elles sont accessibles à tous
-  les cadrans, sans appli supplémentaire. L'écran et la tuile de Santé Sync montrent aussi
-  sommeil, pas et distance.
+- **L'appli montre** propose ces valeurs en complications : 26 données, dont le score
+  d'énergie, le score et la durée de sommeil, la distance, les calories, les étages, l'eau, la
+  SpO2, la tension, le poids, l'IMC et le VO2 max. Elle mesure aussi en direct les pas, la
+  distance, les calories et les étages. Beaucoup de ces données existent aussi en
+  complications **Samsung Health** (pas, cardio, sommeil, stress…), utilisables sans Santé Sync.
 - **Au toucher**, une complication Santé Sync ouvre Samsung Health sur la montre.
 
 Santé Sync fonctionne aujourd'hui en mode développeur Samsung Health, donc pour un usage

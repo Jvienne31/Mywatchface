@@ -52,10 +52,9 @@ METRICS = [
     ("last_ex_min", "Dernière séance : durée", "SÉANCE", "DURATION", None, None, 42, None, "runner"),
     ("last_ex_m", "Dernière séance : distance", "SÉANCE", "DISTANCE", None, None, 8120, None, "runner"),
 ]
-# Données exposées en complication : seulement les deux scores que Samsung réserve à ses propres
-# cadrans. Le reste (pas, cardio, sommeil, stress…) se choisit dans les complications Samsung
-# Health, accessibles à tous les cadrans ; ces valeurs restent lues pour l'écran et la tuile.
-COMPLICATIONS = ["energy", "sleep_score"]
+# Données exposées en complication : toutes. (Ne retirer plus tard que les doublons exacts des
+# complications Samsung Health, une fois leur liste relevée sur la montre.)
+COMPLICATIONS = [m[0] for m in METRICS]
 
 # Valeurs transmises sans complication propre (objectifs, 2e valeur de la tension)
 EXTRA_KEYS = ["sleep_goal_min", "steps_goal", "active_kcal_goal", "active_min_goal", "water_goal_ml",
@@ -323,7 +322,7 @@ def gen():
                 android:resource="@drawable/tile_preview" />
         </service>
 
-        <!-- Complications : les deux scores Samsung Health réservés aux cadrans Samsung -->
+        <!-- Une complication par donnée Samsung Health -->
 {"".join(svc)}
     </application>
 </manifest>

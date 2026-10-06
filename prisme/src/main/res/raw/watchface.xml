@@ -65,10 +65,10 @@
         <Configuration id="secondes" optionId="0" />
         <Configuration id="dome_gauche" optionId="0" />
         <ComplicationSlot slotId="3">
-          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.DistanceMProvider" primaryProviderType="SHORT_TEXT" />
         </ComplicationSlot>
         <ComplicationSlot slotId="4">
-          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
+          <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" primaryProvider="com.jvienne.santesync/com.jvienne.energyscore.watch.ActiveKcalProvider" primaryProviderType="GOAL_PROGRESS" />
         </ComplicationSlot>
       </Flavor>
       <Flavor id="fl_nuit" displayName="fl_nuit" icon="fl_nuit">
