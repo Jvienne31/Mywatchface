@@ -29,7 +29,8 @@ METRICS = [
     ("sleep_score", "Score de sommeil", "SOMMEIL", "INT", None, 100, 78, None, "moon_star"),
     ("sleep_min", "Durée de sommeil", "SOMMEIL", "DURATION", "sleep_goal_min", None, 389, 450, "moon"),
     ("steps", "Pas (objectif)", "PAS", "INT", "steps_goal", None, 6420, 10000, "steps"),
-    ("distance_m", "Distance du jour", "DISTANCE", "DISTANCE", None, None, 4230, None, "pin"),
+    # objectif de distance dérivé (pas de tel objectif dans Samsung Health) : voir HealthStore
+    ("distance_m", "Distance du jour", "DISTANCE", "DISTANCE", "distance_goal_m", None, 4230, 6600, "pin"),
     ("active_kcal", "Calories actives", "KCAL ACT.", "INT", "active_kcal_goal", None, 412, 500, "flame"),
     ("total_kcal", "Calories totales", "KCAL", "INT", None, None, 2140, None, "flame"),
     ("active_min", "Temps actif", "ACTIF", "DURATION", "active_min_goal", None, 48, 90, "timer"),

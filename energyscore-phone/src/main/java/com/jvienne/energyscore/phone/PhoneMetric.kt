@@ -16,7 +16,7 @@ enum class PhoneMetric(
     SLEEP_SCORE("sleep_score", "Score de sommeil", "SOMMEIL", Format.INT, null, 100.0f, R.drawable.ic_m_moon_star),
     SLEEP_MIN("sleep_min", "Durée de sommeil", "SOMMEIL", Format.DURATION, "sleep_goal_min", null, R.drawable.ic_m_moon),
     STEPS("steps", "Pas (objectif)", "PAS", Format.INT, "steps_goal", null, R.drawable.ic_m_steps),
-    DISTANCE_M("distance_m", "Distance du jour", "DISTANCE", Format.DISTANCE, null, null, R.drawable.ic_m_pin),
+    DISTANCE_M("distance_m", "Distance du jour", "DISTANCE", Format.DISTANCE, "distance_goal_m", null, R.drawable.ic_m_pin),
     ACTIVE_KCAL("active_kcal", "Calories actives", "KCAL ACT.", Format.INT, "active_kcal_goal", null, R.drawable.ic_m_flame),
     TOTAL_KCAL("total_kcal", "Calories totales", "KCAL", Format.INT, null, null, R.drawable.ic_m_flame),
     ACTIVE_MIN("active_min", "Temps actif", "ACTIF", Format.DURATION, "active_min_goal", null, R.drawable.ic_m_timer),

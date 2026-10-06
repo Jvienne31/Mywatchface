@@ -81,7 +81,7 @@ private data class Reading(val metric: PhoneMetric, val value: String, val sub: 
 private fun reading(values: Map<String, Float>, m: PhoneMetric): Reading? {
     val v = values[m.key] ?: return null
     val extra = if (m.format == Format.PRESSURE) values[Keys.BP_DIA] else null
-    val goal = m.goalKey?.let { values[it] }?.takeIf { it > 0f }
+    val goal = m.goalKey?.let { values[it] ?: derivedGoal(values, it) }?.takeIf { it > 0f }
     val sub = when {
         goal != null -> "/ ${m.format.text(goal, null)}"
         m.max == 100f && m.format == Format.INT -> "/ 100"
@@ -89,6 +89,15 @@ private fun reading(values: Map<String, Float>, m: PhoneMetric): Reading? {
     }
     val progress = (goal ?: m.max)?.let { (v / it).coerceIn(0f, 1f) }
     return Reading(m, m.format.text(v, extra), sub, progress)
+}
+
+/** Objectif de distance déduit de l'objectif de pas à la longueur de pas du jour (comme sur la montre). */
+private fun derivedGoal(values: Map<String, Float>, key: String): Float? {
+    if (key != "distance_goal_m") return null
+    val steps = values[Keys.STEPS]?.takeIf { it > 0f } ?: return null
+    val distance = values[Keys.DISTANCE_M] ?: return null
+    val goal = values[Keys.STEPS_GOAL] ?: return null
+    return distance / steps * goal
 }
 
 /**

@@ -18,7 +18,7 @@ enum class Metric(
     SLEEP_SCORE("sleep_score", "Score de sommeil", "SOMMEIL", Format.INT, null, 100.0f, 78.0f, null, R.drawable.ic_m_moon_star),
     SLEEP_MIN("sleep_min", "Durée de sommeil", "SOMMEIL", Format.DURATION, "sleep_goal_min", null, 389.0f, 450.0f, R.drawable.ic_m_moon),
     STEPS("steps", "Pas (objectif)", "PAS", Format.INT, "steps_goal", null, 6420.0f, 10000.0f, R.drawable.ic_m_steps),
-    DISTANCE_M("distance_m", "Distance du jour", "DISTANCE", Format.DISTANCE, null, null, 4230.0f, null, R.drawable.ic_m_pin),
+    DISTANCE_M("distance_m", "Distance du jour", "DISTANCE", Format.DISTANCE, "distance_goal_m", null, 4230.0f, 6600.0f, R.drawable.ic_m_pin),
     ACTIVE_KCAL("active_kcal", "Calories actives", "KCAL ACT.", Format.INT, "active_kcal_goal", null, 412.0f, 500.0f, R.drawable.ic_m_flame),
     TOTAL_KCAL("total_kcal", "Calories totales", "KCAL", Format.INT, null, null, 2140.0f, null, R.drawable.ic_m_flame),
     ACTIVE_MIN("active_min", "Temps actif", "ACTIF", Format.DURATION, "active_min_goal", null, 48.0f, 90.0f, R.drawable.ic_m_timer),

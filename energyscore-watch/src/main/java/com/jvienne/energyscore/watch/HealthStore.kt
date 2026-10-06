@@ -39,8 +39,21 @@ object HealthStore {
     fun lastUpdate(context: Context): Long =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getLong(KEY_TS, 0L)
 
+    /**
+     * Objectif de distance déduit de l'objectif de pas, à la longueur de pas du jour
+     * (distance / pas) : la barre de distance avance au même rythme que celle des pas.
+     * Samsung Health n'a pas d'objectif de distance.
+     */
+    const val DISTANCE_GOAL = "distance_goal_m"
+
     /** Valeur à afficher : mesure de la montre du jour si elle existe, sinon celle du téléphone. */
     fun get(context: Context, key: String): Float? {
+        if (key == DISTANCE_GOAL) {
+            val steps = get(context, "steps")?.takeIf { it > 0f } ?: return null
+            val distance = get(context, "distance_m")?.takeIf { it > 0f } ?: return null
+            val stepsGoal = get(context, "steps_goal")?.takeIf { it > 0f } ?: return null
+            return distance / steps * stepsGoal
+        }
         val local = context.getSharedPreferences(PREFS_LOCAL, Context.MODE_PRIVATE)
         if (local.getString(KEY_DAY, null) == LocalDate.now().toString() && local.contains(key)) {
             return local.getFloat(key, 0f)
