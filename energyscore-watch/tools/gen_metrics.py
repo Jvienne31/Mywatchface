@@ -253,6 +253,8 @@ def gen():
     <!-- Watch Face Push : installer / mettre à jour le cadran Prisme, puis l'activer -->
     <uses-permission android:name="com.google.wear.permission.PUSH_WATCH_FACES" />
     <uses-permission android:name="com.google.wear.permission.SET_PUSHED_WATCH_FACE_AS_ACTIVE" />
+    <!-- Bouton « Supprimer l'ancien Prisme » (version installée à la main, com.jvienne.prisme) -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
     <!-- Pas, distance, calories, étages en direct (Health Services) -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
@@ -260,6 +262,7 @@ def gen():
     <!-- Toucher une complication ouvre Samsung Health sur la montre -->
     <queries>
         <package android:name="com.samsung.android.wear.shealth" />
+        <package android:name="com.jvienne.prisme" />
         <!-- Liste des sources de complications installées (écran « Sources ») -->
         <intent>
             <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />

@@ -101,8 +101,11 @@ class MainActivity : ComponentActivity() {
                 else "Téléphone : reçu à ${DateFormat.getTimeFormat(this).format(ts)}"
             }
             val live = remember(tick) { hasActivityPermission() }
-            val panel = prisme?.let { PrismePanel(it, prismeMessage, prismeBusy) }
-            SanteScreen(readings, phone, live, ::askPermission, ::openSamsungHealth, panel, ::prismeAction)
+            val oldPrisme = remember(tick) { PrismeInstaller.oldInstalled(this) }
+            val panel = prisme?.let { PrismePanel(it, prismeMessage, prismeBusy, oldPrisme) }
+            SanteScreen(readings, phone, live, ::askPermission, ::openSamsungHealth, panel, ::prismeAction) {
+                PrismeInstaller.uninstallOld(this)
+            }
         }
     }
 
@@ -188,6 +191,7 @@ private fun SanteScreen(
     onOpen: () -> Unit,
     prisme: PrismePanel?,
     onPrisme: () -> Unit,
+    onRemoveOld: () -> Unit,
 ) {
     val listState = rememberScalingLazyListState()
     val context = LocalContext.current
@@ -223,7 +227,7 @@ private fun SanteScreen(
                     )
                 }
                 if (prisme != null) {
-                    item { PrismeSection(prisme, onPrisme) }
+                    item { PrismeSection(prisme, onPrisme, onRemoveOld) }
                 }
                 if (readings.isEmpty()) {
                     item { Note("Aucune donnée pour l'instant.") }
@@ -319,10 +323,15 @@ private fun Note(text: String) {
 }
 
 /** Ce que l'écran montre du cadran Prisme (Watch Face Push). */
-private data class PrismePanel(val state: PrismeInstaller.State, val message: String?, val busy: Boolean)
+private data class PrismePanel(
+    val state: PrismeInstaller.State,
+    val message: String?,
+    val busy: Boolean,
+    val oldInstalled: Boolean,
+)
 
 @Composable
-private fun PrismeSection(p: PrismePanel, onClick: () -> Unit) {
+private fun PrismeSection(p: PrismePanel, onClick: () -> Unit, onRemoveOld: () -> Unit) {
     val s = p.state
     val label = when {
         p.busy -> "Installation…"
@@ -344,5 +353,14 @@ private fun PrismeSection(p: PrismePanel, onClick: () -> Unit) {
             Note("Prisme à jour (version ${s.installedVersion})")
         }
         p.message?.let { Note(it) }
+        if (p.oldInstalled) {
+            Chip(
+                onClick = onRemoveOld,
+                label = { Text("Supprimer l'ancien Prisme", fontFamily = Barlow) },
+                secondaryLabel = { Text("celui installé à la main", fontFamily = Barlow) },
+                colors = ChipDefaults.secondaryChipColors(),
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+            )
+        }
     }
 }

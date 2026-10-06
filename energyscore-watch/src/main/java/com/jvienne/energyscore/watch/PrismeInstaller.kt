@@ -18,6 +18,8 @@ import java.io.File
  */
 object PrismeInstaller {
     const val PACKAGE = "com.jvienne.santesync.watchfacepush.prisme"
+    /** Ancien Prisme installé à la main (Wear Installer, adb) : même nom, à supprimer. */
+    const val OLD_PACKAGE = "com.jvienne.prisme"
     const val PERMISSION_ACTIVATE = "com.google.wear.permission.SET_PUSHED_WATCH_FACE_AS_ACTIVE"
     private const val APK_ASSET = "prisme.apk"
     private const val TOKEN_ASSET = "prisme_token.txt"
@@ -81,6 +83,17 @@ object PrismeInstaller {
         } catch (e: WatchFacePushManager.SetWatchFaceAsActiveException) {
             "Activation impossible : appui long sur le cadran pour choisir Prisme"
         }
+    }
+
+    fun oldInstalled(context: Context): Boolean =
+        runCatching { context.packageManager.getPackageInfo(OLD_PACKAGE, 0) }.isSuccess
+
+    /** Ouvre la confirmation système de désinstallation de l'ancien Prisme. */
+    fun uninstallOld(context: Context) {
+        context.startActivity(
+            android.content.Intent(android.content.Intent.ACTION_DELETE, android.net.Uri.parse("package:$OLD_PACKAGE"))
+                .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
     }
 
     private fun manager(context: Context) = WatchFacePushManagerFactory.createWatchFacePushManager(context)
