@@ -27,11 +27,20 @@ class PassiveDataService : PassiveListenerService() {
         dataPoints.getData(DataType.FLOORS_DAILY).lastOrNull()?.let { values["floors"] = it.value.toFloat() }
         if (values.isEmpty()) return
         HealthStore.putLocal(applicationContext, values)
+        // Économie de batterie : les pas arrivent très souvent ; on ne fait redessiner
+        // complications et tuile qu'au plus toutes les 5 minutes (les valeurs, elles, sont
+        // toujours enregistrées et servies à la prochaine mise à jour).
+        val prefs = applicationContext.getSharedPreferences("sante_montre_maj", MODE_PRIVATE)
+        val now = System.currentTimeMillis()
+        if (now - prefs.getLong("derniere", 0L) < MIN_INTERVAL_MS) return
+        prefs.edit().putLong("derniere", now).apply()
         requestUpdate(applicationContext, LOCAL_PROVIDERS)
         SanteTileService.refresh(applicationContext)
     }
 
     companion object {
+        private const val MIN_INTERVAL_MS = 5 * 60 * 1000L
+
         private val LOCAL_PROVIDERS = listOf(
             StepsProvider::class.java, DistanceMProvider::class.java,
             TotalKcalProvider::class.java, FloorsProvider::class.java,
